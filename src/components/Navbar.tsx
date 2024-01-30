@@ -105,7 +105,7 @@ function Navbar() {
                 onMouseEnter={handleToggleDropdownOpen}
                 onMouseLeave={handleToggleDropdownClose}
               >
-                <div className="absolute top-8 left-1 h-6 w-full rounded-bl-full"></div>
+                <div className="absolute top-8 left-1 h-10 w-full rounded-bl-full"></div>
                 <div className="cursor-pointer">
                   <p className="relative inline-block">
                     คิวส่ง Gift
@@ -127,11 +127,17 @@ function Navbar() {
                     </Link>
                     <Link
                       to="/CheckQueue/G1-G8"
-                      className="mt-1 w-full whitespace-nowrap block px-4 py-2 rounded-md transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
+                      className="my-1 w-full whitespace-nowrap block px-4 py-2 rounded-md transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
                     >
                       Dada G1-G8
                       <br />
                       <span className="text-red-400">(ปิดรับเพื่อนแล้ว)</span>
+                    </Link>
+                    <Link
+                      to="/CheckQueue/ZZ1-ZZ6"
+                      className="w-full block px-4 py-2 rounded-md transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
+                    >
+                      Dada ZZ1-ZZ6
                     </Link>
                   </div>
                 )}

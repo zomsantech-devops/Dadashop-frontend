@@ -9,6 +9,7 @@ import CheckQueueG from './pages/CheckQueueG'
 import CheckPoints from './pages/CheckPoints'
 import Admin from './pages/Admin';
 import Navbar from './components/Navbar';
+import CheckQueueZZ from './pages/CheckQueueZZ';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/ItemPriceTable/HowToElse" element={<HowToElse />} />
         <Route path="/CheckQueue/D1-D10" element={<CheckQueueD />} />
         <Route path="/CheckQueue/G1-G8" element={<CheckQueueG />} />
+        <Route path="/CheckQueue/ZZ1-ZZ6" element={<CheckQueueZZ />} />
         <Route path="/CheckPoints" element={<CheckPoints />} />
         <Route path={`/admin123dada`} element={<Admin />} />
       </Routes>

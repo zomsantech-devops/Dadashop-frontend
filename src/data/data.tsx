@@ -410,6 +410,7 @@ interface TransformResult {
   data: TransformedData[];
   dData: TransformedData[];
   gData: TransformedData[];
+  zzData: TransformedData[];
 }
 
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -430,12 +431,13 @@ const transformData = async (): Promise<TransformResult> => {
   
     if (!values || !values.values) {
       console.error('Invalid data format:', values);
-      return { data: [], dData: [], gData: [] };
+      return { data: [], dData: [], gData: [], zzData: [] };
     }
   
     const data: TransformedData[] = [];
     const dData: TransformedData[] = [];
     const gData: TransformedData[] = [];
+    const zzData: TransformedData[] = [];
 
     // for (let i = 0;i < values.values.length; i++) {
     for (let i = 0; i < values.values[0].length; i += 3) {
@@ -462,9 +464,12 @@ const transformData = async (): Promise<TransformResult> => {
             dData.push(productData);
         } else if (productName[5] === 'G') {
             gData.push(productData);
-        }
+        } else if (productName[5] === 'Z') {
+          zzData.push(productData);
+      }
     }
-    return { data, dData, gData };
+    console.log(zzData);
+    return { data, dData, gData, zzData };
   };
   
   
