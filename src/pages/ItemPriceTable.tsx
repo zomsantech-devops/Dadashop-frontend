@@ -74,7 +74,7 @@ function ItemPriceTable() {
               {/* อันนี้เป็นสี gradient จากซ้ายไปขวา ใส่ตามนี้เลยครับ form -> via -> to (bg-[โค้ดสี]) */}
               {/* Hover ขอบเรืองแสง สามารถก็อบตัว link-how-to-btn-green ไปหาในไฟล์ index.css ได้เลยครับ */}
               <Link
-                to="/ItemPriceTable/HowToGift"
+                to="/ItemPriceTable/HowToElse"
                 className="link-how-to-btn-green w-full text-center block px-4 py-3 bg-[#1c85b6] text-white rounded-3xl bg-gradient-to-r from-[#BBB251] via-[#ABD499] to-[#2FD491] text-xl font-bold"
               >
                 ขั้นตอนการสั่งซื้อผ่าน XBOX

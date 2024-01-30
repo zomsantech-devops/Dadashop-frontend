@@ -3,6 +3,7 @@ import { FBButton, DiscordButton } from "../components/Button";
 import arrow from "../images/arrow-down-sign-to-navigate.png";
 
 import { Link } from "react-router-dom";
+import { dadaID } from "../constants";
 
 function HowToGift() {
   return (
@@ -27,34 +28,54 @@ function HowToGift() {
           </p>
         </div>
         <div className="flex flex-col gap-[20px]">
-          <div className="screen_930:w-full screen_930:text-[20px] font-bold bg-[#E7F9FD] w-[870px]  text-[24px] leading-[40px] p-[30px] rounded-[30px] self-center">
-            <p className=" mb-[15px]">
-              1. เพิ่มเพื่อนในเกมทุกตัวตามนี้
-              <ul className="list-disc ml-[20px]">
-                <li>Dada D1</li>
-                <li>Dada D2</li>
-                <li>Dada D3</li>
-                <li>Dada D4</li>
-                <li>Dada D5</li>
-                <li>Dada D6</li>
-                <li>Dada D7</li>
-                <li>Dada D8</li>
-                <li>Dada D9</li>
-                <li>Dada D10</li>
-              </ul>
-              แล้วรอ 48 ชั่วโมง จึงจะเริ่มส่ง Gift ได้
-              (แจ้งชื่อในเกมให้แอดมินทราบด้วยนะครับ หลังเพิ่มมา)
+          <div className="screen_930:w-full screen_930:text-[20px] font-bold bg-[#E7F9FD] w-[870px] text-xl leading-[40px] p-7 rounded-[30px] self-center">
+            <p className="mb-[15px]">
+              1. เพิ่มเพื่อนในเกม{" "}
+              <span className="text-blue-600 font-bold">ทุกตัว</span> ตามนี้ และ
+              แจ้งชื่อในเกมของลูกค้าให้ทางร้านทราบด้วย
             </p>
-            <div className="flex gap-[15px] text-[16px]">
-              <FBButton />
-              <DiscordButton />
-            </div>
+            <ul className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-4">
+              {dadaID.map((id, index) => {
+                return (
+                  <li
+                    key={index}
+                    className="p-1 bg-[#515151] text-center text-white rounded-xl"
+                  >
+                    {id}
+                  </li>
+                );
+              })}
+            </ul>
+            <p className="text-center px-4 py-2 rounded-3xl transition ease-in-out duration-300 bg-[#0c63c5] text-white mt-6">
+              รอ 48 ชั่วโมง หลังเป็นเพื่อนกัน ถึงจะเริ่มสั่งไอเทมได้ครับ 😊
+            </p>
           </div>
-          <div className="screen_930:w-full font-bold bg-[#E7F9FD] screen_930:text-[20px] w-[870px] text-[24px] leading-[40px] p-[30px] rounded-[30px] self-center">
-            <p>
+          <div className="screen_930:w-full font-bold bg-[#E7F9FD] w-[870px] p-[30px] rounded-[30px] self-center">
+            <p className="screen_930:text-[20px] text-[24px] leading-[40px]">
               2. เช็คคิวกับตัวละครที่เรามีเพื่อน หากมีคิวว่าง
               ถึงจะสั่งซื้อได้ครับ :)
             </p>
+            <div className="flex flex-row flex-wrap gap-2 mt-4">
+              <Link
+                to="/CheckQueue/D1-D10"
+                className="w-fit text-center px-4 py-2 rounded-3xl transition ease-in-out duration-300 bg-[#0c63c5] text-white cursor-pointer"
+              >
+                เช็คคิว Dada D1-D10
+              </Link>
+              {/* TODO: Change path */}
+              <Link
+                to="/CheckQueue/D1-D10"
+                className="w-fit text-center px-4 py-2 rounded-3xl transition ease-in-out duration-300 bg-[#0c63c5] text-white cursor-pointer"
+              >
+                เช็คคิว Dada ZZ1-ZZ6
+              </Link>
+              <Link
+                to="/CheckQueue/G1-G8"
+                className="w-fit text-center px-4 py-2 rounded-3xl transition ease-in-out duration-300 bg-[#0c63c5] text-white cursor-pointer"
+              >
+                เช็คคิว Dada G1-G8 (ปิดรับเพื่อนแล้ว)
+              </Link>
+            </div>
           </div>
           <div className="screen_930:w-full font-bold bg-[#E7F9FD] w-[870px] text-[24px] screen_930:text-[20px] leading-[40px] p-[30px] rounded-[30px] self-center">
             <p className=" mb-[15px]">

@@ -1,0 +1,18 @@
+export const dadaID = [
+  "Dada D1",
+  "Dada D2",
+  "Dada D3",
+  "Dada D4",
+  "Dada D5",
+  "Dada D6",
+  "Dada D7",
+  "Dada D8",
+  "Dada D9",
+  "Dada D10",
+  "Dada ZZ1",
+  "Dada ZZ2",
+  "Dada ZZ3",
+  "Dada ZZ4",
+  "Dada ZZ5",
+  "Dada ZZ6",
+];
