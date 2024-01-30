@@ -1,8 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop'
 import HomePage from './pages/HomePage';
-// import ItemPriceTable from './pages/ItemPriceTable';
-import ItemPriceTable2 from './pages/ItemPriceTable2';
+import ItemPriceTable from './pages/ItemPriceTable';
 import HowToGift from './pages/HowToGift'
 import HowToElse from './pages/HowToElse'
 import CheckQueueD from './pages/CheckQueueD'
@@ -18,7 +17,7 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/ItemPriceTable" element={<ItemPriceTable2 />} />
+        <Route path="/ItemPriceTable" element={<ItemPriceTable />} />
         <Route path="/ItemPriceTable/HowToGift" element={<HowToGift />} />
         <Route path="/ItemPriceTable/HowToElse" element={<HowToElse />} />
         <Route path="/CheckQueue/D1-D10" element={<CheckQueueD />} />

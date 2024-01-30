@@ -6,9 +6,6 @@
 
 body {
   margin: 0;
-  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #28283c;
@@ -46,21 +43,6 @@ body {
   box-shadow: 0px 0px 20px 0px rgba(30, 174, 240, 0.5);
 }
 
-/* .middle-navbar a:after {
-  display: block;
-  content: "";
-  border-bottom: solid 3px #28283c;
-  transform: scaleX(0);
-  transition: transform 250ms ease-in-out;
-}
-.middle-navbar a:hover:after {
-  transform: scaleX(1);
-} */
-
-.navbar {
-  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.05);
-}
-
 /* NEW */
 .navbar-shadow {
   box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.05);
@@ -70,9 +52,12 @@ body {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
 }
 
-.link-how-to-btn:hover {
-  box-shadow: 4px 4px 20px 0px rgba(193, 164, 232, 0.5);
-  border-radius: 25px;
+.link-how-to-btn-purple:hover {
+  box-shadow: 4px 4px 10px 0px rgba(193, 164, 232, 0.5);
+}
+
+.link-how-to-btn-green:hover {
+  box-shadow: 4px 4px 10px 0px rgba(171, 212, 153, 0.5);
 }
 
 .homepage-btn-overlay:hover {
@@ -90,7 +75,6 @@ body {
 
 .shadow {
   position: relative;
-  /* background: white; */
   border-radius: 20px;
 }
 
