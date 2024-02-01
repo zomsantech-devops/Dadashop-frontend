@@ -468,7 +468,6 @@ const transformData = async (): Promise<TransformResult> => {
           zzData.push(productData);
       }
     }
-    console.log(zzData);
     return { data, dData, gData, zzData };
   };
   

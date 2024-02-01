@@ -59,7 +59,7 @@ function Navbar() {
     <div
       className={`${
         isMobile ? "gap-4 py-0" : "gap-7 py-2"
-      } flex flex-col items-center justify-between px-28 lg:px-16 md:px-12 sm:px-8 bg-white sticky top-0 z-30 navbar-shadow`}
+      } flex flex-col items-center justify-between px-28 lg:px-14 md:px-10 sm:px-8 bg-white sticky top-0 z-30 navbar-shadow`}
     >
       <div className="w-full flex items-center">
         {/* LOGO */}
@@ -98,7 +98,8 @@ function Navbar() {
               <div
                 className={`${
                   location.pathname === "/CheckQueue/D1-D10" ||
-                  location.pathname === "/CheckQueue/G1-G8"
+                  location.pathname === "/CheckQueue/G1-G8" ||
+                  location.pathname === "/CheckQueue/ZZ1-ZZ6"
                     ? "bg-[#3d82d1] text-white"
                     : "text-gray-700"
                 } relative group px-4 py-2 rounded-full transition ease-in-out duration-300 hover:bg-[#3d82d1] hover:text-white`}
@@ -117,34 +118,32 @@ function Navbar() {
                   <div
                     className="bg-white text-black w-48 absolute mt-3 rounded-xl drop-down p-3 opacity-100 transition-opacity duration-300"
                     onMouseEnter={handleToggleDropdownOpen}
-                    // onMouseLeave={handleToggleDropdownClose}
                   >
-                    <Link
-                      to="/CheckQueue/D1-D10"
-                      className="w-full block px-4 py-2 rounded-md transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
-                    >
-                      Dada D1-D10
-                    </Link>
-                    <Link
-                      to="/CheckQueue/G1-G8"
-                      className="my-1 w-full whitespace-nowrap block px-4 py-2 rounded-md transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
-                    >
-                      Dada G1-G8
-                      <br />
-                      <span className="text-red-400">(ปิดรับเพื่อนแล้ว)</span>
-                    </Link>
                     <Link
                       to="/CheckQueue/ZZ1-ZZ6"
                       className="w-full block px-4 py-2 rounded-md transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
                     >
                       Dada ZZ1-ZZ6
                     </Link>
+                    <Link
+                      to="/CheckQueue/D1-D10"
+                      className="my-1 w-full block px-4 py-2 rounded-md transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
+                    >
+                      Dada D1-D10
+                    </Link>
+                    <Link
+                      to="/CheckQueue/G1-G8"
+                      className="w-full whitespace-nowrap block px-4 py-2 rounded-md transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
+                    >
+                      Dada G1-G8
+                      <br />
+                      <span className="text-red-400">(ปิดรับเพื่อนแล้ว)</span>
+                    </Link>
                   </div>
                 )}
               </div>
               <Link
                 to="/CheckPoints"
-                // className="px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
                 className={`${
                   location.pathname === "/CheckPoints"
                     ? "bg-[#3d82d1] text-white"
@@ -205,14 +204,14 @@ function Navbar() {
       </div>
       {isMobileDropdownOpen && (
         <div
-          className={`w-full flex flex-col gap-[15px] pl-2.5 mb-4 ${
+          className={`w-full flex flex-col gap-1 pl-2.5 mb-4 ${
             animateCollapseIn ? "animate-collapseOut" : "animate-expandIn"
           } overflow-hidden`}
         >
           <Link
             target="_blank"
             to="https://fortnite.gg/shop"
-            className="relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-black after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
+            className="relative w-fit block"
           >
             Item Shop
             <br />
@@ -225,12 +224,21 @@ function Navbar() {
           </Link>
           <Link
             to="/ItemPriceTable"
-            className="relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-[#3d82d1] after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
+            className={`${
+              location.pathname === "/ItemPriceTable" &&
+              "px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
+            } py-2 relative w-fit block text-gray-700`}
           >
             ราคา & ขั้นตอนการซื้อ
           </Link>
           <button
-            className="relative inline-block w-fit"
+            className={`${
+              location.pathname === "/CheckQueue/D1-D10" ||
+              location.pathname === "/CheckQueue/G1-G8" ||
+              location.pathname === "/CheckQueue/ZZ1-ZZ6"
+                ? "px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
+                : "text-gray-700"
+            } py-2 relative w-fit block`}
             onClick={handleToggleGiftDropdown}
           >
             คิวส่ง Gift
@@ -239,29 +247,38 @@ function Navbar() {
                 isGiftDropdownOpen && "rotate-180"
               }`}
             >
-              <img src={arrow} alt="arrow" />
+              <FaChevronDown className="inline-block w-3" />
             </span>
           </button>
           {isGiftDropdownOpen && (
-            <>
+            <div className="pl-4 flex flex-col gap-1">
+              <Link
+                to="/CheckQueue/ZZ1-ZZ6"
+                className="w-fit block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
+              >
+                Dada ZZ1-ZZ6
+              </Link>
               <Link
                 to="/CheckQueue/D1-D10"
-                className="pl-[20px] whitespace-nowrap relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-[#3d82d1] after:w-full after:scale-x-0 after:hover:scale-x-90 after:transition after:duration-300 after:origin-left"
+                className="w-fit block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
               >
                 Dada D1-D10
               </Link>
               <Link
                 to="/CheckQueue/G1-G8"
-                className="pl-[20px] whitespace-nowrap relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-[#3d82d1] after:w-full after:scale-x-0 after:hover:scale-x-90 after:transition after:duration-300 after:origin-left"
+                className="w-fit block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
               >
                 Dada G1-G8{" "}
                 <span className="text-red-600">(ปิดรับเพื่อนแล้ว)</span>
               </Link>
-            </>
+            </div>
           )}
           <Link
             to="/CheckPoints"
-            className="relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-[#3d82d1] after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
+            className={`${
+              location.pathname === "/CheckPoints" &&
+              "px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
+            } py-2 relative w-fit block`}
           >
             Dada Points
           </Link>
