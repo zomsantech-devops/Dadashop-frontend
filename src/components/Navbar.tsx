@@ -1,4 +1,3 @@
-import arrow from "../images/arrow-down-sign-to-navigate.png";
 import FBIcon from "../images/facebook (1).png";
 import DiscordIcon from "../images/discord (2).png";
 import logo from "../images/dada-logo-horizontal.png";
