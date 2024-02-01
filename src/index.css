@@ -47,11 +47,32 @@ body {
   box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.05);
 }
 
+/* For General */
 .list-bullet {
   display: inline-block;
   width: 7px;
   height: 7px;
   background-color: #005fee;
+  border-radius: 100%;
+  margin-right: 0.5em;
+  margin-bottom: 2px;
+}
+
+/* For HowToGift/Else */
+.list-bullet-gift {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background-color: #BA6EEA;
+  border-radius: 100%;
+  margin-right: 0.5em;
+  margin-bottom: 2px;
+}
+.list-bullet-else {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background-color: #ABD499;
   border-radius: 100%;
   margin-right: 0.5em;
   margin-bottom: 2px;

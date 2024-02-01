@@ -24,20 +24,23 @@ function ItemPriceTable() {
             <div className="p-[15px]">
               <h1 className="font-bold text-[28px]">ส่ง Gift</h1>
               {/* สามารถเปลี่ยนสีได้เลยครับ แค่ใส่โค้ดสี HEX ลงใน bg-[โค้ดสี] */}
-              <div className="flex flex-col items-center justify-center gap-1.5 mb-4">
-                <p className="w-full text-center block px-4 py-3 bg-[#1c85b6] text-white rounded-3xl">
-                  สั่ง Item หรือ Battle Pass ชุดเริ่มต้น
+              <div className="flex flex-col justify-center gap-3 mb-5 mt-3 ml-10">
+                <p>
+                  <span className="list-bullet-gift"></span>สั่ง Item หรือ
+                  Battle Pass ชุดเริ่มต้น
                 </p>
-                <p className="w-full text-center block px-4 py-3 bg-[#1c85b6] text-white rounded-3xl">
-                  ไม่ใช่การส่ง V-Bucks (ลูกค้าจะได้รับเป็น Item)
+                <p>
+                  <span className="list-bullet-gift"></span>ไม่ใช่การส่ง
+                  V-Bucks (ลูกค้าจะได้รับเป็น Item)
                 </p>
-                <p className="w-full text-center block px-4 py-3 bg-[#1c85b6] text-white rounded-3xl">
+                <p>
+                  <span className="list-bullet-gift"></span>
                   ต้องเป็นเพื่อนกันในเกม{" "}
                   <span className="font-bold">อย่างน้อย 48 ชั่วโมง</span>
                 </p>
               </div>
-               {/* อันนี้เป็นสี gradient จากซ้ายไปขวา ใส่ตามนี้เลยครับ form -> via -> to (bg-[โค้ดสี]) */}
-               {/* Hover ขอบเรืองแสง สามารถก็อบตัว link-how-to-btn-purple ไปหาในไฟล์ index.css ได้เลยครับ */}
+              {/* อันนี้เป็นสี gradient จากซ้ายไปขวา ใส่ตามนี้เลยครับ form -> via -> to (bg-[โค้ดสี]) */}
+              {/* Hover ขอบเรืองแสง สามารถก็อบตัว link-how-to-btn-purple ไปหาในไฟล์ index.css ได้เลยครับ */}
               <Link
                 to="/ItemPriceTable/HowToGift"
                 className="link-how-to-btn-purple w-full text-center block px-4 py-3 bg-[#1c85b6] text-white rounded-3xl bg-gradient-to-r from-[#BA6EEA] via-[#A5B7E1] to-[#3ABFCD] text-xl font-bold"
@@ -60,15 +63,18 @@ function ItemPriceTable() {
                 เติม V-Bucks, Packs, Fortnite Crew
               </h1>
               {/* สามารถเปลี่ยนสีได้เลยครับ แค่ใส่โค้ดสี HEX ลงใน bg-[โค้ดสี] */}
-              <div className="flex flex-col items-center justify-center gap-1.5 mb-4">
-                <p className="w-full text-center block px-4 py-3 bg-[#4aa464] text-white rounded-3xl">
-                  ลูกค้าต้องนำ ID Epic มาผูกกับ ID XBOX ของลูกค้าเอง
+              <div className="flex flex-col justify-center gap-3 mb-5 mt-3 ml-10">
+                <p>
+                  <span className="list-bullet-else"></span>ลูกค้าต้องนำ ID
+                  Epic มาผูกกับ ID XBOX ของลูกค้าเอง
                 </p>
-                <p className="w-full text-center block px-4 py-3 bg-[#4aa464] text-white rounded-3xl">
-                  ไม่ต้องรอ 48 ชั่วโมง
+                <p>
+                  <span className="list-bullet-else"></span>ไม่ต้องรอ 48
+                  ชั่วโมง
                 </p>
-                <p className="w-full text-center block px-4 py-3 bg-[#4aa464] text-white rounded-3xl">
-                  ได้ทันทีภายใน 10 ถึง 20 นาที
+                <p>
+                  <span className="list-bullet-else"></span>ได้ทันทีภายใน 10
+                  ถึง 20 นาที
                 </p>
               </div>
               {/* อันนี้เป็นสี gradient จากซ้ายไปขวา ใส่ตามนี้เลยครับ form -> via -> to (bg-[โค้ดสี]) */}
