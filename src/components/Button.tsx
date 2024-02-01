@@ -27,13 +27,13 @@ interface BtnProps {
 }
 
   export const DarkButton = ({text, link}: BtnProps) => (
-    <Link target="_blank" to={link} className="text-white leading-normal flex w-[180px] py-[14px] justify-center bg-[#28283C] rounded-[20px] whitespace-nowrap">
+    <Link target="_blank" to={link} className="text-white leading-normal flex w-[180px] py-[14px] justify-center bg-[#28283C] rounded-[20px] whitespace-nowrap hover:bg-[#28283C]/90">
       {text}
     </Link>
   );
 
   export const SmallDarkButton = ({text, link}: BtnProps) => (
-    <Link target="_blank" to={link} className="text-white leading-normal flex w-[140px] py-[14px] justify-center bg-[#28283C] rounded-[20px] whitespace-nowrap">
+    <Link target="_blank" to={link} className="text-white leading-normal flex w-[140px] py-[14px] justify-center bg-[#28283C] rounded-[20px] whitespace-nowrap hover:bg-[#28283C]/90">
       {text}
     </Link>
   );

@@ -53,7 +53,7 @@ function HowToGift() {
                   <>
                     <li
                       key={index}
-                      className="p-1 bg-[#515151] text-center text-white rounded-xl cursor-pointer"
+                      className="p-1 bg-[#515151] text-center text-white rounded-xl cursor-pointer hover:bg-[#515151]/90"
                       onClick={() => handleClick(index)}
                     >
                       {clickedIndex === index ? (
@@ -101,7 +101,7 @@ function HowToGift() {
             </div>
           </div>
           <div className="screen_930:w-full font-bold bg-[#E7F9FD] w-[870px] text-[24px] screen_930:text-[20px] leading-[40px] p-[30px] rounded-[30px] self-center">
-            <p className=" mb-[15px]">
+            <p className="mb-[15px]">
               3. สั่งซื้อ โดยการแจ้ง
               <ul className="ml-10 md:ml-8 sm:ml-5">
                 <li className="flex items-center"><span className="list-bullet"></span>Item ที่ต้องการ</li>

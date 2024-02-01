@@ -50,8 +50,7 @@ function HowToElse() {
           </div>
           <div className="screen_930:w-full screen_930:text-[20px] font-bold bg-[#E7F9FD] w-[870px] text-[24px] leading-[40px] p-[30px] rounded-[30px] self-center">
             <p className=" mb-[15px]">
-              2. สมัคร ID XBOX ของลูกค้า (ตอนสมัครต้องกรอกปีเกิดให้อายุ &gt;20
-              ครับ)
+              2. สมัคร ID XBOX ของลูกค้า โดยเข้า Link ข้างล่าง แล้วกด <span className="text-blue-600">Create one!</span> (หากมี ID XBOX อยู่แล้ว ให้ข้ามข้อนี้ได้เลยครับ)
             </p>
             <div className="flex gap-[15px] text-[16px]">
               <DarkButton
@@ -74,10 +73,10 @@ function HowToElse() {
           <div className="screen_930:w-full screen_930:text-[20px] font-bold bg-[#E7F9FD] w-[870px] text-[24px] leading-[40px] p-[30px] rounded-[30px] self-center">
             <p className=" mb-[15px]">
               4. สั่งซื้อ โดยการแจ้งสิ่งที่ต้องการ
-              <ul className="list-disc ml-[20px]">
-                <li>V-Bucks 1000/2800/5000/13500</li>
-                <li>Packs</li>
-                <li>Fortnite Crew</li>
+              <ul className="ml-10 md:ml-8 sm:ml-5">
+                <li className="flex items-center"><span className="list-bullet"></span>V-Bucks 1000/2800/5000/13500</li>
+                <li className="flex items-center"><span className="list-bullet"></span>Packs</li>
+                <li className="flex items-center"><span className="list-bullet"></span>Fortnite Crew</li>
               </ul>
               (ทักแล้วรอ Admin คอนเฟิร์มครับผม)
             </p>
