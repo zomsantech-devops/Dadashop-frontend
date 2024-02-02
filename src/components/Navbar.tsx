@@ -15,7 +15,13 @@ function Navbar() {
 
   const location = useLocation();
 
-  // TODO: setMobileDropdownOpen to false when path is changed
+  useEffect(() => {
+    setAnimateCollapseIn(true);
+    setTimeout(() => {
+      setMobileDropdownOpen(false);
+      setAnimateCollapseIn(false);
+    }, 450);
+  }, [location.pathname]);
 
   const handleToggleDropdownOpen = () => {
     setDropdownOpen(true);

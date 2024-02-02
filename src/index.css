@@ -156,11 +156,11 @@ body {
 }
 
 .animate-expandIn {
-  animation: expandIn 0.5s ease-out;
+  animation: expandIn 0.5s ease;
 }
 
 .animate-collapseOut {
-  animation: collapseOut 0.5s ease-out;
+  animation: collapseOut 0.5s ease;
 }
 
 .glow-text {
