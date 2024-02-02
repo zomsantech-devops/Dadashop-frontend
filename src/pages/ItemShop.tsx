@@ -54,7 +54,7 @@ function ItemShop() {
           <ul className="grid grid-cols-6 lg:grid-cols-4 md:grid-cols-3 xs:grid-cols-1 gap-4">
             {data.map((item) => (
               <li key={item._id} className="cursor-pointer">
-                <div className="relative group">
+                <div className="relative group overflow-hidden rounded-lg">
                   <img
                     loading="lazy"
                     src={item.images_background}
