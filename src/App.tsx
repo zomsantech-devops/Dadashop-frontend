@@ -10,6 +10,7 @@ import CheckPoints from './pages/CheckPoints'
 import Admin from './pages/Admin';
 import Navbar from './components/Navbar';
 import CheckQueueZZ from './pages/CheckQueueZZ';
+import ItemShop from './pages/ItemShop';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/ItemShop" element={<ItemShop />} />
         <Route path="/ItemPriceTable" element={<ItemPriceTable />} />
         <Route path="/ItemPriceTable/HowToGift" element={<HowToGift />} />
         <Route path="/ItemPriceTable/HowToElse" element={<HowToElse />} />

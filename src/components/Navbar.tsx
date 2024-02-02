@@ -1,7 +1,6 @@
 import FBIcon from "../images/facebook (1).png";
 import DiscordIcon from "../images/discord (2).png";
 import logo from "../images/dada-logo-horizontal.png";
-import fortniteGGLogo from "../images/fortniteGG.png";
 import { FaChevronDown } from "react-icons/fa";
 
 import { Link, useLocation } from "react-router-dom";
@@ -15,6 +14,8 @@ function Navbar() {
   const [animateCollapseIn, setAnimateCollapseIn] = useState(false);
 
   const location = useLocation();
+
+  // TODO: setMobileDropdownOpen to false when path is changed
 
   const handleToggleDropdownOpen = () => {
     setDropdownOpen(true);
@@ -54,7 +55,6 @@ function Navbar() {
   }, [isMobile]);
 
   return (
-    // NEW
     <div
       className={`${
         isMobile ? "gap-4 py-0" : "gap-7 py-2"
@@ -69,17 +69,14 @@ function Navbar() {
           <>
             <div className="flex gap-2 mx-auto justify-center items-center middle-navbar">
               <Link
-                target="_blank"
-                to="https://fortnite.gg/shop"
-                className="px-4 py-2 hover:scale-105 transition ease-in-out duration-300"
+                to="/ItemShop"
+                className={`${
+                  location.pathname === "/ItemShop"
+                    ? "bg-[#3d82d1] text-white"
+                    : "text-gray-700"
+                } px-4 py-2 rounded-full transition ease-in-out duration-300 hover:bg-[#3d82d1] hover:text-white`}
               >
                 <p>Item Shop</p>
-                <img
-                  src={fortniteGGLogo}
-                  alt="fortniteGGLogo"
-                  className="inline-flex h-4 mr-[5px]"
-                />
-                <span className="text-xs text-gray-600">Fortnite.gg</span>
               </Link>
 
               <Link
@@ -208,18 +205,13 @@ function Navbar() {
           } overflow-hidden`}
         >
           <Link
-            target="_blank"
-            to="https://fortnite.gg/shop"
-            className="relative w-fit block"
+            to="/ItemShop"
+            className={`${
+              location.pathname === "/ItemShop" &&
+              "px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
+            } py-2 relative w-fit block text-gray-700`}
           >
             Item Shop
-            <br />
-            <img
-              src={fortniteGGLogo}
-              alt="fortniteGGLogo"
-              className="inline-flex h-[16px] mr-[5px]"
-            />
-            <span className="text-[12px]">Fortnite.gg</span>
           </Link>
           <Link
             to="/ItemPriceTable"

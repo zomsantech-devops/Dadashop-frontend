@@ -12,7 +12,7 @@ module.exports = {
       'screen_1170': {'max': '1170px'},
       'homePageCatagories_1150px': {'max': '1150px'},
       'screen_1070': {'max': '1070px'},
-      'lg': {'max': '1024px'},
+      'lg': {'max': '1025px'},
       'screen_960': {'max': '960px'},
       'screen_930': {'max': '930px'},
       'homePageBGArea_920px': {'max': '920px'},

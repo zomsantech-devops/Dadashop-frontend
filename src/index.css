@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -63,7 +64,7 @@ body {
   display: inline-block;
   width: 5px;
   height: 5px;
-  background-color: #BA6EEA;
+  background-color: #ba6eea;
   border-radius: 100%;
   margin-right: 0.5em;
   margin-bottom: 2px;
@@ -72,7 +73,7 @@ body {
   display: inline-block;
   width: 5px;
   height: 5px;
-  background-color: #ABD499;
+  background-color: #abd499;
   border-radius: 100%;
   margin-right: 0.5em;
   margin-bottom: 2px;
@@ -164,4 +165,23 @@ body {
 
 .glow-text {
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.item-title-shadow {
+  text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.5);
+}
+
+@font-face {
+  font-family: fn;
+  src: url('assets/font/Burbank\ Big\ Condensed\ Black.otf');
+  /* src: url('assets/font/fortnite.otf'); */
+}
+
+.fn-font {
+  /* font-family: "Luckiest Guy", cursive; */
+  font-family: fn, sans-serif;
+}
+
+.card-bg {
+  background: linear-gradient(0deg,#000 0%,transparent 80%);
 }
