@@ -174,11 +174,9 @@ body {
 @font-face {
   font-family: fn;
   src: url('assets/font/Burbank\ Big\ Condensed\ Black.otf');
-  /* src: url('assets/font/fortnite.otf'); */
 }
 
 .fn-font {
-  /* font-family: "Luckiest Guy", cursive; */
   font-family: fn, sans-serif;
 }
 

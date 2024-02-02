@@ -14,6 +14,7 @@ interface Item {
   rarity_id: string;
   images_background: string;
   images_full_background: string;
+  section_name: string;
   finalPrice: number | null;
   time_fetch: string;
   time_update: string;
@@ -32,6 +33,7 @@ function ItemShop() {
     { name: string; count: number }[]
   >([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [section, setSection] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -61,6 +63,14 @@ function ItemShop() {
     }));
     setCategories([{ name: "All", count: data.length }, ...categoryCounts]);
     setSelectedCategory("All");
+  }, [data]);
+
+  useEffect(() => {
+    const uniqueSection = Array.from(
+      new Set(data.map((sec) => sec.section_name))
+    );
+    console.log(uniqueSection);
+    setSection(uniqueSection);
   }, [data]);
 
   const handleCategoryClick = (category: string) => {
@@ -93,15 +103,45 @@ function ItemShop() {
               ))}
             </div>
             <div className="flex flex-col self-center gap-[20px] screen_960:gap-[40px] screen_500:w-full">
+              {selectedCategory === "All" &&
+                section.map((sec) => (
+                  <section>
+                    <h1 className="pt-3.5 pb-2 text-4xl fn-font text-black/80">{sec}</h1>
+                    <ul className="grid grid-cols-6 xl:grid-cols-5 lg:grid-cols-4 screen_810:grid-cols-3 sm:grid-cols-2 screen_445:grid-cols-1 gap-4 screen_500:self-center">
+                      {data
+                        .filter((item) => item.section_name === sec)
+                        .map((item) => (
+                          <li
+                            key={item._id}
+                            className="w-[187px] screen_445:w-[256px] cursor-pointer"
+                          >
+                            <div className="relative group overflow-hidden rounded-lg">
+                              <img
+                                loading="lazy"
+                                src={item.images_background}
+                                alt={item.name}
+                                className="rounded-lg transition ease-in-out duration-300 group-hover:scale-110 group-hover:brightness-105 overflow-hidden"
+                              />
+                              <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 fn-font tracking-wider text-2xl uppercase antialiased leading-6 card-bg w-full rounded-lg">
+                                <h3 className="pb-1.5 pt-2">{item.name}</h3>
+                                <div className="flex">
+                                  <img
+                                    src={vBucks}
+                                    alt="V-Bucks"
+                                    className="w-5 h-5 mr-2"
+                                  />
+                                  <p>{item.finalPrice || "-"}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        ))}
+                    </ul>
+                  </section>
+                ))}
               <ul className="grid grid-cols-6 xl:grid-cols-5 lg:grid-cols-4 screen_810:grid-cols-3 sm:grid-cols-2 screen_445:grid-cols-1 gap-4 screen_500:self-center">
                 {data
-                  .filter((item) =>
-                    selectedCategory === "All"
-                      ? true
-                      : selectedCategory
-                      ? item.type_name === selectedCategory
-                      : true
-                  )
+                  .filter((item) => item.type_name === selectedCategory)
                   .map((item) => (
                     <li
                       key={item._id}
