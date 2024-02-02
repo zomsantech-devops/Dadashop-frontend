@@ -54,14 +54,14 @@ function ItemShop() {
           <ul className="grid grid-cols-6 lg:grid-cols-4 md:grid-cols-3 xs:grid-cols-1 gap-4">
             {data.map((item) => (
               <li key={item._id} className="cursor-pointer">
-                <div className="relative w-[187px]">
+                <div className="relative group">
                   <img
                     loading="lazy"
                     src={item.images_background}
                     alt={item.name}
-                    className="rounded-lg transition ease-in-out duration-300 hover:scale-110 hover:brightness-105 overflow-hidden z-20"
+                    className="w-[187px] rounded-lg transition ease-in-out duration-300 group-hover:scale-110 group-hover:brightness-105 overflow-hidden"
                   />
-                  <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 fn-font tracking-wider text-2xl uppercase antialiased leading-6 card-bg w-full rounded-lg z-10">
+                  <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 fn-font tracking-wider text-2xl uppercase antialiased leading-6 card-bg w-full rounded-lg">
                     <h3 className="pb-1.5 pt-2">{item.name}</h3>
                     <div className="flex">
                       <img
