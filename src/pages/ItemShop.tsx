@@ -134,9 +134,9 @@ function ItemShop() {
                                 alt={item.name}
                                 className="rounded-lg transition ease-in-out duration-300 group-hover:scale-110 group-hover:brightness-105 overflow-hidden"
                               />
-                              <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 tracking-wider text-2xl uppercase antialiased leading-6 card-bg w-full rounded-lg">
+                              <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 tracking-wider text-xl uppercase antialiased leading-6 card-bg w-full rounded-lg">
                                 <h3 className="pb-1.5 pt-2">{item.name}</h3>
-                                <div className="flex">
+                                <div className="flex items-center">
                                   <img
                                     src={vBucks}
                                     alt="V-Bucks"
