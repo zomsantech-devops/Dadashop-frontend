@@ -1,9 +1,9 @@
 export default function determineTier (points: number): string {
     if (points >= 3000) {
-        return 'Mythic';
+        return 'Unreal';
     } else if (points >= 300) {
-        return 'Epic';
+        return 'Diamond';
     } else {
-        return 'Rare';
+        return 'Gold';
     }
 };

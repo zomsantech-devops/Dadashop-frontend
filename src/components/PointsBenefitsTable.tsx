@@ -1,7 +1,7 @@
 import { Typography } from "@material-tailwind/react";
-import rare from "../images/Mask group (4).png";
-import epic from "../images/Mask group (1).png";
-import mythic from "../images/Mask group (2).png";
+import diamond from "../images/Mask-group-diamond.png";
+import unreal from "../images/Mask-group-unreal.png";
+import gold from "../images/Mask-group-gold.png";
 
 const TABLE_HEAD = ["ระดับ", "แต้มสะสม", "สิทธิประโยชน์"];
 
@@ -54,25 +54,25 @@ export function PointsBenefitsTable() {
                     {index === 0 && (
                       <>
                         <p className="absolute ml-[10px] mt-[13px] font-bold text-white">
-                          RARE
+                          Gold
                         </p>
-                        <img src={rare} alt="" />
+                        <img src={gold} alt="" />
                       </>
                     )}
                     {index === 1 && (
                       <>
                         <p className="absolute ml-[10px] mt-[13px] font-bold text-white">
-                          EPIC
+                          Diamond
                         </p>
-                        <img src={epic} alt="" />
+                        <img src={diamond} alt="" />
                       </>
                     )}
                     {index === 2 && (
                       <>
                         <p className="absolute ml-[10px] mt-[13px] font-bold text-white">
-                          MYTHIC
+                          Unreal
                         </p>
-                        <img src={mythic} alt="" />
+                        <img src={unreal} alt="" />
                       </>
                     )}
                   </td>

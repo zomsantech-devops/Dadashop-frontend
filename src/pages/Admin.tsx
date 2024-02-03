@@ -30,7 +30,7 @@ function Admin() {
     name_display: "Anonymous#",
     current_points: 0,
     total_points: 0,
-    tier: "Rare",
+    tier: "Gold",
   });
   const [addUserOpen, setAddUserOpen] = useState(false);
   const [isToggleChecked, setIsToggleChecked] = useState(false);
@@ -162,7 +162,7 @@ function Admin() {
         name_display: "Anonymous#",
         current_points: 0,
         total_points: 0,
-        tier: "Rare",
+        tier: "Gold",
       });
     } catch (error) {
       console.error(error);
@@ -179,7 +179,7 @@ function Admin() {
       name_display: "Anonymous#",
       current_points: 0,
       total_points: 0,
-      tier: "Rare",
+      tier: "Gold",
     });
     setAddUserOpen(false);
   };
