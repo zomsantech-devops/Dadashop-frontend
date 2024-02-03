@@ -69,7 +69,6 @@ function ItemShop() {
     const uniqueSection = Array.from(
       new Set(data.map((sec) => sec.section_name))
     );
-    console.log(uniqueSection);
     setSection(uniqueSection);
   }, [data]);
 

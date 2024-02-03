@@ -10,13 +10,14 @@ function Navbar() {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isMobileDropdownOpen, setMobileDropdownOpen] = useState(false);
   const [isGiftDropdownOpen, setGiftDropdownOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 850);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 920);
   const [animateCollapseIn, setAnimateCollapseIn] = useState(false);
 
   const location = useLocation();
 
   useEffect(() => {
     setAnimateCollapseIn(true);
+    handleToggleDropdownClose()
     setTimeout(() => {
       setMobileDropdownOpen(false);
       setAnimateCollapseIn(false);
@@ -48,9 +49,9 @@ function Navbar() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.outerWidth < 920);
+      setIsMobile(window.innerWidth < 920);
       // NEW
-      window.outerWidth > 920 && setMobileDropdownOpen(false);
+      window.innerWidth > 920 && setMobileDropdownOpen(false);
     };
 
     window.addEventListener("resize", handleResize);
@@ -59,6 +60,10 @@ function Navbar() {
       window.removeEventListener("resize", handleResize);
     };
   }, [isMobile]);
+
+  useEffect(() => {
+    window.innerWidth < 920 && setIsMobile(true);
+  }, []);
 
   return (
     <div
@@ -108,7 +113,7 @@ function Navbar() {
                 onMouseEnter={handleToggleDropdownOpen}
                 onMouseLeave={handleToggleDropdownClose}
               >
-                <div className="absolute top-8 left-1 h-10 w-full rounded-bl-full"></div>
+                <div className="absolute top-8 left-1 h-5 w-full rounded-bl-full"></div>
                 <div className="cursor-pointer">
                   <p className="relative inline-block">
                     คิวส่ง Gift
@@ -124,22 +129,25 @@ function Navbar() {
                     <Link
                       to="/CheckQueue/ZZ1-ZZ6"
                       className="w-full block px-4 py-2 rounded-md transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
+                      onClick={handleToggleDropdownClose}
                     >
                       Dada ZZ1-ZZ6
                     </Link>
                     <Link
                       to="/CheckQueue/D1-D10"
                       className="my-1 w-full block px-4 py-2 rounded-md transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
+                      onClick={handleToggleDropdownClose}
                     >
                       Dada D1-D10
                     </Link>
                     <Link
                       to="/CheckQueue/G1-G8"
-                      className="w-full whitespace-nowrap block px-4 py-2 rounded-md transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
+                      className="group/name w-full whitespace-nowrap block px-4 py-2 rounded-md transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
+                      onClick={handleToggleDropdownClose}
                     >
                       Dada G1-G8
                       <br />
-                      <span className="text-red-400">(ปิดรับเพื่อนแล้ว)</span>
+                      <span className="text-red-400 group-hover/name:text-[#23d9d9]">(ปิดรับเพื่อนแล้ว)</span>
                     </Link>
                   </div>
                 )}
