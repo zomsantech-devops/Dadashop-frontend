@@ -41,7 +41,7 @@ function HowToElse() {
               ที่เราเล่น เช่น หากลูกค้าเล่นบน PlayStation ให้กด Login ด้วย
               PlayStation ID เป็นต้น เพื่อป้องกันการผูกผิดไอดี)
             </p>
-            <div className="flex gap-[15px] text-[16px]">
+            <div className="flex w-fit gap-[15px] text-[16px] hover:scale-105 transition ease-in-out duration-300">
               <DarkButton
                 text={"Login Epic Games"}
                 link="https://www.epicgames.com/account/connections#accounts"
@@ -50,9 +50,11 @@ function HowToElse() {
           </div>
           <div className="screen_930:w-full screen_930:text-[20px] font-bold bg-[#E7F9FD] w-[870px] text-[24px] leading-[40px] p-[30px] rounded-[30px] self-center">
             <p className=" mb-[15px]">
-              2. สมัคร ID XBOX ของลูกค้า โดยเข้า Link ข้างล่าง แล้วกด <span className="text-blue-600">Create one!</span> (หากมี ID XBOX อยู่แล้ว ให้ข้ามข้อนี้ได้เลยครับ)
+              2. สมัคร ID XBOX ของลูกค้า โดยเข้า Link ข้างล่าง แล้วกด{" "}
+              <span className="text-blue-600">Create one!</span> (หากมี ID XBOX
+              อยู่แล้ว ให้ข้ามข้อนี้ได้เลยครับ)
             </p>
-            <div className="flex gap-[15px] text-[16px]">
+            <div className="flex w-fit gap-[15px] text-[16px] hover:scale-105 transition ease-in-out duration-300">
               <DarkButton
                 text={"สมัคร ID XBOX"}
                 link="https://account.xbox.com/profile"
@@ -63,7 +65,7 @@ function HowToElse() {
             <p className=" mb-[15px]">
               3. ทำการผูก ID Epic เข้ากับ ID XBOX โดยการกด Link นี้เลย
             </p>
-            <div className="flex gap-[15px] text-[16px]">
+            <div className="flex gap-[15px] w-fit text-[16px] hover:scale-105 transition ease-in-out duration-300">
               <SmallDarkButton
                 text={"ผูก ID"}
                 link="https://www.epicgames.com/id/link/xbl?successRedirect=https%3A%2F%2Fwww.epicgames.com%2Faccount%2Fconnections%3Flang%3Den-US%26connected%3Dxbox%26tab%3Daccounts&client_id=007c0bfe154c4f5396648f013c641dcf&lang=en_US"
@@ -74,9 +76,31 @@ function HowToElse() {
             <p className=" mb-[15px]">
               4. สั่งซื้อ โดยการแจ้งสิ่งที่ต้องการ
               <ul className="ml-10 md:ml-8 sm:ml-5">
-                <li className="flex items-center"><span className="list-bullet"></span>V-Bucks 1000/2800/5000/13500</li>
-                <li className="flex items-center"><span className="list-bullet"></span>Packs</li>
-                <li className="flex items-center"><span className="list-bullet"></span>Fortnite Crew</li>
+                <li className="flex flex-col whitespace-normal">
+                  <p>
+                    <span className="list-bullet"></span>V-Bucks
+                  </p>
+                  <div className="ml-10 md:ml-8 sm:ml-5">
+                    <p>
+                      <span className="list-bullet"></span>1000
+                    </p>
+                    <p>
+                      <span className="list-bullet"></span>2800
+                    </p>
+                    <p>
+                      <span className="list-bullet"></span>5000
+                    </p>
+                    <p>
+                      <span className="list-bullet"></span>13500
+                    </p>
+                  </div>
+                </li>
+                <li className="flex items-center">
+                  <span className="list-bullet"></span>Packs
+                </li>
+                <li className="flex items-center">
+                  <span className="list-bullet"></span>Fortnite Crew
+                </li>
               </ul>
               (ทักแล้วรอ Admin คอนเฟิร์มครับผม)
             </p>

@@ -1,5 +1,5 @@
 import Footer from "../components/Footer";
-import { FBButton, DiscordButton } from "../components/Button";
+import { FBButton, DiscordButton, CustomButton } from "../components/Button";
 import arrow from "../images/arrow-down-sign-to-navigate.png";
 import { FaRegCheckCircle } from "react-icons/fa";
 
@@ -61,8 +61,9 @@ function HowToGift() {
                           <FaRegCheckCircle />
                           <p>Copied!</p>
                         </div>
-
-                      ) : id}
+                      ) : (
+                        id
+                      )}
                     </li>
                   </>
                 );
@@ -70,7 +71,8 @@ function HowToGift() {
             </ul>
             {/* code emoji in html -> https://www.w3schools.com/charsets/ref_emoji_smileys.asp */}
             <p className="text-center px-4 py-2 rounded-3xl transition ease-in-out duration-300 bg-[#0c63c5] text-white mt-6">
-              รอ 48 ชั่วโมง หลังเป็นเพื่อนกัน ถึงจะเริ่มสั่งไอเทมได้ครับ &#128522;
+              รอ 48 ชั่วโมง หลังเป็นเพื่อนกัน ถึงจะเริ่มสั่งไอเทมได้ครับ
+              &#128522;
             </p>
           </div>
           <div className="screen_930:w-full font-bold bg-[#E7F9FD] w-[870px] p-[30px] rounded-[30px] self-center">
@@ -79,33 +81,36 @@ function HowToGift() {
               ถึงจะสั่งซื้อได้ครับ &#128522;
             </p>
             <div className="flex flex-row flex-wrap gap-2.5 mt-4">
-              <Link
-                to="/CheckQueue/D1-D10"
-                className="w-fit text-center px-4 py-2 rounded-3xl bg-[#0c63c5] text-white cursor-pointer hover:scale-105 transition ease-in-out duration-300"
-              >
-                เช็คคิว Dada D1-D10
-              </Link>
-              {/* TODO: Change path */}
-              <Link
-                to="/CheckQueue/ZZ1-ZZ6"
-                className="w-fit text-center px-4 py-2 rounded-3xl bg-[#0c63c5] text-white cursor-pointer hover:scale-105 transition ease-in-out duration-300"
-              >
-                เช็คคิว Dada ZZ1-ZZ6
-              </Link>
-              <Link
-                to="/CheckQueue/G1-G8"
-                className="w-fit text-center px-4 py-2 rounded-3xl bg-[#0c63c5] text-white cursor-pointer hover:scale-105 transition ease-in-out duration-300"
-              >
-                เช็คคิว Dada G1-G8 (ปิดรับเพื่อนแล้ว)
-              </Link>
+              <div className="flex gap-[15px] text-[16px] hover:scale-105 transition ease-in-out duration-300">
+                <CustomButton
+                  text={"เช็คคิว Dada D1-D10"}
+                  link="/CheckQueue/D1-D10"
+                />
+              </div>
+              <div className="flex gap-[15px] text-[16px] hover:scale-105 transition ease-in-out duration-300">
+                <CustomButton
+                  text={"เช็คคิว Dada ZZ1-ZZ6"}
+                  link="/CheckQueue/ZZ1-ZZ6"
+                />
+              </div>
+              <div className="flex gap-[15px] text-[16px] hover:scale-105 transition ease-in-out duration-300">
+                <CustomButton
+                  text={"เช็คคิว Dada G1-G8 (ปิดรับเพื่อนแล้ว)"}
+                  link="/CheckQueue/G1-G8"
+                />
+              </div>
             </div>
           </div>
           <div className="screen_930:w-full font-bold bg-[#E7F9FD] w-[870px] text-[24px] screen_930:text-[20px] leading-[40px] p-[30px] rounded-[30px] self-center">
             <p className="mb-[15px]">
               3. สั่งซื้อ โดยการแจ้ง
               <ul className="ml-10 md:ml-8 sm:ml-5">
-                <li className="flex items-center"><span className="list-bullet"></span>Item ที่ต้องการ</li>
-                <li className="flex items-center"><span className="list-bullet"></span>ชื่อในเกมของลูกค้า</li>
+                <li className="flex items-center">
+                  <span className="list-bullet"></span>Item ที่ต้องการ
+                </li>
+                <li className="flex items-center">
+                  <span className="list-bullet"></span>ชื่อในเกมของลูกค้า
+                </li>
               </ul>
               (ทักแล้วรอ Admin คอนเฟิร์ม ห้ามทักซ้ำเด็ดขาดครับ
               ไม่งั้นอาจจะหลุดคิวได้)
