@@ -139,7 +139,6 @@ function ItemShop() {
                           <li
                             key={item._id}
                             className="w-[187px] cursor-pointer screen_500:w-full"
-                            // onClick={() => handleItemClick(item.id)}
                             onClick={() => handleItemClick(item.id)}
                           >
                             <div className="relative group overflow-hidden rounded-lg">
@@ -177,6 +176,7 @@ function ItemShop() {
                     <li
                       key={item._id}
                       className="w-[187px] cursor-pointer screen_500:w-full"
+                      onClick={() => handleItemClick(item.id)}
                     >
                       <div className="relative group overflow-hidden rounded-lg">
                         <img
@@ -208,9 +208,6 @@ function ItemShop() {
           </>
         )}
       </div>
-      {/* {open && (
-        <ItemModal open={open} itemId={selectedItemId} onClose={closeModal} />
-      )} */}
       {selectedItemId && (
         <Modal open={open} onClose={() => setOpen(false)}>
           <ItemDetail itemId={selectedItemId} onClose={() => setOpen(false)} />

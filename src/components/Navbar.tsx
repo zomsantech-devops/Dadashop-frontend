@@ -74,7 +74,7 @@ function Navbar() {
       <div className="w-full flex items-center">
         {/* LOGO */}
         <Link to="/">
-          <img src={logo} alt="logo" className="h-20" />
+          <img src={logo} alt="logo" className="h-20 screen_443:-ml-3.5" />
         </Link>
         {!isMobile && (
           <>
