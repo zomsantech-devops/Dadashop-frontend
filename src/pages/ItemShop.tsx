@@ -25,7 +25,7 @@ interface Item {
 
 interface ResponseData {
   success: boolean;
-  message: Item[];
+  data: Item[];
 }
 
 function ItemShop() {
@@ -44,7 +44,7 @@ function ItemShop() {
         const response = await axios.get<ResponseData>(
           "https://dadashop-backend.vercel.app/api/v1/item/"
         );
-        setData(response.data.message);
+        setData(response.data.data);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
