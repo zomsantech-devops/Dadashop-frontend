@@ -13,7 +13,7 @@ function ItemPriceTable() {
         </p>
         <div className="flex screen_960:flex-col self-center gap-[20px] screen_960:gap-[40px] screen_500:w-full">
           {/* GIFT */}
-          <div className="w-[585px] h-min pricetable_1250:w-[440px] screen_500:w-full rounded-[30px] price-and-how-to-box">
+          <div className="w-[585px] h-min screen_1250:w-[440px] screen_500:w-full rounded-[30px] price-and-how-to-box">
             <div className="w-full rounded-t-[30px] bg-lime-100 overflow-hidden">
               <img
                 src={giftImage}
@@ -50,7 +50,7 @@ function ItemPriceTable() {
             </div>
           </div>
           {/* V-BUCKs */}
-          <div className="w-[585px] h-min pricetable_1250:w-[440px] screen_500:w-full rounded-[30px] price-and-how-to-box">
+          <div className="w-[585px] h-min screen_1250:w-[440px] screen_500:w-full rounded-[30px] price-and-how-to-box">
             <div className="w-full rounded-t-[30px] bg-lime-100 overflow-hidden">
               <img
                 src={vBucksImage}
@@ -59,7 +59,7 @@ function ItemPriceTable() {
               ></img>
             </div>
             <div className="p-[15px]">
-              <h1 className="w-full font-bold text-[28px] pricetable_1250:leading-tight pricetable_1250:mb-[5px] whitespace-normal">
+              <h1 className="w-full font-bold text-[28px] screen_1250:leading-tight screen_1250:mb-[5px] whitespace-normal">
                 เติม V-Bucks, Packs, Fortnite Crew
               </h1>
               {/* สามารถเปลี่ยนสีได้เลยครับ แค่ใส่โค้ดสี HEX ลงใน bg-[โค้ดสี] */}

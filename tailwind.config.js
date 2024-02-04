@@ -8,7 +8,7 @@ module.exports = {
     },
     screens: {
       'xl': {'max': '1280px'},
-      'pricetable_1250': {'max': '1250px'},
+      'screen_1250': {'max': '1250px'},
       'screen_1170': {'max': '1170px'},
       'homePageCatagories_1150px': {'max': '1150px'},
       'screen_1070': {'max': '1070px'},

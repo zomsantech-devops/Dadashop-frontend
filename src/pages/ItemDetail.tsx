@@ -64,8 +64,6 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
     }
   }, [itemId]);
 
-  console.log(item?.images.background);
-
   return (
     <>
       {loading ? (
@@ -73,7 +71,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
           <CircularProgress className="self-center" />
         </div>
       ) : item ? (
-        <div className="flex flex-row screen_1170:flex-col items-center justify-center max-h-[90vh] gap-6 pr-4 pl-6">
+        <div className="flex flex-row screen_1170:flex-col items-center justify-center max-h-[90vh] gap-6 pr-6 pl-6">
           {item.previewVideos[0] ? (
             <video
               preload="true"
@@ -92,10 +90,10 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
               className="h-[90vh] rounded-lg screen_1170:h-[375px] screen_445:h-[256px]"
             />
           )}
-          <div className="w-[2px] min-h-[90vh] bg-black screen_1170:min-h-[2px] screen_1170:min-w-[15%]"></div>
-          <div className="max-h-[90vh] max-w-[400px] overflow-y-auto scrollbar screen_1170:max-w-fit">
+          <div className="w-[2px] min-h-[90vh] bg-black/60 screen_1170:min-h-[2px] screen_1170:min-w-[15%]"></div>
+          <div className="max-h-[90vh] max-w-[450px] w-[450px] overflow-y-auto scrollbar screen_1170:w-[315px]">
             <div className="flex flex-col items-center justify-center mr-4 screen_1170:ml-4">
-              <div className="text-[28px] text-black/80 uppercase">
+              <div className="text-[28px] text-black/80 uppercase text-center">
                 {item?.name}
               </div>
               <p>
@@ -106,8 +104,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                 <p className="font-extrabold">{item.price || "-"}</p>
               </div>
               <p className="italic text-center text-sm mb-2">
-                Roses are red, violets are blue, victory is sweet, but not
-                without you.
+                {item.description || "-"}
               </p>
               <div className="mb-4">details...</div>
               <div className="flex flex-col gap-2">
@@ -127,7 +124,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
             </div>
           </div>
           <div
-            className="absolute top-5 right-5 cursor-pointer"
+            className="absolute top-5 right-5 cursor-pointer screen_1170:top-2 screen_1170:right-2"
             onClick={onClose}
           >
             <IoMdClose className="hover:bg-black/20 rounded-xl w-5 h-5 p-0.5" />
