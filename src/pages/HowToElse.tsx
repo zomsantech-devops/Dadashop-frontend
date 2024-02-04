@@ -45,6 +45,7 @@ function HowToElse() {
               <DarkButton
                 text={"Login Epic Games"}
                 link="https://www.epicgames.com/account/connections#accounts"
+                className=""
               />
             </div>
           </div>
@@ -58,6 +59,7 @@ function HowToElse() {
               <DarkButton
                 text={"สมัคร ID XBOX"}
                 link="https://account.xbox.com/profile"
+                className=""
               />
             </div>
           </div>
@@ -69,6 +71,7 @@ function HowToElse() {
               <SmallDarkButton
                 text={"ผูก ID"}
                 link="https://www.epicgames.com/id/link/xbl?successRedirect=https%3A%2F%2Fwww.epicgames.com%2Faccount%2Fconnections%3Flang%3Den-US%26connected%3Dxbox%26tab%3Daccounts&client_id=007c0bfe154c4f5396648f013c641dcf&lang=en_US"
+                className=""
               />
             </div>
           </div>

@@ -85,18 +85,21 @@ function HowToGift() {
                 <CustomButton
                   text={"เช็คคิว Dada D1-D10"}
                   link="/CheckQueue/D1-D10"
+                  className=""
                 />
               </div>
               <div className="flex gap-[15px] text-[16px] hover:scale-105 transition ease-in-out duration-300">
                 <CustomButton
                   text={"เช็คคิว Dada ZZ1-ZZ6"}
                   link="/CheckQueue/ZZ1-ZZ6"
+                  className=""
                 />
               </div>
               <div className="flex gap-[15px] text-[16px] hover:scale-105 transition ease-in-out duration-300">
                 <CustomButton
                   text={"เช็คคิว Dada G1-G8 (ปิดรับเพื่อนแล้ว)"}
                   link="/CheckQueue/G1-G8"
+                  className=""
                 />
               </div>
             </div>

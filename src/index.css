@@ -14,6 +14,30 @@ body {
   letter-spacing: 0.05em;
 }
 
+.scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scrollbar-category::-webkit-scrollbar {
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 .item-shop-btn {
   box-shadow: 0px 0px 50px 0px rgba(255, 255, 255, 0.5);
 }
@@ -172,5 +196,5 @@ body {
 }
 
 .card-bg {
-  background: linear-gradient(0deg,#000 0%,transparent 80%);
+  background: linear-gradient(0deg, #000 0%, transparent 80%);
 }
