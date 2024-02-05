@@ -93,6 +93,14 @@ function ItemShop() {
     return capitalizedWord;
   };
 
+  const convertVbuckToTHB = (price: number | null) => {
+    if (price === null) {
+      return 0;
+    }
+    const baht = (price / 100) * 5;
+    return baht;
+  };
+
   return (
     <>
       <div className="flex flex-col justify-center px-[30px] screen_445:px-3">
@@ -128,14 +136,13 @@ function ItemShop() {
               {selectedCategory === "All" &&
                 section.map((sec) => (
                   <section key={sec}>
-                    <h1 className="pt-3.5 pb-2 text-4xl text-black/80">
+                    <h1 className="pt-3.5 pb-2 text-4xl text-black/80 font-semibold">
                       {sec}
                     </h1>
                     <ul className="grid grid-cols-6 xl:grid-cols-5 lg:grid-cols-4 screen_810:grid-cols-3 sm:grid-cols-2 gap-4 screen_500:place-items-center screen_445:gap-2">
                       {data
                         .filter((item) => item.section_name === sec)
                         .map((item) => (
-                          // Click to open modal here (li)
                           <li
                             key={item._id}
                             className="w-[187px] cursor-pointer screen_500:w-full"
@@ -148,19 +155,28 @@ function ItemShop() {
                                 alt={item.name}
                                 className="rounded-lg transition ease-in-out duration-300 group-hover:scale-110 group-hover:brightness-105 overflow-hidden"
                               />
-                              <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 tracking-wider text-xl uppercase antialiased leading-6 card-bg w-full rounded-lg screen_445:text-lg screen_445:leading-normal">
-                                <h3 className="pb-1.5 pt-2 screen_445:pb-0">
+                              <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 text-xl uppercase antialiased leading-6 card-bg w-full rounded-lg screen_445:text-lg screen_445:leading-normal">
+                                <h3 className="text-[20px] font-bold leading-5 pb-1.5 pt-2 screen_445:pb-0">
                                   {item.name}
                                 </h3>
-                                <div className="flex items-center">
-                                  <img
-                                    src={vBucks}
-                                    alt="V-Bucks"
-                                    className="w-5 h-5 mr-2"
-                                  />
-                                  <p className="font-bold">
-                                    {item.finalPrice || "-"}
-                                  </p>
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center justify-center">
+                                    <img
+                                      src={vBucks}
+                                      alt="V-Bucks"
+                                      className="w-5 h-5 mr-1"
+                                    />
+                                    <p className="font-bold">
+                                      {item.finalPrice || "-"}
+                                    </p>
+                                  </div>
+                                  <div className="text-[#aafffa]">
+                                    <p className="font-bold">
+                                      {convertVbuckToTHB(item.finalPrice) ||
+                                        "-"}{" "}
+                                      บาท
+                                    </p>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -185,19 +201,26 @@ function ItemShop() {
                           alt={item.name}
                           className="rounded-lg transition ease-in-out duration-300 group-hover:scale-110 group-hover:brightness-105 overflow-hidden"
                         />
-                        <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 tracking-wider text-xl uppercase antialiased leading-6 card-bg w-full rounded-lg screen_445:text-lg screen_445:leading-normal">
-                          <h3 className="pb-1.5 pt-2 screen_445:pb-0">
+                        <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 text-xl uppercase antialiased leading-6 card-bg w-full rounded-lg screen_445:text-lg screen_445:leading-normal">
+                          <h3 className="text-[20px] font-bold leading-5 pb-1.5 pt-2 screen_445:pb-0">
                             {item.name}
                           </h3>
-                          <div className="flex items-center">
-                            <img
-                              src={vBucks}
-                              alt="V-Bucks"
-                              className="w-5 h-5 mr-2"
-                            />
-                            <p className="font-bold">
-                              {item.finalPrice || "-"}
-                            </p>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center justify-center">
+                              <img
+                                src={vBucks}
+                                alt="V-Bucks"
+                                className="w-5 h-5 mr-1"
+                              />
+                              <p className="font-bold">
+                                {item.finalPrice || "-"}
+                              </p>
+                            </div>
+                            <div className="text-[#aafffa]">
+                              <p className="font-bold">
+                                {convertVbuckToTHB(item.finalPrice) || "-"} บาท
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>

@@ -6,6 +6,7 @@ import vBucks from "../images/vbucks-coins.png";
 import { CustomButton } from "../components/Button";
 import { Link } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
+import { IoMdPricetag } from "react-icons/io";
 
 interface IdProps {
   itemId: string | null;
@@ -21,7 +22,7 @@ interface Item {
   type: {
     name: string;
   };
-  price: number;
+  price: number | null;
   previewVideos: [
     {
       url: string;
@@ -30,6 +31,12 @@ interface Item {
   images: {
     background: string;
   };
+  displayAssets: DisplayAsset[];
+}
+
+interface DisplayAsset {
+  materialInstance: string;
+  background: string;
 }
 
 interface ResponseData {
@@ -43,6 +50,8 @@ interface ResponseData {
 const ItemDetail = ({ itemId, onClose }: IdProps) => {
   const [item, setItem] = useState<Item>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [styles, setStyles] = useState<DisplayAsset[]>([]);
+  // const [selectedMedia, setSelectedMedia] = useState<string>();
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -52,6 +61,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
           `https://dadashop-backend.vercel.app/api/v1/item/${itemId}`
         );
         setItem(response.data.data.item);
+        setStyles(response.data.data.item.displayAssets);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -64,6 +74,14 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
     }
   }, [itemId]);
 
+  const convertVbuckToTHB = (price: number | null) => {
+    if (price === null) {
+      return 0;
+    }
+    const baht = (price / 100) * 5;
+    return baht;
+  };
+
   return (
     <>
       {loading ? (
@@ -71,6 +89,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
           <CircularProgress className="self-center" />
         </div>
       ) : item ? (
+        // Do it here
         <div className="flex flex-row screen_1170:flex-col items-center justify-center max-h-[90vh] gap-6 pr-6 pl-6">
           {item.previewVideos[0] ? (
             <video
@@ -85,7 +104,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
           ) : (
             <img
               loading="lazy"
-              src={item.images.background}
+              src={item.images.background || item.displayAssets[0].background}
               alt={item.description}
               className="h-[90vh] rounded-lg screen_1170:h-[375px] screen_445:h-[256px]"
             />
@@ -99,27 +118,49 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
               <p>
                 {item.rarity.name} {item.type.name}
               </p>
-              <div className="flex items-center mb-2">
-                <img src={vBucks} alt="V-Bucks" className="w-5 h-5 mr-2" />
-                <p className="font-extrabold">{item.price || "-"}</p>
+              <div className="flex flex-col items-start justify-center my-2">
+                <div className="flex items-center">
+                  <img src={vBucks} alt="V-Bucks" className="w-6 h-6 mr-2" />
+                  <p className="font-bold text-2xl">{item.price || "-"}</p>
+                </div>
+                <div className="flex items-start justify-center">
+                  <IoMdPricetag className="w-6 h-6 mr-2 text-[#ffc007] self-center" />
+                  <p className="font-bold text-2xl">
+                    {convertVbuckToTHB(item.price) || "-"} บาท
+                  </p>
+                </div>
               </div>
-              <p className="italic text-center text-sm mb-2">
+              <p className="italic text-center text-sm mb-4">
                 {item.description || "-"}
               </p>
-              <div className="mb-4">details...</div>
+              {/* <div className="mb-4">details...</div> */}
               <div className="flex flex-col gap-2">
                 <CustomButton
                   text={"ขั้นตอนการสั่งซื้อ"}
-                  link={""}
+                  link={"/ItemPriceTable"}
                   className={"text-lg"}
                 />
                 <Link
-                  to={""}
+                  to={"https://discord.com/invite/5t8Juy7FHu"}
                   className="text-white leading-normal p-4 px-6 flex flex-col justify-center items-center bg-[#4b2762] rounded-[20px] hover:bg-[#4b2762]/90"
                 >
                   <p className="text-xl">ราคา Member</p>
                   <p className="text-xs">ตรวจสอบใน Discord</p>
                 </Link>
+              </div>
+              <div className="mt-4 mb-2 font-bold">Styles: </div>
+              <div className="flex items-center justify-center flex-wrap gap-3">
+                {styles.map((style, i) => (
+                  <div key={i + "_" + style} className="">
+                    {/* Click this image to show others preview vid */}
+                    <img
+                      src={style.background}
+                      alt=""
+                      className="object-cover rounded-xl h-full w-[100px]"
+                      // onClick={() => setSelectedMedia(style.background)}
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           </div>

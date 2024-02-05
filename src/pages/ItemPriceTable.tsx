@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Footer from "../components/Footer";
 import giftImage from "../images/gift.jpeg";
 import vBucksImage from "../images/vbucks.jpeg";
@@ -5,6 +6,17 @@ import vBucksImage from "../images/vbucks.jpeg";
 import { Link } from "react-router-dom";
 
 function ItemPriceTable() {
+  useEffect(() => {
+    const toggleBodyOverflow = () => {
+      document.body.style.overflow = "auto";
+    };
+
+    toggleBodyOverflow();
+
+    return () => {
+      toggleBodyOverflow();
+    };
+  }, []);
   return (
     <div>
       <div className="flex flex-col justify-center px-[30px]">
@@ -30,8 +42,8 @@ function ItemPriceTable() {
                   Battle Pass ชุดเริ่มต้น
                 </p>
                 <p>
-                  <span className="list-bullet-gift"></span>ไม่ใช่การส่ง
-                  V-Bucks (ลูกค้าจะได้รับเป็น Item)
+                  <span className="list-bullet-gift"></span>ไม่ใช่การส่ง V-Bucks
+                  (ลูกค้าจะได้รับเป็น Item)
                 </p>
                 <p>
                   <span className="list-bullet-gift"></span>
@@ -65,16 +77,15 @@ function ItemPriceTable() {
               {/* สามารถเปลี่ยนสีได้เลยครับ แค่ใส่โค้ดสี HEX ลงใน bg-[โค้ดสี] */}
               <div className="flex flex-col justify-center gap-3 mb-5 mt-3 ml-10">
                 <p>
-                  <span className="list-bullet-else"></span>ลูกค้าต้องนำ ID
-                  Epic มาผูกกับ ID XBOX ของลูกค้าเอง
+                  <span className="list-bullet-else"></span>ลูกค้าต้องนำ ID Epic
+                  มาผูกกับ ID XBOX ของลูกค้าเอง
                 </p>
                 <p>
-                  <span className="list-bullet-else"></span>ไม่ต้องรอ 48
-                  ชั่วโมง
+                  <span className="list-bullet-else"></span>ไม่ต้องรอ 48 ชั่วโมง
                 </p>
                 <p>
-                  <span className="list-bullet-else"></span>ได้ทันทีภายใน 10
-                  ถึง 20 นาที
+                  <span className="list-bullet-else"></span>ได้ทันทีภายใน 10 ถึง
+                  20 นาที
                 </p>
               </div>
               {/* อันนี้เป็นสี gradient จากซ้ายไปขวา ใส่ตามนี้เลยครับ form -> via -> to (bg-[โค้ดสี]) */}
