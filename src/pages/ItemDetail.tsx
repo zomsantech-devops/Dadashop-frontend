@@ -23,6 +23,7 @@ interface Item {
     name: string;
   };
   price: number | null;
+  styles: Styles[];
   previewVideos: [
     {
       url: string;
@@ -31,13 +32,17 @@ interface Item {
   images: {
     background: string;
   };
-  displayAssets: DisplayAsset[];
+  // displayAssets: DisplayAsset[];
 }
 
-interface DisplayAsset {
-  materialInstance: string;
-  background: string;
+interface Styles {
+  image: string;
 }
+
+// interface DisplayAsset {
+//   materialInstance: string;
+//   background: string;
+// }
 
 interface ResponseData {
   success: boolean;
@@ -50,8 +55,8 @@ interface ResponseData {
 const ItemDetail = ({ itemId, onClose }: IdProps) => {
   const [item, setItem] = useState<Item>();
   const [loading, setLoading] = useState<boolean>(false);
-  const [styles, setStyles] = useState<DisplayAsset[]>([]);
-  // const [selectedMedia, setSelectedMedia] = useState<string>();
+  const [styles, setStyles] = useState<Styles[]>([]);
+  const [selectedStyle, setSelectedStyle] = useState<string | null>();
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -61,7 +66,8 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
           `https://dadashop-backend.vercel.app/api/v1/item/${itemId}`
         );
         setItem(response.data.data.item);
-        setStyles(response.data.data.item.displayAssets);
+        setStyles(response.data.data.item.styles);
+        setSelectedStyle(response.data.data.item.previewVideos[0]?.url || "")
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -91,20 +97,20 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
       ) : item ? (
         // Do it here
         <div className="flex flex-row screen_1170:flex-col items-center justify-center max-h-[90vh] gap-6 pr-6 pl-6">
-          {item.previewVideos[0] ? (
+          {selectedStyle ? (
             <video
               preload="true"
-              className="h-[90vh] rounded-lg screen_1170:h-[375px] screen_445:h-[256px]"
+              className="max-w-[520px] h-[90vh] rounded-lg screen_1170:h-[375px] screen_445:h-[256px]"
               muted
               loop
               autoPlay
               playsInline
-              src={item.previewVideos[0]?.url}
+              src={selectedStyle}
             ></video>
           ) : (
             <img
               loading="lazy"
-              src={item.images.background || item.displayAssets[0].background}
+              src={item.images.background}
               alt={item.description}
               className="h-[90vh] rounded-lg screen_1170:h-[375px] screen_445:h-[256px]"
             />
@@ -149,18 +155,24 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                 </Link>
               </div>
               <div className="mt-4 mb-2 font-bold">Styles: </div>
-              <div className="flex items-center justify-center flex-wrap gap-3">
-                {styles.map((style, i) => (
-                  <div key={i + "_" + style} className="">
-                    {/* Click this image to show others preview vid */}
-                    <img
-                      src={style.background}
-                      alt=""
-                      className="object-cover rounded-xl h-full w-[100px]"
-                      // onClick={() => setSelectedMedia(style.background)}
-                    />
-                  </div>
-                ))}
+              <div className="flex items-center justify-center flex-wrap gap-3 mb-2">
+                {styles.length !== 0 ? (
+                  styles.map((style, i) => (
+                    <div
+                      key={i + "_" + style}
+                      className="cursor-pointer bg-[#1780d8] rounded-xl"
+                    >
+                      <img
+                        src={style.image}
+                        alt=""
+                        className="rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
+                        onClick={() => setSelectedStyle((item.previewVideos.length === 1 ? item.previewVideos[0]?.url : item.previewVideos[i]?.url) || null)}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <p>No style</p>
+                )}
               </div>
             </div>
           </div>
