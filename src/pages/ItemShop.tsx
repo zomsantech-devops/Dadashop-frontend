@@ -94,10 +94,16 @@ function ItemShop() {
   }, [data]);
 
   useEffect(() => {
-    const uniqueSection = Array.from(
-      new Set(data.map((sec) => sec.section_name))
-    );
-    setSection(uniqueSection);
+    const uniqueSection = Array.from(new Set(data.map((sec) => sec.section_name)));
+  
+    // Move "Jam Tracks" to the end of the array
+    const sortedSections = uniqueSection.sort((a, b) => {
+      if (a === "Jam Tracks") return 1;
+      if (b === "Jam Tracks") return -1;
+      return 0;
+    });
+  
+    setSection(sortedSections);
   }, [data]);
 
   const handleCategoryClick = (category: string) => {
