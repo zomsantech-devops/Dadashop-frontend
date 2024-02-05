@@ -8,7 +8,7 @@ export const FBButton = () => (
   <Link
     target="_blank"
     to="https://www.facebook.com/dadafnth/"
-    className="text-white leading-normal flex justify-center w-[140px] py-[14px] bg-[#1EAEF0] rounded-[20px] whitespace-nowrap hover:scale-105 transition ease-in-out duration-300"
+    className="text-white leading-normal flex justify-center w-[140px] py-[14px] bg-[#1EAEF0] hover:bg-[#1EAEF0]/90 rounded-[20px] whitespace-nowrap hover:scale-105 transition ease-in-out duration-300"
   >
     <span className="mr-[7px] flex">
       <img src={FBIcon} alt="FBIcon" className="w-[16px] h-[16px] mt-[3px]" />
@@ -21,7 +21,7 @@ export const DiscordButton = () => (
   <Link
     target="_blank"
     to="https://discord.com/invite/5t8Juy7FHu"
-    className="text-white leading-normal flex w-[180px] py-[14px] justify-center bg-[#7289DA] rounded-[20px] whitespace-nowrap hover:scale-105 transition ease-in-out duration-300"
+    className="text-white leading-normal flex w-[180px] py-[14px] justify-center bg-[#7289DA] hover:bg-[#7289DA]/90 rounded-[20px] whitespace-nowrap hover:scale-105 transition ease-in-out duration-300"
   >
     <span className="mr-[7px] flex ">
       <img

@@ -34,7 +34,7 @@ function HowToElse() {
           </p>
         </div>
         <div className="flex flex-col gap-[20px]">
-          <div className="screen_930:w-full screen_930:text-[20px] font-bold bg-[#E7F9FD] w-[870px] text-[24px] leading-[40px] p-[30px] rounded-[30px] self-center">
+          <div className="screen_930:w-full screen_930:text-[20px] font-bold bg-[#E7F9FD] w-[870px] text-xl leading-[40px] p-[30px] rounded-[30px] self-center">
             <p className=" mb-[15px]">
               1. เข้าเว็บ Epic Games และทำการ Login ID
               ที่เราเล่นไว้รอก่อนได้เลยครับ 😊 (ให้ทำการ Login ให้ถูก ID
@@ -49,7 +49,7 @@ function HowToElse() {
               />
             </div>
           </div>
-          <div className="screen_930:w-full screen_930:text-[20px] font-bold bg-[#E7F9FD] w-[870px] text-[24px] leading-[40px] p-[30px] rounded-[30px] self-center">
+          <div className="screen_930:w-full screen_930:text-[20px] font-bold bg-[#E7F9FD] w-[870px] text-xl leading-[40px] p-[30px] rounded-[30px] self-center">
             <p className=" mb-[15px]">
               2. สมัคร ID XBOX ของลูกค้า โดยเข้า Link ข้างล่าง แล้วกด{" "}
               <span className="text-blue-600">Create one!</span> (หากมี ID XBOX
@@ -63,7 +63,7 @@ function HowToElse() {
               />
             </div>
           </div>
-          <div className="screen_930:w-full screen_930:text-[20px] font-bold bg-[#E7F9FD] w-[870px] text-[24px] leading-[40px] p-[30px] rounded-[30px] self-center">
+          <div className="screen_930:w-full screen_930:text-[20px] font-bold bg-[#E7F9FD] w-[870px] text-xl leading-[40px] p-[30px] rounded-[30px] self-center">
             <p className=" mb-[15px]">
               3. ทำการผูก ID Epic เข้ากับ ID XBOX โดยการกด Link นี้เลย
             </p>
@@ -75,7 +75,7 @@ function HowToElse() {
               />
             </div>
           </div>
-          <div className="screen_930:w-full screen_930:text-[20px] font-bold bg-[#E7F9FD] w-[870px] text-[24px] leading-[40px] p-[30px] rounded-[30px] self-center">
+          <div className="screen_930:w-full screen_930:text-[20px] font-bold bg-[#E7F9FD] w-[870px] text-xl leading-[40px] p-[30px] rounded-[30px] self-center">
             <p className=" mb-[15px]">
               4. สั่งซื้อ โดยการแจ้งสิ่งที่ต้องการ
               <ul className="ml-10 md:ml-8 sm:ml-5">

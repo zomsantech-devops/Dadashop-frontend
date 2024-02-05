@@ -37,7 +37,7 @@ function HowToGift() {
           <p className="text-center text-5xl font-bold my-[40px] leading-[58px]">
             ขั้นตอนการสั่งซื้อ
             <br />
-            <span className="text-[36px] leading-[44px]">Gift</span>
+            <span className="text-4xl leading-[44px]">Gift</span>
           </p>
         </div>
         <div className="flex flex-col gap-[20px]">
@@ -76,7 +76,7 @@ function HowToGift() {
             </p>
           </div>
           <div className="screen_930:w-full font-bold bg-[#E7F9FD] w-[870px] p-[30px] rounded-[30px] self-center">
-            <p className="screen_930:text-[20px] text-[24px] leading-[40px]">
+            <p className="screen_930:text-[20px] text-xl leading-[40px]">
               2. เช็คคิวกับตัวละครที่เรามีเพื่อน หากมีคิวว่าง
               ถึงจะสั่งซื้อได้ครับ &#128522;
             </p>
@@ -104,7 +104,7 @@ function HowToGift() {
               </div>
             </div>
           </div>
-          <div className="screen_930:w-full font-bold bg-[#E7F9FD] w-[870px] text-[24px] screen_930:text-[20px] leading-[40px] p-[30px] rounded-[30px] self-center">
+          <div className="screen_930:w-full font-bold bg-[#E7F9FD] w-[870px] text-xl screen_930:text-[20px] leading-[40px] p-[30px] rounded-[30px] self-center">
             <p className="mb-[15px]">
               3. สั่งซื้อ โดยการแจ้ง
               <ul className="ml-10 md:ml-8 sm:ml-5">

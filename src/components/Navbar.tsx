@@ -128,21 +128,21 @@ function Navbar() {
                   >
                     <Link
                       to="/CheckQueue/ZZ1-ZZ6"
-                      className="w-full block px-4 py-2 rounded-md transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
+                      className="w-full block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
                       onClick={handleToggleDropdownClose}
                     >
                       Dada ZZ1-ZZ6
                     </Link>
                     <Link
                       to="/CheckQueue/D1-D10"
-                      className="my-1 w-full block px-4 py-2 rounded-md transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
+                      className="my-1 w-full block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
                       onClick={handleToggleDropdownClose}
                     >
                       Dada D1-D10
                     </Link>
                     <Link
                       to="/CheckQueue/G1-G8"
-                      className="group/name w-full whitespace-nowrap block px-4 py-2 rounded-md transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
+                      className="group/name w-full whitespace-nowrap block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
                       onClick={handleToggleDropdownClose}
                     >
                       Dada G1-G8
