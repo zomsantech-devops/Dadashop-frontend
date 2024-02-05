@@ -32,17 +32,11 @@ interface Item {
   images: {
     background: string;
   };
-  // displayAssets: DisplayAsset[];
 }
 
 interface Styles {
   image: string;
 }
-
-// interface DisplayAsset {
-//   materialInstance: string;
-//   background: string;
-// }
 
 interface ResponseData {
   success: boolean;
@@ -139,7 +133,6 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
               <p className="italic text-center text-sm mb-4">
                 {item.description || "-"}
               </p>
-              {/* <div className="mb-4">details...</div> */}
               <div className="flex flex-col gap-2">
                 <CustomButton
                   text={"ขั้นตอนการสั่งซื้อ"}

@@ -6,6 +6,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { DateDisplay } from "../components/DateDisplay";
 import Modal from "../components/ItemModal";
 import ItemDetail from "./ItemDetail";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface Item {
   _id: string;
@@ -41,10 +42,27 @@ function ItemShop() {
   const [open, setOpen] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handleItemClick = (itemId: string) => {
     setSelectedItemId(itemId);
     setOpen(true);
+
+    navigate(`/ItemShop?id=${itemId}`);
   };
+
+  useEffect(() => {
+    // Parse the query parameters from the URL
+    const searchParams = new URLSearchParams(location.search);
+    const itemId = searchParams.get("id");
+
+    // If itemId is present, open the modal with the corresponding item
+    if (itemId) {
+      setSelectedItemId(itemId);
+      setOpen(true);
+    }
+  }, [location.search]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -233,7 +251,13 @@ function ItemShop() {
       </div>
       {selectedItemId && (
         <Modal open={open} onClose={() => setOpen(false)}>
-          <ItemDetail itemId={selectedItemId} onClose={() => setOpen(false)} />
+          <ItemDetail
+            itemId={selectedItemId}
+            onClose={() => {
+              navigate(`/ItemShop`);
+              setOpen(false);
+            }}
+          />
         </Modal>
       )}
       <Footer />

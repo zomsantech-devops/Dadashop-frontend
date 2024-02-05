@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface ModalProps {
   open: boolean;
@@ -7,6 +8,8 @@ interface ModalProps {
 }
 
 export default function Modal({ open, onClose, children }: ModalProps) {
+  const navigate = useNavigate();
+
   useEffect(() => {
     const toggleBodyOverflow = () => {
       document.body.style.overflow = open ? "hidden" : "auto";
@@ -22,7 +25,10 @@ export default function Modal({ open, onClose, children }: ModalProps) {
   return (
     // backdrop
     <div
-      onClick={onClose}
+      onClick={() => {
+        onClose();
+        navigate(`/ItemShop`);
+      }}
       className={`
         fixed inset-0 flex justify-center items-center transition-colors z-50 overflow-y-auto
         ${open ? "visible bg-black/10" : "invisible"}
