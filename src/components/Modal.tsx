@@ -1,5 +1,5 @@
 // Modal.tsx
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 
 interface ModalProps {
   open: boolean;
@@ -8,14 +8,24 @@ interface ModalProps {
 }
 
 export default function Modal({ open, onClose, children }: ModalProps) {
-  if (!open) {
-    return null;
-  }
-
   return (
-    <div className="fixed top-[50px] left-0  w-full h-full flex items-center justify-center z-10 overflow-y-auto">
-      <div className="absolute w-full h-full bg-gray-900 opacity-40" onClick={onClose}></div>
-      <div className="relative bg-white p-6 rounded-[30px] shadow-md overflow-y-auto overflow-x-hidden" style={{ maxHeight: 'calc(100vh - 150px)' }}>
+    // backdrop
+    <div
+      onClick={onClose}
+      className={`
+        fixed inset-0 flex justify-center items-center transition-colors w-full h-full z-20 overflow-y-auto
+        ${open ? "visible bg-black/20" : "invisible"}
+      `}
+    >
+      {/* modal */}
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className={`
+          bg-white rounded-xl p-6 transition-all overflow-y-auto
+          ${open ? "scale-100 opacity-100" : "scale-125 opacity-0"}
+        `}
+        style={{ maxHeight: "calc(100vh - 125px)" }}
+      >
         {children}
       </div>
     </div>

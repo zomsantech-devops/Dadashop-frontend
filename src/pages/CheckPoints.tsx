@@ -2,7 +2,7 @@ import Footer from "../components/Footer";
 import { PointsBenefitsTable } from "../components/PointsBenefitsTable";
 import pointsBenefits from "../images/pointsBenefits.png";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import MemberCard from "../components/MemberCard";
 import determineTier from "../components/DetermineTier";
 import arrow from "../images/arrow-down-sign-to-navigate.png";
@@ -23,42 +23,6 @@ function CheckPoints() {
   const [userBalance, setUserBalance] = useState<UserBalance | null>(null);
   const [notFound, setNotFound] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  // USE FOR TEST DELETE LATER
-  useEffect(() => {
-    setUserBalance(
-      {
-        id: "1",
-        discord_id: "1234567890",
-        discord_username: "user123",
-        name: "John Doe",
-        name_display: "John D.",
-        current_points: 100,
-        total_points: 500,
-        tier: "Diamond",
-      }
-      // {
-      //   id: "2",
-      //   discord_id: "9876543210",
-      //   discord_username: "exampleuser",
-      //   name: "Jane Smith",
-      //   name_display: "Jane S.",
-      //   current_points: 250,
-      //   total_points: 3000,
-      //   tier: "Unreal",
-      // },
-      // {
-      //   id: "3",
-      //   discord_id: "5555555555",
-      //   discord_username: "testuser",
-      //   name: "Alice Johnson",
-      //   name_display: "Alice J.",
-      //   current_points: 50,
-      //   total_points: 50,
-      //   tier: "Gold",
-      // },
-    );
-  }, []);
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -105,21 +69,7 @@ function CheckPoints() {
             Dada Points
           </p>
         </div>
-        {/* TEST */}
         {userBalance && (
-          <>
-            <h1 className="text-center">Test เฉยๆนะครับ</h1>
-            <MemberCard
-              name_display={userBalance.name_display}
-              discord_username={userBalance.discord_username}
-              name={userBalance.name}
-              tier={determineTier(userBalance.total_points)}
-              present_points={userBalance.current_points}
-              all_points={userBalance.total_points}
-            />
-          </>
-        )}
-        {/* {userBalance && (
           <MemberCard
             name_display={userBalance.name_display}
             discord_username={userBalance.discord_username}
@@ -128,7 +78,7 @@ function CheckPoints() {
             present_points={userBalance.current_points}
             all_points={userBalance.total_points}
           />
-        )} */}
+        )}
         {!userBalance && (
           <form onSubmit={handleSubmit} className="mt-[40px]">
             <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">

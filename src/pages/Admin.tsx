@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import MemberTable from "../components/MemberTable";
 import Modal from "../components/Modal";
 import determineTier from "../components/DetermineTier";
+import LeftSidebar from "../components/LeftSidebar";
 
 interface UserBalance {
   id: string;
@@ -227,8 +228,9 @@ function Admin() {
   };
 
   return (
-    <>
-      <div className="flex flex-col justify-center px-[30px] w-[910px] screen_910:w-full mx-auto relative  pb-[50px]">
+    <main className="flex flex-row">
+      <LeftSidebar />
+      <div className="flex flex-col justify-center px-[30px] w-[910px] screen_910:w-full mx-auto relative pb-[50px] pl-20 screen_1070:pl-20 screen_500:pb-0 screen_500:pr-4">
         <p className="text-center text-5xl font-bold my-[40px] leading-[58px]">
           Member ทั้งหมด
         </p>
@@ -276,7 +278,7 @@ function Admin() {
         </button>
         <Modal open={!!addUserOpen} onClose={handleCloseModal}>
           {newUserData && (
-            <div className="flex flex-col w-[250px]">
+            <div className="flex flex-col w-[600px] screen_810:w-[350px] screen_500:w-[250px]">
               <p className="font-bold text-[24px] mb-[10px]">เพิ่มสมาชิก</p>
               <form onSubmit={handleAddUser} className="flex flex-col">
                 <label className="mb-[3px] font-bold">ID:</label>
@@ -323,7 +325,6 @@ function Admin() {
                       className="sr-only peer"
                     />
                     <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                    {/* <span className="text-[12px] font-medium text-gray-900 dark:text-gray-300">Show name</span> */}
                   </label>
                 </label>
                 <input
@@ -376,8 +377,7 @@ function Admin() {
           />
         </div>
       </div>
-      {/* <Footer /> */}
-    </>
+    </main>
   );
 }
 
