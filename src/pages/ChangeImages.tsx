@@ -1,25 +1,6 @@
-import { ChangeEvent, FormEvent, useState } from "react";
 import LeftSidebar from "../components/LeftSidebar";
 
 const ChangeImages = () => {
-  const [image, setImage] = useState<File | null>(null);
-
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const selectedImage = e.target.files?.[0];
-    if (selectedImage) {
-      setImage(selectedImage);
-    }
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (image) {
-      console.log("Uploaded image:", image);
-      // You can perform further actions such as sending the image to a server
-    } else {
-      console.log("No image selected.");
-    }
-  };
   return (
     <main className="flex flex-row">
       <LeftSidebar />
@@ -39,12 +20,7 @@ const ChangeImages = () => {
             </select>
 
             <label className="mb-[3px] font-bold">Upload new image:</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="mb-[15px]"
-            />
+            <input type="file" accept="image/*" className="mb-[15px]" />
 
             <div className="flex gap-4 mb-[15px] screen_445:flex-col">
               <div className="">
@@ -68,7 +44,6 @@ const ChangeImages = () => {
             <button
               type="submit"
               className="bg-[#1EAEF0] rounded-[10px] px-4 py-2 opacity-100 hover:opacity-80 w-full font-bold text-white"
-              // className="font-bold text-[#1EAEF0] opacity-80 hover:opacity-100 w-fit mx-auto"
             >
               อัพเดตรูปภาพ
             </button>

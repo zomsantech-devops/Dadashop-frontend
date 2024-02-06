@@ -17,6 +17,7 @@ import Navbar from "./components/Navbar";
 import CheckQueueZZ from "./pages/CheckQueueZZ";
 import ItemShop from "./pages/ItemShop";
 import ChangeImages from "./pages/ChangeImages";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/CheckPoints" element={<CheckPoints />} />
         <Route path="/admin123dada" element={<Admin />} />
         <Route path="/change-image" element={<ChangeImages />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );
@@ -43,7 +45,7 @@ function App() {
 function NavbarWrapper(): JSX.Element {
   const location = useLocation();
 
-  const hideNavbarRoutes = ["/admin123dada", "/change-image"];
+  const hideNavbarRoutes = ["/admin123dada", "/change-image", "/login"];
   const isNavbarVisible = !hideNavbarRoutes.includes(location.pathname);
 
   return isNavbarVisible ? <Navbar /> : <></>;
