@@ -112,7 +112,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
           <div className="w-[2px] min-h-[80vh] bg-black/60 screen_1170:min-h-[2px] screen_1170:min-w-[15%]"></div>
           <div className="max-h-[80vh] max-w-[450px] w-[450px] overflow-y-auto scrollbar screen_1170:w-[315px]">
             <div className="flex flex-col items-center justify-center mr-4 screen_1170:ml-4">
-              <div className="text-[28px] text-black/80 uppercase text-center">
+              <div className="text-[30px] font-bold text-black/80 uppercase text-center">
                 {item?.name}
               </div>
               <p>
