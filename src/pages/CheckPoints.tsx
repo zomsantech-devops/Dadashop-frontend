@@ -64,7 +64,7 @@ function CheckPoints() {
             </button>
           )}
           <p
-            className={`text-center text-5xl font-bold mt-[40px] leading-[58px] mx-auto screen_540:w-[200px]`}
+            className={`text-center text-5xl font-bold mt-[40px] leading-[58px] mx-auto screen_445:text-4xl`}
           >
             Dada Points
           </p>

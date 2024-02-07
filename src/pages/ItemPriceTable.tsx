@@ -20,7 +20,7 @@ function ItemPriceTable() {
   return (
     <div>
       <div className="flex flex-col justify-center px-[30px]">
-        <p className="text-center text-5xl font-bold leading-normal my-[40px]">
+        <p className="text-center text-5xl font-bold leading-normal my-[40px] screen_445:text-4xl">
           ราคา & ขั้นตอนการสั่งซื้อ
         </p>
         <div className="flex screen_960:flex-col self-center gap-[20px] screen_960:gap-[40px] screen_500:w-full">

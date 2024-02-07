@@ -169,7 +169,7 @@ function ItemShop() {
               {selectedCategory === "All" &&
                 section.map((sec) => (
                   <section key={sec}>
-                    <h1 className="pt-3.5 pb-2 text-4xl text-black/80 font-semibold screen_445:text-3xl">
+                    <h1 className="pt-3.5 pb-2 text-4xl text-black/80 font-semibold screen_445:text-2xl mb-2">
                       {sec}
                     </h1>
                     <ul className="grid grid-cols-6 xl:grid-cols-5 lg:grid-cols-4 screen_810:grid-cols-3 sm:grid-cols-2 gap-4 screen_500:place-items-center screen_445:gap-2">
