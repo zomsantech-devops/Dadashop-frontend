@@ -90,11 +90,11 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
         </div>
       ) : item ? (
         // Do it here
-        <div className="flex flex-row screen_1170:flex-col items-center justify-center max-h-[90vh] gap-6 pr-6 pl-6">
+        <div className="flex flex-row screen_1170:flex-col items-center justify-center max-h-[80vh] gap-6 pr-6 pl-6">
           {selectedStyle ? (
             <video
               preload="true"
-              className="max-w-[520px] h-[90vh] rounded-lg screen_1170:h-[375px] screen_445:h-[256px]"
+              className="max-w-[520px] h-[80vh] rounded-lg screen_1170:h-[375px] screen_445:h-[256px]"
               muted
               loop
               autoPlay
@@ -106,11 +106,11 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
               loading="lazy"
               src={item.images.background}
               alt={item.description}
-              className="h-[90vh] rounded-lg screen_1170:h-[375px] screen_445:h-[256px]"
+              className="h-[80vh] rounded-lg screen_1170:h-[375px] screen_445:h-[256px]"
             />
           )}
-          <div className="w-[2px] min-h-[90vh] bg-black/60 screen_1170:min-h-[2px] screen_1170:min-w-[15%]"></div>
-          <div className="max-h-[90vh] max-w-[450px] w-[450px] overflow-y-auto scrollbar screen_1170:w-[315px]">
+          <div className="w-[2px] min-h-[80vh] bg-black/60 screen_1170:min-h-[2px] screen_1170:min-w-[15%]"></div>
+          <div className="max-h-[80vh] max-w-[450px] w-[450px] overflow-y-auto scrollbar screen_1170:w-[315px]">
             <div className="flex flex-col items-center justify-center mr-4 screen_1170:ml-4">
               <div className="text-[28px] text-black/80 uppercase text-center">
                 {item?.name}
@@ -170,10 +170,10 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
             </div>
           </div>
           <div
-            className="absolute top-5 right-5 cursor-pointer screen_1170:top-2 screen_1170:right-2"
+            className="absolute top-5 right-5 cursor-pointer screen_1170:top-2 screen_1170:right-2 screen_443:top-3 screen_443:right-3"
             onClick={onClose}
           >
-            <IoMdClose className="hover:bg-black/20 rounded-xl w-5 h-5 p-0.5" />
+            <IoMdClose className="hover:bg-black/20 rounded-xl w-5 h-5 p-0.5 screen_443:w-6 screen_443:h-6" />
           </div>
         </div>
       ) : (
