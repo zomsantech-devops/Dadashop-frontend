@@ -102,15 +102,18 @@ function ItemShop() {
     const uniqueSection = Array.from(
       new Set(data.map((sec) => sec.section_name || ""))
     );
-
+  
     const sortedSections = uniqueSection.sort((a, b) => {
       if (a === "Jam Tracks") return 1;
       if (b === "Jam Tracks") return -1;
+      if (a === "Gear For Festival") return 1;
+      if (b === "Gear For Festival") return -1;
       return 0;
     });
-
+  
     setSection(sortedSections);
   }, [data]);
+  
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category === selectedCategory ? "All" : category);
