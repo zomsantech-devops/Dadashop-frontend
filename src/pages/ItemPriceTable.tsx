@@ -54,7 +54,7 @@ function ItemPriceTable() {
               {/* อันนี้เป็นสี gradient จากซ้ายไปขวา ใส่ตามนี้เลยครับ form -> via -> to (bg-[โค้ดสี]) */}
               {/* Hover ขอบเรืองแสง สามารถก็อบตัว link-how-to-btn-purple ไปหาในไฟล์ index.css ได้เลยครับ */}
               <Link
-                to="/ItemPriceTable/HowToGift"
+                to="/item-price-table/how-to-gift"
                 className="link-how-to-btn-purple w-full text-center block px-4 py-3 bg-[#1c85b6] text-white rounded-3xl bg-gradient-to-r from-[#BA6EEA] via-[#A5B7E1] to-[#3ABFCD] text-xl font-bold"
               >
                 ขั้นตอนการสั่งซื้อ Gift
@@ -91,7 +91,7 @@ function ItemPriceTable() {
               {/* อันนี้เป็นสี gradient จากซ้ายไปขวา ใส่ตามนี้เลยครับ form -> via -> to (bg-[โค้ดสี]) */}
               {/* Hover ขอบเรืองแสง สามารถก็อบตัว link-how-to-btn-green ไปหาในไฟล์ index.css ได้เลยครับ */}
               <Link
-                to="/ItemPriceTable/HowToElse"
+                to="/item-price-table/how-to-else"
                 className="link-how-to-btn-green w-full text-center block px-4 py-3 bg-[#1c85b6] text-white rounded-3xl bg-gradient-to-r from-[#BBB251] via-[#ABD499] to-[#2FD491] text-xl font-bold"
               >
                 ขั้นตอนการสั่งซื้อผ่าน XBOX

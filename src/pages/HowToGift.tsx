@@ -24,7 +24,7 @@ function HowToGift() {
       <div className="flex flex-col justify-center px-[30px]">
         <div className="relative">
           <Link
-            to="/ItemPriceTable"
+            to="/item-price-table"
             className="screen_1070:invisible absolute top-[30px] ml-[70px] flex gap-[5px] items-center"
           >
             <img
@@ -84,21 +84,21 @@ function HowToGift() {
               <div className="flex gap-[15px] text-[16px] hover:scale-105 transition ease-in-out duration-300">
                 <CustomButton
                   text={"เช็คคิว Dada D1-D10"}
-                  link="/CheckQueue/D1-D10"
+                  link="/check-queue/d1-d10"
                   className=""
                 />
               </div>
               <div className="flex gap-[15px] text-[16px] hover:scale-105 transition ease-in-out duration-300">
                 <CustomButton
                   text={"เช็คคิว Dada ZZ1-ZZ6"}
-                  link="/CheckQueue/ZZ1-ZZ6"
+                  link="/check-queue/zz1-zz6"
                   className=""
                 />
               </div>
               <div className="flex gap-[15px] text-[16px] hover:scale-105 transition ease-in-out duration-300">
                 <CustomButton
                   text={"เช็คคิว Dada G1-G8 (ปิดรับเพื่อนแล้ว)"}
-                  link="/CheckQueue/G1-G8"
+                  link="/check-queue/g1-g8"
                   className=""
                 />
               </div>

@@ -80,9 +80,9 @@ function Navbar() {
           <>
             <div className="flex gap-2 mx-auto justify-center items-center middle-navbar">
               <Link
-                to="/ItemShop"
+                to="/item-shop"
                 className={`${
-                  location.pathname === "/ItemShop"
+                  location.pathname === "/item-shop"
                     ? "bg-[#3d82d1] text-white"
                     : "text-gray-700"
                 } px-4 py-2 rounded-full transition ease-in-out duration-300 hover:bg-[#3d82d1] hover:text-white`}
@@ -91,9 +91,9 @@ function Navbar() {
               </Link>
 
               <Link
-                to="/ItemPriceTable"
+                to="/item-price-table"
                 className={`${
-                  location.pathname === "/ItemPriceTable"
+                  location.pathname === "/item-price-table"
                     ? "bg-[#3d82d1] text-white"
                     : "text-gray-700"
                 } px-4 py-2 rounded-full transition ease-in-out duration-300 hover:bg-[#3d82d1] hover:text-white`}
@@ -104,9 +104,9 @@ function Navbar() {
               {/* MAIN DROPDOWN */}
               <div
                 className={`${
-                  location.pathname === "/CheckQueue/D1-D10" ||
-                  location.pathname === "/CheckQueue/G1-G8" ||
-                  location.pathname === "/CheckQueue/ZZ1-ZZ6"
+                  location.pathname === "/check-queue/d1-d10" ||
+                  location.pathname === "/check-queue/g1-g8" ||
+                  location.pathname === "/check-queue/zz1-zz6"
                     ? "bg-[#3d82d1] text-white"
                     : "text-gray-700"
                 } relative group px-4 py-2 rounded-full transition ease-in-out duration-300 hover:bg-[#3d82d1] hover:text-white`}
@@ -127,21 +127,21 @@ function Navbar() {
                     onMouseEnter={handleToggleDropdownOpen}
                   >
                     <Link
-                      to="/CheckQueue/ZZ1-ZZ6"
+                      to="/check-queue/zz1-zz6"
                       className="w-full block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
                       onClick={handleToggleDropdownClose}
                     >
                       Dada ZZ1-ZZ6
                     </Link>
                     <Link
-                      to="/CheckQueue/D1-D10"
+                      to="/check-queue/d1-d10"
                       className="my-1 w-full block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
                       onClick={handleToggleDropdownClose}
                     >
                       Dada D1-D10
                     </Link>
                     <Link
-                      to="/CheckQueue/G1-G8"
+                      to="/check-queue/g1-g8"
                       className="group/name w-full whitespace-nowrap block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
                       onClick={handleToggleDropdownClose}
                     >
@@ -153,9 +153,9 @@ function Navbar() {
                 )}
               </div>
               <Link
-                to="/CheckPoints"
+                to="/check-points"
                 className={`${
-                  location.pathname === "/CheckPoints"
+                  location.pathname === "/check-points"
                     ? "bg-[#3d82d1] text-white"
                     : "text-gray-700"
                 } px-4 py-2 rounded-full transition ease-in-out duration-300 hover:bg-[#3d82d1] hover:text-white`}
@@ -219,18 +219,18 @@ function Navbar() {
           } overflow-hidden`}
         >
           <Link
-            to="/ItemShop"
+            to="/item-shop"
             className={`${
-              location.pathname === "/ItemShop" &&
+              location.pathname === "/item-shop" &&
               "px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
             } py-2 relative w-fit block text-gray-700`}
           >
             Item Shop
           </Link>
           <Link
-            to="/ItemPriceTable"
+            to="/item-price-table"
             className={`${
-              location.pathname === "/ItemPriceTable" &&
+              location.pathname === "/item-price-table" &&
               "px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
             } py-2 relative w-fit block text-gray-700`}
           >
@@ -238,9 +238,9 @@ function Navbar() {
           </Link>
           <button
             className={`${
-              location.pathname === "/CheckQueue/D1-D10" ||
-              location.pathname === "/CheckQueue/G1-G8" ||
-              location.pathname === "/CheckQueue/ZZ1-ZZ6"
+              location.pathname === "/check-queue/d1-d10" ||
+              location.pathname === "/check-queue/g1-g8" ||
+              location.pathname === "/check-queue/zz1-zz6"
                 ? "px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
                 : "text-gray-700"
             } py-2 relative w-fit block`}
@@ -258,19 +258,19 @@ function Navbar() {
           {isGiftDropdownOpen && (
             <div className="pl-4 flex flex-col gap-1">
               <Link
-                to="/CheckQueue/ZZ1-ZZ6"
+                to="/check-queue/zz1-zz6"
                 className="w-fit block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
               >
                 Dada ZZ1-ZZ6
               </Link>
               <Link
-                to="/CheckQueue/D1-D10"
+                to="/check-queue/d1-d10"
                 className="w-fit block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
               >
                 Dada D1-D10
               </Link>
               <Link
-                to="/CheckQueue/G1-G8"
+                to="/check-queue/g1-g8"
                 className="w-fit block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
               >
                 Dada G1-G8{" "}
@@ -279,9 +279,9 @@ function Navbar() {
             </div>
           )}
           <Link
-            to="/CheckPoints"
+            to="/check-points"
             className={`${
-              location.pathname === "/CheckPoints" &&
+              location.pathname === "/check-points" &&
               "px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
             } py-2 relative w-fit block`}
           >

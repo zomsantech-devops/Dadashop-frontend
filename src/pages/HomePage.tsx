@@ -53,14 +53,14 @@ function HomePage() {
       <div className="px-[30px]">
         <div className="grid grid-rows-1 grid-cols-[330px_330px_330px] homePageCatagories_1150px:grid-rows-2 homePageCatagories_1150px:grid-cols-[330px_330px] md:grid-rows-1 md:grid-cols-[330px]  gap-[50px] justify-center mt-[110px] md:mt-[50px] relative">
           <HomePageBtn
-            page={"/ItemPriceTable"}
+            page={"/item-price-table"}
             icon={cart}
             text={"ราคา & ขั้นตอนการซื้อ"}
           />
           <div className="relative">
             <div className="homepage-btn homepage-btn-overlay opacity-0 absolute h-full w-[330px] px-[44px] py-[30px] flex flex-col text-2xl font-bold rounded-[30px] text-white place-content-between">
-              <Link to="/CheckQueue/D1-D10">Dada D1-D10</Link>
-              <Link to="/CheckQueue/G1-G8">
+              <Link to="/check-queue/d1-d10">Dada D1-D10</Link>
+              <Link to="/check-queue/g1-g8">
                 Dada G1-G8{" "}
                 <span className="text-[10px]">(ปิดรับเพื่อนแล้ว)</span>
               </Link>
@@ -71,7 +71,7 @@ function HomePage() {
           </div>
 
           <HomePageBtn
-            page={"/CheckPoints"}
+            page={"/check-points"}
             icon={medal}
             text={"Dada Points"}
           />

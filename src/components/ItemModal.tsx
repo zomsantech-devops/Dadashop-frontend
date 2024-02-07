@@ -27,7 +27,7 @@ export default function Modal({ open, onClose, children }: ModalProps) {
     <div
       onClick={() => {
         onClose();
-        navigate(`/ItemShop`);
+        navigate(`/item-shop`);
       }}
       className={`
         fixed inset-0 flex justify-center items-center transition-colors z-50 overflow-y-auto

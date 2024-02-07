@@ -53,7 +53,7 @@ function ItemShop() {
     setSelectedItemId(itemId);
     setOpen(true);
 
-    navigate(`/ItemShop?id=${itemId}`);
+    navigate(`/item-shop?id=${itemId}`);
   };
 
   useEffect(() => {
@@ -266,7 +266,7 @@ function ItemShop() {
           <ItemDetail
             itemId={selectedItemId}
             onClose={() => {
-              navigate(`/ItemShop`);
+              navigate(`/item-shop`);
               setOpen(false);
             }}
           />

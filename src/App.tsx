@@ -26,14 +26,14 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/ItemShop" element={<ItemShop />} />
-        <Route path="/ItemPriceTable" element={<ItemPriceTable />} />
-        <Route path="/ItemPriceTable/HowToGift" element={<HowToGift />} />
-        <Route path="/ItemPriceTable/HowToElse" element={<HowToElse />} />
-        <Route path="/CheckQueue/D1-D10" element={<CheckQueueD />} />
-        <Route path="/CheckQueue/G1-G8" element={<CheckQueueG />} />
-        <Route path="/CheckQueue/ZZ1-ZZ6" element={<CheckQueueZZ />} />
-        <Route path="/CheckPoints" element={<CheckPoints />} />
+        <Route path="/item-shop" element={<ItemShop />} />
+        <Route path="/item-price-table" element={<ItemPriceTable />} />
+        <Route path="/item-price-table/how-to-gift" element={<HowToGift />} />
+        <Route path="/item-price-table/how-to-else" element={<HowToElse />} />
+        <Route path="/check-queue/d1-d10" element={<CheckQueueD />} />
+        <Route path="/check-queue/g1-g8" element={<CheckQueueG />} />
+        <Route path="/check-queue/zz1-zz6" element={<CheckQueueZZ />} />
+        <Route path="/check-points" element={<CheckPoints />} />
         <Route path="/admin123dada" element={<Admin />} />
         <Route path="/change-image" element={<ChangeImages />} />
         <Route path="/login" element={<Login />} />
