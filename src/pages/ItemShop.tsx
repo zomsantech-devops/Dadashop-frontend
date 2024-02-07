@@ -9,21 +9,25 @@ import ItemDetail from "./ItemDetail";
 import { useLocation, useNavigate } from "react-router-dom";
 
 interface Item {
-  _id: string;
-  id: string;
-  type_id: string;
-  type_name: string;
-  name: string;
-  description: string;
-  rarity_id: string;
-  images_background: string;
-  images_full_background: string;
-  section_name: string;
+  _id: string | null;
+  id: string | null;
+  type_id: string | null;
+  type_name: string | null;
+  name: string | null;
+  description: string | null;
+  rarity_id: string | null;
+  rarity_name: string | null;
+  images_texture_background: string | null;
+  images_item: string | null;
+  images_background: string | null;
+  images_full_background: string | null;
+  display_assets: any[];
+  section_name: string | null;
   finalPrice: number | null;
-  time_fetch: string;
-  time_update: string;
-  uid_update: string;
-  __v: number;
+  time_fetch: string | null;
+  time_update: string | null;
+  uid_update: string | null;
+  __v: number | null;
 }
 
 interface ResponseData {
@@ -53,11 +57,9 @@ function ItemShop() {
   };
 
   useEffect(() => {
-    // Parse the query parameters from the URL
     const searchParams = new URLSearchParams(location.search);
     const itemId = searchParams.get("id");
 
-    // If itemId is present, open the modal with the corresponding item
     if (itemId) {
       setSelectedItemId(itemId);
       setOpen(true);
@@ -71,7 +73,10 @@ function ItemShop() {
         const response = await axios.get<ResponseData>(
           "https://dadashop-backend.vercel.app/api/v1/item/"
         );
-        setData(response.data.data);
+        const filteredData = response.data.data.filter(
+          (item) => item.id !== null
+        );
+        setData(filteredData);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -83,7 +88,7 @@ function ItemShop() {
 
   useEffect(() => {
     const uniqueCategories = Array.from(
-      new Set(data.map((item) => item.type_name))
+      new Set(data.map((item) => item.type_name || ""))
     );
     const categoryCounts = uniqueCategories.map((category) => ({
       name: category,
@@ -94,15 +99,16 @@ function ItemShop() {
   }, [data]);
 
   useEffect(() => {
-    const uniqueSection = Array.from(new Set(data.map((sec) => sec.section_name)));
-  
-    // Move "Jam Tracks" to the end of the array
+    const uniqueSection = Array.from(
+      new Set(data.map((sec) => sec.section_name || ""))
+    );
+
     const sortedSections = uniqueSection.sort((a, b) => {
       if (a === "Jam Tracks") return 1;
       if (b === "Jam Tracks") return -1;
       return 0;
     });
-  
+
     setSection(sortedSections);
   }, [data]);
 
@@ -168,15 +174,15 @@ function ItemShop() {
                         .filter((item) => item.section_name === sec)
                         .map((item) => (
                           <li
-                            key={item._id}
+                            key={item._id || ""}
                             className="w-[187px] cursor-pointer screen_500:w-full"
-                            onClick={() => handleItemClick(item.id)}
+                            onClick={() => handleItemClick(item.id || "")}
                           >
                             <div className="relative group overflow-hidden rounded-lg">
                               <img
                                 loading="lazy"
-                                src={item.images_background}
-                                alt={item.name}
+                                src={item.images_background || ""}
+                                alt={item.name || ""}
                                 className="rounded-lg transition ease-in-out duration-300 group-hover:scale-110 group-hover:brightness-105 overflow-hidden"
                               />
                               <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 text-xl uppercase antialiased leading-6 card-bg w-full rounded-lg screen_445:text-lg screen_445:leading-normal">
@@ -214,15 +220,15 @@ function ItemShop() {
                   .filter((item) => item.type_name === selectedCategory)
                   .map((item) => (
                     <li
-                      key={item._id}
+                      key={item._id || ""}
                       className="w-[187px] cursor-pointer screen_500:w-full"
-                      onClick={() => handleItemClick(item.id)}
+                      onClick={() => handleItemClick(item.id || "")}
                     >
                       <div className="relative group overflow-hidden rounded-lg">
                         <img
                           loading="lazy"
-                          src={item.images_background}
-                          alt={item.name}
+                          src={item.images_background || ""}
+                          alt={item.name || ""}
                           className="rounded-lg transition ease-in-out duration-300 group-hover:scale-110 group-hover:brightness-105 overflow-hidden"
                         />
                         <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 text-xl uppercase antialiased leading-6 card-bg w-full rounded-lg screen_445:text-lg screen_445:leading-normal">
