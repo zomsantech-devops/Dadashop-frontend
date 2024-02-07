@@ -25,10 +25,12 @@ export const DateDisplay = () => {
       "ธันวาคม",
     ];
 
-    const dayOfWeek: string = thaiWeekdays[date.getDay()];
-    const day: number = date.getDate();
-    const month: string = thaiMonths[date.getMonth()];
-    const year: number = date.getFullYear() + 543;
+    const utcDate = new Date(date.getTime() - (7 * 60 * 60 * 1000));
+
+    const dayOfWeek: string = thaiWeekdays[utcDate.getUTCDay()];
+    const day: number = utcDate.getUTCDate();
+    const month: string = thaiMonths[utcDate.getUTCMonth()];
+    const year: number = utcDate.getUTCFullYear() + 543;
 
     return `${dayOfWeek}ที่ ${day} ${month} ${year}`;
   };
