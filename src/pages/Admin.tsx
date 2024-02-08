@@ -4,6 +4,7 @@ import MemberTable from "../components/MemberTable";
 import Modal from "../components/Modal";
 import determineTier from "../components/DetermineTier";
 import LeftSidebar from "../components/LeftSidebar";
+import { useNavigate } from "react-router-dom";
 
 interface UserBalance {
   id: string;
@@ -35,6 +36,36 @@ function Admin() {
   });
   const [addUserOpen, setAddUserOpen] = useState(false);
   const [isToggleChecked, setIsToggleChecked] = useState(false);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const rawToken: string | null = localStorage.getItem("token"); // Ensure token is of type string or null
+    const getAuthenticated = async () => {
+      try {
+        if (rawToken) {
+          const token = rawToken.replace(/"/g, "");
+          const response = await axios.get(
+            "https://dadashop-backend.vercel.app/api/v1/auth/protected",
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          console.log(response);
+        } else {
+          console.error("Token not found in localStorage");
+          navigate("/login")
+        }
+      } catch (error: any) {
+        console.error("Authentication failed", error.response?.data);
+        navigate("/login")
+      }
+    };
+
+    getAuthenticated();
+  }, [navigate]);
 
   useEffect(() => {
     const fetchUserBalance = async () => {
