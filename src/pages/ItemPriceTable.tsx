@@ -1,11 +1,10 @@
 import { useEffect } from "react";
 import Footer from "../components/Footer";
-import giftImage from "../images/gift.jpeg";
-import vBucksImage from "../images/vbucks.jpeg";
 
 import { Link } from "react-router-dom";
 
 function ItemPriceTable() {
+
   useEffect(() => {
     const toggleBodyOverflow = () => {
       document.body.style.overflow = "auto";
@@ -17,6 +16,7 @@ function ItemPriceTable() {
       toggleBodyOverflow();
     };
   }, []);
+
   return (
     <div>
       <div className="flex flex-col justify-center px-[30px]">
@@ -28,9 +28,9 @@ function ItemPriceTable() {
           <div className="w-[585px] h-min screen_1250:w-[440px] screen_500:w-full rounded-[30px] price-and-how-to-box">
             <div className="w-full rounded-t-[30px] bg-lime-100 overflow-hidden">
               <img
-                src={giftImage}
+                src={"https://dadashop-backend.vercel.app/api/v1/image/banner-1"}
                 alt="giftImage"
-                className="w-full h-auto"
+                className="w-full aspect-square object-cover object-top"
               ></img>
             </div>
             <div className="p-[15px]">
@@ -65,9 +65,9 @@ function ItemPriceTable() {
           <div className="w-[585px] h-min screen_1250:w-[440px] screen_500:w-full rounded-[30px] price-and-how-to-box">
             <div className="w-full rounded-t-[30px] bg-lime-100 overflow-hidden">
               <img
-                src={vBucksImage}
+                src={"https://dadashop-backend.vercel.app/api/v1/image/banner-2"}
                 alt="vBucksImage"
-                className="w-full h-auto"
+                className="w-full aspect-square object-cover object-top"
               ></img>
             </div>
             <div className="p-[15px]">

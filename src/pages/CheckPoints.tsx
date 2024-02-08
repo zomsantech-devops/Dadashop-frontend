@@ -1,6 +1,5 @@
 import Footer from "../components/Footer";
 import { PointsBenefitsTable } from "../components/PointsBenefitsTable";
-import pointsBenefits from "../images/pointsBenefits.png";
 import axios from "axios";
 import { useState } from "react";
 import MemberCard from "../components/MemberCard";
@@ -133,7 +132,14 @@ function CheckPoints() {
           <p className="text-[24px] font-bold">เงื่อนไขสิทธิประโยชน์</p>
           <div className="w-full bg-white mt-[20px] rounded-[30px] overflow-hidden points-benefits-box">
             <div className="w-full bg-lime-100">
-              <img src={pointsBenefits} alt="pointsBenefits" />
+              <img
+                src={
+                  "https://dadashop-backend.vercel.app/api/v1/image/banner-3"
+                }
+                alt="pointsBenefits"
+                className=""
+              />
+              {/* <img src={pointsBenefits} alt="pointsBenefits" /> */}
             </div>
             <PointsBenefitsTable />
           </div>
