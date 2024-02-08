@@ -24,6 +24,7 @@ interface Item {
   display_assets: any[];
   section_name: string | null;
   finalPrice: number | null;
+  release_date: string | null;
   time_fetch: string | null;
   time_update: string | null;
   uid_update: string | null;
@@ -102,7 +103,7 @@ function ItemShop() {
     const uniqueSection = Array.from(
       new Set(data.map((sec) => sec.section_name || ""))
     );
-  
+
     const sortedSections = uniqueSection.sort((a, b) => {
       if (a === "Jam Tracks") return 1;
       if (b === "Jam Tracks") return -1;
@@ -110,10 +111,9 @@ function ItemShop() {
       if (b === "Gear For Festival") return -1;
       return 0;
     });
-  
+
     setSection(sortedSections);
   }, [data]);
-  
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category === selectedCategory ? "All" : category);
@@ -132,6 +132,15 @@ function ItemShop() {
     }
     const baht = (price / 100) * 5;
     return baht;
+  };
+
+  const isToday = (date: Date) => {
+    const today = new Date();
+    return (
+      date.getDate() === today.getDate() &&
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear()
+    );
   };
 
   return (
@@ -182,9 +191,20 @@ function ItemShop() {
                             onClick={() => handleItemClick(item.id || "")}
                           >
                             <div className="relative group overflow-hidden rounded-lg">
+                              {isToday(new Date(item.release_date || "")) && (
+                                <div className="absolute top-1 right-1 text-white bg-[#cb3369] px-2 py-0.5 rounded-md font-bold">
+                                  NEW!
+                                </div>
+                              )}
                               <img
                                 loading="lazy"
-                                src={item.images_background || ""}
+                                // src={item.images_background || ""}
+                                // src={
+                                //   (isToday(new Date(item.release_date || ""))
+                                //     ? item.images_item
+                                //     : item.images_background) || ""
+                                // }
+                                src={(item.type_name === "emote" ? item.images_background : (isToday(new Date(item.release_date || "")) ? item.images_item : item.images_background)) || ""}
                                 alt={item.name || ""}
                                 className="rounded-lg transition ease-in-out duration-300 group-hover:scale-110 group-hover:brightness-105 overflow-hidden"
                               />
@@ -228,9 +248,14 @@ function ItemShop() {
                       onClick={() => handleItemClick(item.id || "")}
                     >
                       <div className="relative group overflow-hidden rounded-lg">
+                        {isToday(new Date(item.release_date || "")) && (
+                          <div className="absolute top-1 right-1 text-white bg-[#cb3369] px-2 py-0.5 rounded-md font-bold">
+                            NEW!
+                          </div>
+                        )}
                         <img
                           loading="lazy"
-                          src={item.images_background || ""}
+                          src={(item.type_name === "emote" ? item.images_background : (isToday(new Date(item.release_date || "")) ? item.images_item : item.images_background)) || ""}
                           alt={item.name || ""}
                           className="rounded-lg transition ease-in-out duration-300 group-hover:scale-110 group-hover:brightness-105 overflow-hidden"
                         />

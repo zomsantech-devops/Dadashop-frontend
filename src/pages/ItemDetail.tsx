@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import vBucks from "../images/vbucks-coins.png";
 import { CustomButton } from "../components/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
 import { IoMdPricetag } from "react-icons/io";
 
@@ -20,6 +20,7 @@ interface Item {
     name: string;
   };
   type: {
+    id: string;
     name: string;
   };
   price: number | null;
@@ -32,10 +33,18 @@ interface Item {
   images: {
     background: string;
   };
+  grants: Grants[];
 }
 
 interface Styles {
   image: string;
+}
+
+interface Grants {
+  id: string;
+  images: {
+    icon_background: string;
+  };
 }
 
 interface ResponseData {
@@ -51,6 +60,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [styles, setStyles] = useState<Styles[]>([]);
   const [selectedStyle, setSelectedStyle] = useState<string | null>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -61,7 +71,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
         );
         setItem(response.data.data.item);
         setStyles(response.data.data.item.styles);
-        setSelectedStyle(response.data.data.item.previewVideos[0]?.url || "")
+        setSelectedStyle(response.data.data.item.previewVideos[0]?.url || "");
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -82,6 +92,10 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
     return baht;
   };
 
+  const handleItemClick = (itemId: string) => {
+    navigate(`/item-shop?id=${itemId}`);
+  };
+
   return (
     <>
       {loading ? (
@@ -89,25 +103,46 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
           <CircularProgress className="self-center" />
         </div>
       ) : item ? (
-        // Do it here
         <div className="flex flex-row screen_1170:flex-col items-center justify-center max-h-[80vh] gap-6 pr-6 pl-6">
-          {selectedStyle ? (
-            <video
-              preload="true"
-              className="max-w-[520px] h-[80vh] rounded-lg screen_1170:h-[375px] screen_445:h-[256px]"
-              muted
-              loop
-              autoPlay
-              playsInline
-              src={selectedStyle}
-            ></video>
-          ) : (
-            <img
-              loading="lazy"
-              src={item.images.background}
-              alt={item.description}
-              className="h-[80vh] rounded-lg screen_1170:h-[375px] screen_445:h-[256px]"
-            />
+          {item.type.id !== "bundle" &&
+            (selectedStyle ? (
+              <video
+                preload="true"
+                className="max-w-[520px] h-[80vh] rounded-lg screen_1170:h-[375px] screen_445:h-[256px]"
+                muted
+                loop
+                autoPlay
+                playsInline
+                src={selectedStyle}
+              ></video>
+            ) : (
+              <img
+                loading="lazy"
+                src={item.images.background}
+                alt={item.description}
+                className="h-[80vh] rounded-lg screen_1170:h-[375px] screen_445:h-[256px]"
+              />
+            ))}
+          {item.type.id === "bundle" && (
+            <div className="flex items-center justify-center flex-wrap gap-3 w-[648px] screen_910:w-auto">
+              {item.grants.length !== 0 ? (
+                item.grants.map((grant) => (
+                  <div
+                    key={grant.id}
+                    className="cursor-pointer bg-[#1780d8] rounded-xl"
+                  >
+                    <img
+                      src={grant.images.icon_background}
+                      alt=""
+                      className="rounded-xl w-[120px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105 screen_445:w-[80px]"
+                      onClick={() => handleItemClick(grant.id)}
+                    />
+                  </div>
+                ))
+              ) : (
+                <p className="w-96 text-center">No grant</p>
+              )}
+            </div>
           )}
           <div className="w-[2px] min-h-[80vh] bg-black/60 screen_1170:min-h-[2px] screen_1170:min-w-[15%]"></div>
           <div className="max-h-[80vh] max-w-[450px] w-[450px] overflow-y-auto scrollbar screen_1170:w-[315px]">
@@ -159,7 +194,13 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                         src={style.image}
                         alt=""
                         className="rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
-                        onClick={() => setSelectedStyle((item.previewVideos.length === 1 ? item.previewVideos[0]?.url : item.previewVideos[i]?.url) || null)}
+                        onClick={() =>
+                          setSelectedStyle(
+                            (item.previewVideos.length === 1
+                              ? item.previewVideos[0]?.url
+                              : item.previewVideos[i]?.url) || null
+                          )
+                        }
                       />
                     </div>
                   ))
