@@ -70,48 +70,48 @@ function Admin() {
   useEffect(() => {
     const fetchUserBalance = async () => {
       // use for test
-      setUserBalance([
-        {
-          id: "1",
-          discord_id: "1234567890",
-          discord_username: "user123",
-          name: "John Doe",
-          name_display: "John D.",
-          current_points: 100,
-          total_points: 500,
-          tier: "Diamond",
-        },
-        {
-          id: "2",
-          discord_id: "9876543210",
-          discord_username: "exampleuser",
-          name: "Jane Smith",
-          name_display: "Jane S.",
-          current_points: 250,
-          total_points: 3000,
-          tier: "Unreal",
-        },
-        {
-          id: "3",
-          discord_id: "5555555555",
-          discord_username: "testuser",
-          name: "Alice Johnson",
-          name_display: "Alice J.",
-          current_points: 50,
-          total_points: 50,
-          tier: "Gold",
-        },
-      ]);
+      // setUserBalance([
+      //   {
+      //     id: "1",
+      //     discord_id: "1234567890",
+      //     discord_username: "user123",
+      //     name: "John Doe",
+      //     name_display: "John D.",
+      //     current_points: 100,
+      //     total_points: 500,
+      //     tier: "Diamond",
+      //   },
+      //   {
+      //     id: "2",
+      //     discord_id: "9876543210",
+      //     discord_username: "exampleuser",
+      //     name: "Jane Smith",
+      //     name_display: "Jane S.",
+      //     current_points: 250,
+      //     total_points: 3000,
+      //     tier: "Unreal",
+      //   },
+      //   {
+      //     id: "3",
+      //     discord_id: "5555555555",
+      //     discord_username: "testuser",
+      //     name: "Alice Johnson",
+      //     name_display: "Alice J.",
+      //     current_points: 50,
+      //     total_points: 50,
+      //     tier: "Gold",
+      //   },
+      // ]);
       try {
         let response;
         if (searchValue.length > 0) {
           response = await axios.get(
-            `https://dada-game-items-api-emmys-projects-cd7ef475.vercel.app/dadaUsers/user_balance/${searchValue}`
+            `https://dadashop-backend.vercel.app/api/v1/dadaUsers/user_balance/${searchValue}`
           );
           setUserBalance([response.data]);
         } else {
           response = await axios.get(
-            "https://dada-game-items-api-emmys-projects-cd7ef475.vercel.app/dadaUsers/user_balance"
+            "https://dadashop-backend.vercel.app/api/v1/dadaUsers/user_balance"
           );
           setUserBalance(response.data);
         }
@@ -143,7 +143,7 @@ function Admin() {
       setUserBalance(updatedUserBalance);
 
       await axios.post(
-        `https://dada-game-items-api-emmys-projects-cd7ef475.vercel.app/dadaUsers/user_balance/${id}`,
+        `https://dadashop-backend.vercel.app/api/v1/dadaUsers/user_balance/${id}`,
         {
           ...editedData,
         },
@@ -201,7 +201,7 @@ function Admin() {
       });
 
       await axios.post(
-        "https://dada-game-items-api-emmys-projects-cd7ef475.vercel.app/dadaUsers/user_balance",
+        "https://dadashop-backend.vercel.app/api/v1/dadaUsers/user_balance",
         {
           id: (userBalance?.length ?? 0) + 1,
           discord_id: newUserData.discord_id,
