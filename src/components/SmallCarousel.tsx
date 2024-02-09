@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useState, useEffect, useRef } from 'react';
+
+import "./thickthighdrivemecrazy.css"
 
 interface CarouselProps {
-  displayAssets: DisplayAssets[];
+  displayAssets: { display_id: string; image_background: string }[];
   autoSlide?: boolean;
   autoSlideInterval?: number;
 }
@@ -11,34 +13,33 @@ interface DisplayAssets {
   image_background: string;
 }
 
-export const SmallCarousel = ({
-  displayAssets,
-  autoSlide = false,
-  autoSlideInterval = 3000,
-}: CarouselProps) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+interface SmallCarouselProps {
+  displayAssets: DisplayAssets[];
+}
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const next = () =>
-    setCurrentIndex((curr) =>
-      curr === displayAssets?.length - 1 ? 0 : curr + 1
-    );
+
+export const SmallCarousel: React.FC<SmallCarouselProps> = ({ displayAssets }) => {
+  const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    if (!autoSlide) return;
-    const slideInterval = setInterval(next, autoSlideInterval);
-    return () => clearInterval(slideInterval);
-  }, [autoSlide, autoSlideInterval, next]);
+    const interval = setInterval(() => {
+      setCurrent(current => (current + 1) % displayAssets.length);
+    }, 6000); 
+    return () => clearInterval(interval);
+  }, [displayAssets.length]);
 
   return (
-    <div className="overflow-hidden relative">
-      <div className="flex">
-        <img
-          loading="lazy"
-          src={displayAssets[currentIndex]?.image_background || ""}
-          alt={displayAssets[currentIndex]?.display_id}
-          className="aspect-square object-cover"
-        />
+    <div className="carousel-container">
+      <div className="image-wrapper">
+        {displayAssets.map((asset, index) => (
+          <img
+            key={asset.display_id}
+            src={asset.image_background}
+            alt={`Slide ${index}`}
+            className={`carousel-image ${index === current ? 'active' : ''} ${index === (current + 1) % displayAssets.length ? 'next' : ''}`}
+          />
+        ))}
+        <div className="mask"></div>
       </div>
     </div>
   );
