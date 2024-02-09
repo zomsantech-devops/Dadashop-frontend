@@ -7,6 +7,7 @@ import { DateDisplay } from "../components/DateDisplay";
 import Modal from "../components/ItemModal";
 import ItemDetail from "./ItemDetail";
 import { useLocation, useNavigate } from "react-router-dom";
+import { SmallCarousel } from "../components/SmallCarousel";
 
 interface Item {
   _id: string | null;
@@ -21,7 +22,7 @@ interface Item {
   images_item: string | null;
   images_background: string | null;
   images_full_background: string | null;
-  display_assets: any[];
+  display_assets: DisplayAssets[];
   section_name: string | null;
   finalPrice: number | null;
   release_date: string | null;
@@ -29,6 +30,11 @@ interface Item {
   time_update: string | null;
   uid_update: string | null;
   __v: number | null;
+}
+
+interface DisplayAssets {
+  display_id: string;
+  image_background: string;
 }
 
 interface ResponseData {
@@ -196,7 +202,7 @@ function ItemShop() {
                                   NEW!
                                 </div>
                               )}
-                              <img
+                              {/* <img
                                 loading="lazy"
                                 src={
                                   (item.type_name === "emote"
@@ -207,7 +213,10 @@ function ItemShop() {
                                 }
                                 alt={item.name || ""}
                                 className="rounded-lg transition ease-in-out duration-300 group-hover:scale-110 group-hover:brightness-105 overflow-hidden aspect-square object-cover"
-                              />
+                              /> */}
+                              <div className="w-[187px]">
+                                <SmallCarousel displayAssets={item.display_assets || []} autoSlide={true} />
+                              </div>
                               <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 text-lg uppercase antialiased leading-6 card-bg w-full rounded-lg screen_445:text-lg screen_445:leading-normal">
                                 <h3 className="font-bold leading-5 pb-1.5 pt-2 screen_445:pb-0">
                                   {item.name}
