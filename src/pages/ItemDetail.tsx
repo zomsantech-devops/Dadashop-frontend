@@ -114,39 +114,53 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
         </div>
       ) : item ? (
         <div className="flex screen_1170:flex-col items-center justify-center max-h-[80vh] screen_1170:max-h-none gap-6 px-6 screen_1170:pt-4">
-          {item.type.id !== "bundle" ? (
-            <div className="max-w-[520px] screen_610:w-[375px] screen_445:w-[275px] rounded-lg">
-              <Carousel>
-                {displayAssets.map((asset) => (
-                  <img
-                    key={asset.displayAsset}
-                    src={asset.background}
-                    alt={asset.displayAsset}
-                    className={`aspect-square rounded-lg`}
-                  />
-                ))}
-              </Carousel>
-            </div>
-          ) : (
-            <div className="flex items-center justify-center flex-wrap gap-3 w-[648px] screen_910:w-auto">
-              {item.grants.length !== 0 ? (
-                item.grants.map((grant) => (
-                  <div
-                    key={grant.id}
-                    className="cursor-pointer bg-[#1780d8] rounded-xl"
-                  >
+          {item.type.id !== "emote" ? (
+            item.type.id !== "bundle" ? (
+              <div className="max-w-[520px] screen_610:w-[375px] screen_445:w-[275px] rounded-lg">
+                <Carousel>
+                  {displayAssets.map((asset) => (
                     <img
-                      src={grant.images.icon_background}
-                      alt=""
-                      className="rounded-xl w-[120px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105 screen_445:w-[80px]"
-                      onClick={() => handleItemClick(grant.id)}
+                      key={asset.displayAsset}
+                      src={asset.background}
+                      alt={asset.displayAsset}
+                      className={`aspect-square rounded-lg`}
                     />
-                  </div>
-                ))
-              ) : (
-                <p className="w-96 text-center">No grant</p>
-              )}
-            </div>
+                  ))}
+                </Carousel>
+              </div>
+            ) : (
+              <div className="flex items-center justify-center flex-wrap gap-3 w-[648px] screen_910:w-auto">
+                {item.grants.length !== 0 ? (
+                  item.grants.map((grant) => (
+                    <div
+                      key={grant.id}
+                      className="cursor-pointer bg-[#1780d8] rounded-xl"
+                    >
+                      <img
+                        src={grant.images.icon_background}
+                        alt=""
+                        className="rounded-xl w-[120px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105 screen_445:w-[80px]"
+                        onClick={() => handleItemClick(grant.id)}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <p className="w-96 text-center">No grant</p>
+                )}
+              </div>
+            )
+          ) : (
+            selectedStyle && (
+              <video
+                preload="true"
+                className="max-w-[520px] h-[80vh] rounded-lg screen_1170:h-[375px] screen_445:h-[256px]"
+                muted
+                loop
+                autoPlay
+                playsInline
+                src={selectedStyle}
+              ></video>
+            )
           )}
 
           <div className="w-[2px] min-h-[80vh] bg-black/60 screen_1170:min-h-[2px] screen_1170:min-w-[15%]"></div>
