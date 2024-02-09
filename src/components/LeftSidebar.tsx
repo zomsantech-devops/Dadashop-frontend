@@ -2,9 +2,13 @@ import { Link, useLocation } from "react-router-dom";
 import { IoPersonAdd } from "react-icons/io5";
 import { FaChevronLeft, FaImage } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { GrPowerReset } from "react-icons/gr";
+import { toast } from "react-toastify";
 
 const LeftSidebar = () => {
   const [isNavSmall, setIsNavSmall] = useState(window.innerWidth < 1250);
+  const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -22,6 +26,19 @@ const LeftSidebar = () => {
   useEffect(() => {
     window.innerWidth < 1250 && setIsNavSmall(true);
   }, []);
+
+  const resetItem = async () => {
+    setIsLoading(true);
+    try {
+      await axios.get("https://dadashop-backend.vercel.app/api/v1/item/reset");
+      toast.success("Reset API Successfully");
+      setIsLoading(false);
+    } catch (error) {
+      toast.error("Reset API Failed");
+      setIsLoading(false);
+      console.error("Reset API Item Failed");
+    }
+  };
 
   return (
     <section
@@ -90,6 +107,37 @@ const LeftSidebar = () => {
             </Link>
           </div>
         </>
+      )}
+
+      {!isNavSmall ? (
+        <div className="self-center">
+          <button
+            className={`relative flex justify-start gap-4 rounded-lg p-4 bg-[#e1510f] ${
+              isLoading && "bg-[#e1510f]/50 cursor-not-allowed"
+            }`}
+            onClick={resetItem}
+            disabled={isLoading}
+          >
+            <GrPowerReset
+              className={`w-5 h-5 self-center ${isLoading && "animate-spin"}`}
+            />
+            Reset API
+          </button>
+        </div>
+      ) : (
+        <div className="self-center">
+          <button
+            className={`flex items-center justify-center gap-4 rounded-lg p-4 bg-[#e1510f] ${
+              isLoading && "bg-[#e1510f]/50 cursor-not-allowed"
+            }`}
+            onClick={resetItem}
+            disabled={isLoading}
+          >
+            <GrPowerReset
+              className={`w-5 h-5 self-center ${isLoading && "animate-spin"}`}
+            />
+          </button>
+        </div>
       )}
     </section>
   );

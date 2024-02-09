@@ -19,11 +19,15 @@ import ItemShop from "./pages/ItemShop";
 import ChangeImages from "./pages/ChangeImages";
 import Login from "./pages/Login";
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   return (
     <Router>
       <NavbarWrapper />
       <ScrollToTop />
+      <ToastContainer closeOnClick />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/item-shop" element={<ItemShop />} />

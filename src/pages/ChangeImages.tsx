@@ -3,6 +3,7 @@ import LeftSidebar from "../components/LeftSidebar";
 import { ChangeEvent, useEffect, useState } from "react";
 import axios from "axios";
 import emptyImage from "../images/empty.jpg";
+import { toast } from "react-toastify";
 
 interface AllImages {
   _id: string;
@@ -17,6 +18,7 @@ const ChangeImages = () => {
     useState<string>("");
   const [image, setImage] = useState<File>();
   const [previewImage, setPreviewImage] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -92,6 +94,7 @@ const ChangeImages = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true)
     const rawToken: string | null = localStorage.getItem("token");
     try {
       console.log(rawToken);
@@ -108,11 +111,19 @@ const ChangeImages = () => {
           }
         );
         console.log(response);
-        window.location.reload();
+        toast.success("Upload Image Successfully")
+        setTimeout(() => {
+          toast.success("Please reload this page...")
+        }, 1000);
+        setIsLoading(false)
       } else {
+        toast.warn("Token not found in localStorage")
+        setIsLoading(false)
         console.error("Token not found in localStorage");
       }
     } catch (error) {
+      toast.error("Upload Image Failed")
+      setIsLoading(false)
       console.error("Upload Error:" + error);
     }
   };
@@ -168,7 +179,8 @@ const ChangeImages = () => {
 
             <button
               type="submit"
-              className="bg-[#1EAEF0] rounded-[10px] px-4 py-2 opacity-100 hover:opacity-80 w-full font-bold text-white"
+              className={`bg-[#1EAEF0] rounded-[10px] px-4 py-2 opacity-100 hover:opacity-80 w-full font-bold text-white ${isLoading && "bg-[#1EAEF0]/50"}`}
+              disabled={isLoading}
             >
               อัพเดตรูปภาพ
             </button>
