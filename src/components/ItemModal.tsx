@@ -30,7 +30,7 @@ export default function Modal({ open, onClose, children }: ModalProps) {
         navigate(`/item-shop`);
       }}
       className={`
-        fixed inset-0 flex justify-center items-center transition-colors z-50 overflow-y-auto
+        fixed inset-0 flex justify-center items-center screen_1170:items-start transition-colors z-50 overflow-y-auto
         ${open ? "visible bg-black/10" : "invisible"}
       `}
     >
@@ -41,7 +41,7 @@ export default function Modal({ open, onClose, children }: ModalProps) {
           bg-white rounded-xl py-6 transition-all
           ${open ? "scale-100 opacity-100" : "scale-125 opacity-0"}
         `}
-      >
+      > 
         {children}
       </div>
     </div>

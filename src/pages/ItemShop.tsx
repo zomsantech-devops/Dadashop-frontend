@@ -198,18 +198,18 @@ function ItemShop() {
                               )}
                               <img
                                 loading="lazy"
-                                // src={item.images_background || ""}
-                                // src={
-                                //   (isToday(new Date(item.release_date || ""))
-                                //     ? item.images_item
-                                //     : item.images_background) || ""
-                                // }
-                                src={(item.type_name === "emote" ? item.images_background : (isToday(new Date(item.release_date || "")) ? item.images_item : item.images_background)) || ""}
+                                src={
+                                  (item.type_name === "emote"
+                                    ? item.images_background
+                                    : isToday(new Date(item.release_date || ""))
+                                    ? item.images_item
+                                    : item.images_background) || ""
+                                }
                                 alt={item.name || ""}
-                                className="rounded-lg transition ease-in-out duration-300 group-hover:scale-110 group-hover:brightness-105 overflow-hidden"
+                                className="rounded-lg transition ease-in-out duration-300 group-hover:scale-110 group-hover:brightness-105 overflow-hidden aspect-square object-cover"
                               />
-                              <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 text-xl uppercase antialiased leading-6 card-bg w-full rounded-lg screen_445:text-lg screen_445:leading-normal">
-                                <h3 className="text-[20px] font-bold leading-5 pb-1.5 pt-2 screen_445:pb-0">
+                              <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 text-lg uppercase antialiased leading-6 card-bg w-full rounded-lg screen_445:text-lg screen_445:leading-normal">
+                                <h3 className="font-bold leading-5 pb-1.5 pt-2 screen_445:pb-0">
                                   {item.name}
                                 </h3>
                                 <div className="flex items-center justify-between">
@@ -255,7 +255,13 @@ function ItemShop() {
                         )}
                         <img
                           loading="lazy"
-                          src={(item.type_name === "emote" ? item.images_background : (isToday(new Date(item.release_date || "")) ? item.images_item : item.images_background)) || ""}
+                          src={
+                            (item.type_name === "emote"
+                              ? item.images_background
+                              : isToday(new Date(item.release_date || ""))
+                              ? item.images_item
+                              : item.images_background) || ""
+                          }
                           alt={item.name || ""}
                           className="rounded-lg transition ease-in-out duration-300 group-hover:scale-110 group-hover:brightness-105 overflow-hidden"
                         />
