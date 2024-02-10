@@ -1,0 +1,8 @@
+.item-title-shadow {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 3; 
+    color: white;
+    padding: 10px;
+  }
