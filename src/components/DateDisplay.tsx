@@ -25,7 +25,7 @@ export const DateDisplay = () => {
       "ธันวาคม",
     ];
 
-    const utcDate = new Date(date.getTime() - (7 * 60 * 60 * 1000));
+    const utcDate = new Date(date.getTime() + (7 * 60 * 60 * 1000));
 
     const dayOfWeek: string = thaiWeekdays[utcDate.getUTCDay()];
     const day: number = utcDate.getUTCDate();
