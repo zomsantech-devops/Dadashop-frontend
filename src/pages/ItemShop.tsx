@@ -8,7 +8,6 @@ import Modal from "../components/ItemModal";
 import ItemDetail from "./ItemDetail";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SmallCarousel } from "../components/SmallCarousel";
-import { CardWithSlidingImages } from "../components/CardWithSlidingImages";
 
 import "../components/misterPepper.css";
 
