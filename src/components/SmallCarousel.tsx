@@ -32,7 +32,7 @@ export const SmallCarousel: React.FC<SmallCarouselProps> = ({
 
   return (
     <div className="carousel-container">
-      <div className="image-wrapper">
+      <div className="image-wrapper transition duration-300 hover:scale-110">
         {displayAssets.map((asset, index) => (
           <div
             key={asset.display_id}
