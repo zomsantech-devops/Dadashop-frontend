@@ -24,7 +24,7 @@ export const SmallCarousel: React.FC<SmallCarouselProps> = ({ displayAssets }) =
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent(current => (current + 1) % displayAssets.length);
-    }, 6000); 
+    }, 3000); 
     return () => clearInterval(interval);
   }, [displayAssets.length]);
 
@@ -39,7 +39,7 @@ export const SmallCarousel: React.FC<SmallCarouselProps> = ({ displayAssets }) =
             className={`carousel-image ${index === current ? 'active' : ''} ${index === (current + 1) % displayAssets.length ? 'next' : ''}`}
           />
         ))}
-        <div className="mask"></div>
+
       </div>
     </div>
   );

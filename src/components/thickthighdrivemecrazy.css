@@ -31,7 +31,7 @@
     z-index: 0;
   }
   
-  .mask {
+  /* .mask {
     position: absolute;
     top: 0;
     left: 0;
@@ -50,4 +50,4 @@
     to {
       transform: translateX(100%);
     }
-  }
+  } */
