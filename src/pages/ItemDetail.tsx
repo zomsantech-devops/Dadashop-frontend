@@ -39,7 +39,9 @@ interface Item {
 }
 
 interface Styles {
+  channelName: string;
   image: string;
+  video_url: string;
 }
 
 interface Grants {
@@ -68,6 +70,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
   const [styles, setStyles] = useState<Styles[]>([]);
   const [selectedStyle, setSelectedStyle] = useState<string | null>();
   const [displayAssets, setDisplayAssets] = useState<DisplayAssets[]>([]);
+  const [channelName, setChannelName] = useState<string[]>([]);
 
   const navigate = useNavigate();
 
@@ -93,6 +96,14 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
       fetchItem();
     }
   }, [itemId]);
+
+  useEffect(() => {
+    const uniqueSection = Array.from(
+      new Set(styles.map((cn) => cn.channelName || ""))
+    );
+
+    setChannelName(uniqueSection);
+  }, [styles]);
 
   const convertVbuckToTHB = (price: number | null) => {
     if (price === null) {
@@ -164,7 +175,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
           )}
 
           <div className="w-[2px] min-h-[80vh] bg-black/60 screen_1170:min-h-[2px] screen_1170:min-w-[15%]"></div>
-          <div className="min-w-[min(50vw,500px)] max-h-[80vh] text-center screen_810:min-w-none overflow-auto">
+          <div className="min-w-[min(50vw,500px)] max-h-[80vh] text-center screen_810:min-w-none overflow-auto py-6">
             <div className="flex flex-col items-center justify-center px-2.5 mr-4 screen_1170:ml-4">
               <div className="text-[30px] font-bold text-black/80 uppercase text-center">
                 {item?.name}
@@ -203,34 +214,42 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
               </div>
               {styles.length !== 0 && (
                 <>
-                  <div className="mt-4 mb-2 font-bold">Styles: </div>
-                  <div className="flex items-center justify-center flex-wrap gap-3 mb-2">
-                    {styles.map((style, i) => (
-                      <div
-                        key={i + "_" + style}
-                        className="cursor-pointer bg-[#1780d8] rounded-xl"
-                      >
-                        <img
-                          src={style.image}
-                          alt=""
-                          className="rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
-                          onClick={() =>
-                            setSelectedStyle(
-                              (item.previewVideos.length === 1
-                                ? item.previewVideos[0]?.url
-                                : item.previewVideos[i]?.url) || null
-                            )
-                          }
-                        />
+                  {channelName.map((cn) => (
+                    <section key={cn}>
+                      <h1 className="pt-3.5 pb-2 text-lg font-bold text-black/80 mb-2">
+                        {cn}
+                      </h1>
+                      <div className="flex items-center justify-center flex-wrap gap-3 mb-2">
+                        {styles
+                          .filter((style) => style.channelName === cn)
+                          .map((style, i) => (
+                            <div
+                              key={i + "_" + style}
+                              className="cursor-pointer bg-[#1780d8] rounded-xl"
+                            >
+                              <img
+                                src={style.image}
+                                alt=""
+                                className="rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
+                                onClick={() =>
+                                  setSelectedStyle(
+                                    (item.previewVideos.length === 1
+                                      ? item.previewVideos[0]?.url
+                                      : item.previewVideos[i]?.url) || null
+                                  )
+                                }
+                              />
+                            </div>
+                          ))}
                       </div>
-                    ))}
-                  </div>
+                    </section>
+                  ))}
                 </>
               )}
             </div>
           </div>
           <div
-            className="absolute top-5 right-5 cursor-pointer screen_1170:top-3 screen_1170:right-3 screen_443:top-2 screen_443:right-2"
+            className="absolute top-2 right-2 cursor-pointer screen_1170:top-3 screen_1170:right-3 screen_443:top-2 screen_443:right-2"
             onClick={onClose}
           >
             <IoMdClose className="hover:bg-black/20 rounded-xl w-5 h-5 p-0.5 screen_443:w-6 screen_443:h-6" />
