@@ -8,7 +8,7 @@ import Modal from "../components/ItemModal";
 import ItemDetail from "./ItemDetail";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SmallCarousel } from "../components/SmallCarousel";
-import { CardWithSlidingImages } from "../components/CardWithSlidingImages"
+import { CardWithSlidingImages } from "../components/CardWithSlidingImages";
 
 interface Item {
   _id: string | null;
@@ -203,23 +203,16 @@ function ItemShop() {
                                   NEW!
                                 </div>
                               )}
-                              {/* <img
-                                loading="lazy"
-                                src={
-                                  (item.type_name === "emote"
-                                    ? item.images_background
-                                    : isToday(new Date(item.release_date || ""))
-                                    ? item.images_item
-                                    : item.images_background) || ""
-                                }
-                                alt={item.name || ""}
-                                className="rounded-lg transition ease-in-out duration-300 group-hover:scale-110 group-hover:brightness-105 overflow-hidden aspect-square object-cover"
-                              /> */}
-                                {/* <div key={item.id} className="card-container">
-    <CardWithSlidingImages displayAssets={item.display_assets} isDataLoaded={isDataLoaded} />
-  </div> */}
+                              {/* <div key={item.id} className="card-container">
+                                <CardWithSlidingImages
+                                  displayAssets={item.display_assets}
+                                  isDataLoaded={isDataLoaded}
+                                />
+                              </div> */}
                               <div className="w-[187px]">
-                                <SmallCarousel displayAssets={item.display_assets || []} />
+                                <SmallCarousel
+                                  displayAssets={item.display_assets || []}
+                                />
                               </div>
                               <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 text-lg uppercase antialiased leading-6 card-bg w-full rounded-lg screen_445:text-lg screen_445:leading-normal">
                                 <h3 className="font-bold leading-5 pb-1.5 pt-2 screen_445:pb-0">
@@ -266,18 +259,11 @@ function ItemShop() {
                             NEW!
                           </div>
                         )}
-                        <img
-                          loading="lazy"
-                          src={
-                            (item.type_name === "emote"
-                              ? item.images_background
-                              : isToday(new Date(item.release_date || ""))
-                              ? item.images_item
-                              : item.images_background) || ""
-                          }
-                          alt={item.name || ""}
-                          className="rounded-lg transition ease-in-out duration-300 group-hover:scale-110 group-hover:brightness-105 overflow-hidden"
-                        />
+                        <div className="w-[187px]">
+                          <SmallCarousel
+                            displayAssets={item.display_assets || []}
+                          />
+                        </div>
                         <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 text-xl uppercase antialiased leading-6 card-bg w-full rounded-lg screen_445:text-lg screen_445:leading-normal">
                           <h3 className="text-[20px] font-bold leading-5 pb-1.5 pt-2 screen_445:pb-0">
                             {item.name}
