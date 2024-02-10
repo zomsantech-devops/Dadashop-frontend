@@ -10,7 +10,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { SmallCarousel } from "../components/SmallCarousel";
 import { CardWithSlidingImages } from "../components/CardWithSlidingImages";
 
-import "../components/misterPepper.css"
+import "../components/misterPepper.css";
 
 interface Item {
   _id: string | null;
@@ -38,7 +38,7 @@ interface Item {
 interface DisplayAssets {
   display_id: string;
   image_background: string;
-  image_url: string
+  image_url: string;
 }
 
 interface ResponseData {
@@ -212,11 +212,13 @@ function ItemShop() {
                                   isDataLoaded={isDataLoaded}
                                 />
                               </div> */}
-                              <div className="w-[187px]">
-                                <SmallCarousel
-                                  displayAssets={item.display_assets || []}
-                                />
-                              </div>
+                              {item.display_assets.length !== 0 && (
+                                <div className="w-[187px]">
+                                  <SmallCarousel
+                                    displayAssets={item.display_assets || []}
+                                  />
+                                </div>
+                              )}
                               <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 text-lg uppercase antialiased leading-6 card-bg w-full rounded-lg screen_445:text-lg screen_445:leading-normal">
                                 <h3 className="font-bold leading-5 pb-1.5 pt-2 screen_445:pb-0">
                                   {item.name}
@@ -262,11 +264,13 @@ function ItemShop() {
                             NEW!
                           </div>
                         )}
-                        <div className="w-[187px]">
-                          <SmallCarousel
-                            displayAssets={item.display_assets || []}
-                          />
-                        </div>
+                        {item.display_assets.length !== 0 && (
+                          <div className="w-[187px]">
+                            <SmallCarousel
+                              displayAssets={item.display_assets}
+                            />
+                          </div>
+                        )}
                         <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 text-xl uppercase antialiased leading-6 card-bg w-full rounded-lg screen_445:text-lg screen_445:leading-normal">
                           <h3 className="text-[20px] font-bold leading-5 pb-1.5 pt-2 screen_445:pb-0">
                             {item.name}
