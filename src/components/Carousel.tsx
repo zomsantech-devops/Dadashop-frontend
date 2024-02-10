@@ -36,13 +36,13 @@ export const Carousel = ({ children: slides }: CarouselProps) => {
             onClick={prev}
             className="p-1 rounded-full shadow-sm bg-white/80 text-gray-800 hover:bg-white"
           >
-            <FaChevronLeft size={10} />
+            <FaChevronLeft size={20} />
           </button>
           <button
             onClick={next}
             className="p-1 rounded-full shadow-sm bg-white/80 text-gray-800 hover:bg-white"
           >
-            <FaChevronRight size={10} />
+            <FaChevronRight size={20} />
           </button>
         </div>
       )}

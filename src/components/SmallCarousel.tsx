@@ -35,7 +35,7 @@ export const SmallCarousel: React.FC<SmallCarouselProps> = ({
       <div className="image-wrapper transition duration-300 hover:scale-110">
         {displayAssets.map((asset, index) => (
           <div
-            key={asset.display_id}
+            key={asset.display_id + "_" + index}
             className={`carousel-image-container ${
               index === current ? "active" : ""
             } ${index === (current + 1) % displayAssets.length ? "next" : ""}`}
