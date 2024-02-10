@@ -2,7 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 
 import "./thickthighdrivemecrazy.css"
 
-
+interface CarouselProps {
+  displayAssets: { display_id: string; image_background: string }[];
+  autoSlide?: boolean;
+  autoSlideInterval?: number;
+}
 
 interface DisplayAssets {
   display_id: string;
@@ -20,26 +24,23 @@ export const SmallCarousel: React.FC<SmallCarouselProps> = ({ displayAssets }) =
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent(current => (current + 1) % displayAssets.length);
-    }, 4000); 
+    }, 6000); 
     return () => clearInterval(interval);
   }, [displayAssets.length]);
 
-  const nextIndex = displayAssets && displayAssets.length > 0 ? (current + 1) % displayAssets.length : 0;
-
   return (
     <div className="carousel-container">
-<div 
-  key={current}
-  className="carousel-slide" 
-  style={{ backgroundImage: `url(${displayAssets[current]?.image_background})` }}
->
-  <div 
-    className="overlay" 
-    key={current} 
-    style={{ backgroundImage: `url(${displayAssets[nextIndex]?.image_background})` }}
-  >
-  </div>
-    </div>
+      <div className="image-wrapper">
+        {displayAssets.map((asset, index) => (
+          <img
+            key={asset.display_id}
+            src={asset.image_background}
+            alt={`Slide ${index}`}
+            className={`carousel-image ${index === current ? 'active' : ''} ${index === (current + 1) % displayAssets.length ? 'next' : ''}`}
+          />
+        ))}
+        <div className="mask"></div>
+      </div>
     </div>
   );
 };
