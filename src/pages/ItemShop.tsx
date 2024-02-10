@@ -10,6 +10,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { SmallCarousel } from "../components/SmallCarousel";
 import { CardWithSlidingImages } from "../components/CardWithSlidingImages"
 
+import "../components/misterPepper.css"
+
 interface Item {
   _id: string | null;
   id: string | null;
@@ -36,6 +38,7 @@ interface Item {
 interface DisplayAssets {
   display_id: string;
   image_background: string;
+  image_url: string
 }
 
 interface ResponseData {
