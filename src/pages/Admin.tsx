@@ -106,12 +106,12 @@ function Admin() {
         let response;
         if (searchValue.length > 0) {
           response = await axios.get(
-            `https://dadashop-backend.vercel.app/api/v1/dadaUsers/user_balance/${searchValue}`
+            `https://dadashop-backend.vercel.app/api/v1/user-balance/${searchValue}`
           );
           setUserBalance([response.data]);
         } else {
           response = await axios.get(
-            "https://dadashop-backend.vercel.app/api/v1/dadaUsers/user_balance"
+            "https://dadashop-backend.vercel.app/api/v1/user-balance"
           );
           setUserBalance(response.data);
         }
@@ -143,7 +143,7 @@ function Admin() {
       setUserBalance(updatedUserBalance);
 
       await axios.post(
-        `https://dadashop-backend.vercel.app/api/v1/dadaUsers/user_balance/${id}`,
+        `https://dadashop-backend.vercel.app/api/v1/user-balance/${id}`,
         {
           ...editedData,
         },
@@ -201,7 +201,7 @@ function Admin() {
       });
 
       await axios.post(
-        "https://dadashop-backend.vercel.app/api/v1/dadaUsers/user_balance",
+        "https://dadashop-backend.vercel.app/api/v1/user-balance",
         {
           id: (userBalance?.length ?? 0) + 1,
           discord_id: newUserData.discord_id,

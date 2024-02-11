@@ -29,7 +29,7 @@ function CheckPoints() {
       setLoading(true);
       setNotFound(false);
       const response = await axios.get(
-        `https://dadashop-backend.vercel.app/api/v1/dadaUsers/user_balance/${searchValue}`
+        `https://dadashop-backend.vercel.app/api/v1/user-balance/${searchValue}`
       );
       setUserBalance(response.data);
     } catch (error) {
