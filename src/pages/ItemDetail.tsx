@@ -175,7 +175,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
           )}
 
           <div className="w-[2px] min-h-[80vh] bg-black/60 screen_1170:min-h-[2px] screen_1170:min-w-[15%]"></div>
-          <div className="min-w-[min(50vw,500px)] max-h-[80vh] text-center screen_810:min-w-none overflow-auto py-6">
+          <div className="min-w-[min(50vw,500px)] max-h-[80vh] screen_1170:max-h-full text-center screen_810:min-w-none overflow-auto py-6">
             <div className="flex flex-col items-center justify-center px-2.5 mr-4 screen_1170:ml-4">
               <div className="text-[30px] font-bold text-black/80 uppercase text-center">
                 {item?.name}
