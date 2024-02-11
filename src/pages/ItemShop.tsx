@@ -8,6 +8,8 @@ import Modal from "../components/ItemModal";
 import ItemDetail from "./ItemDetail";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SmallCarousel } from "../components/SmallCarousel";
+import moment from 'moment-timezone'
+
 
 import "../components/misterPepper.css";
 
@@ -160,12 +162,13 @@ function ItemShop() {
     return baht;
   };
 
-  const isToday = (date: Date) => {
-    const today = new Date();
+  const isToday = (inputDate : Date) => {
+    const date = moment.utc(inputDate);
+    const today = moment.utc();
     return (
-      date.getDate() === today.getDate() &&
-      date.getMonth() === today.getMonth() &&
-      date.getFullYear() === today.getFullYear()
+      date.date() === today.date() &&
+      date.month() === today.month() &&
+      date.year() === today.year()
     );
   };
 
