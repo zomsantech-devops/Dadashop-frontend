@@ -24,9 +24,12 @@ export const SmallCarousel: React.FC<SmallCarouselProps> = ({
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
+    if (displayAssets.length <= 1) {
+      return; 
+    }
     const interval = setInterval(() => {
       setCurrent((current) => (current + 1) % displayAssets.length);
-    }, 3000);
+    }, 3000); 
     return () => clearInterval(interval);
   }, [displayAssets.length]);
 
@@ -36,9 +39,7 @@ export const SmallCarousel: React.FC<SmallCarouselProps> = ({
         {displayAssets.map((asset, index) => (
           <div
             key={asset.display_id + "_" + index}
-            className={`carousel-image-container ${
-              index === current ? "active" : ""
-            } ${index === (current + 1) % displayAssets.length ? "next" : ""}`}
+            className={`carousel-image-container ${index === current ? "active" : ""}`}
           >
             <img
               src={asset.image_background}
