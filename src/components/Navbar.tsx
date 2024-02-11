@@ -1,6 +1,5 @@
 import FBIcon from "../images/facebook (1).png";
 import DiscordIcon from "../images/discord (2).png";
-import logo from "../images/dada-logo-horizontal.png";
 import { FaChevronDown } from "react-icons/fa";
 
 import { Link, useLocation } from "react-router-dom";
@@ -74,7 +73,7 @@ function Navbar() {
       <div className="w-full flex items-center">
         {/* LOGO */}
         <Link to="/">
-          <img src={logo} alt="logo" className="h-20 screen_443:-ml-3.5" />
+          <img src={"https://dadashop-backend.vercel.app/api/v1/image/banner-5"} alt="logo" className="h-20 screen_443:-ml-3.5" />
         </Link>
         {!isMobile && (
           <>

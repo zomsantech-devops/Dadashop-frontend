@@ -1,5 +1,4 @@
 import Footer from "../components/Footer";
-import bg from "../images/image 2.png";
 import characterBG from "../images/bgSeasonLatest.png";
 import HomePageBtn from "../components/HomePageBtn";
 import cart from "../images/shopping-cart (1).png";
@@ -15,7 +14,7 @@ function HomePage() {
     <div>
       <div className="h-[715px] homePageBGArea_920px:h-[615px] md:h-[550px] screen_540:h-[500px] screen_445:h-[430px] screen_443:h-[465px] relative">
         {/* <img src={bg}  alt="" className={`h-[${height}px] w-full absolute -z-20`}  /> */}
-        <img src={bg} alt="" className={`h-full w-full absolute -z-20`} />
+        <img src={"https://dadashop-backend.vercel.app/api/v1/image/banner-99"} alt="" className={`h-full w-full absolute -z-20`} />
         <div className="flex justify-center text-white font-bold">
           <div className="text-center px-[30px]">
             <img
