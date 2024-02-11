@@ -47,14 +47,20 @@ interface ResponseData {
 
 function ItemShop() {
   const [data, setData] = useState<Item[]>([]);
-  const [categories, setCategories] = useState<
-    { name: string; count: number }[]
-  >([]);
+  // const [categories, setCategories] = useState<
+  //   { name: string; count: number }[]
+  // >([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [section, setSection] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
+  const [categories, setCategories] = useState<
+    { name: string; count: number }[]
+  >([
+    { name: "All", count: 0 },
+    { name: "New", count: 0 },
+  ]);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -104,7 +110,18 @@ function ItemShop() {
       name: category,
       count: data.filter((item) => item.type_name === category).length,
     }));
-    setCategories([{ name: "All", count: data.length }, ...categoryCounts]);
+
+    // Calculate count for "New" category based on items released today
+    const newItemsCount = data.filter((item) => {
+      const releaseDate = new Date(item.release_date || "");
+      return isToday(releaseDate);
+    }).length;
+
+    setCategories([
+      { name: "All", count: data.length },
+      { name: "New", count: newItemsCount }, // Add the "New" category here
+      ...categoryCounts,
+    ]);
     setSelectedCategory("All");
   }, [data]);
 
@@ -167,7 +184,7 @@ function ItemShop() {
           <CircularProgress className="self-center" />
         ) : (
           <>
-            <div className="flex self-center justify-left gap-4 mb-5 overflow-x-auto max-w-full screen_500:gap-2 scrollbar-category">
+            <div className="flex self-center justify-left gap-4 mb-5 overflow-x-auto max-w-[1200px] screen_1250:max-w-full screen_500:gap-2 scrollbar-category rounded-xl">
               {categories.map((category) => (
                 <button
                   key={category.name}
@@ -196,21 +213,15 @@ function ItemShop() {
                         .map((item) => (
                           <li
                             key={item._id || ""}
-                            className="w-[187px] cursor-pointer screen_500:w-full"
+                            className="relative w-[187px] cursor-pointer screen_500:w-full"
                             onClick={() => handleItemClick(item.id || "")}
                           >
+                            {isToday(new Date(item.release_date || "")) && (
+                              <div className="absolute -top-2 -right-2 text-white bg-[#cb3369] px-2 py-0.5 rounded-md font-bold z-[20]">
+                                NEW!
+                              </div>
+                            )}
                             <div className="relative group overflow-hidden rounded-lg">
-                              {isToday(new Date(item.release_date || "")) && (
-                                <div className="absolute top-1 right-1 text-white bg-[#cb3369] px-2 py-0.5 rounded-md font-bold">
-                                  NEW!
-                                </div>
-                              )}
-                              {/* <div key={item.id} className="card-container">
-                                <CardWithSlidingImages
-                                  displayAssets={item.display_assets}
-                                  isDataLoaded={isDataLoaded}
-                                />
-                              </div> */}
                               {item.display_assets.length !== 0 && (
                                 <div className="w-[187px]">
                                   <SmallCarousel
@@ -249,52 +260,101 @@ function ItemShop() {
                   </section>
                 ))}
               <ul className="grid grid-cols-6 xl:grid-cols-5 lg:grid-cols-4 screen_810:grid-cols-3 sm:grid-cols-2 gap-4 screen_500:place-items-center screen_445:gap-2">
-                {data
-                  .filter((item) => item.type_name === selectedCategory)
-                  .map((item) => (
-                    <li
-                      key={item._id || ""}
-                      className="w-[187px] cursor-pointer screen_500:w-full"
-                      onClick={() => handleItemClick(item.id || "")}
-                    >
-                      <div className="relative group overflow-hidden rounded-lg">
-                        {isToday(new Date(item.release_date || "")) && (
-                          <div className="absolute top-1 right-1 text-white bg-[#cb3369] px-2 py-0.5 rounded-md font-bold">
+                {selectedCategory === "New" // Check if the selected category is "New"
+                  ? data
+                      .filter((item) =>
+                        isToday(new Date(item.release_date || ""))
+                      ) // Filter items with today's release date
+                      .map((item) => (
+                        <li
+                          key={item._id || ""}
+                          className="relative w-[187px] cursor-pointer screen_500:w-full"
+                          onClick={() => handleItemClick(item.id || "")}
+                        >
+                          <div className="absolute -top-2 -right-2 text-white bg-[#cb3369] px-2 py-0.5 rounded-md font-bold z-[20]">
                             NEW!
                           </div>
-                        )}
-                        {item.display_assets.length !== 0 && (
-                          <div className="w-[187px]">
-                            <SmallCarousel
-                              displayAssets={item.display_assets}
-                            />
-                          </div>
-                        )}
-                        <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 text-xl uppercase antialiased leading-6 card-bg w-full rounded-lg screen_445:text-lg screen_445:leading-normal">
-                          <h3 className="text-[20px] font-bold leading-5 pb-1.5 pt-2 screen_445:pb-0">
-                            {item.name}
-                          </h3>
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center justify-center">
-                              <img
-                                src={vBucks}
-                                alt="V-Bucks"
-                                className="w-5 h-5 mr-1"
-                              />
-                              <p className="font-bold">
-                                {item.finalPrice || "-"}
-                              </p>
+                          <div className="relative group overflow-hidden rounded-lg">
+                            {item.display_assets.length !== 0 && (
+                              <div className="w-[187px]">
+                                <SmallCarousel
+                                  displayAssets={item.display_assets}
+                                />
+                              </div>
+                            )}
+                            <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 text-xl uppercase antialiased leading-6 card-bg w-full rounded-lg screen_445:text-lg screen_445:leading-normal">
+                              <h3 className="text-[20px] font-bold leading-5 pb-1.5 pt-2 screen_445:pb-0">
+                                {item.name}
+                              </h3>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center justify-center">
+                                  <img
+                                    src={vBucks}
+                                    alt="V-Bucks"
+                                    className="w-5 h-5 mr-1"
+                                  />
+                                  <p className="font-bold">
+                                    {item.finalPrice || "-"}
+                                  </p>
+                                </div>
+                                <div className="text-[#aafffa]">
+                                  <p className="font-bold">
+                                    {convertVbuckToTHB(item.finalPrice) || "-"}{" "}
+                                    บาท
+                                  </p>
+                                </div>
+                              </div>
                             </div>
-                            <div className="text-[#aafffa]">
-                              <p className="font-bold">
-                                {convertVbuckToTHB(item.finalPrice) || "-"} บาท
-                              </p>
+                          </div>
+                        </li>
+                      ))
+                  : data
+                      .filter((item) => item.type_name === selectedCategory)
+                      .map((item) => (
+                        <li
+                          key={item._id || ""}
+                          className="relative w-[187px] cursor-pointer screen_500:w-full"
+                          onClick={() => handleItemClick(item.id || "")}
+                        >
+                          {isToday(new Date(item.release_date || "")) && (
+                            <div className="absolute -top-2 -right-2 text-white bg-[#cb3369] px-2 py-0.5 rounded-md font-bold z-[20]">
+                              NEW!
+                            </div>
+                          )}
+                          <div className="relative group overflow-hidden rounded-lg">
+                            {item.display_assets.length !== 0 && (
+                              <div className="w-[187px]">
+                                <SmallCarousel
+                                  displayAssets={item.display_assets}
+                                />
+                              </div>
+                            )}
+                            <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 text-xl uppercase antialiased leading-6 card-bg w-full rounded-lg screen_445:text-lg screen_445:leading-normal">
+                              <h3 className="text-[20px] font-bold leading-5 pb-1.5 pt-2 screen_445:pb-0">
+                                {item.name}
+                              </h3>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center justify-center">
+                                  <img
+                                    src={vBucks}
+                                    alt="V-Bucks"
+                                    className="w-5 h-5 mr-1"
+                                  />
+                                  <p className="font-bold">
+                                    {item.finalPrice || "-"}
+                                  </p>
+                                </div>
+                                <div className="text-[#aafffa]">
+                                  <p className="font-bold">
+                                    {convertVbuckToTHB(item.finalPrice) || "-"}{" "}
+                                    บาท
+                                  </p>
+                                </div>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
-                    </li>
-                  ))}
+                        </li>
+                      ))}
               </ul>
             </div>
           </>
