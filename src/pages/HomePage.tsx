@@ -18,7 +18,7 @@ function HomePage() {
         <div className="flex justify-center text-white font-bold">
           <div className="text-center px-[30px]">
             <img
-              src={whiteLogo}
+              src={"https://dadashop-backend.vercel.app/api/v1/image/logo-middle"}
               alt="whiteLogo"
               className="h-[270px] screen_540:h-[190px] screen_445:h-[150px] -mt-[50px] screen_540:-mt-[25px] screen_445:-mt-[15px]  mx-[auto]"
             />
@@ -28,7 +28,7 @@ function HomePage() {
           </div>
           {/* <img src={characterBG}  alt="" className="w-[1090px] absolute mt-[195.5px] -z-10"  /> */}
           <img
-            src={characterBG}
+            src={"https://dadashop-backend.vercel.app/api/v1/image/banner-4"}
             alt=""
             className="w-[1090px] absolute bottom-0 -z-10"
           />
