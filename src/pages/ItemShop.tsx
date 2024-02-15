@@ -176,10 +176,10 @@ function ItemShop() {
     <>
       <div className="flex flex-col justify-center px-[30px] screen_445:px-3">
         <div className="text-center my-[40px]">
-          <p className="text-5xl font-bold leading-normal my-1 screen_445:text-4xl">
+          <p className="text-4xl font-bold leading-normal my-1 screen_930:text-3xl screen_445:text-2xl">
             Daily Item Shop
           </p>
-          <div className="text-3xl text-[#4a4a59] screen_445:text-2xl">
+          <div className="text-2xl text-[#4a4a59] screen_930:text-xl screen_445:text-lg">
             <DateDisplay />
           </div>
         </div>
@@ -207,7 +207,7 @@ function ItemShop() {
               {selectedCategory === "All" &&
                 section.map((sec) => (
                   <section key={sec}>
-                    <h1 className="pt-3.5 pb-2 text-4xl text-black/80 font-semibold screen_445:text-2xl mb-2">
+                    <h1 className="pt-3.5 pb-2 text-2xl text-black/80 font-semibold screen_930:text-xl screen_445:text-lg mb-2">
                       {sec}
                     </h1>
                     <ul className="grid grid-cols-6 xl:grid-cols-5 lg:grid-cols-4 screen_810:grid-cols-3 sm:grid-cols-2 gap-4 screen_500:place-items-center screen_445:gap-2">

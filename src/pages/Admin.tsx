@@ -288,7 +288,7 @@ function Admin() {
               type="search"
               id="default-search"
               className="block w-full p-4 ps-10 text-sm border border-gray-300 rounded-[30px] focus:border-[#1EAEF0] outline-[#02A7F3]"
-              placeholder="กรอก ID หรือชื่อสมาชิก"
+              placeholder="โปรดระบุหมายเลข Member หรือชื่อ Member ของคุณ"
               required
               autoComplete="off"
               value={searchValue}

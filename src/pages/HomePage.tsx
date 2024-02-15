@@ -52,7 +52,7 @@ function HomePage() {
       <div className="px-[30px]">
         <div className="grid grid-rows-1 grid-cols-[330px_330px_330px] homePageCatagories_1150px:grid-rows-2 homePageCatagories_1150px:grid-cols-[330px_330px] md:grid-rows-1 md:grid-cols-[330px]  gap-[50px] justify-center mt-[110px] md:mt-[50px] relative">
           <HomePageBtn
-            page={"/item-price-table"}
+            page={"/price-fortnite"}
             icon={cart}
             text={"ราคา & ขั้นตอนการซื้อ"}
           />
