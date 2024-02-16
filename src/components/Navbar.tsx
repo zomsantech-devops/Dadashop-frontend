@@ -288,6 +288,15 @@ function Navbar() {
             </div>
           )}
           <Link
+                to="/price-other"
+                className={`${
+                  location.pathname === "/price-other" &&
+                  " px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
+                } font-bold py-2 relative w-fit block`}
+              >
+                บริการอื่นๆ
+          </Link>   
+          <Link
             to="/check-points"
             className={`${
               location.pathname === "/check-points" &&
