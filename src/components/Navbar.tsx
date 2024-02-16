@@ -67,7 +67,7 @@ function Navbar() {
   return (
     <div
       className={`${
-        isMobile ? "gap-4 py-0" : "gap-7 py-2"
+        isMobile ? " py-0" : "gap-7 py-2"
       } flex flex-col items-center justify-between px-28 screen_1170:px-10 screen_1070:px-5 sm:px-8 bg-white sticky top-0 z-30 navbar-shadow`}
     >
       <div className="w-full flex items-center">
@@ -223,7 +223,7 @@ function Navbar() {
       </div>
       {isMobileDropdownOpen && (
         <div
-          className={`w-full flex flex-col gap-1 pl-2.5 mb-4 ${
+          className={`w-full flex flex-col gap-1 pl-2.5 ${
             animateCollapseIn ? "animate-collapseOut" : "animate-expandIn"
           } overflow-hidden`}
         >
@@ -291,8 +291,8 @@ function Navbar() {
             to="/check-points"
             className={`${
               location.pathname === "/check-points" &&
-              "px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
-            } font-bold py-2 relative w-fit block`}
+              " px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
+            } mb-4 font-bold py-2 relative w-fit block`}
           >
             Dada Points
           </Link>
