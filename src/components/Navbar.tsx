@@ -268,19 +268,31 @@ function Navbar() {
             <div className="pl-4 flex flex-col gap-1">
               <Link
                 to="/check-queue/zz1-zz6"
-                className="w-fit block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
+                className={`${
+                  location.pathname === "/check-queue/zz1-zz6"
+                    ? "bg-[#3d82d1] text-white"
+                    : "text-gray-700"
+                } w-fit block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white`}
               >
                 Dada ZZ1-ZZ6
               </Link>
               <Link
                 to="/check-queue/d1-d10"
-                className="w-fit block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
+                className={`${
+                  location.pathname === "/check-queue/d1-d10"
+                    ? "bg-[#3d82d1] text-white"
+                    : "text-gray-700"
+                } w-fit block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white`}
               >
                 Dada D1-D10
               </Link>
               <Link
                 to="/check-queue/g1-g8"
-                className="w-fit block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
+                className={`${
+                  location.pathname === "/check-queue/g1-g8"
+                    ? "bg-[#3d82d1] text-white"
+                    : "text-gray-700"
+                } w-fit block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white`}
               >
                 Dada G1-G8{" "}
                 <span className="text-red-600">(ปิดรับเพื่อนแล้ว)</span>
