@@ -201,7 +201,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
               <div className="flex flex-col gap-2">
                 <CustomButton
                   text={"ขั้นตอนการสั่งซื้อ"}
-                  link={"/item-price-table"}
+                  link={"/price-fortnite"}
                   className={"text-lg"}
                 />
                 <Link

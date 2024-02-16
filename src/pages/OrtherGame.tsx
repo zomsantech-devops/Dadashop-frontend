@@ -3,7 +3,7 @@ import Footer from "../components/Footer";
 
 import { Link } from "react-router-dom";
 
-function ItemPriceTable() {
+function OrtherGame() {
 
   useEffect(() => {
     const toggleBodyOverflow = () => {
@@ -21,7 +21,7 @@ function ItemPriceTable() {
     <div>
       <div className="flex flex-col justify-center px-[30px]">
         <p className="text-center text-5xl font-bold leading-normal my-[40px] screen_445:text-4xl">
-            เติม Fortnite
+              เติมเกมอื่นๆ
         </p>
         <div className="flex screen_960:flex-col self-center gap-[20px] screen_960:gap-[40px] screen_500:w-full">
           {/* GIFT */}
@@ -105,4 +105,4 @@ function ItemPriceTable() {
   );
 }
 
-export default ItemPriceTable;
+export default OrtherGame;

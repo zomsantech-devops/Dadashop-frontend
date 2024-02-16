@@ -24,7 +24,7 @@ function HowToGift() {
       <div className="flex flex-col justify-center px-[30px]">
         <div className="relative">
           <Link
-            to="/item-price-table"
+            to="/price-fortnite"
             className="screen_1070:invisible absolute top-[30px] ml-[70px] flex gap-[5px] items-center"
           >
             <img

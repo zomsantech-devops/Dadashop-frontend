@@ -7,6 +7,7 @@ import {
 import ScrollToTop from "./components/ScrollToTop";
 import HomePage from "./pages/HomePage";
 import ItemPriceTable from "./pages/ItemPriceTable";
+import OtherGameItemPriceTable from "./pages/OrtherGame";
 import HowToGift from "./pages/HowToGift";
 import HowToElse from "./pages/HowToElse";
 import CheckQueueD from "./pages/CheckQueueD";
@@ -31,9 +32,10 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/item-shop" element={<ItemShop />} />
-        <Route path="/item-price-table" element={<ItemPriceTable />} />
-        <Route path="/item-price-table/how-to-gift" element={<HowToGift />} />
-        <Route path="/item-price-table/how-to-else" element={<HowToElse />} />
+        <Route path="/price-fortnite" element={<ItemPriceTable />} />
+        <Route path="/price-fortnite/how-to-gift" element={<HowToGift />} />
+        <Route path="/price-fortnite/how-to-else" element={<HowToElse />} />
+        <Route path="/price-other" element={<OtherGameItemPriceTable />} />
         <Route path="/check-queue/d1-d10" element={<CheckQueueD />} />
         <Route path="/check-queue/g1-g8" element={<CheckQueueG />} />
         <Route path="/check-queue/zz1-zz6" element={<CheckQueueZZ />} />
