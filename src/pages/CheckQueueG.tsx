@@ -54,10 +54,10 @@ function CheckQueueG() {
   return (
     <div>
       <div className="flex flex-col justify-center px-[30px]">
-        <p className="text-center text-5xl font-bold mt-[40px] mb-[25px] leading-[58px] screen_400:text-4xl">
+        <p className="text-center text-4xl font-bold mt-[40px] mb-[25px] leading-[58px] screen_930:text-3xl screen_445:text-2xl">
           คิวส่ง Gift
           <br />
-          <span className="whitespace-nowrap text-[#1EAEF0] leading-[65px]">
+          <span className="text-5xl whitespace-nowrap text-[#1EAEF0] leading-[65px] screen_930:text-4xl screen_445:text-3xl">
             Dada G1-G8
           </span>
           <br />

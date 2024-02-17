@@ -1,7 +1,7 @@
+import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import { PointsBenefitsTable } from "../components/PointsBenefitsTable";
 import axios from "axios";
-import { useState } from "react";
 import MemberCard from "../components/MemberCard";
 import determineTier from "../components/DetermineTier";
 import arrow from "../images/arrow-down-sign-to-navigate.png";
@@ -22,6 +22,29 @@ function CheckPoints() {
   const [userBalance, setUserBalance] = useState<UserBalance | null>(null);
   const [notFound, setNotFound] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [placeholder, setPlaceholder] = useState(
+    "โปรดระบุหมายเลข Member หรือชื่อ Member ของคุณ"
+  );
+
+  useEffect(() => {
+    function updatePlaceholder() {
+      if (window.innerWidth <= 500) {
+        setPlaceholder("โปรดระบุหมายเลข Member...");
+      } else {
+        setPlaceholder(
+          "โปรดระบุหมายเลข Member หรือชื่อ Member ของคุณ"
+        );
+      }
+    }
+
+    updatePlaceholder(); 
+
+    window.addEventListener("resize", updatePlaceholder);
+
+    return () => {
+      window.removeEventListener("resize", updatePlaceholder);
+    };
+  }, []);
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -36,6 +59,7 @@ function CheckPoints() {
       setNotFound(true);
       console.error(error);
     } finally {
+      // ถ้าโอเคแล้วปรับคืน
       // setLoading(false);
     }
   };
@@ -63,7 +87,7 @@ function CheckPoints() {
             </button>
           )}
           <p
-            className={`text-center text-5xl font-bold mt-[40px] leading-[58px] mx-auto screen_445:text-4xl`}
+            className={`text-center text-4xl font-bold mt-[40px] leading-[58px] mx-auto screen_930:text-3xl screen_445:text-2xl`}
           >
             Dada Points
           </p>
@@ -102,7 +126,7 @@ function CheckPoints() {
                 type="search"
                 id="default-search"
                 className="block w-full p-4 ps-10 text-sm border border-gray-300 rounded-[30px] focus:border-[#1EAEF0] outline-[#02A7F3]"
-                placeholder="โปรดระบุหมายเลข Member หรือชื่อ Member ของคุณ"
+                placeholder={placeholder}
                 required
                 autoComplete="off"
                 value={searchValue}
@@ -118,18 +142,28 @@ function CheckPoints() {
           </form>
         )}
         {loading && (
-          // <div className="flex gap-[5px] mt-[20px]">
-          //   <div className="h-3 w-3 bg-[#28283C] rounded-full animate-bounce [animation-delay:-0.3s] "></div>
-          //   <div className="h-3 w-3 bg-[#28283C] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-          //   <div className="h-3 w-3 bg-[#28283C] rounded-full animate-bounce"></div> 
-          // </div>
           <ul className=" max-w-md space-y-2 text-gray-500 list-inside dark:text-gray-400">
-            <li className="flex items-center">
+            <li className="flex items-center mt-3">
               <div role="status">
-            <svg aria-hidden="true" className="w-6 h-6 me-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/><path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/></svg>
-            <span className="sr-only">Loading...</span>
-               </div>
-                   กำลังค้นหาสมาชิก...
+                <svg
+                  aria-hidden="true"
+                  className="w-5 h-5 me-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                  viewBox="0 0 100 101"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                    fill="currentFill"
+                  />
+                </svg>
+                <span className="sr-only">Loading...</span>
+              </div>
+              กำลังค้นหาสมาชิก...
             </li>
           </ul>
         )}
@@ -137,7 +171,6 @@ function CheckPoints() {
           <p className="mt-[10px] text-red-600">ไม่พบหมายเลขหรือชื่อสมาชิก</p>
         )}
         <div className={`mt-[${userBalance ? "0" : "40"}px]`}>
-          {/* <div className="mt-[135px] screen_610:mt-[50px]"> */}
           <p className="text-[24px] font-bold">เงื่อนไขสิทธิประโยชน์</p>
           <div className="w-full bg-white mt-[20px] rounded-[30px] overflow-hidden points-benefits-box">
             <div className="w-full bg-lime-100">
@@ -148,7 +181,6 @@ function CheckPoints() {
                 alt="pointsBenefits"
                 className=""
               />
-              {/* <img src={pointsBenefits} alt="pointsBenefits" /> */}
             </div>
             <PointsBenefitsTable />
           </div>
