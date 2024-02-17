@@ -4,7 +4,7 @@ import { PointsBenefitsTable } from "../components/PointsBenefitsTable";
 import axios from "axios";
 import MemberCard from "../components/MemberCard";
 import determineTier from "../components/DetermineTier";
-import arrow from "../images/arrow-down-sign-to-navigate.png";
+import arrow from "../assets/icons/arrow-down-sign-to-navigate.png";
 
 interface UserBalance {
   id: string;

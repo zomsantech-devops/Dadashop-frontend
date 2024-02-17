@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import wraith from "../images/wraith_apex.jpg";
+import wraith from "../assets/images/wraith_apex.jpg";
 
 function HomePage() {
   return (

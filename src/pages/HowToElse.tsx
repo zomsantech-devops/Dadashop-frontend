@@ -5,7 +5,7 @@ import {
   DarkButton,
   SmallDarkButton,
 } from "../components/Button";
-import arrow from "../images/arrow-down-sign-to-navigate.png";
+import arrow from "../assets/icons/arrow-down-sign-to-navigate.png";
 
 import { Link } from "react-router-dom";
 

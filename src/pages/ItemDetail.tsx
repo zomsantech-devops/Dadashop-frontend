@@ -2,7 +2,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-import vBucks from "../images/vbucks-coins.png";
+import vBucks from "../assets/icons/vbucks-coins.png";
 import { CustomButton } from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";

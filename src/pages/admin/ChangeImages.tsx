@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import LeftSidebar from "../components/LeftSidebar";
+import LeftSidebar from "../../components/LeftSidebar";
 import { ChangeEvent, useEffect, useState } from "react";
 import axios from "axios";
-import emptyImage from "../images/empty.jpg";
+import emptyImage from "../../assets/images/empty.jpg";
 import { toast } from "react-toastify";
 import CircularProgress from "@mui/material/CircularProgress";
 

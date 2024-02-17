@@ -1,7 +1,7 @@
 import Footer from "../components/Footer";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import vBucks from "../images/vbucks-coins.png";
+import vBucks from "../assets/icons/vbucks-coins.png";
 import CircularProgress from "@mui/material/CircularProgress";
 import { DateDisplay } from "../components/DateDisplay";
 import Modal from "../components/ItemModal";
@@ -9,7 +9,6 @@ import ItemDetail from "./ItemDetail";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SmallCarousel } from "../components/SmallCarousel";
 import moment from 'moment-timezone'
-
 
 import "../components/misterPepper.css";
 

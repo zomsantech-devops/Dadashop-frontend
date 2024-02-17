@@ -1,6 +1,6 @@
-import diamond from '../images/Member-card-diamond.png'
-import unreal from '../images/Member-card-unreal.png'
-import gold from '../images/Member-card-gold.png'
+import diamond from '../assets/images/Member-card-diamond.png'
+import unreal from '../assets/images/Member-card-unreal.png'
+import gold from '../assets/images/Member-card-gold.png'
 
 interface MemberCardProps {
     tier: string, 

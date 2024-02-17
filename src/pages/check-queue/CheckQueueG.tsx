@@ -1,24 +1,22 @@
-import { BasicTable } from "../components/BasicTable";
-import Footer from "../components/Footer";
+import { BasicTable } from "../../components/BasicTable";
+import Footer from "../../components/Footer";
+import { useEffect, useState } from "react";
+import { TransformedData, transformData } from "../../data/data";
 import CircularProgress from "@mui/material/CircularProgress";
 
-import { TransformedData, transformData } from "../data/data";
-
-import { useEffect, useState } from "react";
-
-function CheckQueueZZ() {
-  const [zzData, setZZData] = useState<TransformedData[] | undefined>(undefined);
+function CheckQueueG() {
+  const [gData, setDData] = useState<TransformedData[] | undefined>(undefined);
   const [readyToSendCount, setReadyToSendCount] = useState(0);
   const [readyToSendNowCount, setReadyToSendowCount] = useState(0);
   const [readyToSendAtCount, setReadyToSendAtCount] = useState(0);
 
   useEffect(() => {
-    const fetchDataAndUseZZData = async () => {
+    const fetchDataAndUseDData = async () => {
       try {
-        const { zzData } = await transformData();
-        setZZData(zzData);
+        const { gData } = await transformData();
+        setDData(gData);
 
-        const readyToSendCount = zzData?.reduce((sum, item) => {
+        const readyToSendCount = gData?.reduce((sum, item) => {
           return (
             sum +
             item.infos.filter(
@@ -28,12 +26,12 @@ function CheckQueueZZ() {
             ).length
           );
         }, 0);
-        const readyToSendNowCount = zzData?.reduce((sum, item) => {
+        const readyToSendNowCount = gData?.reduce((sum, item) => {
           return (
             sum + item.infos.filter((info) => info.status === "พร้อมส่ง").length
           );
         }, 0);
-        const readyToSendAtCount = zzData?.reduce((sum, item) => {
+        const readyToSendAtCount = gData?.reduce((sum, item) => {
           return (
             sum +
             item.infos.filter((info) => info.status === "พร้อมส่งวันนี้เวลา")
@@ -47,8 +45,9 @@ function CheckQueueZZ() {
         console.error("Error fetching and using data:", error);
       }
     };
-    fetchDataAndUseZZData();
-    const intervalId = setInterval(fetchDataAndUseZZData, 60 * 1000);
+
+    fetchDataAndUseDData();
+    const intervalId = setInterval(fetchDataAndUseDData, 60 * 1000);
     return () => clearInterval(intervalId);
   }, []);
 
@@ -59,26 +58,30 @@ function CheckQueueZZ() {
           คิวส่ง Gift
           <br />
           <span className="text-5xl whitespace-nowrap text-[#1EAEF0] leading-[65px] screen_930:text-4xl screen_445:text-3xl">
-            Dada ZZ1-ZZ6
+            Dada G1-G8
+          </span>
+          <br />
+          <span className="w-max self-center text-[16px] xs:text-[12px] leading-[100px] text-white shadow p-[15px] font-bold">
+            *ปิดรับคำขอเพื่อนแล้ว เนื่องจากเพื่อนเต็ม
           </span>
           <br />
         </p>
-        <div className="flex flex-col gap-[20px] screen_605:w-full self-center items-center">
+        <div className="flex flex-col screen_605:w-full gap-[20px] w-min self-center items-center">
           <div className="w-full mx-auto text-center  mb-[15px] bg-[#E7F9FD] py-[20px] rounded-[30px] min-w-[300px]">
-            <p className="text-[36px]  screen_400:text-3xl font-bold">
+            <p className="text-[36px] leading-[44px] screen_400:text-3xl font-bold">
               คิวว่าง <span>{readyToSendCount}</span> ชิ้น
             </p>
-            <p className="text-[24px] leading-[44px]  ">
+            <p className="text-[24px] leading-[44px]">
               พร้อมส่งทันที{" "}
               <span className="text-green-600">{readyToSendNowCount}</span> ชิ้น
             </p>
-            <p className="text-[24px] leading-[44px]  ">
+            <p className="text-[24px] leading-[44px]">
               ส่งได้ตามเวลา{" "}
               <span className="text-yellow-600">{readyToSendAtCount}</span> ชิ้น
             </p>
           </div>
-          {zzData ? (
-            zzData.map((item, index) =>
+          {gData ? (
+            gData.map((item, index) =>
               index % 2 === 0 ? (
                 <div
                   key={index}
@@ -89,18 +92,18 @@ function CheckQueueZZ() {
                     vBucks={item.vBucks}
                     infos={item.infos}
                   />
-                  {zzData[index + 1] && (
+                  {gData[index + 1] && (
                     <BasicTable
-                      name={zzData[index + 1].productName}
-                      vBucks={zzData[index + 1].vBucks}
-                      infos={zzData[index + 1].infos}
+                      name={gData[index + 1].productName}
+                      vBucks={gData[index + 1].vBucks}
+                      infos={gData[index + 1].infos}
                     />
                   )}
                 </div>
               ) : null
             )
           ) : (
-            <CircularProgress className="self-center" />
+            <CircularProgress />
           )}
         </div>
       </div>
@@ -109,4 +112,4 @@ function CheckQueueZZ() {
   );
 }
 
-export default CheckQueueZZ;
+export default CheckQueueG;

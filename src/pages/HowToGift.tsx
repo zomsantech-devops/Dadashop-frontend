@@ -1,6 +1,6 @@
 import Footer from "../components/Footer";
 import { FBButton, DiscordButton, CustomButton } from "../components/Button";
-import arrow from "../images/arrow-down-sign-to-navigate.png";
+import arrow from "../assets/icons/arrow-down-sign-to-navigate.png";
 import { FaRegCheckCircle } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
