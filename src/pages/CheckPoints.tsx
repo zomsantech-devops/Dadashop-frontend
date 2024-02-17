@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Footer from "../components/Footer";
+import Footer from "../components/shared/Footer";
 import { PointsBenefitsTable } from "../components/PointsBenefitsTable";
 import axios from "axios";
 import MemberCard from "../components/MemberCard";

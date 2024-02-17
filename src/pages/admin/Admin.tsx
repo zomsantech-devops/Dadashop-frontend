@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import MemberTable from "../../components/MemberTable";
 import Modal from "../../components/Modal";
 import determineTier from "../../components/DetermineTier";
-import LeftSidebar from "../../components/LeftSidebar";
+import LeftSidebar from "../../components/shared/LeftSidebar";
 import { useNavigate } from "react-router-dom";
 
 interface UserBalance {

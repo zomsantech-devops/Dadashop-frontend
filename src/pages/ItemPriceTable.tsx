@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Footer from "../components/Footer";
+import Footer from "../components/shared/Footer";
 
 import { cardData } from "../data/data";
 import { VerticalCard } from "../components/VerticalCard";

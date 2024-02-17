@@ -1,5 +1,5 @@
-import FBIcon from "../assets/icons/facebook.png";
-import DiscordIcon from "../assets/icons/discord.png";
+import FBIcon from "../../assets/icons/facebook.png";
+import DiscordIcon from "../../assets/icons/discord.png";
 import { FaChevronDown } from "react-icons/fa";
 
 import { Link, useLocation } from "react-router-dom";

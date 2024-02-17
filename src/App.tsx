@@ -4,7 +4,7 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
-import ScrollToTop from "./components/ScrollToTop";
+import ScrollToTop from "./components/shared/ScrollToTop";
 import HomePage from "./pages/HomePage";
 import ItemPriceTable from "./pages/ItemPriceTable";
 import OtherGameItemPriceTable from "./pages/OrtherGame";
@@ -14,7 +14,7 @@ import CheckQueueD from "./pages/check-queue/CheckQueueD";
 import CheckQueueG from "./pages/check-queue/CheckQueueG";
 import CheckPoints from "./pages/CheckPoints";
 import Admin from "./pages/admin/Admin";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/shared/Navbar";
 import CheckQueueZZ from "./pages/check-queue/CheckQueueZZ";
 import ItemShop from "./pages/ItemShop";
 import ChangeImages from "./pages/admin/ChangeImages";

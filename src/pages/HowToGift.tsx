@@ -1,4 +1,4 @@
-import Footer from "../components/Footer";
+import Footer from "../components/shared/Footer";
 import { FBButton, DiscordButton, CustomButton } from "../components/Button";
 import arrow from "../assets/icons/arrow-down-sign-to-navigate.png";
 import { FaRegCheckCircle } from "react-icons/fa";

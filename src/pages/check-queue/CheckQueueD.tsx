@@ -1,5 +1,5 @@
 import { BasicTable } from "../../components/BasicTable";
-import Footer from "../../components/Footer";
+import Footer from "../../components/shared/Footer";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import { TransformedData, transformData } from "../../data/data";

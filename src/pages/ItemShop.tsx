@@ -1,4 +1,4 @@
-import Footer from "../components/Footer";
+import Footer from "../components/shared/Footer";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import vBucks from "../assets/icons/vbucks-coins.png";

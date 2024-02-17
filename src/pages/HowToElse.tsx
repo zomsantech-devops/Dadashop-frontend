@@ -1,4 +1,4 @@
-import Footer from "../components/Footer";
+import Footer from "../components/shared/Footer";
 import {
   FBButton,
   DiscordButton,
