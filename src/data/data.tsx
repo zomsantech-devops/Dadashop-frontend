@@ -394,107 +394,84 @@ export const cardData = [
   {
     image: "https://dadashop-backend.vercel.app/api/v1/image/banner-1",
     title: "ส่ง Gift",
-    bulletColor: "#ba6eea",
     list: [
       {
         content: "สั่ง Item หรือ Battle Pass ชุดเริ่มต้น",
+        color: "bg-[#ba6eea]",
       },
       {
         content: "ไม่ใช่การส่ง V-Bucks (ลูกค้าจะได้รับเป็น Item)",
+        color: "bg-[#ba6eea]",
       },
       {
         content: "ต้องเป็นเพื่อนกันในเกม อย่างน้อย 48 ชั่วโมง",
+        color: "bg-[#ba6eea]",
       },
     ],
     button: {
       name: "ขั้นตอนการสั่งซื้อ Gift",
       link: "/price-fortnite/how-to-gift",
       color: {
-        from: "#BA6EEA",
-        via: "#A5B7E1",
-        to: "#3ABFCD",
+        from: "from-[#BA6EEA]",
+        via: "via-[#A5B7E1]",
+        to: "to-[#3ABFCD]",
       },
     },
-    preset_type: 1,
   },
   {
     image: "https://dadashop-backend.vercel.app/api/v1/image/banner-2",
     title: "เติม V-Bucks, Packs, Fortnite Crew",
-    bulletColor: "#abd499",
     list: [
       {
         content: "ลูกค้าต้องนำ ID Epic มาผูกกับ ID XBOX ของลูกค้าเอง",
+        color: "bg-[#abd499]",
       },
       {
         content: "ไม่ต้องรอ 48 ชั่วโมง",
+        color: "bg-[#abd499]",
       },
       {
         content: "ได้ทันทีภายใน 10 ถึง 20 นาที",
+        color: "bg-[#abd499]",
       },
     ],
     button: {
       name: "ขั้นตอนการสั่งซื้อผ่าน XBOX",
       link: "/price-fortnite/how-to-else",
       color: {
-        from: "#BBB251",
-        via: "#ABD499",
-        to: "#2FD491",
+        from: "from-[#BBB251]",
+        via: "via-[#ABD499]",
+        to: "to-[#2FD491]",
       },
     },
-    preset_type: 2,
   },
-  // {
-  //   image: "https://dadashop-backend.vercel.app/api/v1/image/banner-2",
-  //   title: "เติม V-Bucks, Packs, Fortnite Crew",
-  //   bulletColor: "#abd499",
-  //   list: [
-  //     {
-  //       content: "ลูกค้าต้องนำ ID Epic มาผูกกับ ID XBOX ของลูกค้าเอง",
-  //     },
-  //     {
-  //       content: "ไม่ต้องรอ 48 ชั่วโมง",
-  //     },
-  //     {
-  //       content: "ได้ทันทีภายใน 10 ถึง 20 นาที",
-  //     },
-  //   ],
-  //   button: {
-  //     name: "ขั้นตอนการสั่งซื้อผ่าน XBOX",
-  //     link: "/price-fortnite/how-to-else",
-  //     color: {
-  //       from: "#BBB251",
-  //       via: "#ABD499",
-  //       to: "#2FD491",
-  //     },
-  //   },
-  //   preset_type: 3,
-  // },
-  // {
-  //   image: "https://dadashop-backend.vercel.app/api/v1/image/banner-2",
-  //   title: "เติม V-Bucks, Packs, Fortnite Crew",
-  //   bulletColor: "#abd499",
-  //   list: [
-  //     {
-  //       content: "ลูกค้าต้องนำ ID Epic มาผูกกับ ID XBOX ของลูกค้าเอง",
-  //     },
-  //     {
-  //       content: "ไม่ต้องรอ 48 ชั่วโมง",
-  //     },
-  //     {
-  //       content: "ได้ทันทีภายใน 10 ถึง 20 นาที",
-  //     },
-  //   ],
-  //   button: {
-  //     name: "ขั้นตอนการสั่งซื้อผ่าน XBOX",
-  //     link: "/price-fortnite/how-to-else",
-  //     color: {
-  //       from: "#BBB251",
-  //       via: "#ABD499",
-  //       to: "#2FD491",
-  //     },
-  //   },
-  //   preset_type: 4,
-  // },
+  {
+    image: "https://dadashop-backend.vercel.app/api/v1/image/banner-2",
+    title: "TEST title",
+    list: [
+      {
+        content: "Bullet 1",
+        color: "bg-[#EF4444]",
+      },
+      {
+        content: "Bullet 2",
+        color: "bg-[#EF4444]",
+      },
+      {
+        content: "Bullet 3",
+        color: "bg-[#EF4444]",
+      },
+    ],
+    button: {
+      name: "BUTTON",
+      link: "/price-fortnite",
+      color: {
+        from: "from-[#EF4444]",
+        via: "via-[#F59E0B]",
+        to: "to-[#EAB308]",
+      },
+    },
+  },
 ];
 
 interface APIResponse {

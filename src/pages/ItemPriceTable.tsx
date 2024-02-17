@@ -8,7 +8,6 @@ import { HorizontalCard } from "../components/HorizontalCard";
 interface CardProps {
   image: string;
   title: string;
-  bulletColor: string;
   list: BulletList[];
   button: {
     name: string;
@@ -19,11 +18,11 @@ interface CardProps {
       to: string;
     };
   };
-  preset_type: number;
 }
 
 interface BulletList {
   content: string;
+  color: string;
 }
 
 function ItemPriceTable() {
@@ -49,11 +48,19 @@ function ItemPriceTable() {
           เติม Fortnite
         </p>
         <div className="grid grid-cols-12 screen_960:flex screen_960:flex-col self-center gap-[20px] screen_960:gap-[40px] screen_500:w-full">
-        {/* <div className="grid grid-cols-12 self-center gap-[20px] screen_960:gap-[40px] screen_500:w-full"> */}
-          {data.map((cardElement, index) => (
+          {/* <div className="grid grid-cols-12 self-center gap-[20px] screen_960:gap-[40px] screen_500:w-full"> */}
+          {/* {data.map((cardElement, index) => (
             <VerticalCard key={index} cardData={cardElement} />
           ))}
-          <HorizontalCard />
+          <HorizontalCard /> */}
+          {data.map((cardElement, index) =>
+            data.length % 2 !== 0 && index === data.length - 1 ? (
+              <HorizontalCard key={index} cardData={cardElement} />
+            ) : (
+              <VerticalCard key={index} cardData={cardElement} />
+            )
+          )}
+
           {/* <div className="w-[585px] h-min screen_1250:w-[440px] screen_500:w-full rounded-[30px] price-and-how-to-box">
             <div className="w-full rounded-t-[30px] bg-lime-100 overflow-hidden">
               <img
