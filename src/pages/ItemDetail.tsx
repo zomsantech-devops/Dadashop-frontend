@@ -8,68 +8,20 @@ import { Link, useNavigate } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
 import { IoMdPricetag } from "react-icons/io";
 import { Carousel } from "../components/Carousel";
-
-interface IdProps {
-  itemId: string | null;
-  onClose: () => void;
-}
-
-interface Item {
-  name: string;
-  description: string;
-  rarity: {
-    name: string;
-  };
-  type: {
-    id: string;
-    name: string;
-  };
-  price: number | null;
-  styles: Styles[];
-  previewVideos: [
-    {
-      url: string;
-    }
-  ];
-  images: {
-    background: string;
-  };
-  grants: Grants[];
-  displayAssets: DisplayAssets[];
-}
-
-interface Styles {
-  channelName: string;
-  image: string;
-  video_url: string;
-}
-
-interface Grants {
-  id: string;
-  images: {
-    icon_background: string;
-  };
-}
-
-interface DisplayAssets {
-  displayAsset: string;
-  background: string;
-}
-
-interface ResponseData {
-  success: boolean;
-  data: {
-    result: boolean;
-    item: Item;
-  };
-}
+import {
+  DisplayAssetsItem,
+  IdProps,
+  Item,
+  ResponseData,
+  Styles,
+} from "../types";
 
 const ItemDetail = ({ itemId, onClose }: IdProps) => {
   const [item, setItem] = useState<Item>();
   const [loading, setLoading] = useState<boolean>(false);
   const [styles, setStyles] = useState<Styles[]>([]);
   const [selectedStyle, setSelectedStyle] = useState<string | null>();
-  const [displayAssets, setDisplayAssets] = useState<DisplayAssets[]>([]);
+  const [displayAssets, setDisplayAssets] = useState<DisplayAssetsItem[]>([]);
   const [channelName, setChannelName] = useState<string[]>([]);
 
   const navigate = useNavigate();

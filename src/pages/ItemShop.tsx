@@ -8,49 +8,18 @@ import Modal from "../components/ItemModal";
 import ItemDetail from "./ItemDetail";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SmallCarousel } from "../components/SmallCarousel";
-import moment from 'moment-timezone'
+import moment from "moment-timezone";
 
 import "../components/misterPepper.css";
+import { ItemProps } from "../types";
 
-interface Item {
-  _id: string | null;
-  id: string | null;
-  type_id: string | null;
-  type_name: string | null;
-  name: string | null;
-  description: string | null;
-  rarity_id: string | null;
-  rarity_name: string | null;
-  images_texture_background: string | null;
-  images_item: string | null;
-  images_background: string | null;
-  images_full_background: string | null;
-  display_assets: DisplayAssets[];
-  section_name: string | null;
-  finalPrice: number | null;
-  release_date: string | null;
-  time_fetch: string | null;
-  time_update: string | null;
-  uid_update: string | null;
-  __v: number | null;
-}
-
-interface DisplayAssets {
-  display_id: string;
-  image_background: string;
-  image_url: string;
-}
-
-interface ResponseData {
+export interface ResponseData {
   success: boolean;
-  data: Item[];
+  data: ItemProps[];
 }
 
 function ItemShop() {
-  const [data, setData] = useState<Item[]>([]);
-  // const [categories, setCategories] = useState<
-  //   { name: string; count: number }[]
-  // >([]);
+  const [data, setData] = useState<ItemProps[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [section, setSection] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -161,7 +130,7 @@ function ItemShop() {
     return baht;
   };
 
-  const isToday = (inputDate : Date) => {
+  const isToday = (inputDate: Date) => {
     const date = moment.utc(inputDate);
     const today = moment.utc();
     return (

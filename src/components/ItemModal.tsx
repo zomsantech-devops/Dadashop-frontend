@@ -1,11 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
-interface ModalProps {
-  open: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
-}
+import { ModalProps } from "../types";
 
 export default function Modal({ open, onClose, children }: ModalProps) {
   const navigate = useNavigate();
@@ -41,7 +36,7 @@ export default function Modal({ open, onClose, children }: ModalProps) {
           bg-white rounded-xl py-6 transition-all
           ${open ? "scale-100 opacity-100" : "scale-125 opacity-0"}
         `}
-      > 
+      >
         {children}
       </div>
     </div>

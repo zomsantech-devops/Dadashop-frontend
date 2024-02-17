@@ -5,17 +5,7 @@ import axios from "axios";
 import MemberCard from "../components/MemberCard";
 import determineTier from "../components/DetermineTier";
 import arrow from "../assets/icons/arrow-down-sign-to-navigate.png";
-
-interface UserBalance {
-  id: string;
-  discord_id: string;
-  discord_username: string;
-  name: string;
-  name_display: string;
-  current_points: number;
-  total_points: number;
-  tier: string;
-}
+import { UserBalance } from "../types";
 
 function CheckPoints() {
   const [searchValue, setSearchValue] = useState("");

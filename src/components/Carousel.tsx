@@ -1,11 +1,6 @@
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-
-interface CarouselProps {
-  children: ReactNode[];
-  autoSlide?: boolean;
-  autoSlideInterval?: number;
-}
+import { CarouselProps } from "../types";
 
 export const Carousel = ({ children: slides }: CarouselProps) => {
   const [curr, setCurr] = useState<number>(0);

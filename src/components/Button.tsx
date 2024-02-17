@@ -3,6 +3,7 @@ import DiscordIcon from "../assets/icons/discord_white.png";
 
 import { Link } from "react-router-dom";
 import { cn } from "../lib/utils";
+import { BtnProps } from "../types";
 
 export const FBButton = () => (
   <Link
@@ -33,12 +34,6 @@ export const DiscordButton = () => (
     ทัก Discord
   </Link>
 );
-
-interface BtnProps {
-  text: string;
-  link: string;
-  className: string;
-}
 
 export const DarkButton = ({ text, link, className }: BtnProps) => (
   <Link

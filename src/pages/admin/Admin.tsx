@@ -5,17 +5,7 @@ import Modal from "../../components/Modal";
 import determineTier from "../../components/DetermineTier";
 import LeftSidebar from "../../components/shared/LeftSidebar";
 import { useNavigate } from "react-router-dom";
-
-interface UserBalance {
-  id: string;
-  discord_id: string;
-  discord_username: string;
-  name: string;
-  name_display: string;
-  current_points: number;
-  total_points: number;
-  tier: string;
-}
+import { UserBalance } from "../../types";
 
 function Admin() {
   const [searchValue, setSearchValue] = useState("");

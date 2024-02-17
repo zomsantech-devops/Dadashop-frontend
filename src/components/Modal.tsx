@@ -1,11 +1,4 @@
-// Modal.tsx
-import { ReactNode } from "react";
-
-interface ModalProps {
-  open: boolean;
-  onClose: () => void;
-  children: ReactNode;
-}
+import { ModalProps } from "../types";
 
 export default function Modal({ open, onClose, children }: ModalProps) {
   return (

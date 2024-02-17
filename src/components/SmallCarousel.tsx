@@ -1,35 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import { SmallCarouselProps } from "../types";
 
 import "./thickthighdrivemecrazy.css";
 
-interface CarouselProps {
-  displayAssets: { display_id: string; image_background: string }[];
-  autoSlide?: boolean;
-  autoSlideInterval?: number;
-}
-
-interface DisplayAssets {
-  display_id: string;
-  image_background: string;
-  image_url: string;
-}
-
-interface SmallCarouselProps {
-  displayAssets: DisplayAssets[];
-}
-
-export const SmallCarousel: React.FC<SmallCarouselProps> = ({
-  displayAssets,
-}) => {
+export const SmallCarousel = ({ displayAssets }: SmallCarouselProps) => {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
     if (displayAssets.length <= 1) {
-      return; 
+      return;
     }
     const interval = setInterval(() => {
       setCurrent((current) => (current + 1) % displayAssets.length);
-    }, 3000); 
+    }, 3000);
     return () => clearInterval(interval);
   }, [displayAssets.length]);
 
@@ -39,7 +22,9 @@ export const SmallCarousel: React.FC<SmallCarouselProps> = ({
         {displayAssets.map((asset, index) => (
           <div
             key={asset.display_id + "_" + index}
-            className={`carousel-image-container ${index === current ? "active" : ""}`}
+            className={`carousel-image-container ${
+              index === current ? "active" : ""
+            }`}
           >
             <img
               src={asset.image_background}

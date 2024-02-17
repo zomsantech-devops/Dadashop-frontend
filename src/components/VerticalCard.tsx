@@ -1,24 +1,5 @@
 import { Link } from "react-router-dom";
-
-interface CardProps {
-  image: string;
-  title: string;
-  list: BulletList[];
-  button: {
-    name: string;
-    link: string;
-    color: {
-      from: string;
-      via?: string;
-      to: string;
-    };
-  };
-}
-
-interface BulletList {
-  content: string;
-  color: string;
-}
+import { CardProps } from "../types";
 
 interface VerticalCardProps {
   cardData: CardProps;

@@ -5,12 +5,7 @@ import axios from "axios";
 import emptyImage from "../../assets/images/empty.jpg";
 import { toast } from "react-toastify";
 import CircularProgress from "@mui/material/CircularProgress";
-
-interface AllImages {
-  _id: string;
-  name: string;
-  dataUrl: string;
-}
+import { AllImages } from "../../types";
 
 const ChangeImages = () => {
   const [allImages, setAllImages] = useState<AllImages[]>([]);
@@ -120,7 +115,9 @@ const ChangeImages = () => {
         console.log(response);
         toast.success("Upload Image Successfully", { autoClose: 2500 });
         setTimeout(() => {
-          toast.success("This page will reload in 3 seconds", { autoClose: 2000 });
+          toast.success("This page will reload in 3 seconds", {
+            autoClose: 2000,
+          });
         }, 1000);
         setTimeout(() => {
           window.location.reload();
@@ -173,7 +170,9 @@ const ChangeImages = () => {
                 onChange={handleUpload}
                 disabled={selectedBanner === "empty"}
               />
-              <p className="mb-[15px] text-red-500 text-sm">{selectedBanner === "empty" && "*Please Select banner first"}</p>
+              <p className="mb-[15px] text-red-500 text-sm">
+                {selectedBanner === "empty" && "*Please Select banner first"}
+              </p>
 
               <div className="flex flex-col gap-4 mb-[15px]">
                 <div className="">
