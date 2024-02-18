@@ -27,7 +27,7 @@ export interface BasicTableProps {
     time: string;
     buyerName: string;
   }[];
-  isAvailable?: boolean
+  isAvailable?: boolean;
 }
 
 export interface ProductInfo {
@@ -109,6 +109,9 @@ export interface Item {
     name: string;
   };
   price: number | null;
+  set: {
+    name: string;
+  };
   styles: Styles[];
   previewVideos: [
     {

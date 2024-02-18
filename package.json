@@ -33,7 +33,8 @@
     "react-scripts": "^5.0.1",
     "react-toastify": "^10.0.4",
     "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "zustand": "^4.5.1"
   },
   "scripts": {
     "start": "react-dotenv && react-app-rewired start",

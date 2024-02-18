@@ -50,6 +50,7 @@ function ItemShop() {
       setSelectedItemId(itemId);
       setOpen(true);
     }
+
   }, [location.search]);
 
   useEffect(() => {

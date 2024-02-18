@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { SmallCarouselProps } from "../types";
+import noImg from "../assets/images/empty.jpg"
 
 import "./thickthighdrivemecrazy.css";
 
@@ -32,7 +33,7 @@ export const SmallCarousel = ({ displayAssets }: SmallCarouselProps) => {
               className="carousel-image"
             />
             <img
-              src={asset.image_url}
+              src={asset.image_url || noImg}
               alt={`URL Slide ${index}`}
               className="url-overlay"
             />

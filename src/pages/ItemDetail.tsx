@@ -1,12 +1,12 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import vBucks from "../assets/icons/vbucks-coins.png";
 import { CustomButton } from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
-import { IoMdClose } from "react-icons/io";
-import { IoMdPricetag } from "react-icons/io";
+import { IoMdClose, IoMdPricetag } from "react-icons/io";
+import { FaPlay } from "react-icons/fa";
 import { Carousel } from "../components/Carousel";
 import {
   DisplayAssetsItem,
@@ -15,16 +15,41 @@ import {
   ResponseData,
   Styles,
 } from "../types";
+import noImg from "../assets/images/empty.jpg";
+import { useGenerationStore } from "../state/idea-generation";
 
 const ItemDetail = ({ itemId, onClose }: IdProps) => {
   const [item, setItem] = useState<Item>();
   const [loading, setLoading] = useState<boolean>(false);
   const [styles, setStyles] = useState<Styles[]>([]);
-  const [selectedStyle, setSelectedStyle] = useState<string | null>();
+  const [previewVideo, setPreviewVideo] = useState<string | null>();
   const [displayAssets, setDisplayAssets] = useState<DisplayAssetsItem[]>([]);
   const [channelName, setChannelName] = useState<string[]>([]);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  // const [isPlaying, setIsPlaying] = useState(true);
+  const { isPlaying, setIsPlaying } = useGenerationStore();
 
   const navigate = useNavigate();
+
+  const toggleVideoPlay = () => {
+    if (videoRef.current) {
+      if (videoRef.current.paused) {
+        videoRef.current.play();
+      } else {
+        videoRef.current.pause();
+      }
+      // Toggle the isPlaying state to reflect the change for UI purposes.
+      setIsPlaying(!videoRef.current.paused);
+    }
+  };
+
+  const handlePlay = () => {
+    setIsPlaying(true);
+  };
+
+  const handlePause = () => {
+    setIsPlaying(false);
+  };
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -35,7 +60,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
         );
         setItem(response.data.data.item);
         setStyles(response.data.data.item.styles);
-        setSelectedStyle(response.data.data.item.previewVideos[0]?.url || "");
+        setPreviewVideo(response.data.data.item.previewVideos[0]?.url || "");
         setDisplayAssets(response.data.data.item.displayAssets);
         setLoading(false);
       } catch (error) {
@@ -69,6 +94,14 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
     navigate(`/item-shop?id=${itemId}`);
   };
 
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+      setIsPlaying(false);
+    }
+  }, [onClose, setIsPlaying]);
+
   return (
     <>
       {loading ? (
@@ -79,18 +112,43 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
         <div className="flex screen_1170:flex-col items-center justify-center max-h-[80vh] screen_1170:max-h-none gap-6 px-6 screen_1170:pt-4">
           {item.type.id !== "emote" ? (
             item.type.id !== "bundle" ? (
-              <div className="max-w-[520px] screen_610:w-[375px] screen_445:w-[275px] rounded-lg">
-                <Carousel>
-                  {displayAssets.map((asset) => (
-                    <img
-                      key={asset.displayAsset}
-                      src={asset.background}
-                      alt={asset.displayAsset}
-                      className={`aspect-square rounded-lg`}
-                    />
-                  ))}
-                </Carousel>
-              </div>
+              displayAssets.length !== 0 ? (
+                <div className="max-w-[520px] screen_610:w-[375px] screen_445:w-[275px] rounded-lg">
+                  <Carousel>
+                    {displayAssets.map((asset) => (
+                      <img
+                        key={asset.displayAsset}
+                        src={asset.background || noImg}
+                        alt={asset.displayAsset}
+                        className={`aspect-square rounded-lg`}
+                      />
+                    ))}
+                  </Carousel>
+                </div>
+              ) : previewVideo ? (
+                <div className="relative">
+                  <video
+                    preload="true"
+                    className="max-w-[520px] h-[80vh] rounded-lg screen_1170:h-[375px] screen_445:h-[256px] cursor-pointer"
+                    muted
+                    loop
+                    autoPlay
+                    playsInline
+                    src={previewVideo}
+                    onClick={toggleVideoPlay}
+                    ref={videoRef}
+                    onPlay={handlePlay}
+                    onPause={handlePause}
+                  ></video>
+                  {!isPlaying && (
+                    <div className="absolute left-3 bottom-3">
+                      <FaPlay className="text-white" />
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <img src={noImg} alt="empty" className={`rounded-lg`} />
+              )
             ) : (
               <div className="flex items-center justify-center flex-wrap gap-3 w-[648px] screen_910:w-auto">
                 {item.grants.length !== 0 ? (
@@ -108,22 +166,38 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                     </div>
                   ))
                 ) : (
-                  <p className="w-96 text-center">No grant</p>
+                  // <p className="w-96 text-center">No grant</p>
+                  <img src={noImg} alt="empty" className="rounded-lg" />
                 )}
               </div>
             )
-          ) : (
-            selectedStyle && (
+          ) : previewVideo ? (
+            // Here is playing emote
+            <div className="relative">
               <video
                 preload="true"
-                className="max-w-[520px] h-[80vh] rounded-lg screen_1170:h-[375px] screen_445:h-[256px]"
-                muted
+                className="max-w-[520px] h-[80vh] rounded-lg screen_610:h-[375px] cursor-pointer"
                 loop
                 autoPlay
                 playsInline
-                src={selectedStyle}
+                src={previewVideo}
+                onClick={toggleVideoPlay}
+                ref={videoRef}
+                onPlay={handlePlay}
+                onPause={handlePause}
               ></video>
-            )
+              {!isPlaying && (
+                <div className="absolute left-3 bottom-3">
+                  <FaPlay className="text-white" />
+                </div>
+              )}
+            </div>
+          ) : (
+            <img
+              src={item.images.background}
+              alt="empty"
+              className={`max-w-[520px] h-[80vh] object-cover rounded-lg screen_1170:h-[325px] screen_445:h-[256px]`}
+            />
           )}
 
           <div className="w-[2px] min-h-[80vh] bg-black/60 screen_1170:min-h-[2px] screen_1170:min-w-[15%]"></div>
@@ -138,12 +212,25 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
               <div className="flex flex-col items-start justify-center my-2">
                 <div className="flex items-center">
                   <img src={vBucks} alt="V-Bucks" className="w-6 h-6 mr-2" />
-                  <p className="font-bold text-2xl">{item.price || "-"}</p>
+                  {!item.price ? (
+                    <div className="flex gap-2">
+                      <p className="font-bold text-2xl">{item.price}</p>
+                      <p className="font-bold text-2xl">
+                        (
+                        <span className="text-[#3D82D1] cursor-pointer">
+                          {item.set.name}
+                        </span>
+                        )
+                      </p>
+                    </div>
+                  ) : (
+                    <p className="font-bold text-2xl">{item.price}</p>
+                  )}
                 </div>
                 <div className="flex items-start justify-center">
                   <IoMdPricetag className="w-6 h-6 mr-2 text-[#ffc007] self-center" />
                   <p className="font-bold text-2xl">
-                    {convertVbuckToTHB(item.price) || "-"} บาท
+                    {convertVbuckToTHB(item.price)} บาท
                   </p>
                 </div>
               </div>
@@ -183,13 +270,6 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                                 src={style.image}
                                 alt=""
                                 className="rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
-                                onClick={() =>
-                                  setSelectedStyle(
-                                    (item.previewVideos.length === 1
-                                      ? item.previewVideos[0]?.url
-                                      : item.previewVideos[i]?.url) || null
-                                  )
-                                }
                               />
                             </div>
                           ))}
