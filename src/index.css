@@ -128,39 +128,6 @@ body {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
 }
 
-.shadow {
-  position: relative;
-  border-radius: 20px;
-}
-
-.shadow:before,
-.shadow:after {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  background: linear-gradient(
-    45deg,
-    #fb0094,
-    #0000ff,
-    #ff0000,
-    #fb0094,
-    #0000ff,
-    #00ff00,
-    #ffff00,
-    #ff0000
-  );
-  background-size: 400% 400%;
-  width: calc(100% + 6px);
-  height: calc(100% + 6px);
-  border-radius: 20px;
-  z-index: -1;
-  animation: animate 3s ease alternate infinite;
-}
-.shadow:after {
-  filter: blur(10px);
-}
-
 @keyframes expandIn {
   from {
     max-height: 0;

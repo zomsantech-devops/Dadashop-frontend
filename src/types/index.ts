@@ -27,6 +27,20 @@ export interface BasicTableProps {
     time: string;
     buyerName: string;
   }[];
+  isAvailable?: boolean
+}
+
+export interface ProductInfo {
+  status: string;
+  time: string;
+  buyerName: string;
+}
+
+export interface TransformedData {
+  productName: string;
+  vBucks: string;
+  infos: ProductInfo[];
+  isAvailable: boolean;
 }
 
 export interface BtnProps {
