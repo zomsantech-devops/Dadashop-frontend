@@ -13,7 +13,7 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       const response = await axios.post<any>(
-        "https://dadashop-backend.vercel.app/api/v1/auth/login",
+        `${process.env.REACT_APP_API}/auth/login`,
         {
           email,
           password,

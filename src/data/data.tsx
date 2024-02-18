@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const cardData = [
   {
-    image: "https://dadashop-backend.vercel.app/api/v1/image/banner-1",
+    image: `${process.env.REACT_APP_API}/image/banner-1`,
     title: "ส่ง Gift",
     list: [
       {
@@ -29,7 +29,7 @@ export const cardData = [
     },
   },
   {
-    image: "https://dadashop-backend.vercel.app/api/v1/image/banner-2",
+    image: `${process.env.REACT_APP_API}/image/banner-2`,
     title: "เติม V-Bucks, Packs, Fortnite Crew",
     list: [
       {
@@ -56,7 +56,7 @@ export const cardData = [
     },
   },
   {
-    image: "https://dadashop-backend.vercel.app/api/v1/image/banner-2",
+    image: `${process.env.REACT_APP_API}/image/banner-2`,
     title: "Title",
     list: [
       {

@@ -31,7 +31,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
       setLoading(true);
       try {
         const response = await axios.get<ResponseData>(
-          `https://dadashop-backend.vercel.app/api/v1/item/${itemId}`
+          `${process.env.REACT_APP_API}/item/${itemId}`
         );
         setItem(response.data.data.item);
         setStyles(response.data.data.item.styles);

@@ -26,7 +26,7 @@ const ChangeImages = () => {
         if (rawToken) {
           const token = rawToken.replace(/"/g, "");
           await axios.get(
-            "https://dadashop-backend.vercel.app/api/v1/auth/protected",
+            `${process.env.REACT_APP_API}/auth/protected`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -50,7 +50,7 @@ const ChangeImages = () => {
         if (rawToken) {
           const token = rawToken.replace(/"/g, "");
           const response = await axios.get(
-            "https://dadashop-backend.vercel.app/api/v1/image",
+            `${process.env.REACT_APP_API}/image`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -103,7 +103,7 @@ const ChangeImages = () => {
       if (rawToken) {
         const token = rawToken.replace(/"/g, "");
         const response = await axios.post(
-          `https://dadashop-backend.vercel.app/api/v1/image/${selectedBanner}`,
+          `${process.env.REACT_APP_API}/image/${selectedBanner}`,
           { image },
           {
             headers: {

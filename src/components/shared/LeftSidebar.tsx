@@ -30,7 +30,7 @@ const LeftSidebar = () => {
   const resetItem = async () => {
     setIsLoading(true);
     try {
-      await axios.get("https://dadashop-backend.vercel.app/api/v1/item/reset");
+      await axios.get(`${process.env.REACT_APP_API}/item/reset`);
       toast.success("Reset API Successfully");
       setIsLoading(false);
     } catch (error) {

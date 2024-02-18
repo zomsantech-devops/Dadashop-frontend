@@ -73,7 +73,7 @@ function Navbar() {
       <div className="w-full flex items-center">
         {/* LOGO */}
         <Link to="/">
-          <img src={"https://dadashop-backend.vercel.app/api/v1/image/banner-5"} alt="logo" className="h-20 screen_443:-ml-3.5" />
+          <img src={`${process.env.REACT_APP_API}/image/banner-5`} alt="logo" className="h-20 screen_443:-ml-3.5" />
         </Link>
         {!isMobile && (
           <>

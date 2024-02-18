@@ -42,7 +42,7 @@ function CheckPoints() {
       setLoading(true);
       setNotFound(false);
       const response = await axios.get(
-        `https://dadashop-backend.vercel.app/api/v1/user-balance/${searchValue}`
+        `${process.env.REACT_APP_API}/user-balance/${searchValue}`
       );
       setUserBalance(response.data);
     } catch (error) {
@@ -166,7 +166,7 @@ function CheckPoints() {
             <div className="w-full bg-lime-100">
               <img
                 src={
-                  "https://dadashop-backend.vercel.app/api/v1/image/banner-3"
+                  `${process.env.REACT_APP_API}/image/banner-3`
                 }
                 alt="pointsBenefits"
                 className=""

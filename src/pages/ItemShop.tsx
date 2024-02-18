@@ -57,7 +57,7 @@ function ItemShop() {
       setIsLoading(true);
       try {
         const response = await axios.get<ResponseData>(
-          "https://dadashop-backend.vercel.app/api/v1/item/"
+          `${process.env.REACT_APP_API}/item`
         );
         const filteredData = response.data.data.filter(
           (item) => item.id !== null

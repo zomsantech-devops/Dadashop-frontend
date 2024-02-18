@@ -36,7 +36,7 @@ function Admin() {
         if (rawToken) {
           const token = rawToken.replace(/"/g, "");
           const response = await axios.get(
-            "https://dadashop-backend.vercel.app/api/v1/auth/protected",
+            `${process.env.REACT_APP_API}/auth/protected`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -59,49 +59,16 @@ function Admin() {
 
   useEffect(() => {
     const fetchUserBalance = async () => {
-      // use for test
-      // setUserBalance([
-      //   {
-      //     id: "1",
-      //     discord_id: "1234567890",
-      //     discord_username: "user123",
-      //     name: "John Doe",
-      //     name_display: "John D.",
-      //     current_points: 100,
-      //     total_points: 500,
-      //     tier: "Diamond",
-      //   },
-      //   {
-      //     id: "2",
-      //     discord_id: "9876543210",
-      //     discord_username: "exampleuser",
-      //     name: "Jane Smith",
-      //     name_display: "Jane S.",
-      //     current_points: 250,
-      //     total_points: 3000,
-      //     tier: "Unreal",
-      //   },
-      //   {
-      //     id: "3",
-      //     discord_id: "5555555555",
-      //     discord_username: "testuser",
-      //     name: "Alice Johnson",
-      //     name_display: "Alice J.",
-      //     current_points: 50,
-      //     total_points: 50,
-      //     tier: "Gold",
-      //   },
-      // ]);
       try {
         let response;
         if (searchValue.length > 0) {
           response = await axios.get(
-            `https://dadashop-backend.vercel.app/api/v1/user-balance/${searchValue}`
+            `${process.env.REACT_APP_API}/user-balance/${searchValue}`
           );
           setUserBalance([response.data]);
         } else {
           response = await axios.get(
-            "https://dadashop-backend.vercel.app/api/v1/user-balance"
+            `${process.env.REACT_APP_API}/user-balance`
           );
           setUserBalance(response.data);
         }
@@ -133,7 +100,7 @@ function Admin() {
       setUserBalance(updatedUserBalance);
 
       await axios.post(
-        `https://dadashop-backend.vercel.app/api/v1/user-balance/${id}`,
+        `${process.env.REACT_APP_API}/user-balance/${id}`,
         {
           ...editedData,
         },
@@ -191,7 +158,7 @@ function Admin() {
       });
 
       await axios.post(
-        "https://dadashop-backend.vercel.app/api/v1/user-balance",
+        `${process.env.REACT_APP_API}/user-balance`,
         {
           id: (userBalance?.length ?? 0) + 1,
           discord_id: newUserData.discord_id,
