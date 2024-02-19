@@ -17,6 +17,7 @@ import {
 } from "../types";
 import noImg from "../assets/images/empty.jpg";
 import { useGenerationStore } from "../state/idea-generation";
+import { ItemHistory } from "../components/ItemHistory";
 
 const ItemDetail = ({ itemId, onClose }: IdProps) => {
   const [item, setItem] = useState<Item>();
@@ -26,7 +27,6 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
   const [displayAssets, setDisplayAssets] = useState<DisplayAssetsItem[]>([]);
   const [channelName, setChannelName] = useState<string[]>([]);
   const videoRef = useRef<HTMLVideoElement>(null);
-  // const [isPlaying, setIsPlaying] = useState(true);
   const { isPlaying, setIsPlaying } = useGenerationStore();
 
   const navigate = useNavigate();
@@ -172,7 +172,6 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
               </div>
             )
           ) : previewVideo ? (
-            // Here is playing emote
             <div className="relative">
               <video
                 preload="true"
@@ -234,9 +233,12 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                   </p>
                 </div>
               </div>
-              <p className="italic text-center text-sm mb-4">
+              <p className="italic text-center text-sm mb-2">
                 {item.description || "-"}
               </p>
+              <div className="mb-4">
+                <ItemHistory shopHistory={item.shopHistory} />
+              </div>
               <div className="flex flex-col gap-2">
                 <CustomButton
                   text={"ขั้นตอนการสั่งซื้อ"}

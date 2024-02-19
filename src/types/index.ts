@@ -112,6 +112,7 @@ export interface Item {
   set: {
     name: string;
   };
+  shopHistory: string[]
   styles: Styles[];
   previewVideos: [
     {
