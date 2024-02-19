@@ -127,26 +127,43 @@ function Navbar() {
                   >
                     <Link
                       to="/check-queue/zz1-zz6"
-                      className="w-full block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
+                      className= {`${
+                        location.pathname === "/check-queue/zz1-zz6"
+                          ? "bg-[#3d82d1] text-white"
+                          : "text-gray-700"
+                      } w-full block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white`}
                       onClick={handleToggleDropdownClose}
                     >
                       Dada ZZ1-ZZ6
                     </Link>
                     <Link
                       to="/check-queue/d1-d10"
-                      className="my-1 w-full block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
+                      className= {`${
+                        location.pathname === "/check-queue/d1-d10"
+                          ? "bg-[#3d82d1] text-white"
+                          : "text-gray-700"
+                      } my-1 w-full block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white`}
                       onClick={handleToggleDropdownClose}
                     >
                       Dada D1-D10
                     </Link>
                     <Link
                       to="/check-queue/g1-g8"
-                      className="group/name w-full whitespace-nowrap block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white"
+                      className= {`${
+                        location.pathname === "/check-queue/g1-g8"
+                          ? "bg-[#3d82d1] text-white"
+                          : "text-gray-700"
+                      } group/name w-full whitespace-nowrap block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white`}
                       onClick={handleToggleDropdownClose}
                     >
                       Dada G1-G8
                       <br />
-                      <span className="text-red-400 group-hover/name:text-[#23d9d9]">(ปิดรับเพื่อนแล้ว)</span>
+                      <span className={`${
+                        location.pathname === "/check-queue/g1-g8"
+                          ? "text-[#23d9d9]"
+                          : "text-red-400"
+                      } text-red-400 group-hover/name:text-[#23d9d9]`}                                           
+                      >(ปิดรับเพื่อนแล้ว)</span>
                     </Link>
                   </div>
                 )}
@@ -295,7 +312,12 @@ function Navbar() {
                 } w-fit block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white`}
               >
                 Dada G1-G8{" "}
-                <span className="text-red-600">(ปิดรับเพื่อนแล้ว)</span>
+                <span className={`${
+                        location.pathname === "/check-queue/g1-g8"
+                          ? "text-[#23d9d9]"
+                          : "text-red-400"
+                      } text-red-400 group-hover/name:text-[#23d9d9]`}                                           
+                      >(ปิดรับเพื่อนแล้ว)</span>
               </Link>
             </div>
           )}
