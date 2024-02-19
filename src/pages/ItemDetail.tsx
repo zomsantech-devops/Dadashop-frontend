@@ -109,7 +109,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
           <CircularProgress className="self-center" />
         </div>
       ) : item ? (
-        <div className="flex screen_1170:flex-col items-center justify-center max-h-[80vh] screen_1170:max-h-none gap-6 px-6 screen_1170:pt-4">
+        <div className="flex screen_1250:flex-col items-center justify-center max-h-[80vh] screen_1250:max-h-none gap-6 px-6 screen_1250:pt-4">
           {item.type.id !== "emote" ? (
             item.type.id !== "bundle" ? (
               displayAssets.length !== 0 ? (
@@ -129,7 +129,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                 <div className="relative">
                   <video
                     preload="true"
-                    className="max-w-[520px] h-[80vh] rounded-lg screen_1170:h-[375px] screen_445:h-[256px] cursor-pointer"
+                    className="max-w-[520px] h-[80vh] rounded-lg screen_1250:h-[375px] screen_445:h-[256px] cursor-pointer"
                     muted
                     loop
                     autoPlay
@@ -150,25 +150,40 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                 <img src={noImg} alt="empty" className={`rounded-lg`} />
               )
             ) : (
-              <div className="flex items-center justify-center flex-wrap gap-3 w-[648px] screen_910:w-auto">
-                {item.grants.length !== 0 ? (
-                  item.grants.map((grant) => (
-                    <div
-                      key={grant.id}
-                      className="cursor-pointer bg-[#1780d8] rounded-xl"
-                    >
-                      <img
-                        src={grant.images.icon_background}
-                        alt=""
-                        className="rounded-xl w-[120px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105 screen_445:w-[80px]"
-                        onClick={() => handleItemClick(grant.id)}
-                      />
-                    </div>
-                  ))
-                ) : (
-                  // <p className="w-96 text-center">No grant</p>
-                  <img src={noImg} alt="empty" className="rounded-lg" />
-                )}
+              <div className="flex flex-col">
+                <p className="text-2xl font-bold text-center mb-4">
+                  {item.grants.length} ไอเท็มในเซ็ต
+                </p>
+                <div className="flex items-center justify-center flex-wrap gap-3 w-[648px] screen_910:w-auto">
+                  {item.grants.length !== 0 ? (
+                    item.grants.map((grant) => (
+                      <div
+                        key={grant.id}
+                        className="cursor-pointer rounded-xl"
+                      >
+                        {!grant.images.icon_background ? (
+                          <>
+                            <img
+                              src={noImg}
+                              alt="empty"
+                              className="rounded-xl w-[120px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105 screen_445:w-[80px]"
+                            />
+                            <p className="text-center">(No image)</p>
+                          </>
+                        ) : (
+                          <img
+                            src={grant.images.icon_background}
+                            alt=""
+                            className="bg-[#1780d8] rounded-xl w-[120px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105 screen_445:w-[80px]"
+                            onClick={() => handleItemClick(grant.id)}
+                          />
+                        )}
+                      </div>
+                    ))
+                  ) : (
+                    <img src={noImg} alt="empty" className="rounded-lg" />
+                  )}
+                </div>
               </div>
             )
           ) : previewVideo ? (
@@ -195,13 +210,13 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
             <img
               src={item.images.background}
               alt="empty"
-              className={`max-w-[520px] h-[80vh] object-cover rounded-lg screen_1170:h-[325px] screen_445:h-[256px]`}
+              className={`max-w-[520px] h-[80vh] object-cover rounded-lg screen_1250:h-[325px] screen_445:h-[256px]`}
             />
           )}
 
-          <div className="w-[2px] min-h-[80vh] bg-black/60 screen_1170:min-h-[2px] screen_1170:min-w-[15%]"></div>
-          <div className="min-w-[min(50vw,500px)] max-h-[80vh] screen_1170:max-h-full text-center screen_810:min-w-none overflow-auto py-6">
-            <div className="flex flex-col items-center justify-center px-2.5 mr-4 screen_1170:ml-4">
+          <div className="w-[2px] min-h-[80vh] bg-black/60 screen_1250:min-h-[2px] screen_1250:min-w-[15%]"></div>
+          <div className="min-w-[min(50vw,500px)] max-h-[80vh] screen_1250:max-h-full text-center screen_810:min-w-none overflow-auto py-6">
+            <div className="flex flex-col items-center justify-center px-2.5 mr-4 screen_1250:ml-4">
               <div className="text-[30px] font-bold text-black/80 uppercase text-center">
                 {item?.name}
               </div>

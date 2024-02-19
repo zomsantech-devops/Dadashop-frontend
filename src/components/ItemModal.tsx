@@ -25,7 +25,7 @@ export default function Modal({ open, onClose, children }: ModalProps) {
         navigate(`/item-shop`);
       }}
       className={`
-        fixed inset-0 flex justify-center items-center screen_1170:items-start screen_1170:py-10 screen_910:py-0 transition-colors z-50 overflow-y-auto
+        fixed inset-0 flex justify-center items-center screen_1250:items-start screen_1250:py-10 screen_910:py-0 transition-colors z-50 overflow-y-auto
         ${open ? "visible bg-black/10" : "invisible"}
       `}
     >
