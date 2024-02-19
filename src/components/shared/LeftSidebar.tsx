@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { GrPowerReset } from "react-icons/gr";
 import { toast } from "react-toastify";
+import { IoMdSettings } from "react-icons/io";
 
 const LeftSidebar = () => {
   const [isNavSmall, setIsNavSmall] = useState(window.innerWidth < 1250);
@@ -76,6 +77,15 @@ const LeftSidebar = () => {
               <FaImage className="w-5 h-5 self-center" />
               <p className="">Change Images</p>
             </Link>
+            <Link
+              to={"/shop-setting"}
+              className={`relative flex justify-start gap-4 rounded-lg p-4 ${
+                location.pathname === "/shop-setting" ? "bg-blue-500" : ""
+              }`}
+            >
+              <IoMdSettings className="w-5 h-5 self-center" />
+              <p className="">Shop Settings</p>
+            </Link>
           </div>
         </>
       ) : (
@@ -104,6 +114,14 @@ const LeftSidebar = () => {
               }`}
             >
               <FaImage className="w-5 h-5 self-center" />
+            </Link>
+            <Link
+              to={"/shop-setting"}
+              className={`flex items-center justify-center gap-4 rounded-lg p-4 ${
+                location.pathname === "/shop-setting" ? "bg-blue-500" : ""
+              }`}
+            >
+              <IoMdSettings className="w-5 h-5 self-center" />
             </Link>
           </div>
         </>

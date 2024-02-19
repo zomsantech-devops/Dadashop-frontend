@@ -22,6 +22,7 @@ import Login from "./pages/admin/Login";
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ShopSettings from "./pages/admin/ShopSettings";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path="/admin123dada" element={<Admin />} />
         <Route path="/change-image" element={<ChangeImages />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/shop-setting" element={<ShopSettings />} />
       </Routes>
     </Router>
   );
@@ -51,7 +53,7 @@ function App() {
 function NavbarWrapper(): JSX.Element {
   const location = useLocation();
 
-  const hideNavbarRoutes = ["/admin123dada", "/change-image", "/login"];
+  const hideNavbarRoutes = ["/admin123dada", "/change-image", "/login", "/shop-setting"];
   const isNavbarVisible = !hideNavbarRoutes.includes(location.pathname);
 
   return isNavbarVisible ? <Navbar /> : <></>;
