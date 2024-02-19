@@ -161,7 +161,6 @@ function CheckPoints() {
           <p className="mt-[10px] text-red-600">ไม่พบหมายเลขหรือชื่อสมาชิก</p>
         )}
         <div className={`mt-[${userBalance ? "0" : "40"}px]`}>
-          <p className="text-[24px] font-bold">เงื่อนไขสิทธิประโยชน์</p>
           <div className="w-full bg-white mt-[20px] rounded-[30px] overflow-hidden points-benefits-box">
             <div className="w-full bg-lime-100">
               <img
