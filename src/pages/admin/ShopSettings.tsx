@@ -5,39 +5,41 @@ import close from "../../assets/icons/closeAdmin.svg";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ShopSettings = () => {
   const [status, setStatus] = useState<string>("");
-  const [isLoading, setIsLoading] = useState(false);
   const [openTime, setOpenTime] = useState<string>("");
   const [closeTime, setCloseTime] = useState<string>("");
+  const [newOpenTime, setNewOpenTime] = useState<string>("");
+  const [newCloseTime, setNewCloseTime] = useState<string>("");
 
   const navigate = useNavigate();
 
   const handleOpenTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setOpenTime(event.target.value);
+    setNewOpenTime(event.target.value);
   };
 
   const handleCloseTimeChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setCloseTime(event.target.value);
+    setNewCloseTime(event.target.value);
   };
 
-  // TODO: Toast
   const onSubmitHandle = async (event: React.FormEvent) => {
     event.preventDefault();
-    setIsLoading(true);
     try {
       await axios.post(`${process.env.REACT_APP_API}/setting/time`, {
-        open_time: openTime,
-        close_time: closeTime,
+        open_time: newOpenTime,
+        close_time: newCloseTime,
       });
-      setIsLoading(false);
-      window.location.reload();
+      toast.success("Time updated Successfully", { autoClose: 1500 });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
     } catch (error) {
+      toast.success("Failed to update times", { autoClose: 1500 });
       console.error("Failed to update times", error);
-      setIsLoading(false);
     }
   };
 
@@ -78,16 +80,27 @@ const ShopSettings = () => {
   }, [navigate, status]);
 
   const onStatusHandle = async (status: string) => {
-    setIsLoading(true);
     try {
       await axios.get(
         `${process.env.REACT_APP_API}/setting/time/toggle/${status}`
       );
-      setIsLoading(false);
-      window.location.reload();
+      toast.success("Status updated", { autoClose: 1500 });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
     } catch (error: any) {
+      toast.success("Failed to update status ", { autoClose: 1500 });
       console.error("Update status failed", error.response);
-      setIsLoading(false);
+    }
+  };
+
+  const getTextColorClass = (status: string) => {
+    if (status === "OPEN") {
+      return "text-[#4BAE4F]";
+    } else if (status === "MAINTENANCE") {
+      return "text-[#FEC006]";
+    } else {
+      return "text-[#EA3359]";
     }
   };
 
@@ -99,7 +112,8 @@ const ShopSettings = () => {
           Update Shop Status
         </div>
         <div className="font-bold text-center">
-          Click to change shop status <span className="">[{status}]</span>
+          Click to change shop status{" "}
+          <span className={`${getTextColorClass(status)}`}>[{status}]</span>
         </div>
         <div className="flex items-center justify-center gap-4 screen_605:flex-col">
           <button
@@ -147,7 +161,7 @@ const ShopSettings = () => {
               <input
                 id="openTime"
                 type="time"
-                value={openTime}
+                value={newOpenTime}
                 onChange={handleOpenTimeChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 required
@@ -163,7 +177,7 @@ const ShopSettings = () => {
               <input
                 id="closeTime"
                 type="time"
-                value={closeTime}
+                value={newCloseTime}
                 onChange={handleCloseTimeChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 required
