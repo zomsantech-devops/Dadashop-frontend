@@ -7,7 +7,7 @@ interface VerticalCardProps {
 
 export const VerticalCard = ({ cardData }: VerticalCardProps) => {
   const { image, title, list, button } = cardData;
-
+  
   return (
     <div className="col-span-6 w-[585px] h-min screen_1250:w-[440px] screen_500:w-full rounded-[30px] price-and-how-to-box">
       <div className="w-full rounded-t-[30px] bg-lime-100 overflow-hidden">
@@ -23,7 +23,7 @@ export const VerticalCard = ({ cardData }: VerticalCardProps) => {
           {list.map((item, index) => (
             <p key={index}>
               <span
-                className={`inline-block w-[5px] h-[5px] ${item.color} rounded-full mr-[0.5em] mb-0.5`}
+                className={`inline-block w-[5px] h-[5px] ${(item.color).toLowerCase()} rounded-full mr-[0.5em] mb-0.5`}
               ></span>
               {item.content}
             </p>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // TODO: Check token
@@ -19,14 +19,36 @@ const Login = () => {
           password,
         }
       );
-      localStorage.setItem("token", JSON.stringify(response.data.data.access_token));
-      navigate("/admin123dada")
+      localStorage.setItem(
+        "token",
+        JSON.stringify(response.data.data.access_token)
+      );
+      navigate("/admin123dada");
       console.log("Login successful", response);
     } catch (error: any) {
       console.error("Login failed", error.response);
       setError(error.response.data.message);
     }
   };
+
+  useEffect(() => {
+    const rawToken: string | null = localStorage.getItem("token"); // Ensure token is of type string or null
+    const getAuthenticated = async () => {
+      try {
+        if (rawToken) {
+          const token = rawToken.replace(/"/g, "");
+          await axios.get(`${process.env.REACT_APP_API}/auth/protected`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          navigate("/admin123dada");
+        }
+      } catch (error: any) {}
+    };
+
+    getAuthenticated();
+  }, [navigate]);
 
   return (
     <div className="h-screen flex items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-400 to-blue-800">

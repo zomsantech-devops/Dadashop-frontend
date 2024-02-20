@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { IoPersonAdd } from "react-icons/io5";
-import { FaHome, FaImage, FaBars } from "react-icons/fa";
+import { FaHome, FaImage, FaBars, FaEdit } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { GrPowerReset } from "react-icons/gr";
@@ -132,6 +132,21 @@ const LeftSidebar = () => {
                     <IoMdSettings className="w-5 h-5 self-center" />
                     <p className="grow overflow-hidden text-ellipsis whitespace-nowrap">
                       Shop Settings
+                    </p>
+                  </Link>
+                </div>
+                <div className="pb-0.5 last:pb-0">
+                  <Link
+                    to={"/update-preset"}
+                    className={`flex h-10 items-center gap-2 rounded-lg w-full px-2 ${
+                      location.pathname === "/update-preset"
+                        ? "bg-[#424242]"
+                        : "hover:bg-[#212121]"
+                    }`}
+                  >
+                    <FaEdit className="w-5 h-5 self-center" />
+                    <p className="grow overflow-hidden text-ellipsis whitespace-nowrap">
+                      Update Preset
                     </p>
                   </Link>
                 </div>

@@ -23,6 +23,8 @@ import Login from "./pages/admin/Login";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ShopSettings from "./pages/admin/ShopSettings";
+import UpdatePreset from "./pages/admin/UpdatePreset";
+import ProtectedRoute from "./components/shared/ProtectedRoute";
 
 function App() {
   return (
@@ -41,10 +43,15 @@ function App() {
         <Route path="/check-queue/g1-g8" element={<CheckQueueG />} />
         <Route path="/check-queue/zz1-zz6" element={<CheckQueueZZ />} />
         <Route path="/check-points" element={<CheckPoints />} />
-        <Route path="/admin123dada" element={<Admin />} />
-        <Route path="/change-image" element={<ChangeImages />} />
         <Route path="/login" element={<Login />} />
+        {/* <Route path="/admin123dada" element={<Admin />} />
+        <Route path="/change-image" element={<ChangeImages />} />
         <Route path="/shop-setting" element={<ShopSettings />} />
+        <Route path="/update-preset" element={<UpdatePreset />} /> */}
+        <Route path="/admin123dada" element={<ProtectedRoute component={Admin} />} />
+        <Route path="/change-image" element={<ProtectedRoute component={ChangeImages} />} />
+        <Route path="/shop-setting" element={<ProtectedRoute component={ShopSettings} />} />
+        <Route path="/update-preset" element={<ProtectedRoute component={UpdatePreset} />} />
       </Routes>
     </Router>
   );
@@ -53,7 +60,7 @@ function App() {
 function NavbarWrapper(): JSX.Element {
   const location = useLocation();
 
-  const hideNavbarRoutes = ["/admin123dada", "/change-image", "/login", "/shop-setting"];
+  const hideNavbarRoutes = ["/admin123dada", "/change-image", "/login", "/shop-setting", "/update-preset"];
   const isNavbarVisible = !hideNavbarRoutes.includes(location.pathname);
 
   return isNavbarVisible ? <Navbar /> : <></>;

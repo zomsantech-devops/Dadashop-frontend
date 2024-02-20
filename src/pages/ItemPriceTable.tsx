@@ -1,16 +1,26 @@
 import { useEffect, useState } from "react";
 import Footer from "../components/shared/Footer";
 
-import { cardData } from "../data/data";
 import { VerticalCard } from "../components/VerticalCard";
 import { HorizontalCard } from "../components/HorizontalCard";
 import { CardProps } from "../types";
+import axios from "axios";
 
 function ItemPriceTable() {
   const [data, setData] = useState<CardProps[]>([]);
 
   useEffect(() => {
-    setData(cardData);
+    const getPreset = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API}/preset`
+        );
+        setData(response.data.data);
+      } catch (error: any) {}
+    };
+    
+    getPreset();
+
     const toggleBodyOverflow = () => {
       document.body.style.overflow = "auto";
     };

@@ -44,26 +44,6 @@ const ShopSettings = () => {
   };
 
   useEffect(() => {
-    const rawToken: string | null = localStorage.getItem("token");
-    const getAuthenticated = async () => {
-      try {
-        if (rawToken) {
-          const token = rawToken.replace(/"/g, "");
-          await axios.get(`${process.env.REACT_APP_API}/auth/protected`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-        } else {
-          console.error("Token not found in localStorage");
-          navigate("/login");
-        }
-      } catch (error: any) {
-        console.error("Authentication failed", error.response?.data);
-        navigate("/login");
-      }
-    };
-
     const getTime = async () => {
       try {
         const response = await axios.get(
@@ -75,7 +55,6 @@ const ShopSettings = () => {
       } catch (error: any) {}
     };
 
-    getAuthenticated();
     getTime();
   }, [navigate, status]);
 

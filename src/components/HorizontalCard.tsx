@@ -14,9 +14,7 @@ export const HorizontalCard = ({ cardData }: VerticalCardProps) => {
         <img
           src={image}
           alt="giftImage"
-          //   className="h-[585px] w-full object-cover object-top screen_960:h-auto screen_960:w-full"
           className="h-[585px] w-full object-contain screen_960:h-auto screen_960:w-full"
-          //   className="w-full aspect-square object-cover object-top"
         ></img>
       </div>
       <div className="p-[15px]">
@@ -25,7 +23,7 @@ export const HorizontalCard = ({ cardData }: VerticalCardProps) => {
           {list.map((item, index) => (
             <p key={index}>
               <span
-                className={`inline-block w-[5px] h-[5px] ${item.color} rounded-full mr-[0.5em] mb-0.5`}
+                className={`inline-block w-[5px] h-[5px] ${(item.color).toLowerCase()} rounded-full mr-[0.5em] mb-0.5`}
               ></span>
               {item.content}
             </p>

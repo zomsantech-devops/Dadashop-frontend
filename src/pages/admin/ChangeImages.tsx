@@ -20,29 +20,9 @@ const ChangeImages = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const rawToken: string | null = localStorage.getItem("token");
-    const getAuthenticated = async () => {
-      try {
-        if (rawToken) {
-          const token = rawToken.replace(/"/g, "");
-          await axios.get(`${process.env.REACT_APP_API}/auth/protected`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          // console.log(response);
-        } else {
-          console.error("Token not found in localStorage");
-          navigate("/login");
-        }
-      } catch (error: any) {
-        console.error("Authentication failed", error.response?.data);
-        navigate("/login");
-      }
-    };
-
     const getAllImages = async () => {
       setIsPageLoading(true);
+      const rawToken: string | null = localStorage.getItem("token");
       try {
         if (rawToken) {
           const token = rawToken.replace(/"/g, "");
@@ -67,7 +47,6 @@ const ChangeImages = () => {
       }
     };
 
-    getAuthenticated();
     getAllImages();
   }, [navigate]);
 
@@ -96,10 +75,9 @@ const ChangeImages = () => {
     setIsLoading(true);
     const rawToken: string | null = localStorage.getItem("token");
     try {
-      console.log(rawToken);
       if (rawToken) {
         const token = rawToken.replace(/"/g, "");
-        const response = await axios.post(
+        await axios.post(
           `${process.env.REACT_APP_API}/image/${selectedBanner}`,
           { image },
           {
@@ -109,7 +87,6 @@ const ChangeImages = () => {
             },
           }
         );
-        console.log(response);
         toast.success("Upload Image Successfully", { autoClose: 2500 });
         setTimeout(() => {
           toast.success("This page will reload in 3 seconds", {
