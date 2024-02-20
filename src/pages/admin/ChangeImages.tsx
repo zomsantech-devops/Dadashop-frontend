@@ -25,14 +25,11 @@ const ChangeImages = () => {
       try {
         if (rawToken) {
           const token = rawToken.replace(/"/g, "");
-          await axios.get(
-            `${process.env.REACT_APP_API}/auth/protected`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
+          await axios.get(`${process.env.REACT_APP_API}/auth/protected`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
           // console.log(response);
         } else {
           console.error("Token not found in localStorage");
@@ -139,14 +136,16 @@ const ChangeImages = () => {
     <main className="flex flex-row">
       <LeftSidebar />
 
-      <div className="flex flex-col items-center justify-center w-[910px] my-6 screen_910:w-full mx-auto relative pb-[50px] screen_1070:pl-20 screen_500:pb-0 screen_500:pr-4">
+      <div className="flex flex-col items-center justify-center px-6 w-[910px] my-6 mb-10 screen_910:w-full mx-auto relative">
         {isPageLoading ? (
           <div className="self-center">
             <CircularProgress className="self-center" />
           </div>
         ) : (
           <div className="flex flex-col w-[600px] screen_810:w-[350px] screen_500:w-[250px]">
-            <p className="font-bold text-[24px] mb-[10px]">แก้ไขภาพ Banners</p>
+            <div className="text-center text-5xl font-bold mt-10 mb-6 leading-[58px]">
+              Update Banner Image
+            </div>
             <form onSubmit={handleSubmit} className="flex flex-col">
               <label className="mb-[3px] font-bold">Banner name:</label>
               <select

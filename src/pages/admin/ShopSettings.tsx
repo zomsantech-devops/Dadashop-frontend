@@ -94,7 +94,10 @@ const ShopSettings = () => {
   return (
     <main className="flex flex-row">
       <LeftSidebar />
-      <div className="flex flex-col items-center justify-center gap-4 w-[910px] my-6 screen_910:w-full mx-auto relative pb-[50px] screen_1070:pl-20 screen_500:pb-0 screen_500:pr-4">
+      <div className="flex flex-col items-center justify-center gap-4 px-6 w-[910px] my-6 mb-10 screen_910:w-full mx-auto relative">
+        <div className="text-center text-5xl font-bold mt-10 mb-6 leading-[58px]">
+          Update Shop Status
+        </div>
         <div className="font-bold text-center">
           Click to change shop status <span className="">[{status}]</span>
         </div>

@@ -216,12 +216,12 @@ function Admin() {
   };
 
   return (
-    <main className="flex flex-row">
+    <main className="">
       <LeftSidebar />
-      <div className="flex flex-col justify-center px-[30px] w-[910px] screen_910:w-full mx-auto relative pb-[50px] pl-20 screen_1070:pl-20 screen_500:pb-0 screen_500:pr-4">
-        <p className="text-center text-5xl font-bold my-[40px] leading-[58px]">
+      <div className="flex flex-col justify-center px-[30px] w-[910px] my-6 screen_910:w-full mx-auto relative">
+        <div className="text-center text-5xl font-bold my-10 leading-[58px]">
           Member ทั้งหมด
-        </p>
+        </div>
         <form>
           <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
             Search

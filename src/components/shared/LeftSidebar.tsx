@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { IoPersonAdd } from "react-icons/io5";
-import { FaChevronLeft, FaImage } from "react-icons/fa";
+import { FaHome, FaImage, FaBars } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { GrPowerReset } from "react-icons/gr";
@@ -8,13 +8,20 @@ import { toast } from "react-toastify";
 import { IoMdSettings } from "react-icons/io";
 
 const LeftSidebar = () => {
-  const [isNavSmall, setIsNavSmall] = useState(window.innerWidth < 1250);
+  const [isOpen, setIsOpen] = useState(window.innerWidth > 1370);
   const [isLoading, setIsLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1170);
+
   const location = useLocation();
+
+  const closeSidebar = () => {
+    isMobile && setIsOpen(false);
+  };
 
   useEffect(() => {
     const handleResize = () => {
-      setIsNavSmall(window.innerWidth < 1250);
+      setIsMobile(window.innerWidth < 1170);
+      setIsOpen(window.innerWidth > 1370);
     };
 
     window.addEventListener("resize", handleResize);
@@ -22,10 +29,6 @@ const LeftSidebar = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [isNavSmall]);
-
-  useEffect(() => {
-    window.innerWidth < 1250 && setIsNavSmall(true);
   }, []);
 
   const resetItem = async () => {
@@ -42,122 +45,122 @@ const LeftSidebar = () => {
   };
 
   return (
-    <section
-      className={`fixed left-0 top-0 z-10 flex flex-col justify-between overflow-auto border-r border-r-[#1EAEF0] bg-[#1EAEF0] pb-5 pt-2 text-white ${
-        isNavSmall ? "w-20 screen_930:w-16 h-screen" : "w-60 h-screen"
-      }`}
-    >
-      {!isNavSmall ? (
-        <>
-          <Link
-            to={"/"}
-            className={`relative flex justify-start gap-4 rounded-lg p-4 w-fit ${
-              location.pathname === "/" ? "bg-blue-500" : ""
-            }`}
-          >
-            <FaChevronLeft className="w-5 h-5 self-center" />
-            <p className="">Home Page</p>
-          </Link>
-          <div className="flex w-full flex-1 flex-col gap-2 px-4 pt-6">
+    <>
+      {/* Backdrop */}
+      <div
+        className={`fixed inset-0 bg-opacity-50 z-30 ${
+          isOpen ? "block" : "hidden"
+        } ${isMobile ? "bg-black" : "bg-transparent"}`}
+        onClick={closeSidebar}
+      ></div>
+      <div
+        className={`fixed top-0 left-0 h-full z-40 flex flex-col justify-between bg-[#171717] text-[#ececec] ${
+          isOpen ? "w-64 px-3 py-3.5" : "w-0"
+        } transition-width duration-300 ease-in-out`}
+      >
+        <div className="">
+          <div className="flex items-center justify-between text-sm">
             <Link
-              to={"/admin123dada"}
-              className={`relative flex justify-start gap-4 rounded-lg p-4 ${
-                location.pathname === "/admin123dada" ? "bg-blue-500" : ""
-              }`}
+              to={"/"}
+              className={`flex h-10 items-center gap-2 rounded-lg w-full px-2 mr-2 ${
+                location.pathname === "/" ? "bg-blue-500" : ""
+              } ${!isOpen ? "hidden" : ""} hover:bg-[#212121]`}
             >
-              <IoPersonAdd className="w-5 h-5 self-center" />
-              <p className="">Add Member</p>
+              <FaHome className="w-5 h-5" />
+              <p className="grow overflow-hidden text-ellipsis whitespace-nowrap">
+                Back to Dada
+              </p>
             </Link>
-            <Link
-              to={"/change-image"}
-              className={`relative flex justify-start gap-4 rounded-lg p-4 ${
-                location.pathname === "/change-image" ? "bg-blue-500" : ""
-              }`}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className={`cursor-pointer p-1 rounded-md hover:bg-[#212121] ${
+                !isOpen
+                  ? "absolute -right-11 top-3 bg-white border-2 border-black text-black hover:text-white"
+                  : "border-2 text-[#ececec]"
+              } transform transition-transform duration-300 ease-in-out`}
             >
-              <FaImage className="w-5 h-5 self-center" />
-              <p className="">Change Images</p>
-            </Link>
-            <Link
-              to={"/shop-setting"}
-              className={`relative flex justify-start gap-4 rounded-lg p-4 ${
-                location.pathname === "/shop-setting" ? "bg-blue-500" : ""
-              }`}
-            >
-              <IoMdSettings className="w-5 h-5 self-center" />
-              <p className="">Shop Settings</p>
-            </Link>
+              <FaBars className={`w-5 h-5 ${!isOpen ? "" : "rotate-180"}`} />
+            </button>
           </div>
-        </>
-      ) : (
-        <>
-          <Link
-            to={"/"}
-            className={`flex items-center justify-center gap-4 rounded-lg p-4 w-full ${
-              location.pathname === "/" ? "bg-blue-500" : ""
-            }`}
-          >
-            <FaChevronLeft className="w-5 h-5 self-center" />
-          </Link>
-          <div className="flex w-full flex-1 flex-col gap-2 px-3 pt-6 screen_930:px-1">
-            <Link
-              to={"/admin123dada"}
-              className={`flex items-center justify-center gap-4 rounded-lg p-4 ${
-                location.pathname === "/admin123dada" ? "bg-blue-500" : ""
-              }`}
-            >
-              <IoPersonAdd className="w-5 h-5 self-center" />
-            </Link>
-            <Link
-              to={"/change-image"}
-              className={`flex items-center justify-center gap-4 rounded-lg p-4 ${
-                location.pathname === "/change-image" ? "bg-blue-500" : ""
-              }`}
-            >
-              <FaImage className="w-5 h-5 self-center" />
-            </Link>
-            <Link
-              to={"/shop-setting"}
-              className={`flex items-center justify-center gap-4 rounded-lg p-4 ${
-                location.pathname === "/shop-setting" ? "bg-blue-500" : ""
-              }`}
-            >
-              <IoMdSettings className="w-5 h-5 self-center" />
-            </Link>
-          </div>
-        </>
-      )}
 
-      {!isNavSmall ? (
-        <div className="self-center">
-          <button
-            className={`relative flex justify-start gap-4 rounded-lg p-4 bg-[#e1510f] ${
-              isLoading && "bg-[#e1510f]/50 cursor-not-allowed"
-            }`}
-            onClick={resetItem}
-            disabled={isLoading}
-          >
-            <GrPowerReset
-              className={`w-5 h-5 self-center ${isLoading && "animate-spin"}`}
-            />
-            Reset API
-          </button>
+          {isOpen && (
+            <>
+              <div className="my-2 ml-2 h-px w-7 bg-gray-700" />
+
+              <nav
+                className={`flex flex-col space-y-2 mt-4 w-full text-[#ececec] text-sm transition-width duration-300 ease-in-out`}
+              >
+                <div className="pb-0.5 last:pb-0">
+                  <Link
+                    to={"/admin123dada"}
+                    className={`flex h-10 items-center gap-2 rounded-lg px-2 ${
+                      location.pathname === "/admin123dada"
+                        ? "bg-[#424242]"
+                        : "hover:bg-[#212121]"
+                    }`}
+                  >
+                    <IoPersonAdd className="w-5 h-5 self-center" />
+                    <p className="grow overflow-hidden text-ellipsis whitespace-nowrap">
+                      Add Member
+                    </p>
+                  </Link>
+                </div>
+                <div className="pb-0.5 last:pb-0">
+                  <Link
+                    to={"/change-image"}
+                    className={`flex h-10 items-center gap-2 rounded-lg w-full px-2 ${
+                      location.pathname === "/change-image"
+                        ? "bg-[#424242]"
+                        : "hover:bg-[#212121]"
+                    }`}
+                  >
+                    <FaImage className="w-5 h-5 self-center" />
+                    <p className="grow overflow-hidden text-ellipsis whitespace-nowrap">
+                      Change Images
+                    </p>
+                  </Link>
+                </div>
+                <div className="pb-0.5 last:pb-0">
+                  <Link
+                    to={"/shop-setting"}
+                    className={`flex h-10 items-center gap-2 rounded-lg w-full px-2 ${
+                      location.pathname === "/shop-setting"
+                        ? "bg-[#424242]"
+                        : "hover:bg-[#212121]"
+                    }`}
+                  >
+                    <IoMdSettings className="w-5 h-5 self-center" />
+                    <p className="grow overflow-hidden text-ellipsis whitespace-nowrap">
+                      Shop Settings
+                    </p>
+                  </Link>
+                </div>
+              </nav>
+            </>
+          )}
         </div>
-      ) : (
-        <div className="self-center">
-          <button
-            className={`flex items-center justify-center gap-4 rounded-lg p-4 bg-[#e1510f] ${
-              isLoading && "bg-[#e1510f]/50 cursor-not-allowed"
-            }`}
-            onClick={resetItem}
-            disabled={isLoading}
-          >
-            <GrPowerReset
-              className={`w-5 h-5 self-center ${isLoading && "animate-spin"}`}
-            />
-          </button>
-        </div>
-      )}
-    </section>
+        {isOpen && (
+          <div className="">
+            <button
+              className={`flex h-12 items-center justify-center rounded-lg w-full p-4 bg-[#e1510f] ${
+                isLoading && "bg-[#e1510f]/50 cursor-not-allowed"
+              }`}
+              onClick={resetItem}
+              disabled={isLoading}
+            >
+              <div className="flex items-center justify-center gap-4">
+                <GrPowerReset
+                  className={`w-5 h-5 ${isLoading && "animate-spin"}`}
+                />
+                <p className="grow overflow-hidden text-ellipsis whitespace-nowrap">
+                  Reset API
+                </p>
+              </div>
+            </button>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 
