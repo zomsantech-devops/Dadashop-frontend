@@ -8,6 +8,7 @@ import close from "../assets/icons/close.svg";
 
 function HomePage() {
   const [status, setStatus] = useState<string>("");
+  const [openTime, setOpenTime] = useState<string>("");
 
   useEffect(() => {
     const getTime = async () => {
@@ -16,6 +17,7 @@ function HomePage() {
           `${process.env.REACT_APP_API}/setting/time`
         );
         setStatus(response.data.data.status);
+        setOpenTime(response.data.data.open_time)
       } catch (error: any) {}
     };
 
@@ -29,7 +31,7 @@ function HomePage() {
           <div className="w-24 h-24">
             <img src={check} alt="check" />
           </div>
-          <div className="text-4xl font-bold">
+          <div className="text-4xl font-bold text-center">
             <span className="text-[#4BAE4F]">ร้านเปิด</span> Available
           </div>
           <p className="text-center">
@@ -42,7 +44,7 @@ function HomePage() {
           <div className="w-24 h-24">
             <img src={busy} alt="busy" />
           </div>
-          <div className="text-4xl font-bold">
+          <div className="text-4xl font-bold text-center">
             <span className="text-[#C4960C]">ไม่ว่างชั่วคราว</span> Busy
           </div>
           <p className="text-center">
@@ -55,22 +57,22 @@ function HomePage() {
           <div className="w-24 h-24">
             <img src={close} alt="close" />
           </div>
-          <div className="text-4xl font-bold">
+          <div className="text-4xl font-bold text-center">
             <span className="text-[#CF173D]">นอกเวลาทำการ</span> Closed
           </div>
           <p className="text-center">
             ร้านจะกลับมาให้บริการอีกครั้งในเวลา{" "}
-            <span className="font-bold">09:30</span> น.
+            <span className="font-bold">{openTime}</span> น.
           </p>
         </div>
       )}
       <div className="flex screen_1250:flex-col self-center gap-8 screen_960:gap-10 screen_500:w-full">
-        <div className="flex w-[600px] h-[475px] rounded-3xl bg-lime-100 overflow-hidden bg-gradient-to-b from-[#B0DE90] via-[#4AA155] via-80% to-[#3A9A4E] price-and-how-to-box screen_610:w-[450px] screen_610:self-center screen_500:w-[350px] screen_500:h-[450px]">
+        <div className="flex w-[600px] h-[475px] rounded-3xl bg-lime-100 overflow-hidden bg-gradient-to-b from-[#B0DE90] via-[#4AA155] via-80% to-[#3A9A4E] price-and-how-to-box screen_610:w-[450px] screen_610:self-center screen_500:w-[350px] screen_500:h-[350px]">
           <div className="relative flex-1 flex justify-center items-center">
             <img
               src={wraith}
               alt="vBucksImage"
-              className="absolute -bottom-36 -left-4 h-[575px] min-w-max screen_610:-left-12 screen_500:-left-16 screen_500:h-[550px]"
+              className="absolute -bottom-36 -left-4 h-[575px] min-w-max screen_610:-left-12 screen_500:h-[450px]"
             ></img>
           </div>
           <div className="flex-1 flex justify-start items-center z-20">
@@ -96,12 +98,12 @@ function HomePage() {
           </div>
         </div>
 
-        <div className="relative flex w-[600px] h-[475px] rounded-3xl bg-lime-100 overflow-hidden bg-gradient-to-b from-[#80E2FF] via-[#7ed0fc] via-80% to-[#56ADF3] price-and-how-to-box screen_610:w-[450px] screen_610:self-center screen_500:w-[350px] screen_500:h-[450px]">
+        <div className="relative flex w-[600px] h-[475px] rounded-3xl bg-lime-100 overflow-hidden bg-gradient-to-b from-[#80E2FF] via-[#7ed0fc] via-80% to-[#56ADF3] price-and-how-to-box screen_610:w-[450px] screen_610:self-center screen_500:w-[350px] screen_500:h-[350px]">
           <div className="flex-1 flex justify-center items-center">
             <img
               src={wraith}
               alt="vBucksImage"
-              className="absolute -bottom-36 -left-4 h-[575px] min-w-max screen_610:-left-12 screen_500:-left-16 screen_500:h-[550px]"
+              className="absolute -bottom-36 -left-4 h-[575px] min-w-max screen_610:-left-12 screen_500:h-[450px]"
             ></img>
           </div>
           <div className="flex-1 flex justify-start items-center z-20">
