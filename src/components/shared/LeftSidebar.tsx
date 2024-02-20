@@ -48,9 +48,9 @@ const LeftSidebar = () => {
     <>
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 bg-opacity-50 z-30 ${
+        className={`fixed inset-0 bg-opacity-50 ${
           isOpen ? "block" : "hidden"
-        } ${isMobile ? "bg-black" : "bg-transparent"}`}
+        } ${isMobile ? "bg-black z-30" : "bg-transparent"}`}
         onClick={closeSidebar}
       ></div>
       <div
