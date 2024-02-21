@@ -57,8 +57,6 @@ function CheckQueueD() {
     return () => clearInterval(intervalId);
   }, []);
 
-  console.log(dData);
-
   return (
     <div>
       <div className="flex flex-col justify-center px-[30px]">

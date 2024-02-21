@@ -56,8 +56,6 @@ function CheckQueueG() {
     return () => clearInterval(intervalId);
   }, []);
 
-  console.log(gData);
-
   return (
     <div>
       <div className="flex flex-col justify-center px-[30px]">

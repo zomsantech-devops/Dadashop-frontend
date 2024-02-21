@@ -17,7 +17,7 @@ function HomePage() {
           `${process.env.REACT_APP_API}/setting/time`
         );
         setStatus(response.data.data.status);
-        setOpenTime(response.data.data.open_time)
+        setOpenTime(response.data.data.open_time);
       } catch (error: any) {}
     };
 
@@ -31,8 +31,10 @@ function HomePage() {
           <div className="w-24 h-24">
             <img src={check} alt="check" />
           </div>
-          <div className="text-4xl font-bold text-center">
-            <span className="text-[#4BAE4F]">ร้านเปิด</span> Available
+          <div rel="preload" className="text-4xl font-bold text-center">
+            <p>
+              <span className="text-[#39843B]">ร้านเปิด</span> Available
+            </p>
           </div>
           <p className="text-center">
             เลือกบริการที่คุณต้องการได้เลย สั่งซื้อผ่าน Discord หรือ Facebook

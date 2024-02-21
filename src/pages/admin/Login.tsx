@@ -24,7 +24,6 @@ const Login = () => {
         JSON.stringify(response.data.data.access_token)
       );
       navigate("/admin123dada");
-      console.log("Login successful", response);
     } catch (error: any) {
       console.error("Login failed", error.response);
       setError(error.response.data.message);

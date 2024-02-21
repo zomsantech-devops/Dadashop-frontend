@@ -22,10 +22,10 @@ export const HorizontalCard = ({ cardData }: VerticalCardProps) => {
         <div className="flex flex-col justify-center gap-3 mb-5 mt-3 ml-10">
           {list.map((item, index) => (
             <p key={index}>
-              <div
+              <span
                 className={`inline-block w-[5px] h-[5px] rounded-full mr-[0.5em] mb-0.5`}
                 style={{ backgroundColor: `${item.color}` }}
-              ></div>
+              ></span>
               {item.content}
             </p>
           ))}

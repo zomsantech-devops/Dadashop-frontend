@@ -96,9 +96,9 @@ export function PointsBenefitsTable() {
                       {!isFirst && (
                         <>
                           <br />
-                          <p className="text-[#1EAEF0] font-bold">
+                          <span className="text-[#1EAEF0] font-bold">
                             *หาก Points ครบแล้ว ถึงจะทราบ Rate*
-                          </p>
+                          </span>
                         </>
                       )}
                     </Typography>

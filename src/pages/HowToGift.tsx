@@ -42,30 +42,28 @@ function HowToGift() {
         </div>
         <div className="flex flex-col gap-[20px]">
           <div className="screen_930:w-full screen_930:text-[20px] font-bold bg-[#E7F9FD] w-[870px] text-xl leading-[40px] p-7 rounded-[30px] self-center">
-            <p className="mb-[15px]">
+            <div className="mb-[15px]">
               1. เพิ่มเพื่อนในเกม{" "}
-              <span className="text-blue-600 font-bold">ทุกตัว</span> ตามนี้ และ
-              แจ้งชื่อในเกมของลูกค้าให้ทางร้านทราบด้วย
-            </p>
+              <span className="text-blue-600 font-bold">ทุกตัว</span> ตามนี้
+              และแจ้งชื่อในเกมของลูกค้าให้ทางร้านทราบด้วย
+            </div>
             <ul className="grid grid-cols-5 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-4">
               {dadaID.map((id, index) => {
                 return (
-                  <>
-                    <li
-                      key={index}
-                      className="p-1 bg-[#515151] text-center text-white rounded-xl cursor-pointer hover:bg-[#515151]/90"
-                      onClick={() => handleClick(index)}
-                    >
-                      {clickedIndex === index ? (
-                        <div className="flex items-center justify-center gap-x-1 text-[#4ADC71]">
-                          <FaRegCheckCircle />
-                          <p>Copied!</p>
-                        </div>
-                      ) : (
-                        id
-                      )}
-                    </li>
-                  </>
+                  <li
+                    key={index}
+                    className="p-1 bg-[#515151] text-center text-white rounded-xl cursor-pointer hover:bg-[#515151]/90"
+                    onClick={() => handleClick(index)}
+                  >
+                    {clickedIndex === index ? (
+                      <div className="flex items-center justify-center gap-x-1 text-[#4ADC71]">
+                        <FaRegCheckCircle />
+                        <p>Copied!</p>
+                      </div>
+                    ) : (
+                      id
+                    )}
+                  </li>
                 );
               })}
             </ul>
@@ -105,16 +103,16 @@ function HowToGift() {
             </div>
           </div>
           <div className="screen_930:w-full font-bold bg-[#E7F9FD] w-[870px] text-xl screen_930:text-[20px] leading-[40px] p-[30px] rounded-[30px] self-center">
+            <div className="">3. สั่งซื้อ โดยการแจ้ง</div>
+            <ul className="ml-10 md:ml-8 sm:ml-5">
+              <li className="flex items-center">
+                <span className="list-bullet"></span>Item ที่ต้องการ
+              </li>
+              <li className="flex items-center">
+                <span className="list-bullet"></span>ชื่อในเกมของลูกค้า
+              </li>
+            </ul>
             <p className="mb-[15px]">
-              3. สั่งซื้อ โดยการแจ้ง
-              <ul className="ml-10 md:ml-8 sm:ml-5">
-                <li className="flex items-center">
-                  <span className="list-bullet"></span>Item ที่ต้องการ
-                </li>
-                <li className="flex items-center">
-                  <span className="list-bullet"></span>ชื่อในเกมของลูกค้า
-                </li>
-              </ul>
               (ทักแล้วรอ Admin คอนเฟิร์ม ห้ามทักซ้ำเด็ดขาดครับ
               ไม่งั้นอาจจะหลุดคิวได้)
             </p>

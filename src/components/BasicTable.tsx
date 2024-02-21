@@ -68,7 +68,8 @@ export function BasicTable({
           </thead>
           <tbody>
             {infos.map(({ status, time, buyerName }, index) => {
-              const newStatus = status === "พร้อมส่งวันนี้เวลา" ? "ส่งได้เวลา" : status
+              const newStatus =
+                status === "พร้อมส่งวันนี้เวลา" ? "ส่งได้เวลา" : status;
 
               const isReady = newStatus === "พร้อมส่ง";
               const isReadyAt = newStatus === "ส่งได้เวลา";
@@ -92,7 +93,8 @@ export function BasicTable({
                       color="blue-gray"
                       className={`font-normal leading-none w-[115px] ${statusClasses}`}
                     >
-                      {status}
+                      {status || ""}
+                      {/* Providing a default value if status is undefined */}
                     </Typography>
                   </td>
                   <td className={classes}>
@@ -101,7 +103,8 @@ export function BasicTable({
                       color="blue-gray"
                       className="font-normal leading-none"
                     >
-                      {time}
+                      {time || ""}
+                      {/* Providing a default value if time is undefined */}
                     </Typography>
                   </td>
                   <td className={classes}>
@@ -110,7 +113,8 @@ export function BasicTable({
                       color="blue-gray"
                       className="font-normal leading-none"
                     >
-                      {buyerName}
+                      {buyerName || ""}
+                      {/* Providing a default value if buyerName is undefined */}
                     </Typography>
                   </td>
                 </tr>

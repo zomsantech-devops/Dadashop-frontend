@@ -16,7 +16,7 @@ function Navbar() {
 
   useEffect(() => {
     setAnimateCollapseIn(true);
-    handleToggleDropdownClose()
+    handleToggleDropdownClose();
     setTimeout(() => {
       setMobileDropdownOpen(false);
       setAnimateCollapseIn(false);
@@ -73,7 +73,13 @@ function Navbar() {
       <div className="w-full flex items-center">
         {/* LOGO */}
         <Link to="/">
-          <img src={`${process.env.REACT_APP_API}/image/banner-5`} alt="logo" className="h-20 screen_443:-ml-3.5" />
+          <img
+            rel="preload"
+            loading="lazy"
+            src={`${process.env.REACT_APP_API}/image/banner-5`}
+            alt="logo"
+            className="h-20 w-full object-cover screen_443:-ml-3.5"
+          />
         </Link>
         {!isMobile && (
           <>
@@ -127,7 +133,7 @@ function Navbar() {
                   >
                     <Link
                       to="/check-queue/zz1-zz6"
-                      className= {`${
+                      className={`${
                         location.pathname === "/check-queue/zz1-zz6"
                           ? "bg-[#3d82d1] text-white"
                           : "text-gray-700"
@@ -138,7 +144,7 @@ function Navbar() {
                     </Link>
                     <Link
                       to="/check-queue/d1-d10"
-                      className= {`${
+                      className={`${
                         location.pathname === "/check-queue/d1-d10"
                           ? "bg-[#3d82d1] text-white"
                           : "text-gray-700"
@@ -149,7 +155,7 @@ function Navbar() {
                     </Link>
                     <Link
                       to="/check-queue/g1-g8"
-                      className= {`${
+                      className={`${
                         location.pathname === "/check-queue/g1-g8"
                           ? "bg-[#3d82d1] text-white"
                           : "text-gray-700"
@@ -158,12 +164,15 @@ function Navbar() {
                     >
                       Dada G1-G8
                       <br />
-                      <span className={`${
-                        location.pathname === "/check-queue/g1-g8"
-                          ? "text-[#23d9d9]"
-                          : "text-red-400"
-                      } text-red-400 group-hover/name:text-[#23d9d9]`}                                           
-                      >(ปิดรับเพื่อนแล้ว)</span>
+                      <span
+                        className={`${
+                          location.pathname === "/check-queue/g1-g8"
+                            ? "text-[#23d9d9]"
+                            : "text-red-400"
+                        } text-red-400 group-hover/name:text-[#23d9d9]`}
+                      >
+                        (ปิดรับเพื่อนแล้ว)
+                      </span>
                     </Link>
                   </div>
                 )}
@@ -177,7 +186,7 @@ function Navbar() {
                 } font-bold px-4 py-2 rounded-full transition ease-in-out duration-300 hover:bg-[#3d82d1] hover:text-white`}
               >
                 บริการอื่นๆ
-              </Link>    
+              </Link>
               <Link
                 to="/check-points"
                 className={`${
@@ -196,14 +205,14 @@ function Navbar() {
             <Link target="_blank" to="https://www.facebook.com/dadafnth/">
               <img
                 src={FBIcon}
-                alt=""
+                alt="facebook"
                 className="w-[24px] opacity-50 hover:opacity-100"
               />
             </Link>
             <Link target="_blank" to="https://discord.com/invite/5t8Juy7FHu">
               <img
                 src={DiscordIcon}
-                alt=""
+                alt="discord"
                 className="w-[24px] opacity-50 hover:opacity-100"
               />
             </Link>
@@ -214,6 +223,7 @@ function Navbar() {
             <button
               className="flex-col items-center justify-center hidden lg:flex"
               onClick={handleToggleMobileDropdown}
+              aria-label="Toggle mobile menu"
             >
               <span
                 className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
@@ -312,24 +322,27 @@ function Navbar() {
                 } w-fit block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white`}
               >
                 Dada G1-G8{" "}
-                <span className={`${
-                        location.pathname === "/check-queue/g1-g8"
-                          ? "text-[#23d9d9]"
-                          : "text-red-400"
-                      } text-red-400 group-hover/name:text-[#23d9d9]`}                                           
-                      >(ปิดรับเพื่อนแล้ว)</span>
+                <span
+                  className={`${
+                    location.pathname === "/check-queue/g1-g8"
+                      ? "text-[#23d9d9]"
+                      : "text-red-400"
+                  } text-red-400 group-hover/name:text-[#23d9d9]`}
+                >
+                  (ปิดรับเพื่อนแล้ว)
+                </span>
               </Link>
             </div>
           )}
           <Link
-                to="/price-other"
-                className={`${
-                  location.pathname === "/price-other" &&
-                  " px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
-                } font-bold py-2 relative w-fit block`}
-              >
-                บริการอื่นๆ
-          </Link>   
+            to="/price-other"
+            className={`${
+              location.pathname === "/price-other" &&
+              " px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
+            } font-bold py-2 relative w-fit block`}
+          >
+            บริการอื่นๆ
+          </Link>
           <Link
             to="/check-points"
             className={`${

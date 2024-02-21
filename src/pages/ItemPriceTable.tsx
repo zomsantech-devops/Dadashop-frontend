@@ -35,9 +35,9 @@ function ItemPriceTable() {
   return (
     <div>
       <div className="flex flex-col justify-center px-[30px]">
-        <p className="text-center text-4xl font-bold leading-normal my-[40px] screen_930:text-3xl screen_445:text-2xl">
+        <div className="text-center text-4xl font-bold leading-normal my-[40px] screen_930:text-3xl screen_445:text-2xl">
           เติม Fortnite
-        </p>
+        </div>
         <div className="grid grid-cols-12 screen_960:flex screen_960:flex-col self-center gap-[20px] screen_960:gap-[40px] screen_500:w-full">
           {data.map((cardElement, index) =>
             data.length % 2 !== 0 && index === data.length - 1 ? (

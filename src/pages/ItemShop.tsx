@@ -202,9 +202,9 @@ function ItemShop() {
                                 </div>
                               )}
                               <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 text-lg uppercase antialiased leading-6 card-bg w-full rounded-lg screen_445:text-lg screen_445:leading-normal">
-                                <h3 className="font-bold leading-5 pb-1.5 pt-2 screen_445:pb-0">
+                                <div className="font-bold leading-5 pb-1.5 pt-2 screen_445:pb-0">
                                   {item.name}
-                                </h3>
+                                </div>
                                 <div className="flex items-center justify-between">
                                   <div className="flex items-center justify-center">
                                     <img
@@ -255,9 +255,9 @@ function ItemShop() {
                               </div>
                             )}
                             <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 text-xl uppercase antialiased leading-6 card-bg w-full rounded-lg screen_445:text-lg screen_445:leading-normal">
-                              <h3 className="text-[20px] font-bold leading-5 pb-1.5 pt-2 screen_445:pb-0">
+                              <div className="text-[20px] font-bold leading-5 pb-1.5 pt-2 screen_445:pb-0">
                                 {item.name}
-                              </h3>
+                              </div>
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center justify-center">
                                   <img
@@ -302,9 +302,9 @@ function ItemShop() {
                               </div>
                             )}
                             <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 text-xl uppercase antialiased leading-6 card-bg w-full rounded-lg screen_445:text-lg screen_445:leading-normal">
-                              <h3 className="text-[20px] font-bold leading-5 pb-1.5 pt-2 screen_445:pb-0">
+                              <div className="text-[20px] font-bold leading-5 pb-1.5 pt-2 screen_445:pb-0">
                                 {item.name}
-                              </h3>
+                              </div>
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center justify-center">
                                   <img

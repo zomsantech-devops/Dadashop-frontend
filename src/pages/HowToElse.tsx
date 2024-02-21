@@ -76,37 +76,35 @@ function HowToElse() {
             </div>
           </div>
           <div className="screen_930:w-full screen_930:text-[20px] font-bold bg-[#E7F9FD] w-[870px] text-xl leading-[40px] p-[30px] rounded-[30px] self-center">
-            <p className=" mb-[15px]">
-              4. สั่งซื้อ โดยการแจ้งสิ่งที่ต้องการ
-              <ul className="ml-10 md:ml-8 sm:ml-5">
-                <li className="flex flex-col whitespace-normal">
+            <div className="">4. สั่งซื้อ โดยการแจ้งสิ่งที่ต้องการ</div>
+            <ul className="ml-10 md:ml-8 sm:ml-5">
+              <li className="flex flex-col whitespace-normal">
+                <p>
+                  <span className="list-bullet"></span>V-Bucks
+                </p>
+                <div className="ml-10 md:ml-8 sm:ml-5">
                   <p>
-                    <span className="list-bullet"></span>V-Bucks
+                    <span className="list-bullet"></span>1000
                   </p>
-                  <div className="ml-10 md:ml-8 sm:ml-5">
-                    <p>
-                      <span className="list-bullet"></span>1000
-                    </p>
-                    <p>
-                      <span className="list-bullet"></span>2800
-                    </p>
-                    <p>
-                      <span className="list-bullet"></span>5000
-                    </p>
-                    <p>
-                      <span className="list-bullet"></span>13500
-                    </p>
-                  </div>
-                </li>
-                <li className="flex items-center">
-                  <span className="list-bullet"></span>Packs
-                </li>
-                <li className="flex items-center">
-                  <span className="list-bullet"></span>Fortnite Crew
-                </li>
-              </ul>
-              (ทักแล้วรอ Admin คอนเฟิร์มครับผม)
-            </p>
+                  <p>
+                    <span className="list-bullet"></span>2800
+                  </p>
+                  <p>
+                    <span className="list-bullet"></span>5000
+                  </p>
+                  <p>
+                    <span className="list-bullet"></span>13500
+                  </p>
+                </div>
+              </li>
+              <li className="flex items-center">
+                <span className="list-bullet"></span>Packs
+              </li>
+              <li className="flex items-center">
+                <span className="list-bullet"></span>Fortnite Crew
+              </li>
+            </ul>
+            <p className=" mb-[15px]">(ทักแล้วรอ Admin คอนเฟิร์มครับผม)</p>
             <div className="flex gap-[15px] text-[16px]">
               <FBButton />
               <DiscordButton />
