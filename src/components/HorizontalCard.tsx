@@ -22,16 +22,20 @@ export const HorizontalCard = ({ cardData }: VerticalCardProps) => {
         <div className="flex flex-col justify-center gap-3 mb-5 mt-3 ml-10">
           {list.map((item, index) => (
             <p key={index}>
-              <span
-                className={`inline-block w-[5px] h-[5px] ${(item.color).toLowerCase()} rounded-full mr-[0.5em] mb-0.5`}
-              ></span>
+              <div
+                className={`inline-block w-[5px] h-[5px] rounded-full mr-[0.5em] mb-0.5`}
+                style={{ backgroundColor: `${item.color}` }}
+              ></div>
               {item.content}
             </p>
           ))}
         </div>
         <Link
           to={button.link}
-          className={`link-how-to-btn-purple w-full text-center block px-4 py-3 bg-[#1c85b6] text-white rounded-3xl bg-gradient-to-r ${button.color.from} ${button.color.via} ${button.color.to} text-xl font-bold`}
+          className={`link-how-to-btn-purple w-full text-center block px-4 py-3 bg-[#1c85b6] text-white rounded-3xl text-xl font-bold`}
+          style={{
+            background: `linear-gradient(90deg, ${button.color.from} 0%, ${button.color.via} 50%, ${button.color.to} 100%)`,
+          }}
         >
           {button.name}
         </Link>

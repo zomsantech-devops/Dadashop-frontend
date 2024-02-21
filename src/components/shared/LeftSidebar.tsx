@@ -6,6 +6,7 @@ import axios from "axios";
 import { GrPowerReset } from "react-icons/gr";
 import { toast } from "react-toastify";
 import { IoMdSettings } from "react-icons/io";
+import { MdNoteAdd } from "react-icons/md";
 
 const LeftSidebar = () => {
   const [isOpen, setIsOpen] = useState(window.innerWidth > 1370);
@@ -147,6 +148,21 @@ const LeftSidebar = () => {
                     <FaEdit className="w-5 h-5 self-center" />
                     <p className="grow overflow-hidden text-ellipsis whitespace-nowrap">
                       Update Preset
+                    </p>
+                  </Link>
+                </div>
+                <div className="pb-0.5 last:pb-0">
+                  <Link
+                    to={"/create-preset"}
+                    className={`flex h-10 items-center gap-2 rounded-lg w-full px-2 ${
+                      location.pathname === "/create-preset"
+                        ? "bg-[#424242]"
+                        : "hover:bg-[#212121]"
+                    }`}
+                  >
+                    <MdNoteAdd className="w-5 h-5 self-center" />
+                    <p className="grow overflow-hidden text-ellipsis whitespace-nowrap">
+                      Create Preset
                     </p>
                   </Link>
                 </div>

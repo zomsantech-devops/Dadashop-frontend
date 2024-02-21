@@ -4,34 +4,34 @@ import axios from "axios";
 import { VerticalCard } from "../../components/VerticalCard";
 import { CardProps } from "../../types";
 import { toast } from "react-toastify";
+import empty from "../../assets/images/empty.jpg"
 
-const UpdatePreset = () => {
+const CreatePreset = () => {
   const [data, setData] = useState<CardProps[]>([]);
-  const [selectedPresetId, setSelectedPresetId] = useState<number>(1);
   const [selectedPreset, setSelectedPreset] = useState<CardProps>({
-    image: "",
+    image: empty,
     title: "",
     list: [
       {
         content: "",
-        color: "",
+        color: "#000000",
       },
       {
         content: "",
-        color: "",
+        color: "#000000",
       },
       {
         content: "",
-        color: "",
+        color: "#000000",
       },
     ],
     button: {
       name: "",
       link: "",
       color: {
-        from: "",
-        via: "",
-        to: "",
+        from: "#000000",
+        via: "#000000",
+        to: "#000000",
       },
     },
   });
@@ -48,23 +48,6 @@ const UpdatePreset = () => {
 
     getPreset();
   }, []);
-
-  useEffect(() => {
-    const getPresetById = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API}/preset/${selectedPresetId}`
-        );
-        setSelectedPreset(response.data.data);
-      } catch (error: any) {}
-    };
-
-    getPresetById();
-  }, [selectedPresetId]);
-
-  const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedPresetId(parseInt(e.target.value));
-  };
 
   const handleUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -132,10 +115,10 @@ const UpdatePreset = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true)
+    setIsLoading(true);
 
     const payload = {
-      image: `${process.env.REACT_APP_API}/image/preset-${selectedPresetId}`,
+      image: `${process.env.REACT_APP_API}/image/preset-${data.length + 1}`,
       title: selectedPreset.title,
       list: selectedPreset.list.map(({ content, color }) => ({
         content,
@@ -150,7 +133,7 @@ const UpdatePreset = () => {
           to: selectedPreset.button.color.to.toLowerCase(),
         },
       },
-      preset_id: selectedPresetId,
+      preset_id: data.length + 1,
     };
 
     const rawToken: string | null = localStorage.getItem("token");
@@ -159,7 +142,7 @@ const UpdatePreset = () => {
       if (rawToken) {
         const token = rawToken.replace(/"/g, "");
         await axios.post(
-          `${process.env.REACT_APP_API}/image/preset-${selectedPresetId}`,
+          `${process.env.REACT_APP_API}/image/preset-${data.length + 1}`,
           { image },
           {
             headers: {
@@ -171,20 +154,20 @@ const UpdatePreset = () => {
         toast.success("Upload Image Successfully");
       } else {
         toast.warn("Token not found in localStorage");
-        setIsLoading(false)
+        setIsLoading(false);
         console.error("Token not found in localStorage");
       }
     } catch (error) {
       toast.error("Upload Image Failed");
-      setIsLoading(false)
+      setIsLoading(false);
       console.error("Upload Error:" + error);
     }
 
     try {
       if (rawToken) {
         const token = rawToken.replace(/"/g, "");
-        await axios.patch(
-          `${process.env.REACT_APP_API}/preset/${selectedPresetId}`,
+        await axios.post(
+          `${process.env.REACT_APP_API}/preset`,
           payload,
           {
             headers: {
@@ -193,12 +176,12 @@ const UpdatePreset = () => {
             },
           }
         );
-        toast.success("Preset has been Updated");
-        setIsLoading(false)
+        toast.success("Preset has been Created!");
+        setIsLoading(false);
       }
     } catch (error) {
       toast.error("Failed");
-      setIsLoading(false)
+      setIsLoading(false);
       console.error(error);
     }
   };
@@ -208,29 +191,23 @@ const UpdatePreset = () => {
       <LeftSidebar />
       <div className="flex flex-col justify-center px-[30px] w-fit my-6 screen_910:w-full mx-auto relative">
         <div className="text-center text-5xl font-bold my-10 leading-[58px]">
-          Update Preset
+          Create Preset
         </div>
         <div className="grid grid-cols-10 gap-8">
           <div className="col-span-5 screen_930:col-span-10">
             <form onSubmit={handleSubmit} className="flex flex-col">
               <label className="mb-[3px] font-bold">Preset id:</label>
-              <select
-                className="border border-blue-gray-50 mb-[15px] rounded-[5px] px-[10px] py-[5px] focus:border-[#1EAEF0] outline-[#02A7F3]"
-                name="preset"
-                onChange={handleSelect}
-              >
-                {/* <option value="empty">Select Preset</option> */}
-                {data.map((preset) => (
-                  <option key={preset.preset_id} value={preset.preset_id}>
-                    {preset.preset_id}
-                  </option>
-                ))}
-              </select>
+              <input
+                type="text"
+                readOnly
+                value={data.length + 1}
+                className="bg-[#E7F9FD] mb-[15px] rounded-[5px] px-[10px] py-[5px] focus:border-none outline-none"
+              />
 
               <div className="mb-[15px]">
                 <p className="text-sm opacity-60">
                   *Upload to {process.env.REACT_APP_API}/preset-
-                  {selectedPresetId}
+                  {data.length + 1}
                 </p>
                 <label className="mb-2 font-bold mr-2">Upload new image:</label>
                 <input
@@ -372,7 +349,7 @@ const UpdatePreset = () => {
                 }`}
                 disabled={isLoading}
               >
-                อัพเดต Preset
+                สร้าง Preset
               </button>
             </form>
           </div>
@@ -384,4 +361,4 @@ const UpdatePreset = () => {
     </main>
   );
 };
-export default UpdatePreset;
+export default CreatePreset;

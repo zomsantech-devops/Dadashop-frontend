@@ -25,6 +25,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ShopSettings from "./pages/admin/ShopSettings";
 import UpdatePreset from "./pages/admin/UpdatePreset";
 import ProtectedRoute from "./components/shared/ProtectedRoute";
+import CreatePreset from "./pages/admin/CreatePreset";
 
 function App() {
   return (
@@ -44,14 +45,11 @@ function App() {
         <Route path="/check-queue/zz1-zz6" element={<CheckQueueZZ />} />
         <Route path="/check-points" element={<CheckPoints />} />
         <Route path="/login" element={<Login />} />
-        {/* <Route path="/admin123dada" element={<Admin />} />
-        <Route path="/change-image" element={<ChangeImages />} />
-        <Route path="/shop-setting" element={<ShopSettings />} />
-        <Route path="/update-preset" element={<UpdatePreset />} /> */}
         <Route path="/admin123dada" element={<ProtectedRoute component={Admin} />} />
         <Route path="/change-image" element={<ProtectedRoute component={ChangeImages} />} />
         <Route path="/shop-setting" element={<ProtectedRoute component={ShopSettings} />} />
         <Route path="/update-preset" element={<ProtectedRoute component={UpdatePreset} />} />
+        <Route path="/create-preset" element={<ProtectedRoute component={CreatePreset} />} />
       </Routes>
     </Router>
   );
@@ -60,7 +58,7 @@ function App() {
 function NavbarWrapper(): JSX.Element {
   const location = useLocation();
 
-  const hideNavbarRoutes = ["/admin123dada", "/change-image", "/login", "/shop-setting", "/update-preset"];
+  const hideNavbarRoutes = ["/admin123dada", "/change-image", "/login", "/shop-setting", "/update-preset", "/create-preset"];
   const isNavbarVisible = !hideNavbarRoutes.includes(location.pathname);
 
   return isNavbarVisible ? <Navbar /> : <></>;
