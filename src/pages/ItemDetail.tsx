@@ -5,8 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import vBucks from "../assets/icons/vbucks-coins.png";
 import { CustomButton } from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
-import { IoMdClose, IoMdPricetag } from "react-icons/io";
-import { FaPlay } from "react-icons/fa";
+import { IoMdClose, IoMdPricetag, IoMdPlay } from "react-icons/io";
 import { Carousel } from "../components/Carousel";
 import {
   DisplayAssetsItem,
@@ -142,7 +141,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                   ></video>
                   {!isPlaying && (
                     <div className="absolute left-3 bottom-3">
-                      <FaPlay className="text-white" />
+                      <IoMdPlay className="text-white" />
                     </div>
                   )}
                 </div>
@@ -202,7 +201,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
               ></video>
               {!isPlaying && (
                 <div className="absolute left-3 bottom-3">
-                  <FaPlay className="text-white" />
+                  <IoMdPlay className="text-white" />
                 </div>
               )}
             </div>

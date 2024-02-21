@@ -206,7 +206,7 @@ const CreatePreset = () => {
 
               <div className="mb-[15px]">
                 <p className="text-sm opacity-60">
-                  *Upload to {process.env.REACT_APP_API}/preset-
+                  *Upload to {process.env.REACT_APP_API}/image/preset-
                   {data.length + 1}
                 </p>
                 <label className="mb-2 font-bold mr-2">Upload new image:</label>

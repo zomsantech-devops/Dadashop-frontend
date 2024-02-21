@@ -1,12 +1,17 @@
 import { Link, useLocation } from "react-router-dom";
-import { IoPersonAdd } from "react-icons/io5";
-import { FaHome, FaImage, FaBars, FaEdit } from "react-icons/fa";
+import {
+  FaHome,
+  FaImage,
+  FaBars,
+  FaEdit,
+  FaUserPlus,
+  FaRedo,
+  FaCog,
+  FaPlusSquare
+} from "react-icons/fa";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { GrPowerReset } from "react-icons/gr";
 import { toast } from "react-toastify";
-import { IoMdSettings } from "react-icons/io";
-import { MdNoteAdd } from "react-icons/md";
 
 const LeftSidebar = () => {
   const [isOpen, setIsOpen] = useState(window.innerWidth > 1370);
@@ -100,7 +105,7 @@ const LeftSidebar = () => {
                         : "hover:bg-[#212121]"
                     }`}
                   >
-                    <IoPersonAdd className="w-5 h-5 self-center" />
+                    <FaUserPlus className="w-5 h-5 self-center" />
                     <p className="grow overflow-hidden text-ellipsis whitespace-nowrap">
                       Add Member
                     </p>
@@ -130,7 +135,7 @@ const LeftSidebar = () => {
                         : "hover:bg-[#212121]"
                     }`}
                   >
-                    <IoMdSettings className="w-5 h-5 self-center" />
+                    <FaCog className="w-5 h-5 self-center" />
                     <p className="grow overflow-hidden text-ellipsis whitespace-nowrap">
                       Shop Settings
                     </p>
@@ -160,7 +165,7 @@ const LeftSidebar = () => {
                         : "hover:bg-[#212121]"
                     }`}
                   >
-                    <MdNoteAdd className="w-5 h-5 self-center" />
+                    <FaPlusSquare className="w-5 h-5 self-center" />
                     <p className="grow overflow-hidden text-ellipsis whitespace-nowrap">
                       Create Preset
                     </p>
@@ -180,9 +185,7 @@ const LeftSidebar = () => {
               disabled={isLoading}
             >
               <div className="flex items-center justify-center gap-4">
-                <GrPowerReset
-                  className={`w-5 h-5 ${isLoading && "animate-spin"}`}
-                />
+                <FaRedo className={`w-5 h-5 ${isLoading && "animate-spin"}`} />
                 <p className="grow overflow-hidden text-ellipsis whitespace-nowrap">
                   Reset API
                 </p>

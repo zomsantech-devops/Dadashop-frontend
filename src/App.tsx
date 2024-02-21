@@ -5,7 +5,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import ScrollToTop from "./components/shared/ScrollToTop";
-import HomePage from "./pages/HomePage";
+// import HomePage from "./pages/HomePage";
 import ItemPriceTable from "./pages/ItemPriceTable";
 import OtherGameItemPriceTable from "./pages/OrtherGame";
 import HowToGift from "./pages/HowToGift";
@@ -26,6 +26,9 @@ import ShopSettings from "./pages/admin/ShopSettings";
 import UpdatePreset from "./pages/admin/UpdatePreset";
 import ProtectedRoute from "./components/shared/ProtectedRoute";
 import CreatePreset from "./pages/admin/CreatePreset";
+import { lazy } from "react";
+
+const HomePage = lazy(() => import("./pages/HomePage"))
 
 function App() {
   return (
