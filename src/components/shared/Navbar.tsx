@@ -1,5 +1,6 @@
 import FBIcon from "../../assets/icons/facebook.png";
 import DiscordIcon from "../../assets/icons/discord.png";
+import dadaLogo from "../../assets/images/dada-logo-horizontal.png";
 import { FaChevronDown } from "react-icons/fa";
 
 import { Link, useLocation } from "react-router-dom";
@@ -75,7 +76,7 @@ function Navbar() {
         <Link to="/">
           <img
             loading="lazy"
-            src={`${process.env.REACT_APP_API}/image/banner-5`}
+            src={dadaLogo}
             alt="logo"
             className="h-20 w-full object-cover screen_443:-ml-3.5"
           />

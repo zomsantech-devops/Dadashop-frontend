@@ -31,7 +31,7 @@ function HomePage() {
           <div className="w-24 h-24">
             <img src={check} alt="check" />
           </div>
-          <div rel="preload" className="text-4xl font-bold text-center">
+          <div className="text-4xl font-bold text-center">
             <p>
               <span className="text-[#39843B]">ร้านเปิด</span> Available
             </p>
