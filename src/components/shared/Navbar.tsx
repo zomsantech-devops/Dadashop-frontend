@@ -74,7 +74,6 @@ function Navbar() {
         {/* LOGO */}
         <Link to="/">
           <img
-            rel="preload"
             loading="lazy"
             src={`${process.env.REACT_APP_API}/image/banner-5`}
             alt="logo"

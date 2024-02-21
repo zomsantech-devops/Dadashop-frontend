@@ -117,7 +117,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                   <Carousel>
                     {displayAssets.map((asset) => (
                       <img
-                        key={asset.displayAsset}
+                        key={asset.materialInstance}
                         src={asset.background || noImg}
                         alt={asset.displayAsset}
                         className={`aspect-square rounded-lg`}

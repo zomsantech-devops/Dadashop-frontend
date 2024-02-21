@@ -143,6 +143,7 @@ interface Grants {
 export interface DisplayAssetsItem {
   displayAsset: string;
   background: string;
+  materialInstance: string;
 }
 
 export interface ResponseData {

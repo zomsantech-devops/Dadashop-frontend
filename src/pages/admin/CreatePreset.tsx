@@ -14,24 +14,24 @@ const CreatePreset = () => {
     list: [
       {
         content: "",
-        color: "#000000",
+        color: "#ffffff",
       },
       {
         content: "",
-        color: "#000000",
+        color: "#ffffff",
       },
       {
         content: "",
-        color: "#000000",
+        color: "#ffffff",
       },
     ],
     button: {
       name: "",
       link: "",
       color: {
-        from: "#000000",
-        via: "#000000",
-        to: "#000000",
+        from: "#ffffff",
+        via: "#ffffff",
+        to: "#ffffff",
       },
     },
   });
