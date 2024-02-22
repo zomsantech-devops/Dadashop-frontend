@@ -41,7 +41,9 @@ function ItemPriceTable() {
         <div className="grid grid-cols-12 screen_960:flex screen_960:flex-col self-center gap-[20px] screen_960:gap-[40px] screen_500:w-full">
           {data.map((cardElement, index) =>
             data.length % 2 !== 0 && index === data.length - 1 ? (
-              <HorizontalCard key={index} cardData={cardElement} />
+              <div key={index} className="col-start-4 col-span-6">
+                <HorizontalCard cardData={cardElement} />
+              </div>
             ) : (
               <VerticalCard key={index} cardData={cardElement} />
             )

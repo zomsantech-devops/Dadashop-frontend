@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { CardProps } from "../types";
+import { useState } from "react";
 
 interface VerticalCardProps {
   cardData: CardProps;
@@ -8,31 +9,63 @@ interface VerticalCardProps {
 export const HorizontalCard = ({ cardData }: VerticalCardProps) => {
   const { image, title, list, button } = cardData;
 
+  // States to manage truncation
+  const [isTitleTruncated, setIsTitleTruncated] = useState(true);
+  const [truncateContent, setTruncateContent] = useState(list.map(() => true));
+
+  // Function to toggle title truncation
+  const toggleTitleTruncation = () => {
+    setIsTitleTruncated(!isTitleTruncated);
+  };
+
+  // Function to toggle content truncation
+  const toggleContentTruncation = (index: number) => {
+    const newTruncateContent = [...truncateContent];
+    newTruncateContent[index] = !newTruncateContent[index];
+    setTruncateContent(newTruncateContent);
+  };
+
   return (
-    <div className="col-span-12 screen_1250:w-[900px] screen_960:w-[440px] screen_500:w-full rounded-[30px] price-and-how-to-box">
-      <div className="h-[585px] screen_960:w-full screen_960:h-auto rounded-t-[30px] bg-lime-100 overflow-hidden">
+    <div className="col-span-6 w-[585px] h-min screen_1250:max-w-[440px] screen_500:w-full rounded-[30px] price-and-how-to-box">
+      <div className="w-full rounded-t-[30px] bg-lime-100 overflow-hidden">
         <img
           src={image}
           alt="giftImage"
-          className="h-[585px] w-full object-contain screen_960:h-auto screen_960:w-full"
+          className="w-full aspect-square object-cover object-top"
         ></img>
       </div>
-      <div className="p-[15px]">
-        <h1 className="font-bold text-[28px]">{title}</h1>
-        <div className="flex flex-col justify-center gap-3 mb-5 mt-3 ml-10 w-fit">
-          {list.map((item, index) => (
-            <p key={index} className="overflow-hidden text-ellipsis whitespace-break-spaces">
-              <span
-                className={`inline-block w-[5px] h-[5px] rounded-full mr-[0.5em] mb-0.5`}
-                style={{ backgroundColor: `${item.color}` }}
-              ></span>
-              {item.content}
-            </p>
-          ))}
+      <div className="p-[15px] flex flex-col justify-between h-full">
+        <div>
+          <h1
+            className={`font-bold text-[28px] ${
+              isTitleTruncated ? "truncate" : ""
+            }`}
+            onClick={toggleTitleTruncation}
+          >
+            {title}
+          </h1>
+          <div className="flex flex-col justify-center gap-3 mb-5 mt-3 ml-10">
+            {list.map((item, index) => (
+              <div key={index} className="flex items-center">
+                <span
+                  className="inline-block w-[5px] h-[5px] rounded-full mr-2"
+                  style={{ backgroundColor: `${item.color}` }}
+                ></span>
+                <p
+                  className={`w-full ${
+                    truncateContent[index] ? "truncate" : ""
+                  }`}
+                  onClick={() => toggleContentTruncation(index)}
+                >
+                  {item.content}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
         <Link
           to={button.link}
-          className={`link-how-to-btn-purple w-full text-center block px-4 py-3 bg-[#1c85b6] text-white rounded-3xl text-xl font-bold`}
+          className="link-how-to-btn-purple w-full text-center block px-4 py-3 bg-[#1c85b6] text-white rounded-3xl text-xl font-bold mt-2"
           style={{
             background: `linear-gradient(90deg, ${button.color.from} 0%, ${button.color.via} 50%, ${button.color.to} 100%)`,
           }}
