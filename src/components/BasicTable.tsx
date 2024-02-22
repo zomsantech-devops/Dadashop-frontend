@@ -33,10 +33,10 @@ export function BasicTable({
           )}
         </div>
 
-        <div className="flex items-center screen_500:flex-col gap-x-1.5 my-auto">
+        <div className={`flex items-center ${isAvailable ? "" : "screen_500:flex-col"} gap-x-1.5 my-auto`}>
           <p>V-Bucks</p>
           <span
-            className={`w-[60px] text-center font-bold text-white px-2 py-1 rounded-xl text-sm screen_500:self-start screen_500:text-base ${getTextColorClass(
+            className={`w-[60px] text-center font-bold text-white px-2 py-1 rounded-xl text-sm screen_500:self-start screen_500:text-base screen_500:w-auto ${getTextColorClass(
               parseInt(vBucks)
             )}`}
           >
