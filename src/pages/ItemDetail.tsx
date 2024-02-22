@@ -37,7 +37,6 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
       } else {
         videoRef.current.pause();
       }
-      // Toggle the isPlaying state to reflect the change for UI purposes.
       setIsPlaying(!videoRef.current.paused);
     }
   };
@@ -145,21 +144,23 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                     </div>
                   )}
                 </div>
+              ) : item.images.background ? (
+                <div className="max-w-[520px] screen_610:w-[375px] screen_445:w-[275px] rounded-lg">
+                  <img
+                    src={item.images.background}
+                    alt={"item in set"}
+                    className={`aspect-square rounded-lg`}
+                  />
+                </div>
               ) : (
                 <img src={noImg} alt="empty" className={`rounded-lg`} />
               )
             ) : (
               <div className="flex flex-col">
-                <p className="text-2xl font-bold text-center mb-4">
-                  {item.grants.length} ไอเท็มในเซ็ต
-                </p>
                 <div className="flex items-center justify-center flex-wrap gap-3 w-[648px] screen_910:w-auto">
                   {item.grants.length !== 0 ? (
                     item.grants.map((grant) => (
-                      <div
-                        key={grant.id}
-                        className="cursor-pointer rounded-xl"
-                      >
+                      <div key={grant.id} className="cursor-pointer rounded-xl">
                         {!grant.images.icon_background ? (
                           <>
                             <img
@@ -172,7 +173,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                         ) : (
                           <img
                             src={grant.images.icon_background}
-                            alt=""
+                            alt="item grant"
                             className="bg-[#1780d8] rounded-xl w-[120px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105 screen_445:w-[80px]"
                             onClick={() => handleItemClick(grant.id)}
                           />
@@ -229,11 +230,15 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                     <div className="flex gap-2">
                       <p className="font-bold text-2xl">{item.price}</p>
                       <p className="font-bold text-2xl">
-                        (
-                        <span className="text-[#3D82D1] cursor-pointer">
-                          {item.set.name}
-                        </span>
-                        )
+                        {item.set?.name && (
+                          <>
+                            <span>&#40;</span>
+                            <span className="text-[#3D82D1] cursor-pointer">
+                              {item.set.name}
+                            </span>
+                            <span>&#41;</span>
+                          </>
+                        )}
                       </p>
                     </div>
                   ) : (
@@ -284,7 +289,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                             >
                               <img
                                 src={style.image}
-                                alt=""
+                                alt="style item"
                                 className="rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
                               />
                             </div>
@@ -292,6 +297,28 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                       </div>
                     </section>
                   ))}
+                </>
+              )}
+              {item.grants.length !== 0 && (
+                <>
+                  <h1 className="pt-3.5 pb-2 text-lg font-bold text-black/80 mb-2">
+                    {item.grants.length} ไอเท็มในเซ็ต
+                  </h1>
+                  <div className="flex items-center justify-center flex-wrap gap-3 mb-2">
+                    {item.grants.map((grant) => (
+                      <div
+                        key={grant.id}
+                        className="cursor-pointer bg-[#1780d8] rounded-xl"
+                        onClick={() => handleItemClick(grant.id)}
+                      >
+                        <img
+                          src={grant.images.icon_background}
+                          alt="item grant"
+                          className="rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </>
               )}
             </div>
