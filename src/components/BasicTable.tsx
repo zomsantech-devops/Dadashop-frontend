@@ -20,20 +20,24 @@ export function BasicTable({
   };
 
   return (
-    <div className="">
+    <div className="text-[18px]">
       <div className="flex justify-between">
         <div className="flex items-center screen_500:flex-col gap-x-1.5">
-          <p className="text-2xl font-bold">{name}</p>
+          <p className="text-3xl font-bold screen_400:text-xl">{name}</p>
           {isAvailable ? (
             ""
           ) : (
-            <p className="bg-[#BC1842] text-white px-2 py-1 rounded-xl text-sm screen_500:self-start screen_500:text-base">
+            <p className="bg-[#BC1842] text-white px-2 py-1 rounded-xl text-base screen_500:self-start screen_500:text-sm">
               <span className="font-bold">ปิด</span> รับเพื่อน
             </p>
           )}
         </div>
 
-        <div className={`flex items-center ${isAvailable ? "" : "screen_500:flex-col"} gap-x-1.5 my-auto`}>
+        <div
+          className={`flex items-center ${
+            isAvailable ? "" : "screen_500:flex-col"
+          } gap-x-1.5 my-auto`}
+        >
           <p>V-Bucks</p>
           <span
             className={`w-[60px] text-center font-bold text-white px-2 py-1 rounded-xl text-sm screen_500:self-start screen_500:text-base screen_500:w-auto ${getTextColorClass(
@@ -91,7 +95,7 @@ export function BasicTable({
                     <Typography
                       variant="small"
                       color="blue-gray"
-                      className={`font-normal leading-none w-[115px] ${statusClasses}`}
+                      className={` text-[16px] font-normal leading-none w-[115px] ${statusClasses}`}
                     >
                       {status || ""}
                       {/* Providing a default value if status is undefined */}
@@ -101,7 +105,7 @@ export function BasicTable({
                     <Typography
                       variant="small"
                       color="blue-gray"
-                      className="font-normal leading-none"
+                      className="text-[16px] font-normal leading-none"
                     >
                       {time || ""}
                       {/* Providing a default value if time is undefined */}
@@ -111,7 +115,7 @@ export function BasicTable({
                     <Typography
                       variant="small"
                       color="blue-gray"
-                      className="font-normal leading-none"
+                      className="text-[16px] font-normal leading-none"
                     >
                       {buyerName || ""}
                       {/* Providing a default value if buyerName is undefined */}
