@@ -68,7 +68,7 @@ function HomePage() {
       )}
       <div className="flex screen_1250:flex-col self-center gap-8 screen_960:gap-10 screen_500:w-full">
         <div className="flex w-[600px] h-[475px] rounded-3xl bg-lime-100 overflow-hidden bg-gradient-to-b from-[#B0DE90] via-[#4AA155] via-80% to-[#3A9A4E] price-and-how-to-box screen_610:w-[450px] screen_610:self-center screen_500:w-[350px] screen_500:h-[350px]">
-          <div className="relative flex-1 flex justify-center items-center">
+          <div className="relative flex-1  justify-center items-center">
             <img
               src={wraith}
               alt="vBucksImage"
@@ -99,7 +99,7 @@ function HomePage() {
         </div>
 
         <div className="relative flex w-[600px] h-[475px] rounded-3xl bg-lime-100 overflow-hidden bg-gradient-to-b from-[#80E2FF] via-[#7ed0fc] via-80% to-[#56ADF3] price-and-how-to-box screen_610:w-[450px] screen_610:self-center screen_500:w-[350px] screen_500:h-[350px]">
-          <div className="flex-1 flex justify-center items-center">
+          <div className="flex-1 justify-center items-center">
             <img
               src={wraith}
               alt="vBucksImage"
