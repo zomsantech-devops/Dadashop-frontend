@@ -84,7 +84,7 @@ function Navbar() {
                   location.pathname === "/item-shop"
                     ? "bg-[#3d82d1] text-white"
                     : "text-gray-700"
-                } font-bold px-4 py-2 rounded-full transition ease-in-out duration-300 hover:bg-[#3d82d1] hover:text-white`}
+                }  px-4 py-2 rounded-full transition ease-in-out duration-300 hover:bg-[#3d82d1] hover:text-white`}
               >
                 Item Shop
               </Link>
@@ -95,9 +95,9 @@ function Navbar() {
                   location.pathname === "/price-fortnite"
                     ? "bg-[#3d82d1] text-white"
                     : "text-gray-700"
-                } font-bold px-4 py-2 rounded-full transition ease-in-out duration-300 hover:bg-[#3d82d1] hover:text-white`}
+                }  px-4 py-2 rounded-full transition ease-in-out duration-300 hover:bg-[#3d82d1] hover:text-white`}
               >
-                ราคา & ขั้นตอนการซื้อ
+                เติม Fortnite
               </Link>
 
               {/* MAIN DROPDOWN */}
@@ -114,7 +114,7 @@ function Navbar() {
               >
                 <div className="absolute top-8 left-1 h-5 w-full rounded-bl-full"></div>
                 <div className="cursor-pointer">
-                  <p className="relative inline-block font-bold">
+                  <p className="relative inline-block ">
                     คิวส่ง Gift
                     <FaChevronDown className="inline-block w-3 ml-2 mb-1" />
                   </p>
@@ -160,31 +160,23 @@ function Navbar() {
                       <br />
                       <span className={`${
                         location.pathname === "/check-queue/g1-g8"
-                          ? "text-[#23d9d9]"
+                          ? "text-[#23d9d8]"
                           : "text-red-400"
                       } text-red-400 group-hover/name:text-[#23d9d9]`}                                           
-                      >(ปิดรับเพื่อนแล้ว)</span>
+                      >
+                        (ปิดรับเพื่อนแล้ว)
+                      </span>
                     </Link>
                   </div>
                 )}
-              </div>
-              <Link
-                to="/price-other"
-                className={`${
-                  location.pathname === "/price-other"
-                    ? "bg-[#3d82d1] text-white"
-                    : "text-gray-700"
-                } font-bold px-4 py-2 rounded-full transition ease-in-out duration-300 hover:bg-[#3d82d1] hover:text-white`}
-              >
-                บริการอื่นๆ
-              </Link>    
+              </div>  
               <Link
                 to="/check-points"
                 className={`${
                   location.pathname === "/check-points"
                     ? "bg-[#3d82d1] text-white"
                     : "text-gray-700"
-                } font-bold px-4 py-2 rounded-full transition ease-in-out duration-300 hover:bg-[#3d82d1] hover:text-white`}
+                }  px-4 py-2 rounded-full transition ease-in-out duration-300 hover:bg-[#3d82d1] hover:text-white`}
               >
                 Dada Points
               </Link>
@@ -249,7 +241,7 @@ function Navbar() {
             className={`${
               location.pathname === "/item-shop" &&
               "px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
-            } font-bold py-2 relative w-fit block text-gray-700`}
+            }  py-2 relative w-fit block text-gray-700`}
           >
             Item Shop
           </Link>
@@ -258,9 +250,9 @@ function Navbar() {
             className={`${
               location.pathname === "/price-fortnite" &&
               "px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
-            } font-bold py-2 relative w-fit block text-gray-700`}
+            }  py-2 relative w-fit block text-gray-700`}
           >
-            ราคา & ขั้นตอนการซื้อ
+            เติม Fortnite
           </Link>
           <button
             className={`${
@@ -269,7 +261,7 @@ function Navbar() {
               location.pathname === "/check-queue/zz1-zz6"
                 ? "px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
                 : "text-gray-700"
-            } font-bold py-2 relative w-fit block`}
+            }  py-2 relative w-fit block`}
             onClick={handleToggleGiftDropdown}
           >
             คิวส่ง Gift
@@ -314,28 +306,20 @@ function Navbar() {
                 Dada G1-G8{" "}
                 <span className={`${
                         location.pathname === "/check-queue/g1-g8"
-                          ? "text-[#23d9d9]"
+                          ? "text-[#23d9d8]"
                           : "text-red-400"
                       } text-red-400 group-hover/name:text-[#23d9d9]`}                                           
-                      >(ปิดรับเพื่อนแล้ว)</span>
+                      >
+                        (ปิดรับเพื่อนแล้ว)</span>
               </Link>
             </div>
-          )}
-          <Link
-                to="/price-other"
-                className={`${
-                  location.pathname === "/price-other" &&
-                  " px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
-                } font-bold py-2 relative w-fit block`}
-              >
-                บริการอื่นๆ
-          </Link>   
+          )}   
           <Link
             to="/check-points"
             className={`${
               location.pathname === "/check-points" &&
               " px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
-            } mb-4 font-bold py-2 relative w-fit block`}
+            } mb-4  py-2 relative w-fit block`}
           >
             Dada Points
           </Link>

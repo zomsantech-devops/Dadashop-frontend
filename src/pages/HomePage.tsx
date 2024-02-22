@@ -27,7 +27,7 @@ function HomePage() {
   return (
     <div className="w-full flex flex-col justify-center items-center mb-10 px-7">
       {status === "OPEN" ? (
-        <div className="flex flex-col items-center mt-5 my-8 gap-1">
+        <div className="flex flex-col items-center my-5 gap-1">
           <div className="w-24 h-24">
             <img src={check} alt="check" />
           </div>
@@ -53,7 +53,7 @@ function HomePage() {
           </p>
         </div>
       ) : (
-        <div className="flex flex-col items-center mt-5 my-8 gap-1">
+        <div className="flex flex-col items-center my-5 gap-1">
           <div className="w-24 h-24">
             <img src={close} alt="close" />
           </div>

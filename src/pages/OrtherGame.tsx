@@ -21,7 +21,7 @@ function OrtherGame() {
     <div>
       <div className="flex flex-col justify-center px-[30px]">
         <p className="text-center text-4xl font-bold leading-normal my-[40px] screen_930:text-3xl screen_445:text-2xl">
-              เติมเกมอื่นๆ
+             บริการอื่นๆ
         </p>
         <div className="flex screen_960:flex-col self-center gap-[20px] screen_960:gap-[40px] screen_500:w-full">
           {/* GIFT */}

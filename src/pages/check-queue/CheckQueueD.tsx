@@ -63,18 +63,18 @@ function CheckQueueD() {
     <div>
       <div className="flex flex-col justify-center px-[30px]">
         <div className="flex flex-col text-center mt-[40px] mb-[25px]">
-          <h1 className="font-bold text-5xl screen_445:text-[40px]">
+          <h1 className="font-bold text-4xl screen_930:text-3xl screen_445:text-2xl">
             คิวส่ง Gift
           </h1>
-          <p className="text-[38px] whitespace-nowrap text-[#524A59] leading-[65px] screen_930:text-4xl screen_445:text-3xl">
+          <p className="text-2xl whitespace-nowrap text-[#524A59] leading-[65px] screen_930:text-xl screen_445:text-lg">
             Dada D1-D10
           </p>
           <div className="w-full flex flex-col items-center text-white mt-3 text-2xl screen_445:text-xl">
             {/* HIDDEN */}
             <p className="hidden">{readyToSendCount}</p>
-            <div className="flex flex-col justify-center w-[350px] screen_445:w-[300px] gap-1.5">
+            <div className="flex flex-col justify-center w-[300px] screen_445:w-[300px] gap-1.5">
               <div className="flex-grow rounded-[32px] py-3 px-16 bg-[#00AB66]">
-                <p className="text-[24px] leading-[44px]">
+                <p className="text-[20px] leading-[40px]">
                   พร้อมส่งทันที{" "}
                   <span className="text-white font-bold">
                     {readyToSendNowCount}
@@ -82,7 +82,7 @@ function CheckQueueD() {
                 </p>
               </div>
               <div className="flex-grow rounded-[32px] py-3 px-16 bg-[#90F0C9] text-black">
-                <p className="text-[24px] leading-[44px]">
+                <p className="text-[20px] leading-[40px]">
                   ส่งได้ตามเวลา{" "}
                   <span className="font-bold">{readyToSendAtCount}</span>
                 </p>

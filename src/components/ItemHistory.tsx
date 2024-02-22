@@ -64,7 +64,7 @@ export const ItemHistory = ({ shopHistory }: ShopHistoryProps) => {
                     ? "วันนี้"
                     : calculateDaysAgo(date) === 1
                     ? "เมื่อวาน"
-                    : calculateDaysAgo(date)}
+                    : calculateDaysAgo(date) + " วันที่แล้ว"}
                 </td>
               </tr>
             ))}
