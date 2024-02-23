@@ -4,8 +4,9 @@ import busy from "../../assets/icons/busyAdmin.svg";
 import close from "../../assets/icons/closeAdmin.svg";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { FaBahtSign } from "react-icons/fa6";
 
 const ShopSettings = () => {
   const [status, setStatus] = useState<string>("");
@@ -13,6 +14,8 @@ const ShopSettings = () => {
   const [closeTime, setCloseTime] = useState<string>("");
   const [newOpenTime, setNewOpenTime] = useState<string>("");
   const [newCloseTime, setNewCloseTime] = useState<string>("");
+  const [initialRate, setInitialRate] = useState<number>(0);
+  const [updateRate, setUpdateRate] = useState<number>(0);
 
   const navigate = useNavigate();
 
@@ -43,6 +46,22 @@ const ShopSettings = () => {
     }
   };
 
+  const onUpdateRate = async (event: React.FormEvent) => {
+    event.preventDefault();
+    try {
+      await axios.patch(
+        `${process.env.REACT_APP_API}/setting/currency/${updateRate}`
+      );
+      toast.success("Update Rate Successfully", { autoClose: 1500 });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+    } catch (error) {
+      toast.success("Failed to update Rate", { autoClose: 1500 });
+      console.error("Failed to update Rate", error);
+    }
+  };
+
   useEffect(() => {
     const getTime = async () => {
       try {
@@ -55,7 +74,17 @@ const ShopSettings = () => {
       } catch (error: any) {}
     };
 
+    const getRate = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API}/setting/currency`
+        );
+        setInitialRate(response.data.data.rate);
+      } catch (error) {}
+    };
+
     getTime();
+    getRate();
   }, [navigate, status]);
 
   const onStatusHandle = async (status: string) => {
@@ -80,6 +109,16 @@ const ShopSettings = () => {
       return "text-[#FEC006]";
     } else {
       return "text-[#EA3359]";
+    }
+  };
+
+  const handleRateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const parsedRate = parseInt(value);
+    if (!value) {
+      setUpdateRate(0);
+    } else if (!isNaN(parsedRate)) {
+      setUpdateRate(parsedRate);
     }
   };
 
@@ -170,6 +209,50 @@ const ShopSettings = () => {
             อัพเดตเวลา
           </button>
         </form>
+
+        {/* SET RATE PRICE */}
+        <div className="text-center text-5xl font-bold mt-10 mb-3 leading-[58px]">
+          SET RATE PRICE
+        </div>
+        <div className="bg-emerald-500/20 p-3 rounded-md flex items-center gap-x-2 text-sm text-emerald-500">
+          <FaBahtSign
+            className="rounded-full bg-emerald-500 text-white/80 p-1"
+            size={20}
+          />
+          <p>
+            Current rate is{" "}
+            <span className="font-bold text-lg">"{initialRate}"</span>
+          </p>
+        </div>
+
+        <form onSubmit={onUpdateRate}>
+          <div className="flex items-center gap-x-2 mb-4">
+            <input
+              type="number"
+              name="rate"
+              value={updateRate}
+              onChange={handleRateChange}
+              min={0}
+              max={100}
+              className="w-[60px] border border-blue-gray-50 rounded-[5px] px-[10px] py-[5px] focus:border-[#1EAEF0] outline-[#02A7F3]"
+            />
+            <div className="">
+              บาท : <span className="font-bold">100</span> v-bucks
+            </div>
+          </div>
+          <button
+            type="submit"
+            className={`bg-[#1EAEF0] rounded-[10px] px-12 py-2 opacity-100 hover:opacity-80 font-bold text-white w-full`}
+          >
+            อัพเดตเรทราคา
+          </button>
+        </form>
+        <Link
+          to={"/item-shop"}
+          className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 text-primary underline-offset-4 hover:underline mt-2"
+        >
+          Go to item shop
+        </Link>
       </div>
     </main>
   );

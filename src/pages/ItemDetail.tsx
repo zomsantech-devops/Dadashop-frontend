@@ -26,8 +26,9 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
   const [displayAssets, setDisplayAssets] = useState<DisplayAssetsItem[]>([]);
   const [channelName, setChannelName] = useState<string[]>([]);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const { isPlaying, setIsPlaying } = useGenerationStore();
+  const [rate, setRate] = useState<number>(5);
 
+  const { isPlaying, setIsPlaying } = useGenerationStore();
   const navigate = useNavigate();
 
   const toggleVideoPlay = () => {
@@ -67,8 +68,18 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
       }
     };
 
+    const getRate = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API}/setting/currency`
+        );
+        setRate(response.data.data.rate);
+      } catch (error) {}
+    };
+
     if (itemId) {
       fetchItem();
+      getRate();
     }
   }, [itemId]);
 
@@ -80,11 +91,11 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
     setChannelName(uniqueSection);
   }, [styles]);
 
-  const convertVbuckToTHB = (price: number | null) => {
+  const convertVbuckToTHB = (price: number | null, rate: number) => {
     if (price === null) {
       return 0;
     }
-    const baht = (price / 100) * 5;
+    const baht = (price / 100) * rate;
     return baht;
   };
 
@@ -248,7 +259,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                 <div className="flex items-start justify-center">
                   <IoMdPricetag className="w-6 h-6 mr-2 text-[#ffc007] self-center" />
                   <p className="font-bold text-2xl">
-                    {convertVbuckToTHB(item.price)} บาท
+                    {convertVbuckToTHB(item.price, rate)} บาท
                   </p>
                 </div>
               </div>
