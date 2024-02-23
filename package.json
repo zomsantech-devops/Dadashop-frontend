@@ -46,7 +46,7 @@
   "scripts": {
     "start": "react-dotenv && react-app-rewired start",
     "dev": "react-scripts start",
-    "build": "webpack",
+    "build": "webpack --mode development",
     "test": "react-dotenv && react-app-rewired test",
     "eject": "react-dotenv && react-scripts eject"
   },
