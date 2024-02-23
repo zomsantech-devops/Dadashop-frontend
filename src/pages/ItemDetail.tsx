@@ -15,7 +15,7 @@ import {
   Styles,
 } from "../types";
 import noImg from "../assets/images/empty.jpg";
-import { useGenerationStore } from "../state/idea-generation";
+import { useGenerationStore } from "../pages/../state/idea-generation";
 import { ItemHistory } from "../components/ItemHistory";
 
 const ItemDetail = ({ itemId, onClose }: IdProps) => {
