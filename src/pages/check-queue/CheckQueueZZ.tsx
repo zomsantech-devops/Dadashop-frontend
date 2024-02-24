@@ -63,10 +63,10 @@ function CheckQueueZZ() {
     <div>
       <div className="flex flex-col justify-center px-[30px]">
         <div className="flex flex-col text-center mt-[40px] mb-[25px]">
-          <h1 className="font-bold text-4xl screen_930:text-3xl screen_445:text-2xl">
+          <h1 className="font-bold text-[38px] leading-[45px] screen_930:text-4xl screen_445:text-3xl">
             คิวส่ง Gift
           </h1>
-          <p className="text-2xl whitespace-nowrap text-[#524A59] leading-[65px] screen_930:text-xl screen_445:text-lg">
+          <p className="text-[26px] whitespace-nowrap text-[#524A59] leading-[45px] screen_930:text-2xl screen_445:text-xl">
             Dada ZZ1-ZZ6
           </p>
           <div className="w-full flex flex-col items-center text-white mt-3 text-2xl screen_445:text-xl">

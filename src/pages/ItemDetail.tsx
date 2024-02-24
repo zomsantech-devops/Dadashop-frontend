@@ -302,7 +302,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
               {item.grants.length !== 0 && (
                 <>
                   <h1 className="pt-3.5 pb-2 text-lg font-bold text-black/80 mb-2">
-                    {item.grants.length} ไอเท็มในเซ็ต
+                    {item.grants.length} INCLUDING
                   </h1>
                   <div className="flex items-center justify-center flex-wrap gap-3 mb-2">
                     {item.grants.map((grant) => (
