@@ -1,8 +1,11 @@
 import LeftSidebar from "../../components/shared/LeftSidebar";
-import check from "../../assets/icons/checkAdmin.svg";
-import busy from "../../assets/icons/busyAdmin.svg";
-import close from "../../assets/icons/closeAdmin.svg";
+
 import { ChangeEvent, useEffect, useState } from "react";
+
+import check from "../../assets/icons/checkAdmin.webp";
+import busy from "../../assets/icons/busyAdmin.webp";
+import close from "../../assets/icons/closeAdmin.webp";
+
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";

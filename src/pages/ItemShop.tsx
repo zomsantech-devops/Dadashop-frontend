@@ -1,7 +1,7 @@
 import Footer from "../components/shared/Footer";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import vBucks from "../assets/icons/vbucks-coins.png";
+import vBucks from "../assets/icons/vbucks-coins.webp";
 import CircularProgress from "@mui/material/CircularProgress";
 import { DateDisplay } from "../components/DateDisplay";
 import Modal from "../components/ItemModal";

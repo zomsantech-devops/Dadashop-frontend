@@ -1,5 +1,5 @@
-import FBIcon from "../../assets/icons/facebook.png";
-import DiscordIcon from "../../assets/icons/discord.png";
+import FBIcon from "../../assets/icons/facebook.webp";
+import DiscordIcon from "../../assets/icons/discord.webp";
 import { Link } from "react-router-dom";
 
 function Footer() {

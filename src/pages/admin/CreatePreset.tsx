@@ -4,7 +4,7 @@ import axios from "axios";
 import { VerticalCard } from "../../components/VerticalCard";
 import { CardProps } from "../../types";
 import { toast } from "react-toastify";
-import empty from "../../assets/images/empty.jpg"
+import empty from "../../assets/images/empty.webp"
 
 const CreatePreset = () => {
   const [data, setData] = useState<CardProps[]>([]);

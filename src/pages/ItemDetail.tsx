@@ -2,7 +2,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import { startTransition, useEffect, useRef, useState } from "react";
 
-import vBucks from "../assets/icons/vbucks-coins.png";
+import vBucks from "../assets/icons/vbucks-coins.webp";
 import { CustomButton } from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdClose, IoMdPricetag, IoMdPlay } from "react-icons/io";
@@ -14,7 +14,7 @@ import {
   ResponseData,
   Styles,
 } from "../types";
-import noImg from "../assets/images/empty.jpg";
+import noImg from "../assets/images/empty.webp";
 import { useGenerationStore } from "../state/idea-generation";
 import { ItemHistory } from "../components/ItemHistory";
 
