@@ -4,28 +4,34 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
+import React, { Suspense } from 'react';
+
 import ScrollToTop from "./components/shared/ScrollToTop";
-import HomePage from "./pages/HomePage";
-import ItemPriceTable from "./pages/ItemPriceTable";
-import OtherGameItemPriceTable from "./pages/OrtherGame";
-import HowToGift from "./pages/HowToGift";
-import HowToElse from "./pages/HowToElse";
-import CheckQueueD from "./pages/check-queue/CheckQueueD";
-import CheckQueueG from "./pages/check-queue/CheckQueueG";
-import CheckPoints from "./pages/CheckPoints";
-import Admin from "./pages/admin/Admin";
 import Navbar from "./components/shared/Navbar";
-import CheckQueueZZ from "./pages/check-queue/CheckQueueZZ";
-import ItemShop from "./pages/ItemShop";
-import ChangeImages from "./pages/admin/ChangeImages";
-import Login from "./pages/admin/Login";
+import ProtectedRoute from "./components/shared/ProtectedRoute";
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ShopSettings from "./pages/admin/ShopSettings";
-import UpdatePreset from "./pages/admin/UpdatePreset";
-import ProtectedRoute from "./components/shared/ProtectedRoute";
-import CreatePreset from "./pages/admin/CreatePreset";
+const ShopSettings = React.lazy(() => import('./pages/admin/ShopSettings'));
+const UpdatePreset = React.lazy(() => import('./pages/admin/UpdatePreset'));
+
+const CreatePreset = React.lazy(() => import('./pages/admin/CreatePreset'));
+
+
+const ItemPriceTable = React.lazy(() => import('./pages/ItemPriceTable'));
+const OtherGameItemPriceTable = React.lazy(() => import('./pages/OrtherGame'));
+const HowToGift = React.lazy(() => import('./pages/HowToGift'));
+const HowToElse = React.lazy(() => import('./pages/HowToElse'));
+const CheckQueueD = React.lazy(() => import('./pages/check-queue/CheckQueueD'));
+const CheckQueueG = React.lazy(() => import('./pages/check-queue/CheckQueueG'));
+const CheckPoints = React.lazy(() => import('./pages/CheckPoints'));
+const Admin = React.lazy(() => import('./pages/admin/Admin'));
+const CheckQueueZZ = React.lazy(() => import('./pages/check-queue/CheckQueueZZ'));
+const ItemShop = React.lazy(() => import('./pages/ItemShop'));
+const ChangeImages = React.lazy(() => import('./pages/admin/ChangeImages'));
+const Login = React.lazy(() => import('./pages/admin/Login'));
+
+const HomePage = React.lazy(() => import('./pages/HomePage'));
 
 function App() {
   return (
@@ -33,6 +39,8 @@ function App() {
       <NavbarWrapper />
       <ScrollToTop />
       <ToastContainer closeOnClick />
+      <Suspense fallback={<div>Loading...</div>}>
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/item-shop" element={<ItemShop />} />
@@ -51,6 +59,8 @@ function App() {
         <Route path="/update-preset" element={<ProtectedRoute component={UpdatePreset} />} />
         <Route path="/create-preset" element={<ProtectedRoute component={CreatePreset} />} />
       </Routes>
+      </Suspense>
+
     </Router>
   );
 }

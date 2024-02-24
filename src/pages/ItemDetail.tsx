@@ -1,6 +1,6 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { startTransition, useEffect, useRef, useState } from "react";
 
 import vBucks from "../assets/icons/vbucks-coins.png";
 import { CustomButton } from "../components/Button";
@@ -57,13 +57,15 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
         const response = await axios.get<ResponseData>(
           `${process.env.REACT_APP_API}/item/${itemId}`
         );
-        setItem(response.data.data.item);
-        setStyles(response.data.data.item.styles);
-        setPreviewVideo(response.data.data.item.previewVideos[0]?.url || "");
-        setDisplayAssets(response.data.data.item.displayAssets);
-        setLoading(false);
+        startTransition(() => {
+          setItem(response.data.data.item);
+          setStyles(response.data.data.item.styles);
+          setPreviewVideo(response.data.data.item.previewVideos[0]?.url || "");
+          setDisplayAssets(response.data.data.item.displayAssets);
+        });
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
         setLoading(false);
       }
     };

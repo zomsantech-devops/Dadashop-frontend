@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 import Footer from "../components/shared/Footer";
 import { PointsBenefitsTable } from "../components/PointsBenefitsTable";
 import axios from "axios";
@@ -38,19 +38,21 @@ function CheckPoints() {
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    try {
-      setLoading(true);
-      setNotFound(false);
-      const response = await axios.get(
-        `${process.env.REACT_APP_API}/user-balance/${searchValue}`
-      );
-      setUserBalance(response.data);
-    } catch (error) {
-      setNotFound(true);
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+    setLoading(true);
+    setNotFound(false);
+  
+    startTransition(() => {
+      axios.get(`${process.env.REACT_APP_API}/user-balance/${searchValue}`)
+        .then(response => {
+          setUserBalance(response.data);
+          setLoading(false);
+        })
+        .catch(error => {
+          setNotFound(true);
+          console.error(error);
+          setLoading(false);
+        });
+    });
   };
 
   const handleBackButtonClick = () => {

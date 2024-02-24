@@ -1,10 +1,6 @@
 import { Link } from "react-router-dom";
-import wraith from "../assets/images/wraith_apex.jpg";
-import { useEffect, useState } from "react";
+import { useEffect, useState, startTransition } from "react";
 import axios from "axios";
-import check from "../assets/icons/check.svg";
-import busy from "../assets/icons/busy.svg";
-import close from "../assets/icons/close.svg";
 
 function HomePage() {
   const [status, setStatus] = useState<string>("");
@@ -16,8 +12,10 @@ function HomePage() {
         const response = await axios.get(
           `${process.env.REACT_APP_API}/setting/time`
         );
-        setStatus(response.data.data.status);
-        setOpenTime(response.data.data.open_time);
+        startTransition(() => {
+          setStatus(response.data.data.status);
+          setOpenTime(response.data.data.open_time);
+        });
       } catch (error: any) {}
     };
 
