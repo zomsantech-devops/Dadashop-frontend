@@ -12,7 +12,7 @@ import ProtectedRoute from "./components/shared/ProtectedRoute";
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { PacmanLoader } from "react-spinners";
+import { ClipLoader } from "react-spinners";
 const ShopSettings = React.lazy(() => import('./pages/admin/ShopSettings'));
 const UpdatePreset = React.lazy(() => import('./pages/admin/UpdatePreset'));
 
@@ -40,7 +40,7 @@ function App() {
       <NavbarWrapper />
       <ScrollToTop />
       <ToastContainer closeOnClick />
-      <Suspense fallback={ <div className="flex justify-center items-center h-screen"><PacmanLoader color="#3d82d1" size={100} /></div> }>
+      <Suspense fallback={ <div className="flex justify-center items-center h-screen"><ClipLoader color="#3d82d1" size={100} /></div> }>
 
       <Routes>
         <Route path="/" element={<HomePage />} />
