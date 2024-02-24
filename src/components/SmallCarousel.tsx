@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { SmallCarouselProps } from "../types";
-import noImg from "../assets/images/empty.jpg"
+import noImg from "../assets/images/empty.webp"
 
 import "./thickthighdrivemecrazy.css";
 

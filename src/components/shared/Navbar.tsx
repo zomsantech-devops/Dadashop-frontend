@@ -1,6 +1,6 @@
-import FBIcon from "../../assets/icons/facebook.png";
-import DiscordIcon from "../../assets/icons/discord.png";
-import dadaLogo from "../../assets/images/dada-logo-horizontal.png";
+import FBIcon from "../../assets/icons/facebook.webp";
+import DiscordIcon from "../../assets/icons/discord.webp";
+import dadaLogo from "../../assets/images/dada-logo-horizontal.webp";
 import { FaChevronDown } from "react-icons/fa";
 
 import { Link, useLocation } from "react-router-dom";

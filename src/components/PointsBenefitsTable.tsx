@@ -1,7 +1,7 @@
 import { Typography } from "@material-tailwind/react";
-import diamond from "../assets/images/Mask-group-diamond.png";
-import unreal from "../assets/images/Mask-group-unreal.png";
-import gold from "../assets/images/Mask-group-gold.png";
+import diamond from "../assets/images/Mask-group-diamond.webp";
+import unreal from "../assets/images/Mask-group-unreal.webp";
+import gold from "../assets/images/Mask-group-gold.webp";
 
 const TABLE_HEAD = ["ระดับ", "แต้มสะสม", "สิทธิประโยชน์"];
 
