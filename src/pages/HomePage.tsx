@@ -4,25 +4,31 @@ import axios from "axios";
 
 import Footer from "../components/shared/Footer";
 
-
 function HomePage() {
   const [status, setStatus] = useState<string>("");
   const [openTime, setOpenTime] = useState<string>("");
+  const [content, setContent] = useState<string>("");
 
   useEffect(() => {
-    const getTime = async () => {
+    const getTimeAndContent = async () => {
       try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API}/setting/time`
-        );
+        const response = await axios.get(`${process.env.REACT_APP_API}/setting/time`);
+        const { status, open_time } = response.data.data;
+  
         startTransition(() => {
-          setStatus(response.data.data.status);
-          setOpenTime(response.data.data.open_time);
+          setStatus(status);
+          setOpenTime(open_time);
         });
-      } catch (error: any) {}
+  
+        const contentResponse = await axios.get(`${process.env.REACT_APP_API}/setting/content/${status}`);
+        setContent(contentResponse.data.data.content);
+  
+      } catch (error) {
+        console.error("Failed to fetch data", error);
+      }
     };
-
-    getTime();
+  
+    getTimeAndContent();
   }, []);
 
   return (
@@ -37,10 +43,7 @@ function HomePage() {
               <span className="text-[#39843B]">ร้านเปิด</span> Available
             </p>
           </div>
-          <p className="text-center">
-            เลือกบริการที่คุณต้องการได้เลย สั่งซื้อผ่าน Discord หรือ Facebook
-            ได้เลยครับ
-          </p>
+          <p className="text-center">{content}</p>
         </div>
       ) : status === "MAINTENANCE" ? (
         <div className="flex flex-col items-center mt-5 my-8 gap-1">
@@ -50,10 +53,7 @@ function HomePage() {
           <div className="text-4xl font-bold text-center">
             <span className="text-[#C4960C]">ไม่ว่างชั่วคราว</span> Busy
           </div>
-          <p className="text-center">
-            เนื่องจากแอดมินไม่สามารถให้บริการได้ชั่วคราว ขอมอบส่วนลด 5%
-            ให้สำหรับการสั่งซื้อผ่าน Discord Ticket จนกว่าแอดมินจะกลับมา
-          </p>
+          <p className="text-center">{content}</p>
         </div>
       ) : (
         <div className="flex flex-col items-center mt-5 my-8 gap-1">
@@ -64,8 +64,7 @@ function HomePage() {
             <span className="text-[#CF173D]">นอกเวลาทำการ</span> Closed
           </div>
           <p className="text-center">
-            ร้านจะกลับมาให้บริการอีกครั้งในเวลา{" "}
-            <span className="font-bold">{openTime}</span> น.
+            {content} <span className="font-bold">{openTime}</span> น.
           </p>
         </div>
       )}
@@ -128,7 +127,6 @@ function HomePage() {
       </div>
       <Footer />
     </div>
-   
   );
 }
 

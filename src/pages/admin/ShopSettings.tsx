@@ -2,7 +2,7 @@ import LeftSidebar from "../../components/shared/LeftSidebar";
 import check from "../../assets/icons/checkAdmin.svg";
 import busy from "../../assets/icons/busyAdmin.svg";
 import close from "../../assets/icons/closeAdmin.svg";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -16,6 +16,8 @@ const ShopSettings = () => {
   const [newCloseTime, setNewCloseTime] = useState<string>("");
   const [initialRate, setInitialRate] = useState<number>(0);
   const [updateRate, setUpdateRate] = useState<number>(0);
+  const [content, setContent] = useState<string>("");
+  const [selectedStatus, setSelectedStatus] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -87,6 +89,19 @@ const ShopSettings = () => {
     getRate();
   }, [navigate, status]);
 
+  useEffect(() => {
+    const getContent = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API}/setting/content/${selectedStatus}`
+        );
+        setContent(response.data.data.content);
+      } catch (error) {}
+    };
+
+    getContent();
+  }, [selectedStatus]);
+
   const onStatusHandle = async (status: string) => {
     try {
       await axios.get(
@@ -120,6 +135,25 @@ const ShopSettings = () => {
     } else if (!isNaN(parsedRate)) {
       setUpdateRate(parsedRate);
     }
+  };
+
+  const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSelectedStatus(e.target.value);
+  };
+
+  const handleContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(e.target.value);
+  };
+
+  const handleContentSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    try {
+      await axios.post(
+        `${process.env.REACT_APP_API}/setting/content/${selectedStatus}`,
+        { content }
+      );
+      toast.success("Content updated!")
+    } catch (error) {}
   };
 
   return (
@@ -172,36 +206,32 @@ const ShopSettings = () => {
         {/* Edit content */}
         <div className="w-full rounded-xl border shadow-md">
           <div className="flex flex-col space-y-1.5 p-6 font-bold text-center text-xl">
-            Edit content (WIP)
+            Edit content
           </div>
           <div className="p-6 pt-0 flex flex-col gap-4">
-            <p className="text-center">
-              Current content text is{" "}
-              <span className="font-bold text-lg">
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Et,
-                saepe!"
-              </span>
-            </p>
+            <label className="font-bold">Status:</label>
+            <select
+              className="border border-blue-gray-50 mb-[15px] rounded-[5px] px-[10px] py-[5px] focus:border-[#1EAEF0] outline-[#02A7F3]"
+              name="status"
+              onChange={handleSelect}
+            >
+              <option value="OPEN">Open</option>
+              <option value="MAINTENANCE">Maintenance</option>
+              <option value="CLOSED">Close</option>
+            </select>
 
-            <form>
-              {/* <div className="flex items-center gap-x-2 mb-4">
-            <input
-              type="number"
-              name="rate"
-              value={updateRate}
-              onChange={handleRateChange}
-              min={0}
-              max={100}
-              className="w-[60px] border border-blue-gray-50 rounded-[5px] px-[10px] py-[5px] focus:border-[#1EAEF0] outline-[#02A7F3]"
-            />
-            <div className="">
-              บาท : <span className="font-bold">100</span> v-bucks
-            </div>
-          </div> */}
+            <form onSubmit={handleContentSubmit}>
+              <label className="font-bold">Content: </label>
+              <textarea
+                name="content"
+                value={content}
+                onChange={handleContentChange}
+                className="w-full border border-blue-gray-50 rounded-[5px] px-[10px] py-[5px] focus:border-[#1EAEF0] outline-[#02A7F3] mb-[15px]"
+              />
               <button
                 type="submit"
-                className={`bg-[#1EAEF0] rounded-[10px] px-12 py-2 opacity-100 hover:opacity-80 font-bold text-white w-full cursor-not-allowed disabled:bg-[#1EAEF0]/50 disabled:hover:opacity-100`}
-                disabled={true}
+                className={`bg-[#1EAEF0] rounded-[10px] px-12 py-2 opacity-100 hover:opacity-80 font-bold text-white w-full disabled:bg-[#1EAEF0]/20 disabled:cursor-not-allowed`}
+                disabled={!content}
               >
                 อัพเดต Content
               </button>
@@ -253,7 +283,8 @@ const ShopSettings = () => {
             </div>
             <button
               type="submit"
-              className={`bg-[#1EAEF0] rounded-[10px] px-12 py-2 opacity-100 hover:opacity-80 font-bold text-white w-full`}
+              className={`bg-[#1EAEF0] rounded-[10px] px-12 py-2 opacity-100 hover:opacity-80 font-bold text-white w-full disabled:bg-[#1EAEF0]/20 disabled:cursor-not-allowed`}
+              disabled={!newCloseTime || !newOpenTime}
             >
               อัพเดตเวลา
             </button>
@@ -278,7 +309,10 @@ const ShopSettings = () => {
               </div>
             </div>
 
-            <form onSubmit={onUpdateRate} className="flex flex-col items-center justify-center">
+            <form
+              onSubmit={onUpdateRate}
+              className="flex flex-col items-center justify-center"
+            >
               <div className="flex items-center gap-x-2 mb-4">
                 <input
                   type="number"
@@ -295,7 +329,8 @@ const ShopSettings = () => {
               </div>
               <button
                 type="submit"
-                className={`bg-[#1EAEF0] rounded-[10px] px-12 py-2 opacity-100 hover:opacity-80 font-bold text-white w-full`}
+                className={`bg-[#1EAEF0] rounded-[10px] px-12 py-2 opacity-100 hover:opacity-80 font-bold text-white w-full disabled:bg-[#1EAEF0]/20 disabled:cursor-not-allowed`}
+                disabled={!updateRate}
               >
                 อัพเดตเรทราคา
               </button>
