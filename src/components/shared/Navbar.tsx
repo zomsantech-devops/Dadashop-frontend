@@ -183,7 +183,7 @@ function Navbar() {
                   location.pathname === "/price-other"
                     ? "bg-[#3d82d1] text-white"
                     : "text-gray-700"
-                } font-bold px-4 py-2 rounded-full transition ease-in-out duration-300 hover:bg-[#3d82d1] hover:text-white`}
+                } px-4 py-2 rounded-full transition ease-in-out duration-300 hover:bg-[#3d82d1] hover:text-white`}
               >
                 บริการอื่นๆ
               </Link>
@@ -340,7 +340,7 @@ function Navbar() {
             className={`${
               location.pathname === "/price-other" &&
               " px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
-            } font-bold py-2 relative w-fit block`}
+            } py-2 relative w-fit block`}
           >
             บริการอื่นๆ
           </Link>
