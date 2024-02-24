@@ -31,6 +31,7 @@ function ItemShop() {
     { name: "All", count: 0 },
     { name: "New", count: 0 },
   ]);
+  const [rate, setRate] = useState<number>(5);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -50,7 +51,6 @@ function ItemShop() {
       setSelectedItemId(itemId);
       setOpen(true);
     }
-
   }, [location.search]);
 
   useEffect(() => {
@@ -70,7 +70,17 @@ function ItemShop() {
       }
     };
 
+    const getRate = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API}/setting/currency`
+        );
+        setRate(response.data.data.rate);
+      } catch (error) {}
+    };
+
     fetchData();
+    getRate();
   }, []);
 
   useEffect(() => {
@@ -123,11 +133,11 @@ function ItemShop() {
     return capitalizedWord;
   };
 
-  const convertVbuckToTHB = (price: number | null) => {
+  const convertVbuckToTHB = (price: number | null, rate: number) => {
     if (price === null) {
       return 0;
     }
-    const baht = (price / 100) * 5;
+    const baht = (price / 100) * rate;
     return baht;
   };
 
@@ -218,7 +228,7 @@ function ItemShop() {
                                   </div>
                                   <div className="text-[#aafffa]">
                                     <p className="font-bold">
-                                      {convertVbuckToTHB(item.finalPrice) ||
+                                      {convertVbuckToTHB(item.finalPrice, rate) ||
                                         "-"}{" "}
                                       บาท
                                     </p>
@@ -271,7 +281,7 @@ function ItemShop() {
                                 </div>
                                 <div className="text-[#aafffa]">
                                   <p className="font-bold">
-                                    {convertVbuckToTHB(item.finalPrice) || "-"}{" "}
+                                    {convertVbuckToTHB(item.finalPrice, rate) || "-"}{" "}
                                     บาท
                                   </p>
                                 </div>
@@ -318,7 +328,7 @@ function ItemShop() {
                                 </div>
                                 <div className="text-[#aafffa]">
                                   <p className="font-bold">
-                                    {convertVbuckToTHB(item.finalPrice) || "-"}{" "}
+                                    {convertVbuckToTHB(item.finalPrice, rate) || "-"}{" "}
                                     บาท
                                   </p>
                                 </div>

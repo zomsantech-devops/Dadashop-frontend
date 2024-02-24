@@ -2,11 +2,15 @@ import { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 
 interface ShopHistoryProps {
-  shopHistory: string[];
+  shopHistory: string[] | null;
 }
 
 export const ItemHistory = ({ shopHistory }: ShopHistoryProps) => {
   const [showTable, setShowTable] = useState(false);
+
+  if (shopHistory === null) {
+    return <div>No shop history available.</div>;
+  }
 
   const calculateDaysAgo = (date: string) => {
     const now = new Date();
@@ -64,7 +68,7 @@ export const ItemHistory = ({ shopHistory }: ShopHistoryProps) => {
                     ? "วันนี้"
                     : calculateDaysAgo(date) === 1
                     ? "เมื่อวาน"
-                    : calculateDaysAgo(date)}
+                    : calculateDaysAgo(date) + " วันที่แล้ว"}
                 </td>
               </tr>
             ))}

@@ -155,7 +155,7 @@ const ChangeImages = () => {
                   <label className="mb-1 font-bold">Old image: </label>
                   <img
                     src={selectedBannerDataUrl || emptyImage}
-                    alt=""
+                    alt="preview"
                     className="mb-1 h-[200px] bg-gray-200/20"
                   />
                 </div>
@@ -163,7 +163,7 @@ const ChangeImages = () => {
                   <label className="mb-1 font-bold">New image:</label>
                   <img
                     src={previewImage || emptyImage}
-                    alt=""
+                    alt="upload"
                     className="mb-[15px] h-[200px] bg-gray-200/20"
                   />
                 </div>

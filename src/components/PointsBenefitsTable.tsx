@@ -56,7 +56,7 @@ export function PointsBenefitsTable() {
                         <p className="absolute ml-[10px] mt-[13px] font-bold text-white">
                           Gold
                         </p>
-                        <img src={gold} alt="" />
+                        <img src={gold} alt="gold tier" />
                       </>
                     )}
                     {index === 1 && (
@@ -64,7 +64,7 @@ export function PointsBenefitsTable() {
                         <p className="absolute ml-[10px] mt-[13px] font-bold text-white">
                           Diamond
                         </p>
-                        <img src={diamond} alt="" />
+                        <img src={diamond} alt="diamond tier" />
                       </>
                     )}
                     {index === 2 && (
@@ -72,7 +72,7 @@ export function PointsBenefitsTable() {
                         <p className="absolute ml-[10px] mt-[13px] font-bold text-white">
                           Unreal
                         </p>
-                        <img src={unreal} alt="" />
+                        <img src={unreal} alt="unreal tier" />
                       </>
                     )}
                   </td>

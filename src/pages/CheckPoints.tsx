@@ -49,8 +49,7 @@ function CheckPoints() {
       setNotFound(true);
       console.error(error);
     } finally {
-      // ถ้าโอเคแล้วปรับคืน
-      // setLoading(false);
+      setLoading(false);
     }
   };
 
