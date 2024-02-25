@@ -70,36 +70,34 @@ function HomePage() {
         </div>
       )}
       <div className="flex screen_1250:flex-col self-center gap-8 screen_960:gap-10 screen_500:w-full">
-        <div className="flex w-[600px] h-[400px] rounded-3xl bg-lime-100 overflow-hidden bg-gradient-to-b from-[#B0DE90] via-[#4AA155] via-80% to-[#3A9A4E] price-and-how-to-box screen_610:w-[450px] screen_610:self-center screen_500:w-[350px] screen_500:h-[300px]">
-          <div className="relative flex-1 flex justify-center items-center">
-            <img
-              src={`${process.env.REACT_APP_API}/image/wraith_apex`}
-              alt="vBucksImage"
-              className="absolute -bottom-36 -left-4 h-[500px] min-w-max screen_610:-left-12 screen_500:h-[400px]"
-            ></img>
-          </div>
-          <div className="flex-1 flex justify-start items-center z-20">
-            <div className="w-full">
-              <div className="text-3xl font-bold text-white mb-2 screen_500:text-2xl">
-                เติม Fortnite
-              </div>
-              <div className="flex gap-1.5 screen_610:flex-col w-fit">
-                <Link
-                  to="#"
-                  className="text-center bg-white/30 p-2 px-8 text-white rounded-[20px] hover:scale-105 transition ease-in-out duration-300"
-                >
-                  ราคา
-                </Link>
-                <Link
-                  to="/item-shop"
-                  className="border-2 border-white/30 p-2 px-8 text-white rounded-[20px] hover:scale-105 transition ease-in-out duration-300"
-                >
-                  Item Shop
-                </Link>
-              </div>
-            </div>
-          </div>
+      <div className="flex w-[600px] h-[400px] rounded-3xl bg-lime-100 overflow-hidden bg-gradient-to-b from-[#B0DE90] via-[#4AA155] to-[#3A9A4E] price-and-how-to-box screen_610:w-[450px] screen_610:self-center screen_500:w-[350px]  screen_500:h-[300px]">
+        <div className="flex flex-1 justify-center items-center">
+         <img
+          src={`${process.env.REACT_APP_API}/image/wraith_apex`}
+          alt="Fortnite"
+         className="h-full object-cover"
+          />
         </div>
+       <div className="flex-1 flex flex-col justify-center items-start">
+         <div className="text-3xl font-bold text-white mb-2 screen_500:text-2xl">
+          เติม Fortnite
+          </div>
+        <div className="flex gap-1.5 screen_610:flex-col">
+         <Link
+            to="#"
+            className="text-center bg-white/30 py-2 px-8 text-white rounded-[20px] hover:scale-105 transition ease-in-out duration-300"
+         >
+             ราคา
+         </Link>
+         <Link
+        to="/item-shop"
+        className="border-2 border-white/30 py-2 px-8 text-white rounded-[20px] hover:scale-105 transition ease-in-out duration-300"
+         >
+          Item Shop
+         </Link>
+         </div>
+         </div>
+       </div>
 
         <div className="relative flex w-[600px] h-[400px] rounded-3xl bg-lime-100 overflow-hidden bg-gradient-to-b from-[#80E2FF] via-[#7ed0fc] via-80% to-[#56ADF3] price-and-how-to-box screen_610:w-[450px] screen_610:self-center screen_500:w-[350px] screen_500:h-[300px]">
           <div className="flex-1 flex justify-center items-center">

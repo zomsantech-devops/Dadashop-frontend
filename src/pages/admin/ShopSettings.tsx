@@ -10,7 +10,6 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaBahtSign } from "react-icons/fa6";
-import { stat } from "fs";
 
 const ShopSettings = () => {
   const [status, setStatus] = useState<string>("");
