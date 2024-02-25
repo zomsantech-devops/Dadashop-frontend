@@ -78,7 +78,7 @@ function Navbar() {
             loading="lazy"
             src={dadaLogo}
             alt="logo"
-            className="h-20 w-full object-cover screen_443:-ml-3.5"
+            className="h-20 w-auto  object-cover screen_443:-ml-3.5"
           />
         </Link>
         {!isMobile && (
