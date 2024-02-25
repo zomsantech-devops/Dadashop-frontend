@@ -24,6 +24,7 @@ const ShopSettings = () => {
 
   const navigate = useNavigate();
 
+
   const handleOpenTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewOpenTime(event.target.value);
   };
@@ -96,14 +97,14 @@ const ShopSettings = () => {
     const getContent = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API}/setting/content/${selectedStatus}`
+          `${process.env.REACT_APP_API}/setting/content/${status}`
         );
         setContent(response.data.data.content);
+        console.log(response.data.data.content);    
       } catch (error) {}
     };
-
     getContent();
-  }, [selectedStatus]);
+  }, [status]);
 
   const onStatusHandle = async (status: string) => {
     try {
@@ -185,13 +186,13 @@ const ShopSettings = () => {
             </button>
             <button
               className={`flex items-center justify-center gap-2 rounded-lg p-4 bg-[#FEC006] text-white ${
-                status === "MAINTENANCE" && "bg-[#FEC006]/40 cursor-not-allowed"
+                status === "MAINTENANCE" && "bg-[#FEC006] "
               }`}
               onClick={() => onStatusHandle("MAINTENANCE")}
-              disabled={status === "MAINTENANCE"}
+              
             >
               <img src={busy} alt="check" className="w-5 h-5 self-center" />
-              Set Maintenance
+              {status === "MAINTENANCE" ? "Out Maintenance" : "Set Maintenance"}
             </button>
             <button
               className={`flex items-center justify-center gap-2 rounded-lg p-4 bg-[#EA3359] text-white ${
@@ -217,10 +218,29 @@ const ShopSettings = () => {
               className="border border-blue-gray-50 mb-[15px] rounded-[5px] px-[10px] py-[5px] focus:border-[#1EAEF0] outline-[#02A7F3]"
               name="status"
               onChange={handleSelect}
+              value={selectedStatus}
             >
-              <option value="OPEN">Open</option>
-              <option value="MAINTENANCE">Maintenance</option>
-              <option value="CLOSED">Close</option>
+            {status === "MAINTENANCE" && (
+              <>
+                <option value="MAINTENANCE">Maintenance</option>
+                <option value="OPEN">Open</option>
+                <option value="CLOSED">Close</option>
+              </>
+            )}
+            {status === "OPEN" && (
+              <>
+                <option value="OPEN">Open</option>
+                <option value="MAINTENANCE">Maintenance</option>
+                <option value="CLOSED">Close</option>
+              </>
+            )}
+            {status === "CLOSED" && (
+              <>
+                <option value="CLOSED">Close</option>
+                <option value="OPEN">Open</option>
+                <option value="MAINTENANCE">Maintenance</option>
+              </>
+            )}
             </select>
 
             <form onSubmit={handleContentSubmit}>
