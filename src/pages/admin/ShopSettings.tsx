@@ -10,20 +10,22 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaBahtSign } from "react-icons/fa6";
+import { stat } from "fs";
 
 const ShopSettings = () => {
   const [status, setStatus] = useState<string>("");
   const [openTime, setOpenTime] = useState<string>("");
   const [closeTime, setCloseTime] = useState<string>("");
-  const [newOpenTime, setNewOpenTime] = useState<string>("");
-  const [newCloseTime, setNewCloseTime] = useState<string>("");
+  const [newOpenTime, setNewOpenTime] = useState<string>(openTime);
+  const [newCloseTime, setNewCloseTime] = useState<string>(closeTime);
   const [initialRate, setInitialRate] = useState<number>(0);
-  const [updateRate, setUpdateRate] = useState<number>(0);
+  const [updateRate, setUpdateRate] = useState<number>(initialRate);
   const [content, setContent] = useState<string>("");
-  const [selectedStatus, setSelectedStatus] = useState<string>("");
+  const [selectedStatus, setSelectedStatus] = useState<string>(status);
 
   const navigate = useNavigate();
 
+console.log(newOpenTime);
 
   const handleOpenTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewOpenTime(event.target.value);
@@ -77,6 +79,9 @@ const ShopSettings = () => {
         setStatus(response.data.data.status);
         setOpenTime(response.data.data.open_time);
         setCloseTime(response.data.data.close_time);
+        setSelectedStatus(response.data.data.status);
+        setNewOpenTime(response.data.data.open_time);
+        setNewCloseTime(response.data.data.close_time);
       } catch (error: any) {}
     };
 
@@ -86,6 +91,7 @@ const ShopSettings = () => {
           `${process.env.REACT_APP_API}/setting/currency`
         );
         setInitialRate(response.data.data.rate);
+        setUpdateRate(response.data.data.rate);
       } catch (error) {}
     };
 
@@ -97,14 +103,13 @@ const ShopSettings = () => {
     const getContent = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API}/setting/content/${status}`
+          `${process.env.REACT_APP_API}/setting/content/${selectedStatus}`
         );
-        setContent(response.data.data.content);
-        console.log(response.data.data.content);    
+        setContent(response.data.data.content);  
       } catch (error) {}
     };
     getContent();
-  }, [status]);
+  }, [selectedStatus]);
 
   const onStatusHandle = async (status: string) => {
     try {
@@ -143,6 +148,7 @@ const ShopSettings = () => {
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     setSelectedStatus(e.target.value);
+    setContent(e.target.value); //-
   };
 
   const handleContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -177,9 +183,9 @@ const ShopSettings = () => {
             <button
               className={`flex items-center justify-center gap-2 rounded-lg p-4 bg-[#4BAE4F] text-white ${
                 status === "OPEN" && "bg-[#4BAE4F]/40 cursor-not-allowed"
-              }`}
+              } ${status === "MAINTENANCE" && "bg-[#4BAE4F]/40 cursor-not-allowed"} `}
               onClick={() => onStatusHandle("OPEN")}
-              disabled={status === "OPEN"}
+              disabled={status === "OPEN" || status === "MAINTENANCE"}
             >
               <img src={check} alt="check" className="w-5 h-5 self-center" />
               Set Open
@@ -197,9 +203,9 @@ const ShopSettings = () => {
             <button
               className={`flex items-center justify-center gap-2 rounded-lg p-4 bg-[#EA3359] text-white ${
                 status === "CLOSED" && "bg-[#EA3359]/40 cursor-not-allowed"
-              }`}
+              } ${status === "MAINTENANCE" && "bg-[#EA3359]/40 cursor-not-allowed"}`}
               onClick={() => onStatusHandle("CLOSED")}
-              disabled={status === "CLOSED"}
+              disabled={status === "CLOSED" || status === "MAINTENANCE"}
             >
               <img src={close} alt="check" className="w-5 h-5 self-center" />
               Set Close
@@ -220,21 +226,21 @@ const ShopSettings = () => {
               onChange={handleSelect}
               value={selectedStatus}
             >
-            {status === "MAINTENANCE" && (
+            {selectedStatus === "MAINTENANCE" && (
               <>
                 <option value="MAINTENANCE">Maintenance</option>
                 <option value="OPEN">Open</option>
                 <option value="CLOSED">Close</option>
               </>
             )}
-            {status === "OPEN" && (
+            {selectedStatus === "OPEN" && (
               <>
                 <option value="OPEN">Open</option>
                 <option value="MAINTENANCE">Maintenance</option>
                 <option value="CLOSED">Close</option>
               </>
             )}
-            {status === "CLOSED" && (
+            {selectedStatus === "CLOSED" && (
               <>
                 <option value="CLOSED">Close</option>
                 <option value="OPEN">Open</option>
@@ -262,6 +268,7 @@ const ShopSettings = () => {
           </div>
         </div>
 
+        {/* SET TIME OPEN-CLOSE */}
         <div className="w-full rounded-xl border shadow-md">
           <div className="flex flex-col space-y-1.5 p-6 font-bold text-center text-xl mt-4">
             Set open - close time
@@ -307,7 +314,7 @@ const ShopSettings = () => {
             <button
               type="submit"
               className={`bg-[#1EAEF0] rounded-[10px] px-12 py-2 opacity-100 hover:opacity-80 font-bold text-white w-full disabled:bg-[#1EAEF0]/20 disabled:cursor-not-allowed`}
-              disabled={!newCloseTime || !newOpenTime}
+              disabled={(newCloseTime === closeTime && newOpenTime === openTime)}
             >
               อัพเดตเวลา
             </button>

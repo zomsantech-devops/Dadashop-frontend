@@ -3,7 +3,7 @@ import { useEffect, useState, startTransition } from "react";
 import axios from "axios";
 
 import Footer from "../components/shared/Footer";
-import { stat } from "fs";
+
 
 function HomePage() {
   const [status, setStatus] = useState<string>("");
@@ -22,7 +22,6 @@ function HomePage() {
         });
   
         const contentResponse = await axios.get(`${process.env.REACT_APP_API}/setting/content/${status}`);
-        console.log(contentResponse.data.data.content)
         setContent(contentResponse.data.data.content);
   
       } catch (error) {
