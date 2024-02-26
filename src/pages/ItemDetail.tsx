@@ -113,6 +113,40 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
     }
   }, [onClose, setIsPlaying]);
 
+  useEffect(() => {
+    setItem({
+      name: "",
+      description: "",
+      rarity: {
+        name: "",
+      },
+      type: {
+        id: "",
+        name: "",
+      },
+      price: null,
+      set: {
+        name: "",
+      },
+      shopHistory: [],
+      styles: [],
+      previewVideos: [
+        {
+          url: "",
+        },
+      ],
+      images: {
+        background: "",
+      },
+      grants: [],
+      displayAssets: [],
+    });
+
+    setDisplayAssets([]);
+    setStyles([]);
+    setPreviewVideo(null);
+  }, [onClose]);
+
   return (
     <>
       {loading ? (
