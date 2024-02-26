@@ -20,7 +20,7 @@ import { useGenerationStore } from "../state/idea-generation";
 import { ItemHistory } from "../components/ItemHistory";
 
 const ItemDetail = ({ itemId, onClose }: IdProps) => {
-  const [item, setItem] = useState<Item>();
+  const [item, setItem] = useState<Item | null>();
   const [loading, setLoading] = useState<boolean>(false);
   const [styles, setStyles] = useState<Styles[]>([]);
   const [previewVideo, setPreviewVideo] = useState<string | null>();
@@ -56,8 +56,22 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
   };
 
   useEffect(() => {
+    setItem(null);
+  }, [onClose])
+
+  useEffect(() => {
+    setLoading(true);
+
+    setDisplayAssets([]);
+    setStyles([]);
+    setPreviewVideo(null);
+    setBundle({
+      id: "",
+      name: "",
+      price: "",
+    });
+
     const fetchItem = async () => {
-      setLoading(true);
       try {
         const response = await axios.get<ResponseData>(
           `${process.env.REACT_APP_API}/item/${itemId}`
@@ -67,11 +81,10 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
           setStyles(response.data.data.item.styles);
           setPreviewVideo(response.data.data.item.previewVideos[0]?.url || "");
           setDisplayAssets(response.data.data.item.displayAssets);
+          setLoading(false);
         });
       } catch (error) {
         console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -126,13 +139,15 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
   useEffect(() => {
     const fetchBundle = async () => {
       if (bundleId) {
+        setLoading(true);
         try {
           const response = await axios.get(
             `${process.env.REACT_APP_API}/item/${bundleId}`
           );
           startTransition(() => {
-            setBundle(response.data.data.item)
+            setBundle(response.data.data.item);
           });
+          setLoading(false);
         } catch (error) {
           console.error("Error fetching data:", error);
         } finally {
@@ -151,40 +166,6 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
       setIsPlaying(false);
     }
   }, [onClose, setIsPlaying]);
-
-  useEffect(() => {
-    setItem({
-      name: "",
-      description: "",
-      rarity: {
-        name: "",
-      },
-      type: {
-        id: "",
-        name: "",
-      },
-      price: null,
-      set: {
-        name: "",
-      },
-      shopHistory: [],
-      styles: [],
-      previewVideos: [
-        {
-          url: "",
-        },
-      ],
-      images: {
-        background: "",
-      },
-      grants: [],
-      displayAssets: [],
-    });
-
-    setDisplayAssets([]);
-    setStyles([]);
-    setPreviewVideo(null);
-  }, [onClose, location.search]);
 
   return (
     <>
@@ -321,7 +302,10 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                         {bundle?.name && (
                           <>
                             <span>&#40;</span>
-                            <span className="text-[#3D82D1] cursor-pointer hover:brightness-110" onClick={() => handleItemClick(bundleId || "")}>
+                            <span
+                              className="text-[#3D82D1] cursor-pointer hover:brightness-110"
+                              onClick={() => handleItemClick(bundleId || "")}
+                            >
                               {bundle?.name}
                             </span>
                             <span>&#41;</span>
@@ -336,7 +320,12 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                 <div className="flex items-start justify-center">
                   <IoMdPricetag className="w-6 h-6 mr-2 text-[#ffc007] self-center" />
                   <p className="font-bold text-2xl">
-                    {convertVbuckToTHB(item.price, rate) || convertVbuckToTHB(parseInt(bundle?.price || "0"), rate)} บาท
+                    {convertVbuckToTHB(item.price, rate) ||
+                      convertVbuckToTHB(
+                        parseInt(bundle?.price || "0"),
+                        rate
+                      )}{" "}
+                    บาท
                   </p>
                 </div>
               </div>
