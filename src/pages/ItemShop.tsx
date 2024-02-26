@@ -347,6 +347,7 @@ function ItemShop() {
           <ItemDetail
             itemId={selectedItemId}
             onClose={() => {
+              setSelectedItemId(null)
               navigate(`/item-shop`);
               setOpen(false);
             }}

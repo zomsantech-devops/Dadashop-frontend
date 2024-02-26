@@ -36,32 +36,20 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const toggleVideoPlay = () => {
-    if (videoRef.current) {
-      if (videoRef.current.paused) {
-        videoRef.current.play();
-      } else {
-        videoRef.current.pause();
-      }
-      setIsPlaying(!videoRef.current.paused);
-    }
-  };
-
-  const handlePlay = () => {
-    setIsPlaying(true);
-  };
-
-  const handlePause = () => {
-    setIsPlaying(false);
-  };
+  useEffect(() => {
+    setItem(null);
+    setDisplayAssets([]);
+    setStyles([]);
+    setPreviewVideo(null);
+    setBundle({
+      id: "",
+      name: "",
+      price: "",
+    });
+  }, [onClose]);
 
   useEffect(() => {
     setItem(null);
-  }, [onClose])
-
-  useEffect(() => {
-    setLoading(true);
-
     setDisplayAssets([]);
     setStyles([]);
     setPreviewVideo(null);
@@ -71,20 +59,53 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
       price: "",
     });
 
+    const searchParams = new URLSearchParams(location.search);
+    const itemId = searchParams.get("id");
+
     const fetchItem = async () => {
-      try {
-        const response = await axios.get<ResponseData>(
-          `${process.env.REACT_APP_API}/item/${itemId}`
-        );
-        startTransition(() => {
-          setItem(response.data.data.item);
-          setStyles(response.data.data.item.styles);
-          setPreviewVideo(response.data.data.item.previewVideos[0]?.url || "");
-          setDisplayAssets(response.data.data.item.displayAssets);
+      if (itemId) {
+        setLoading(true);
+        try {
+          const response = await axios.get<ResponseData>(
+            `${process.env.REACT_APP_API}/item/${itemId}`
+          );
+          startTransition(() => {
+            setItem(response.data.data.item);
+            setStyles(response.data.data.item.styles);
+            setPreviewVideo(
+              response.data.data.item.previewVideos[0]?.url || ""
+            );
+            setDisplayAssets(response.data.data.item.displayAssets);
+            setLoading(false);
+          });
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+    };
+
+    const itemBundleId = searchParams.get("p_id");
+
+    if (itemBundleId) {
+      setBundleId(itemBundleId);
+    }
+
+    const fetchBundle = async () => {
+      if (itemBundleId) {
+        setLoading(true);
+        try {
+          const response = await axios.get(
+            `${process.env.REACT_APP_API}/item/${itemBundleId}`
+          );
+          startTransition(() => {
+            setBundle(response.data.data.item);
+            setLoading(false);
+          });
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        } finally {
           setLoading(false);
-        });
-      } catch (error) {
-        console.error("Error fetching data:", error);
+        }
       }
     };
 
@@ -97,11 +118,10 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
       } catch (error) {}
     };
 
-    if (itemId) {
-      fetchItem();
-      getRate();
-    }
-  }, [itemId]);
+    fetchItem();
+    fetchBundle();
+    getRate();
+  }, [location.search]);
 
   useEffect(() => {
     const uniqueSection = Array.from(
@@ -127,37 +147,25 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
     navigate(navigatePath);
   };
 
-  useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    const itemBundleId = searchParams.get("p_id");
-
-    if (itemBundleId) {
-      setBundleId(itemBundleId);
-    }
-  }, [location.search]);
-
-  useEffect(() => {
-    const fetchBundle = async () => {
-      if (bundleId) {
-        setLoading(true);
-        try {
-          const response = await axios.get(
-            `${process.env.REACT_APP_API}/item/${bundleId}`
-          );
-          startTransition(() => {
-            setBundle(response.data.data.item);
-          });
-          setLoading(false);
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        } finally {
-          setLoading(false);
-        }
+  // Video stuff
+  const toggleVideoPlay = () => {
+    if (videoRef.current) {
+      if (videoRef.current.paused) {
+        videoRef.current.play();
+      } else {
+        videoRef.current.pause();
       }
-    };
+      setIsPlaying(!videoRef.current.paused);
+    }
+  };
 
-    fetchBundle();
-  }, [bundleId]);
+  const handlePlay = () => {
+    setIsPlaying(true);
+  };
+
+  const handlePause = () => {
+    setIsPlaying(false);
+  };
 
   useEffect(() => {
     if (videoRef.current) {
@@ -166,6 +174,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
       setIsPlaying(false);
     }
   }, [onClose, setIsPlaying]);
+  // End video stuff
 
   return (
     <>
@@ -408,7 +417,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
           </div>
         </div>
       ) : (
-        <p>No item found.</p>
+        <p className="px-6">Item not found / Something went wrong</p>
       )}
     </>
   );
