@@ -4,7 +4,7 @@ import { startTransition, useEffect, useRef, useState } from "react";
 
 import vBucks from "../assets/icons/vbucks-coins.webp";
 import { CustomButton } from "../components/Button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IoMdClose, IoMdPricetag, IoMdPlay } from "react-icons/io";
 import { Carousel } from "../components/Carousel";
 import {
@@ -13,6 +13,7 @@ import {
   Item,
   ResponseData,
   Styles,
+  Bundle,
 } from "../types";
 import noImg from "../assets/images/empty.webp";
 import { useGenerationStore } from "../state/idea-generation";
@@ -27,9 +28,13 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
   const [channelName, setChannelName] = useState<string[]>([]);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [rate, setRate] = useState<number>(5);
+  const [bundleId, setBundleId] = useState<string | null>();
+  const [bundle, setBundle] = useState<Bundle>();
 
   const { isPlaying, setIsPlaying } = useGenerationStore();
+
   const navigate = useNavigate();
+  const location = useLocation();
 
   const toggleVideoPlay = () => {
     if (videoRef.current) {
@@ -101,9 +106,43 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
     return baht;
   };
 
-  const handleItemClick = (itemId: string) => {
-    navigate(`/item-shop?id=${itemId}`);
+  const handleItemClick = (itemId: string, p_id?: string) => {
+    let navigatePath = `/item-shop?id=${itemId}`;
+    if (p_id) {
+      navigatePath += `&p_id=${p_id}`;
+    }
+    navigate(navigatePath);
   };
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const itemBundleId = searchParams.get("p_id");
+
+    if (itemBundleId) {
+      setBundleId(itemBundleId);
+    }
+  }, [location.search]);
+
+  useEffect(() => {
+    const fetchBundle = async () => {
+      if (bundleId) {
+        try {
+          const response = await axios.get(
+            `${process.env.REACT_APP_API}/item/${bundleId}`
+          );
+          startTransition(() => {
+            setBundle(response.data.data.item)
+          });
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchBundle();
+  }, [bundleId]);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -145,7 +184,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
     setDisplayAssets([]);
     setStyles([]);
     setPreviewVideo(null);
-  }, [onClose]);
+  }, [onClose, location.search]);
 
   return (
     <>
@@ -222,7 +261,9 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                             src={grant.images.icon_background}
                             alt="item grant"
                             className="bg-[#1780d8] rounded-xl w-[120px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105 screen_445:w-[80px]"
-                            onClick={() => handleItemClick(grant.id)}
+                            onClick={() =>
+                              handleItemClick(grant.id, itemId as string)
+                            }
                           />
                         )}
                       </div>
@@ -275,13 +316,13 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                   <img src={vBucks} alt="V-Bucks" className="w-6 h-6 mr-2" />
                   {!item.price ? (
                     <div className="flex gap-2">
-                      <p className="font-bold text-2xl">{item.price}</p>
+                      <p className="font-bold text-2xl">{bundle?.price}</p>
                       <p className="font-bold text-2xl">
-                        {item.set?.name && (
+                        {bundle?.name && (
                           <>
                             <span>&#40;</span>
-                            <span className="text-[#3D82D1] cursor-pointer">
-                              {item.set.name}
+                            <span className="text-[#3D82D1] cursor-pointer hover:brightness-110" onClick={() => handleItemClick(bundleId || "")}>
+                              {bundle?.name}
                             </span>
                             <span>&#41;</span>
                           </>
@@ -295,7 +336,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                 <div className="flex items-start justify-center">
                   <IoMdPricetag className="w-6 h-6 mr-2 text-[#ffc007] self-center" />
                   <p className="font-bold text-2xl">
-                    {convertVbuckToTHB(item.price, rate)} บาท
+                    {convertVbuckToTHB(item.price, rate) || convertVbuckToTHB(parseInt(bundle?.price || "0"), rate)} บาท
                   </p>
                 </div>
               </div>
