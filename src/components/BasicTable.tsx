@@ -22,12 +22,12 @@ export function BasicTable({
   return (
     <div className="text-[18px]">
       <div className="flex justify-between">
-        <div className="flex items-center screen_500:flex-col gap-x-1.5">
+        <div className="flex items-center justify-center screen_500:flex-col gap-x-1.5">
           <p className="text-3xl font-bold screen_400:text-xl">{name}</p>
           {isAvailable ? (
             ""
           ) : (
-            <p className="bg-[#BC1842] text-white px-2 py-1 rounded-xl text-base screen_500:self-start screen_500:text-sm">
+            <p className="bg-[#BC1842] text-white px-2 py-1 rounded-xl text-sm screen_500:self-start screen_500:text-base">
               <span className="font-bold">ปิด</span> รับเพื่อน
             </p>
           )}
