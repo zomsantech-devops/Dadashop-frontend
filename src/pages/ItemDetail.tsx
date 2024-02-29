@@ -315,10 +315,29 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
               {item.grants.length !== 0 && (
                 <>
                   <h1 className="pt-3.5 pb-2 text-lg font-bold text-black/80 mb-2">
-                    {item.grants.length} INCLUDING
+                     INCLUDING
                   </h1>
+                  
                   <div className="flex items-center justify-center flex-wrap gap-3 mb-2">
+                    
+                  {/* Skin */}
+               
+                      <div
+                        key={itemId}
+                        className="cursor-pointer bg-[#1780d8] rounded-xl"
+                        onClick={() => handleItemClick(itemId || "")}
+                      >
+                        <img
+                          src={item.images.background}
+                          alt="item grant"
+                          className="rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
+                        />
+                      </div>                     
+
+                    {/* Bag */}
+                    
                     {item.grants.map((grant) => (
+                      
                       <div
                         key={grant.id}
                         className="cursor-pointer bg-[#1780d8] rounded-xl"
@@ -329,8 +348,10 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                           alt="item grant"
                           className="rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
                         />
-                      </div>
+                      </div>                     
+          
                     ))}
+
                   </div>
                 </>
               )}
