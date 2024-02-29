@@ -146,6 +146,12 @@ export interface DisplayAssetsItem {
   materialInstance: string;
 }
 
+export interface Bundle {
+  id: string;
+  name: string;
+  price: string;
+}
+
 export interface ResponseData {
   success: boolean;
   data: {

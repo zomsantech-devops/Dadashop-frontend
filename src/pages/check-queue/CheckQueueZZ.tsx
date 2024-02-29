@@ -31,7 +31,7 @@ function CheckQueueZZ() {
             item.infos.filter(
               (info) =>
                 info.status === "พร้อมส่ง" ||
-                info.status === "พร้อมส่งวันนี้เวลา"
+                info.status === "ส่งได้เวลา"
             ).length
           );
         }, 0);
@@ -43,7 +43,7 @@ function CheckQueueZZ() {
         const readyToSendAtCount = zzData?.reduce((sum, item) => {
           return (
             sum +
-            item.infos.filter((info) => info.status === "พร้อมส่งวันนี้เวลา")
+            item.infos.filter((info) => info.status === "ส่งได้เวลา")
               .length
           );
         }, 0);

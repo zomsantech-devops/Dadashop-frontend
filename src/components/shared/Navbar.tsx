@@ -76,7 +76,7 @@ function Navbar() {
         <Link to="/">
           <img
             loading="lazy"
-            src={dadaLogo}
+            src={`${process.env.REACT_APP_API}/image/logo`}
             alt="logo"
             className="h-20 w-auto  object-cover screen_443:-ml-3.5"
           />

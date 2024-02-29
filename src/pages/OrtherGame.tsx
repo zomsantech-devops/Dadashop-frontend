@@ -28,7 +28,7 @@ function OrtherGame() {
           <div className="w-[585px] h-min screen_1250:w-[440px] screen_500:w-full rounded-[30px] price-and-how-to-box">
             <div className="w-full rounded-t-[30px] bg-lime-100 overflow-hidden">
               <img
-                src={`${process.env.REACT_APP_API}/image/banner-1`}
+                src={`${process.env.REACT_APP_API}/image/preset-1`}
                 alt="giftImage"
                 className="w-full aspect-square object-cover object-top"
               ></img>
@@ -65,7 +65,7 @@ function OrtherGame() {
           <div className="w-[585px] h-min screen_1250:w-[440px] screen_500:w-full rounded-[30px] price-and-how-to-box">
             <div className="w-full rounded-t-[30px] bg-lime-100 overflow-hidden">
               <img
-                src={`${process.env.REACT_APP_API}/image/banner-2`}
+                src={`${process.env.REACT_APP_API}/image/preset-2`}
                 alt="vBucksImage"
                 className="w-full aspect-square object-cover object-top"
               ></img>

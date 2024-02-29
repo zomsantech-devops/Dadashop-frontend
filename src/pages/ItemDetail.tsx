@@ -4,8 +4,14 @@ import { startTransition, useEffect, useRef, useState } from "react";
 
 import vBucks from "../assets/icons/vbucks-coins.webp";
 import { CustomButton } from "../components/Button";
-import { Link, useNavigate } from "react-router-dom";
-import { IoMdClose, IoMdPricetag, IoMdPlay } from "react-icons/io";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  IoMdClose,
+  IoMdPricetag,
+  IoMdPlay,
+  IoMdVolumeHigh,
+  IoMdVolumeOff,
+} from "react-icons/io";
 import { Carousel } from "../components/Carousel";
 import {
   DisplayAssetsItem,
@@ -13,13 +19,14 @@ import {
   Item,
   ResponseData,
   Styles,
+  Bundle,
 } from "../types";
 import noImg from "../assets/images/empty.webp";
 import { useGenerationStore } from "../state/idea-generation";
 import { ItemHistory } from "../components/ItemHistory";
 
 const ItemDetail = ({ itemId, onClose }: IdProps) => {
-  const [item, setItem] = useState<Item>();
+  const [item, setItem] = useState<Item | null>();
   const [loading, setLoading] = useState<boolean>(false);
   const [styles, setStyles] = useState<Styles[]>([]);
   const [previewVideo, setPreviewVideo] = useState<string | null>();
@@ -27,10 +34,125 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
   const [channelName, setChannelName] = useState<string[]>([]);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [rate, setRate] = useState<number>(5);
+  const [bundleId, setBundleId] = useState<string | null>();
+  const [bundle, setBundle] = useState<Bundle>();
+  const [isMuted, setIsMuted] = useState(false);
 
   const { isPlaying, setIsPlaying } = useGenerationStore();
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    setItem(null);
+    setDisplayAssets([]);
+    setStyles([]);
+    setPreviewVideo(null);
+    setBundle({
+      id: "",
+      name: "",
+      price: "",
+    });
+  }, [onClose]);
+
+  useEffect(() => {
+    setItem(null);
+    setDisplayAssets([]);
+    setStyles([]);
+    setPreviewVideo(null);
+    setBundle({
+      id: "",
+      name: "",
+      price: "",
+    });
+
+    const searchParams = new URLSearchParams(location.search);
+    const itemId = searchParams.get("id");
+
+    const fetchItem = async () => {
+      if (itemId) {
+        setLoading(true);
+        try {
+          const response = await axios.get<ResponseData>(
+            `${process.env.REACT_APP_API}/item/${itemId}`
+          );
+          startTransition(() => {
+            setItem(response.data.data.item);
+            setStyles(response.data.data.item.styles);
+            setPreviewVideo(
+              response.data.data.item.previewVideos[0]?.url || ""
+            );
+            setDisplayAssets(response.data.data.item.displayAssets);
+            setLoading(false);
+          });
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+    };
+
+    const itemBundleId = searchParams.get("p_id");
+
+    if (itemBundleId) {
+      setBundleId(itemBundleId);
+    }
+
+    const fetchBundle = async () => {
+      if (itemBundleId) {
+        setLoading(true);
+        try {
+          const response = await axios.get(
+            `${process.env.REACT_APP_API}/item/${itemBundleId}`
+          );
+          startTransition(() => {
+            setBundle(response.data.data.item);
+            setLoading(false);
+          });
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+    };
+
+    const getRate = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API}/setting/currency`
+        );
+        setRate(response.data.data.rate);
+      } catch (error) {}
+    };
+
+    fetchItem();
+    fetchBundle();
+    getRate();
+  }, [location.search]);
+
+  useEffect(() => {
+    const uniqueSection = Array.from(
+      new Set(styles.map((cn) => cn.channelName || ""))
+    );
+
+    setChannelName(uniqueSection);
+  }, [styles]);
+
+  const convertVbuckToTHB = (price: number | null, rate: number) => {
+    if (price === null) {
+      return 0;
+    }
+    const baht = (price / 100) * rate;
+    return baht;
+  };
+
+  const handleItemClick = (itemId: string, p_id?: string) => {
+    let navigatePath = `/item-shop?id=${itemId}`;
+    if (p_id) {
+      navigatePath += `&p_id=${p_id}`;
+    }
+    navigate(navigatePath);
+  };
+
+  // Video stuff
   const toggleVideoPlay = () => {
     if (videoRef.current) {
       if (videoRef.current.paused) {
@@ -51,67 +173,21 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
   };
 
   useEffect(() => {
-    const fetchItem = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get<ResponseData>(
-          `${process.env.REACT_APP_API}/item/${itemId}`
-        );
-        startTransition(() => {
-          setItem(response.data.data.item);
-          setStyles(response.data.data.item.styles);
-          setPreviewVideo(response.data.data.item.previewVideos[0]?.url || "");
-          setDisplayAssets(response.data.data.item.displayAssets);
-        });
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    const getRate = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API}/setting/currency`
-        );
-        setRate(response.data.data.rate);
-      } catch (error) {}
-    };
-
-    if (itemId) {
-      fetchItem();
-      getRate();
-    }
-  }, [itemId]);
-
-  useEffect(() => {
-    const uniqueSection = Array.from(
-      new Set(styles.map((cn) => cn.channelName || ""))
-    );
-
-    setChannelName(uniqueSection);
-  }, [styles]);
-
-  const convertVbuckToTHB = (price: number | null, rate: number) => {
-    if (price === null) {
-      return 0;
-    }
-    const baht = (price / 100) * rate;
-    return baht;
-  };
-
-  const handleItemClick = (itemId: string) => {
-    navigate(`/item-shop?id=${itemId}`);
-  };
-
-  useEffect(() => {
     if (videoRef.current) {
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
       setIsPlaying(false);
     }
   }, [onClose, setIsPlaying]);
+  // End video stuff
+
+  const toggleVideoMute = () => {
+    if (videoRef.current) {
+      const newMuteState = !videoRef.current.muted;
+      videoRef.current.muted = newMuteState;
+      setIsMuted(newMuteState); // Update state to reflect the change
+    }
+  };
 
   return (
     <>
@@ -152,8 +228,8 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                     onPause={handlePause}
                   ></video>
                   {!isPlaying && (
-                    <div className="absolute left-3 bottom-3">
-                      <IoMdPlay className="text-white" />
+                    <div className="absolute left-3 bottom-3" onClick={toggleVideoPlay}>
+                      <IoMdPlay className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300" size={25} />
                     </div>
                   )}
                 </div>
@@ -188,7 +264,9 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                             src={grant.images.icon_background}
                             alt="item grant"
                             className="bg-[#1780d8] rounded-xl w-[120px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105 screen_445:w-[80px]"
-                            onClick={() => handleItemClick(grant.id)}
+                            onClick={() =>
+                              handleItemClick(grant.id, itemId as string)
+                            }
                           />
                         )}
                       </div>
@@ -199,25 +277,37 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                 </div>
               </div>
             )
-          ) : previewVideo ? (
+          ) : // Emote preview video
+          previewVideo ? (
             <div className="relative">
               <video
                 preload="true"
-                className="max-w-[520px] h-[80vh] rounded-lg screen_610:h-[375px] cursor-pointer"
+                className="h-[80vh] rounded-lg screen_610:h-[375px] cursor-pointer"
                 loop
                 autoPlay
                 playsInline
-                src={previewVideo}
                 onClick={toggleVideoPlay}
+                src={previewVideo}
                 ref={videoRef}
                 onPlay={handlePlay}
                 onPause={handlePause}
+                muted={isMuted}
               ></video>
               {!isPlaying && (
-                <div className="absolute left-3 bottom-3">
-                  <IoMdPlay className="text-white" />
+                <div className="absolute left-3 bottom-3" onClick={toggleVideoPlay}>
+                  <IoMdPlay className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300" size={25} />
                 </div>
               )}
+              <div
+                className="absolute right-3 bottom-3"
+                onClick={toggleVideoMute}
+              >
+                {isMuted ? (
+                  <IoMdVolumeOff className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300" size={25} />
+                ) : (
+                  <IoMdVolumeHigh className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300" size={25} />
+                )}
+              </div>
             </div>
           ) : (
             <img
@@ -241,13 +331,16 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                   <img src={vBucks} alt="V-Bucks" className="w-6 h-6 mr-2" />
                   {!item.price ? (
                     <div className="flex gap-2">
-                      <p className="font-bold text-2xl">{item.price}</p>
+                      <p className="font-bold text-2xl">{bundle?.price}</p>
                       <p className="font-bold text-2xl">
-                        {item.set?.name && (
+                        {bundle?.name && (
                           <>
                             <span>&#40;</span>
-                            <span className="text-[#3D82D1] cursor-pointer">
-                              {item.set.name}
+                            <span
+                              className="text-[#3D82D1] cursor-pointer hover:brightness-110"
+                              onClick={() => handleItemClick(bundleId || "")}
+                            >
+                              {bundle?.name}
                             </span>
                             <span>&#41;</span>
                           </>
@@ -261,7 +354,12 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                 <div className="flex items-start justify-center">
                   <IoMdPricetag className="w-6 h-6 mr-2 text-[#ffc007] self-center" />
                   <p className="font-bold text-2xl">
-                    {convertVbuckToTHB(item.price, rate)} บาท
+                    {convertVbuckToTHB(item.price, rate) ||
+                      convertVbuckToTHB(
+                        parseInt(bundle?.price || "0"),
+                        rate
+                      )}{" "}
+                    บาท
                   </p>
                 </div>
               </div>
@@ -341,7 +439,9 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                       <div
                         key={grant.id}
                         className="cursor-pointer bg-[#1780d8] rounded-xl"
-                        onClick={() => handleItemClick(grant.id)}
+                        onClick={() =>
+                          handleItemClick(grant.id, itemId as string)
+                        }
                       >
                         <img
                           src={grant.images.icon_background}
@@ -365,7 +465,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
           </div>
         </div>
       ) : (
-        <p>No item found.</p>
+        <p className="px-6">...</p>
       )}
     </>
   );
