@@ -166,7 +166,7 @@ function CheckPoints() {
             <div className="w-full bg-lime-100">
               <img
                 src={
-                  `${process.env.REACT_APP_API}/image/banner-3`
+                  `${process.env.REACT_APP_API}/image/memberperks`
                 }
                 alt="pointsBenefits"
                 className=""
