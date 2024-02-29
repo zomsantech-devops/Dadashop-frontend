@@ -5,7 +5,13 @@ import { startTransition, useEffect, useRef, useState } from "react";
 import vBucks from "../assets/icons/vbucks-coins.webp";
 import { CustomButton } from "../components/Button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { IoMdClose, IoMdPricetag, IoMdPlay } from "react-icons/io";
+import {
+  IoMdClose,
+  IoMdPricetag,
+  IoMdPlay,
+  IoMdVolumeHigh,
+  IoMdVolumeOff,
+} from "react-icons/io";
 import { Carousel } from "../components/Carousel";
 import {
   DisplayAssetsItem,
@@ -30,6 +36,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
   const [rate, setRate] = useState<number>(5);
   const [bundleId, setBundleId] = useState<string | null>();
   const [bundle, setBundle] = useState<Bundle>();
+  const [isMuted, setIsMuted] = useState(false);
 
   const { isPlaying, setIsPlaying } = useGenerationStore();
 
@@ -174,6 +181,14 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
   }, [onClose, setIsPlaying]);
   // End video stuff
 
+  const toggleVideoMute = () => {
+    if (videoRef.current) {
+      const newMuteState = !videoRef.current.muted;
+      videoRef.current.muted = newMuteState;
+      setIsMuted(newMuteState); // Update state to reflect the change
+    }
+  };
+
   return (
     <>
       {loading ? (
@@ -213,8 +228,8 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                     onPause={handlePause}
                   ></video>
                   {!isPlaying && (
-                    <div className="absolute left-3 bottom-3">
-                      <IoMdPlay className="text-white" />
+                    <div className="absolute left-3 bottom-3" onClick={toggleVideoPlay}>
+                      <IoMdPlay className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300" size={25} />
                     </div>
                   )}
                 </div>
@@ -262,25 +277,37 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                 </div>
               </div>
             )
-          ) : previewVideo ? (
+          ) : // Emote preview video
+          previewVideo ? (
             <div className="relative">
               <video
                 preload="true"
-                className="max-w-[520px] h-[80vh] rounded-lg screen_610:h-[375px] cursor-pointer"
+                className="h-[80vh] rounded-lg screen_610:h-[375px] cursor-pointer"
                 loop
                 autoPlay
                 playsInline
-                src={previewVideo}
                 onClick={toggleVideoPlay}
+                src={previewVideo}
                 ref={videoRef}
                 onPlay={handlePlay}
                 onPause={handlePause}
+                muted={isMuted}
               ></video>
               {!isPlaying && (
-                <div className="absolute left-3 bottom-3">
-                  <IoMdPlay className="text-white" />
+                <div className="absolute left-3 bottom-3" onClick={toggleVideoPlay}>
+                  <IoMdPlay className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300" size={25} />
                 </div>
               )}
+              <div
+                className="absolute right-3 bottom-3"
+                onClick={toggleVideoMute}
+              >
+                {isMuted ? (
+                  <IoMdVolumeOff className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300" size={25} />
+                ) : (
+                  <IoMdVolumeHigh className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300" size={25} />
+                )}
+              </div>
             </div>
           ) : (
             <img
@@ -393,7 +420,9 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                       <div
                         key={grant.id}
                         className="cursor-pointer bg-[#1780d8] rounded-xl"
-                        onClick={() => handleItemClick(grant.id, itemId as string)}
+                        onClick={() =>
+                          handleItemClick(grant.id, itemId as string)
+                        }
                       >
                         <img
                           src={grant.images.icon_background}

@@ -9,11 +9,11 @@ export default function Modal({ open, onClose, children }: ModalProps) {
     const toggleBodyOverflow = () => {
       document.body.style.overflow = open ? "hidden" : "auto";
     };
-
+  
     toggleBodyOverflow();
-
+  
     return () => {
-      toggleBodyOverflow();
+      document.body.style.overflow = "auto";
     };
   }, [open]);
 
