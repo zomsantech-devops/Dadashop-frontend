@@ -103,8 +103,6 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
           });
         } catch (error) {
           console.error("Error fetching data:", error);
-        } finally {
-          setLoading(false);
         }
       }
     };
@@ -395,7 +393,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                       <div
                         key={grant.id}
                         className="cursor-pointer bg-[#1780d8] rounded-xl"
-                        onClick={() => handleItemClick(grant.id)}
+                        onClick={() => handleItemClick(grant.id, itemId as string)}
                       >
                         <img
                           src={grant.images.icon_background}
@@ -417,7 +415,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
           </div>
         </div>
       ) : (
-        <p className="px-6">Item not found / Something went wrong</p>
+        <p className="px-6">...</p>
       )}
     </>
   );
