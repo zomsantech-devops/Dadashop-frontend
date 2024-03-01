@@ -12,7 +12,7 @@ import { SmallCarousel } from "../components/SmallCarousel";
 import "../components/misterPepper.css";
 import { ItemProps } from "../types";
 import { convertVbuckToTHB, isToday } from "../lib/utils";
-import { Categories } from "../components/shared/Categories";
+import { capitalize } from "@mui/material";
 
 export interface ResponseData {
   success: boolean;
@@ -123,6 +123,10 @@ function ItemShop() {
     setSelectedCategory("All");
   }, [data]);
 
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(category === selectedCategory ? "All" : category);
+  };
+
   return (
     <>
       <div className="flex flex-col justify-center px-[30px] screen_445:px-3">
@@ -142,11 +146,22 @@ function ItemShop() {
         ) : (
           <>
             {/* Categories tabs */}
-            <Categories
-              categories={categories}
-              selectedCategory={selectedCategory}
-              onSelect={(category) => setSelectedCategory(category)}
-            />
+            <div className="flex self-center justify-left gap-4 mb-5 overflow-x-auto max-w-[1200px] screen_1250:max-w-full screen_500:gap-2 scrollbar-category rounded-xl">
+              {categories.map((category) => (
+                <button
+                  key={category.name}
+                  onClick={() => handleCategoryClick(category.name)}
+                  className={`px-4 py-2 rounded-2xl font-bold whitespace-nowrap screen_445:text-sm ${
+                    selectedCategory === category.name
+                      ? "bg-[#3d82d1] text-white"
+                      : "bg-gray-200 text-gray-800"
+                  } hover:bg-[#3d82d1] hover:text-white focus:outline-none`}
+                >
+                  {category.count}{" "}
+                  {capitalize(category.name.replace(/^sparks_/, ""))}
+                </button>
+              ))}
+            </div>
             {/* Fetch all items */}
             <div className="flex flex-col self-center gap-[20px] screen_960:gap-[40px] screen_500:w-full">
               {selectedCategory === "All" &&
@@ -317,10 +332,7 @@ function ItemShop() {
         //   <div className="">Hello</div>
         // </Modal>
         <Modal open={open} onClose={handleCloseModal}>
-          <ItemDetail
-            itemId={selectedItemId}
-            onClose={handleCloseModal}
-          />
+          <ItemDetail itemId={selectedItemId} onClose={handleCloseModal} />
         </Modal>
       )}
       <Footer />
