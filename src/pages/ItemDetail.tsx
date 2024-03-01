@@ -24,6 +24,7 @@ import {
 import noImg from "../assets/images/empty.webp";
 import { useGenerationStore } from "../state/idea-generation";
 import { ItemHistory } from "../components/ItemHistory";
+import { convertVbuckToTHB } from "../lib/utils";
 
 const ItemDetail = ({ itemId, onClose }: IdProps) => {
   const [item, setItem] = useState<Item | null>();
@@ -48,27 +49,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
     setDisplayAssets([]);
     setStyles([]);
     setPreviewVideo(null);
-    setBundle({
-      id: "",
-      name: "",
-      price: "",
-    });
-  }, [onClose]);
-
-  useEffect(() => {
-    setItem(null);
-    setDisplayAssets([]);
-    setStyles([]);
-    setPreviewVideo(null);
-    setBundle({
-      id: "",
-      name: "",
-      price: "",
-    });
-
-    const searchParams = new URLSearchParams(location.search);
-    const itemId = searchParams.get("id");
-
+    
     const fetchItem = async () => {
       if (itemId) {
         setLoading(true);
@@ -86,29 +67,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
             setLoading(false);
           });
         } catch (error) {
-          console.error("Error fetching data:", error);
-        }
-      }
-    };
-
-    const itemBundleId = searchParams.get("p_id");
-
-    if (itemBundleId) {
-      setBundleId(itemBundleId);
-    }
-
-    const fetchBundle = async () => {
-      if (itemBundleId) {
-        setLoading(true);
-        try {
-          const response = await axios.get(
-            `${process.env.REACT_APP_API}/item/${itemBundleId}`
-          );
-          startTransition(() => {
-            setBundle(response.data.data.item);
-            setLoading(false);
-          });
-        } catch (error) {
+          setLoading(false);
           console.error("Error fetching data:", error);
         }
       }
@@ -124,8 +83,33 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
     };
 
     fetchItem();
-    fetchBundle();
     getRate();
+  }, [itemId]);
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const itemBundleId = searchParams.get("p_id");
+
+    if (itemBundleId) {
+      setBundleId(itemBundleId);
+    }
+
+    const fetchBundle = async () => {
+      if (itemBundleId) {
+        try {
+          const response = await axios.get(
+            `${process.env.REACT_APP_API}/item/${itemBundleId}`
+          );
+          startTransition(() => {
+            setBundle(response.data.data.item);
+          });
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+    };
+
+    fetchBundle();
   }, [location.search]);
 
   useEffect(() => {
@@ -136,18 +120,10 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
     setChannelName(uniqueSection);
   }, [styles]);
 
-  const convertVbuckToTHB = (price: number | null, rate: number) => {
-    if (price === null) {
-      return 0;
-    }
-    const baht = (price / 100) * rate;
-    return baht;
-  };
-
   const handleItemClick = (itemId: string, p_id?: string) => {
-    let navigatePath = `/item-shop?id=${itemId}`;
+    let navigatePath = `/item-shop/${itemId}`;
     if (p_id) {
-      navigatePath += `&p_id=${p_id}`;
+      navigatePath += `?p_id=${p_id}`;
     }
     navigate(navigatePath);
   };
@@ -228,8 +204,14 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                     onPause={handlePause}
                   ></video>
                   {!isPlaying && (
-                    <div className="absolute left-3 bottom-3" onClick={toggleVideoPlay}>
-                      <IoMdPlay className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300" size={25} />
+                    <div
+                      className="absolute left-3 bottom-3"
+                      onClick={toggleVideoPlay}
+                    >
+                      <IoMdPlay
+                        className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300"
+                        size={25}
+                      />
                     </div>
                   )}
                 </div>
@@ -294,8 +276,14 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                 muted={isMuted}
               ></video>
               {!isPlaying && (
-                <div className="absolute left-3 bottom-3" onClick={toggleVideoPlay}>
-                  <IoMdPlay className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300" size={25} />
+                <div
+                  className="absolute left-3 bottom-3"
+                  onClick={toggleVideoPlay}
+                >
+                  <IoMdPlay
+                    className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300"
+                    size={25}
+                  />
                 </div>
               )}
               <div
@@ -303,9 +291,15 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                 onClick={toggleVideoMute}
               >
                 {isMuted ? (
-                  <IoMdVolumeOff className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300" size={25} />
+                  <IoMdVolumeOff
+                    className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300"
+                    size={25}
+                  />
                 ) : (
-                  <IoMdVolumeHigh className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300" size={25} />
+                  <IoMdVolumeHigh
+                    className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300"
+                    size={25}
+                  />
                 )}
               </div>
             </div>
@@ -413,29 +407,27 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
               {item.grants.length !== 0 && (
                 <>
                   <h1 className="pt-3.5 pb-2 text-lg font-bold text-black/80 mb-2">
-                     INCLUDING
+                    INCLUDING
                   </h1>
-                  
+
                   <div className="flex items-center justify-center flex-wrap gap-3 mb-2">
-                    
-                  {/* Skin */}
-               
+                    {/* Skin */}
+
+                    {item.images.background && (
                       <div
                         key={itemId}
                         className="cursor-pointer bg-[#1780d8] rounded-xl"
-                        onClick={() => handleItemClick(itemId || "")}
                       >
                         <img
                           src={item.images.background}
                           alt="item grant"
                           className="rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
                         />
-                      </div>                     
+                      </div>
+                    )}
 
-                    {/* Bag */}
-                    
+                    {/* Grant */}
                     {item.grants.map((grant) => (
-                      
                       <div
                         key={grant.id}
                         className="cursor-pointer bg-[#1780d8] rounded-xl"
@@ -448,10 +440,8 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                           alt="item grant"
                           className="rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
                         />
-                      </div>                     
-          
+                      </div>
                     ))}
-
                   </div>
                 </>
               )}
@@ -465,7 +455,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
           </div>
         </div>
       ) : (
-        <p className="px-6">...</p>
+        <p className="px-6">Item not found! Please try again.</p>
       )}
     </>
   );

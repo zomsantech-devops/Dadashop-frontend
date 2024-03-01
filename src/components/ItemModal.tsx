@@ -1,35 +1,27 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { ModalProps } from "../types";
 
 export default function Modal({ open, onClose, children }: ModalProps) {
-  const navigate = useNavigate();
-
   useEffect(() => {
     const toggleBodyOverflow = () => {
       document.body.style.overflow = open ? "hidden" : "auto";
     };
-  
+
     toggleBodyOverflow();
-  
+
     return () => {
       document.body.style.overflow = "auto";
     };
   }, [open]);
 
   return (
-    // backdrop
     <div
-      onClick={() => {
-        onClose();
-        navigate(`/item-shop`);
-      }}
+      onClick={onClose}
       className={`
         fixed inset-0 flex justify-center items-center screen_1250:items-start screen_1250:py-10 screen_910:py-0 transition-colors z-50 overflow-y-auto
         ${open ? "visible bg-black/10" : "invisible"}
       `}
     >
-      {/* modal */}
       <div
         onClick={(e) => e.stopPropagation()}
         className={`

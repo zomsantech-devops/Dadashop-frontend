@@ -6,12 +6,13 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { DateDisplay } from "../components/DateDisplay";
 import Modal from "../components/ItemModal";
 import ItemDetail from "./ItemDetail";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { SmallCarousel } from "../components/SmallCarousel";
-import moment from "moment-timezone";
 
 import "../components/misterPepper.css";
 import { ItemProps } from "../types";
+import { convertVbuckToTHB, isToday } from "../lib/utils";
+import { Categories } from "../components/shared/Categories";
 
 export interface ResponseData {
   success: boolean;
@@ -19,6 +20,8 @@ export interface ResponseData {
 }
 
 function ItemShop() {
+  const { id } = useParams<{ id?: string }>();
+
   const [data, setData] = useState<ItemProps[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [section, setSection] = useState<string[]>([]);
@@ -34,24 +37,6 @@ function ItemShop() {
   const [rate, setRate] = useState<number>(5);
 
   const navigate = useNavigate();
-  const location = useLocation();
-
-  const handleItemClick = (itemId: string) => {
-    setSelectedItemId(itemId);
-    setOpen(true);
-
-    navigate(`/item-shop?id=${itemId}`);
-  };
-
-  useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    const itemId = searchParams.get("id");
-
-    if (itemId) {
-      setSelectedItemId(itemId);
-      setOpen(true);
-    }
-  }, [location.search]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,6 +69,25 @@ function ItemShop() {
   }, []);
 
   useEffect(() => {
+    if (id) {
+      setSelectedItemId(id);
+      setOpen(true);
+    } else {
+      setOpen(false);
+    }
+  }, [id]);
+
+  const handleItemClick = (itemId: string) => {
+    setSelectedItemId(itemId);
+    navigate(`/item-shop/${itemId}`);
+  };
+
+  const handleCloseModal = () => {
+    setOpen(false);
+    navigate("/item-shop");
+  };
+
+  useEffect(() => {
     const uniqueCategories = Array.from(
       new Set(data.map((item) => item.type_name || ""))
     );
@@ -98,15 +102,6 @@ function ItemShop() {
       return isToday(releaseDate);
     }).length;
 
-    setCategories([
-      { name: "All", count: data.length },
-      { name: "New", count: newItemsCount }, // Add the "New" category here
-      ...categoryCounts,
-    ]);
-    setSelectedCategory("All");
-  }, [data]);
-
-  useEffect(() => {
     const uniqueSection = Array.from(
       new Set(data.map((sec) => sec.section_name || ""))
     );
@@ -120,68 +115,39 @@ function ItemShop() {
     });
 
     setSection(sortedSections);
+    setCategories([
+      { name: "All", count: data.length },
+      { name: "New", count: newItemsCount }, // Add the "New" category here
+      ...categoryCounts,
+    ]);
+    setSelectedCategory("All");
   }, [data]);
-
-  const handleCategoryClick = (category: string) => {
-    setSelectedCategory(category === selectedCategory ? "All" : category);
-  };
-
-  const capitalize = (word: string) => {
-    const firstLetterCap = word.charAt(0).toUpperCase();
-    const remainingLetters = word.slice(1);
-    const capitalizedWord = firstLetterCap + remainingLetters;
-    return capitalizedWord;
-  };
-
-  const convertVbuckToTHB = (price: number | null, rate: number) => {
-    if (price === null) {
-      return 0;
-    }
-    const baht = (price / 100) * rate;
-    return baht;
-  };
-
-  const isToday = (inputDate: Date) => {
-    const date = moment.utc(inputDate);
-    const today = moment.utc();
-    return (
-      date.date() === today.date() &&
-      date.month() === today.month() &&
-      date.year() === today.year()
-    );
-  };
 
   return (
     <>
       <div className="flex flex-col justify-center px-[30px] screen_445:px-3">
         <div className="text-center my-[40px]">
+          {/* Header */}
           <p className="text-[38px] font-bold leading-normal my-1 screen_930:text-4xl screen_445:text-3xl">
             Daily Item Shop
           </p>
+          {/* Date */}
           <div className="text-[26px] text-[#4a4a59] screen_930:text-2xl screen_445:text-xl">
             <DateDisplay />
           </div>
         </div>
+        {/* Fetching data */}
         {isLoading ? (
           <CircularProgress className="self-center" />
         ) : (
           <>
-            <div className="flex self-center justify-left gap-4 mb-5 overflow-x-auto max-w-[1200px] screen_1250:max-w-full screen_500:gap-2 scrollbar-category rounded-xl">
-              {categories.map((category) => (
-                <button
-                  key={category.name}
-                  onClick={() => handleCategoryClick(category.name)}
-                  className={`px-4 py-2 rounded-2xl font-bold whitespace-nowrap screen_445:text-sm ${
-                    selectedCategory === category.name
-                      ? "bg-[#3d82d1] text-white"
-                      : "bg-gray-200 text-gray-800"
-                  } hover:bg-[#3d82d1] hover:text-white focus:outline-none`}
-                >
-                  {category.count}{" "}
-                  {capitalize(category.name.replace(/^sparks_/, ""))}
-                </button>
-              ))}
-            </div>
+            {/* Categories tabs */}
+            <Categories
+              categories={categories}
+              selectedCategory={selectedCategory}
+              onSelect={(category) => setSelectedCategory(category)}
+            />
+            {/* Fetch all items */}
             <div className="flex flex-col self-center gap-[20px] screen_960:gap-[40px] screen_500:w-full">
               {selectedCategory === "All" &&
                 section.map((sec) => (
@@ -228,8 +194,10 @@ function ItemShop() {
                                   </div>
                                   <div className="text-[#aafffa]">
                                     <p className="font-bold">
-                                      {convertVbuckToTHB(item.finalPrice, rate) ||
-                                        "-"}{" "}
+                                      {convertVbuckToTHB(
+                                        item.finalPrice,
+                                        rate
+                                      ) || "-"}{" "}
                                       บาท
                                     </p>
                                   </div>
@@ -242,11 +210,11 @@ function ItemShop() {
                   </section>
                 ))}
               <ul className="grid grid-cols-6 xl:grid-cols-5 lg:grid-cols-4 screen_810:grid-cols-3 sm:grid-cols-2 gap-4 screen_500:place-items-center screen_445:gap-2">
-                {selectedCategory === "New" // Check if the selected category is "New"
+                {selectedCategory === "New"
                   ? data
                       .filter((item) =>
                         isToday(new Date(item.release_date || ""))
-                      ) // Filter items with today's release date
+                      )
                       .map((item) => (
                         <li
                           key={item._id || ""}
@@ -281,7 +249,8 @@ function ItemShop() {
                                 </div>
                                 <div className="text-[#aafffa]">
                                   <p className="font-bold">
-                                    {convertVbuckToTHB(item.finalPrice, rate) || "-"}{" "}
+                                    {convertVbuckToTHB(item.finalPrice, rate) ||
+                                      "-"}{" "}
                                     บาท
                                   </p>
                                 </div>
@@ -328,7 +297,8 @@ function ItemShop() {
                                 </div>
                                 <div className="text-[#aafffa]">
                                   <p className="font-bold">
-                                    {convertVbuckToTHB(item.finalPrice, rate) || "-"}{" "}
+                                    {convertVbuckToTHB(item.finalPrice, rate) ||
+                                      "-"}{" "}
                                     บาท
                                   </p>
                                 </div>
@@ -343,14 +313,13 @@ function ItemShop() {
         )}
       </div>
       {selectedItemId && (
-        <Modal open={open} onClose={() => setOpen(false)}>
+        // <Modal open={open} onClose={handleCloseModal}>
+        //   <div className="">Hello</div>
+        // </Modal>
+        <Modal open={open} onClose={handleCloseModal}>
           <ItemDetail
             itemId={selectedItemId}
-            onClose={() => {
-              setSelectedItemId(null)
-              navigate(`/item-shop`);
-              setOpen(false);
-            }}
+            onClose={handleCloseModal}
           />
         </Modal>
       )}
