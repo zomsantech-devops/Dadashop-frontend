@@ -49,7 +49,12 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
     setDisplayAssets([]);
     setStyles([]);
     setPreviewVideo(null);
-    
+    setBundle({
+      id: "",
+      name: "",
+      price: "",
+    });
+
     const fetchItem = async () => {
       if (itemId) {
         setLoading(true);
@@ -320,26 +325,27 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
               <p>
                 {item.rarity.name} {item.type.name}
               </p>
+
+              <p className="mt-2 font-bold text-2xl">
+                {bundle?.name && (
+                  <>
+                    <span>&#40;</span>
+                    <span
+                      className="text-[#3D82D1] cursor-pointer hover:brightness-110"
+                      onClick={() => handleItemClick(bundleId || "")}
+                    >
+                      {bundle?.name}
+                    </span>
+                    <span>&#41;</span>
+                  </>
+                )}
+              </p>
               <div className="flex flex-col items-start justify-center my-2">
                 <div className="flex items-center">
                   <img src={vBucks} alt="V-Bucks" className="w-6 h-6 mr-2" />
                   {!item.price ? (
                     <div className="flex gap-2">
                       <p className="font-bold text-2xl">{bundle?.price}</p>
-                      <p className="font-bold text-2xl">
-                        {bundle?.name && (
-                          <>
-                            <span>&#40;</span>
-                            <span
-                              className="text-[#3D82D1] cursor-pointer hover:brightness-110"
-                              onClick={() => handleItemClick(bundleId || "")}
-                            >
-                              {bundle?.name}
-                            </span>
-                            <span>&#41;</span>
-                          </>
-                        )}
-                      </p>
                     </div>
                   ) : (
                     <p className="font-bold text-2xl">{item.price}</p>
