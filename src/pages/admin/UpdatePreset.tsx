@@ -132,7 +132,7 @@ const UpdatePreset = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true)
+    setIsLoading(true);
 
     const payload = {
       image: `${process.env.REACT_APP_API}/image/preset-${selectedPresetId}`,
@@ -171,12 +171,12 @@ const UpdatePreset = () => {
         toast.success("Upload Image Successfully");
       } else {
         toast.warn("Token not found in localStorage");
-        setIsLoading(false)
+        setIsLoading(false);
         console.error("Token not found in localStorage");
       }
     } catch (error) {
       toast.error("Upload Image Failed");
-      setIsLoading(false)
+      setIsLoading(false);
       console.error("Upload Error:" + error);
     }
 
@@ -194,12 +194,52 @@ const UpdatePreset = () => {
           }
         );
         toast.success("Preset has been Updated");
-        setIsLoading(false)
+        setIsLoading(false);
       }
     } catch (error) {
       toast.error("Failed");
-      setIsLoading(false)
+      setIsLoading(false);
       console.error(error);
+    }
+  };
+
+  const deletePreset = async () => {
+    // Confirm with the user
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this preset?"
+    );
+    if (isConfirmed) {
+      setIsLoading(true); // Optional: Set loading state
+
+      try {
+        const rawToken = localStorage.getItem("token");
+        if (!rawToken) {
+          toast.warn("Token not found in localStorage");
+          setIsLoading(false); // Reset loading state
+          return;
+        }
+
+        const token = rawToken.replace(/"/g, "");
+        await axios.delete(
+          `${process.env.REACT_APP_API}/preset/${selectedPresetId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        toast.success("Preset has been deleted successfully");
+
+        // Optional: Update the local UI state to reflect the deletion
+        setData(data.filter((preset) => preset.preset_id !== selectedPresetId));
+        setSelectedPresetId(data[0]?.preset_id || 1); // Reset selected preset ID to the first one or a default value
+      } catch (error) {
+        toast.error("Failed to delete the preset");
+        console.error(error);
+      } finally {
+        setIsLoading(false); // Reset loading state
+      }
     }
   };
 
@@ -375,7 +415,30 @@ const UpdatePreset = () => {
                 อัพเดต Preset
               </button>
             </form>
+
+            {/* Separator */}
+            <div className="relative my-6">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-red-500"></span>
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-white px-2 text-red-500">Danger Zone</span>
+              </div>
+            </div>
+            {/* Separator */}
+
+            {/* Delete preset */}
+            <button
+              className={`bg-red-500 rounded-[10px] px-4 py-2 opacity-100 hover:opacity-80 w-full font-bold text-white ${
+                isLoading && "bg-red-500/50"
+              }`}
+              disabled={isLoading}
+              onClick={deletePreset}
+            >
+              Delete This Preset
+            </button>
           </div>
+
           <div className="col-span-5 screen_930:col-span-10">
             <VerticalCard cardData={selectedPreset} />
           </div>
