@@ -25,8 +25,9 @@ import noImg from "../assets/images/empty.webp";
 import { useGenerationStore } from "../state/idea-generation";
 import { ItemHistory } from "../components/ItemHistory";
 import { convertVbuckToTHB } from "../lib/utils";
+import React from "react";
 
-const ItemDetail = ({ itemId, onClose }: IdProps) => {
+export const ItemDetail = ({ itemId, onClose }: IdProps) => {
   const [item, setItem] = useState<Item | null>();
   const [loading, setLoading] = useState<boolean>(false);
   const [styles, setStyles] = useState<Styles[]>([]);
@@ -467,4 +468,4 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
   );
 };
 
-export default ItemDetail;
+export const MemoItemDetail = React.memo(ItemDetail)

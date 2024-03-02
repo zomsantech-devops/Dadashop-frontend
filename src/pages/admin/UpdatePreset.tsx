@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 const UpdatePreset = () => {
   const [data, setData] = useState<CardProps[]>([]);
   const [selectedPresetId, setSelectedPresetId] = useState<number>(1);
+  const [selectedPresetLocation, setSelectedPresetLocation] =
+    useState<string>();
   const [selectedPreset, setSelectedPreset] = useState<CardProps>({
     image: "",
     title: "",
@@ -34,6 +36,7 @@ const UpdatePreset = () => {
         to: "",
       },
     },
+    preset_id: "",
   });
   const [image, setImage] = useState<File>();
   const [isLoading, setIsLoading] = useState(false);
@@ -45,10 +48,10 @@ const UpdatePreset = () => {
         setData(response.data.data);
       } catch (error: any) {}
     };
-
+    
     getPreset();
   }, []);
-
+  
   useEffect(() => {
     const getPresetById = async () => {
       try {
@@ -130,6 +133,10 @@ const UpdatePreset = () => {
       });
     };
 
+  const handleSelectLocation = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSelectedPresetLocation(e.target.value);
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
@@ -150,34 +157,36 @@ const UpdatePreset = () => {
           to: selectedPreset.button.color.to.toLowerCase(),
         },
       },
-      preset_id: selectedPresetId,
+      preset_id: selectedPresetLocation,
     };
 
     const rawToken: string | null = localStorage.getItem("token");
 
-    try {
-      if (rawToken) {
-        const token = rawToken.replace(/"/g, "");
-        await axios.post(
-          `${process.env.REACT_APP_API}/image/preset-${selectedPresetId}`,
-          { image },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-        toast.success("Upload Image Successfully");
-      } else {
-        toast.warn("Token not found in localStorage");
+    if (image) {
+      try {
+        if (rawToken) {
+          const token = rawToken.replace(/"/g, "");
+          await axios.post(
+            `${process.env.REACT_APP_API}/image/preset-${selectedPresetId}`,
+            { image },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          );
+          toast.success("Upload Image Successfully");
+        } else {
+          toast.warn("Token not found in localStorage");
+          setIsLoading(false);
+          console.error("Token not found in localStorage");
+        }
+      } catch (error) {
+        toast.error("Upload Image Failed");
         setIsLoading(false);
-        console.error("Token not found in localStorage");
+        console.error("Upload Error:" + error);
       }
-    } catch (error) {
-      toast.error("Upload Image Failed");
-      setIsLoading(false);
-      console.error("Upload Error:" + error);
     }
 
     try {
@@ -238,11 +247,10 @@ const UpdatePreset = () => {
           }
         );
 
-        toast.success("Preset has been deleted successfully. Reload in 2 seconds...");
+        toast.success(
+          "Preset has been deleted successfully. Reload in 2 seconds..."
+        );
 
-        // Optional: Update the local UI state to reflect the deletion
-        setData(data.filter((preset) => preset.preset_id !== selectedPresetId));
-        setSelectedPresetId(data[0]?.preset_id || 1); // Reset selected preset ID to the first one or a default value
         setTimeout(() => {
           window.location.reload();
         }, 2000);
@@ -386,6 +394,7 @@ const UpdatePreset = () => {
                     />
                   </div>
                 </div>
+
                 <div className="flex flex-col">
                   <label className="mb-[3px] font-bold">Gradient:</label>
                   <div className="flex items-center justify-start gap-2">
@@ -414,6 +423,20 @@ const UpdatePreset = () => {
                       title="Choose your color"
                     />
                   </div>
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="mb-[3px] font-bold">
+                    Location (หน้า เติม fortnite หรือ หน้าบริการอื่นๆ):
+                  </label>
+                  <select
+                    className="border border-blue-gray-50 mb-[15px] rounded-[5px] px-[10px] py-[5px] focus:border-[#1EAEF0] outline-[#02A7F3]"
+                    name="location"
+                    onChange={handleSelectLocation}
+                  >
+                    <option value="/price-fortnite">/price-fortnite</option>
+                    <option value="/price-other">/price-other</option>
+                  </select>
                 </div>
               </div>
 

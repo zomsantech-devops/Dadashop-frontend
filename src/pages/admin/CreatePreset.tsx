@@ -34,6 +34,7 @@ const CreatePreset = () => {
         to: "#ffffff",
       },
     },
+    preset_id: "/price-fortnite"
   });
   const [image, setImage] = useState<File>();
   const [isLoading, setIsLoading] = useState(false);

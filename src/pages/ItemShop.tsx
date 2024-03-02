@@ -5,7 +5,7 @@ import vBucks from "../assets/icons/vbucks-coins.webp";
 import CircularProgress from "@mui/material/CircularProgress";
 import { DateDisplay } from "../components/DateDisplay";
 import Modal from "../components/ItemModal";
-import ItemDetail from "./ItemDetail";
+import { MemoItemDetail } from "./ItemDetail";
 import { useNavigate, useParams } from "react-router-dom";
 import { SmallCarousel } from "../components/SmallCarousel";
 
@@ -332,7 +332,7 @@ function ItemShop() {
         //   <div className="">Hello</div>
         // </Modal>
         <Modal open={open} onClose={handleCloseModal}>
-          <ItemDetail itemId={selectedItemId} onClose={handleCloseModal} />
+          <MemoItemDetail itemId={selectedItemId} onClose={handleCloseModal} />
         </Modal>
       )}
       <Footer />
