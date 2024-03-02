@@ -229,11 +229,23 @@ const UpdatePreset = () => {
           }
         );
 
-        toast.success("Preset has been deleted successfully");
+        await axios.delete(
+          `${process.env.REACT_APP_API}/image/preset-${selectedPresetId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        toast.success("Preset has been deleted successfully. Reload in 2 seconds...");
 
         // Optional: Update the local UI state to reflect the deletion
         setData(data.filter((preset) => preset.preset_id !== selectedPresetId));
         setSelectedPresetId(data[0]?.preset_id || 1); // Reset selected preset ID to the first one or a default value
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       } catch (error) {
         toast.error("Failed to delete the preset");
         console.error(error);

@@ -4,7 +4,7 @@ import axios from "axios";
 import { VerticalCard } from "../../components/VerticalCard";
 import { CardProps } from "../../types";
 import { toast } from "react-toastify";
-import empty from "../../assets/images/empty.webp"
+import empty from "../../assets/images/empty.webp";
 
 const CreatePreset = () => {
   const [data, setData] = useState<CardProps[]>([]);
@@ -113,9 +113,43 @@ const CreatePreset = () => {
       });
     };
 
+  const urlToFile = async (
+    url: string,
+    filename: string,
+    mimeType: string
+  ): Promise<File> => {
+    try {
+      const response = await fetch(url);
+      const blob: Blob = await response.blob();
+      return new File([blob], filename, { type: mimeType });
+    } catch (error) {
+      console.error("Error converting URL to File:", error);
+      throw new Error("Failed to convert URL to File.");
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
+
+    let fileToUpload: File | undefined = image;
+
+    if (!fileToUpload) {
+      try {
+        fileToUpload = await urlToFile(
+          empty, // This should be the path to your default image
+          "default_image.webp", // Name of the file
+          "image/webp" // MIME type
+        );
+      } catch (error) {
+        console.error("Failed to convert default image to File:", error);
+        setIsLoading(false);
+        return; // Exit if the default image conversion fails
+      }
+    }
+  
+    const formData = new FormData();
+    formData.append("image", fileToUpload);
 
     const payload = {
       image: `${process.env.REACT_APP_API}/image/preset-${data.length + 1}`,
@@ -143,7 +177,7 @@ const CreatePreset = () => {
         const token = rawToken.replace(/"/g, "");
         await axios.post(
           `${process.env.REACT_APP_API}/image/preset-${data.length + 1}`,
-          { image },
+          formData,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -166,16 +200,12 @@ const CreatePreset = () => {
     try {
       if (rawToken) {
         const token = rawToken.replace(/"/g, "");
-        await axios.post(
-          `${process.env.REACT_APP_API}/preset`,
-          payload,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        await axios.post(`${process.env.REACT_APP_API}/preset`, payload, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
         toast.success("Preset has been Created!");
         setIsLoading(false);
       }
@@ -216,6 +246,10 @@ const CreatePreset = () => {
                   onChange={handleUpload}
                   className=""
                 />
+                <p className="mt-2 text-sm text-blue-500">
+                  *If there is no uploaded image. The system will upload this
+                  preview image. ---&gt;
+                </p>
               </div>
 
               <div className="flex flex-col gap-4 mb-6">
