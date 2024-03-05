@@ -28,11 +28,13 @@ export const SmallCarousel = memo(({ displayAssets }: SmallCarouselProps) => {
             }`}
           >
             <img
+              loading="lazy"
               src={asset.image_background}
               alt={`Slide ${index}`}
               className="carousel-image"
             />
             <img
+              loading="lazy"
               src={asset.image_url || noImg}
               alt={`URL Slide ${index}`}
               className="url-overlay"
