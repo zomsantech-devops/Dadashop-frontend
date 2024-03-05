@@ -101,7 +101,7 @@ function HomePage() {
           </div>
         </div>
 
-        <div className="flex w-[600px] h-[400px] rounded-3xl bg-[url('https://dadashop-backend.vercel.app/api/v1/image/bg-1')] bg-cover overflow-hidden price-and-how-to-box screen_610:w-[450px] screen_610:self-center screen_500:w-[350px] screen_500:h-[300px]">
+        <div className="flex w-[600px] h-[400px] rounded-3xl bg-[url('https://dadashop-backend.vercel.app/api/v1/image/bg-2')] bg-cover overflow-hidden price-and-how-to-box screen_610:w-[450px] screen_610:self-center screen_500:w-[350px] screen_500:h-[300px]">
           <div className="flex-1 flex justify-center items-center">
             <img
               src={`${process.env.REACT_APP_API}/image/box-2`}
