@@ -82,10 +82,10 @@ function HomePage() {
          <div className="text-3xl font-bold text-white mb-2 screen_500:text-2xl">
           เติม Fortnite
           </div>
-        <div className="flex gap-1.5 screen_610:flex-col">
+        <div className="flex gap-1.5 screen_610:flex-col ">
          <Link
             to="#"
-            className="text-center bg-white/30 py-2 px-8 text-white rounded-[20px] hover:scale-105 transition ease-in-out duration-300"
+            className="text-center bg-white/30 py-2 px-8 text-white rounded-[20px] hover:scale-105 transition ease-in-out duration-300 "
          >
              ราคา
          </Link>
@@ -109,13 +109,14 @@ function HomePage() {
           </div>
           <div className="flex-1 flex flex-col justify-center items-start">
             <div className="w-full">
-              <div className="text-3xl font-bold text-white mb-2 screen_500:text-2xl screen_500:text-center">
+              <div className="text-3xl font-bold text-white mb-2 screen_500:text-2xl">
                 บริการอื่นๆ
               </div>
-              <div className="flex gap-1.5 screen_500:justify-center">
+              <div className="flex gap-1.5 text-center screen_610:flex-col screen_610:w-[152.75px]">
                 <Link
                   to="#"
-                  className="bg-white/30 p-2 px-8 text-white rounded-[20px] hover:scale-105 transition ease-in-out duration-300"
+                  className="text-center bg-white/30 p-2 px-8 text-white rounded-[20px] hover:scale-105 transition ease-in-out duration-300"
+                  
                 >
                   ราคา
                 </Link>
