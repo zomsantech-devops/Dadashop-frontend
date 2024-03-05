@@ -156,6 +156,7 @@ function ItemShop() {
                         .filter((item) => item.section_name === sec)
                         .map((item) => (
                           <ItemCard
+                            key={item.id}
                             item={item}
                             handleItemClick={handleItemClick}
                             rate={rate}
@@ -172,6 +173,7 @@ function ItemShop() {
                       )
                       .map((item) => (
                         <ItemCard
+                          key={item.id}
                           item={item}
                           handleItemClick={handleItemClick}
                           rate={rate}
@@ -181,6 +183,7 @@ function ItemShop() {
                       .filter((item) => item.type_name === selectedCategory)
                       .map((item) => (
                         <ItemCard
+                          key={item.id}
                           item={item}
                           handleItemClick={handleItemClick}
                           rate={rate}
