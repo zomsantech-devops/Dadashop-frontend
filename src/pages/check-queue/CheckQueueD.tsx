@@ -70,17 +70,17 @@ function CheckQueueD() {
           <div className="w-full flex flex-col items-center text-white mt-3 text-2xl screen_445:text-xl">
             {/* HIDDEN */}
             <p className="hidden">{readyToSendCount}</p>
-            <div className="flex flex-col justify-center w-[300px] screen_445:w-[300px] gap-1.5">
-              <div className="flex-grow rounded-[32px] py-3 px-16 bg-[#00AB66]">
-                <p className="text-[20px] leading-[40px]">
+            <div className="flex flex-col justify-center w-[300px] screen_930:w-[250px] screen_445:w-[200px] gap-1.5">
+              <div className="flex-grow rounded-[32px] py-2 px-16 bg-[#00AB66] screen_930:px-10 screen_445:px-8">
+                <p className="text-[20px] leading-[40px] screen_930:text-[17px] screen_445:text-[15px] ">
                   พร้อมส่งทันที{" "}
                   <span className="text-white font-bold">
                     {readyToSendNowCount}
                   </span>
                 </p>
               </div>
-              <div className="flex-grow rounded-[32px] py-3 px-16 bg-[#90F0C9] text-black">
-                <p className="text-[20px] leading-[40px]">
+              <div className="flex-grow rounded-[32px] py-2 px-16 bg-[#90F0C9] text-black screen_930:px-10 screen_445:px-8">
+                <p className="text-[20px] leading-[40px] screen_930:text-[17px] screen_445:text-[15px]">
                   ส่งได้ตามเวลา{" "}
                   <span className="font-bold">{readyToSendAtCount}</span>
                 </p>
