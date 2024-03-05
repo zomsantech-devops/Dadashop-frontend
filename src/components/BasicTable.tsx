@@ -63,7 +63,7 @@ export function BasicTable({
                       index === 0 ? "250px" : index === 1 ? "90px" : "250px",
                   }}
                 >
-                  <Typography variant="small" className="leading-none">
+                  <Typography variant="small" className="leading-none" placeholder="">
                     {head}
                   </Typography>
                 </th>
@@ -93,6 +93,7 @@ export function BasicTable({
                 <tr key={index}>
                   <td className={classes}>
                     <Typography
+                    placeholder=""
                       variant="small"
                       color="blue-gray"
                       className={` text-[16px] font-normal leading-none w-[115px] ${statusClasses}`}
@@ -103,6 +104,7 @@ export function BasicTable({
                   </td>
                   <td className={classes}>
                     <Typography
+                    placeholder=""
                       variant="small"
                       color="blue-gray"
                       className="text-[16px] font-normal leading-none"
@@ -113,6 +115,7 @@ export function BasicTable({
                   </td>
                   <td className={classes}>
                     <Typography
+                    placeholder=""
                       variant="small"
                       color="blue-gray"
                       className="text-[16px] font-normal leading-none"

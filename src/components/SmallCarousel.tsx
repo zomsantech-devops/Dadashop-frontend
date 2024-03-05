@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { SmallCarouselProps } from "../types";
-import noImg from "../assets/images/empty.webp"
+import noImg from "../assets/images/empty.webp";
 
 import "./thickthighdrivemecrazy.css";
 
-export const SmallCarousel = ({ displayAssets }: SmallCarouselProps) => {
+export const SmallCarousel = memo(({ displayAssets }: SmallCarouselProps) => {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
@@ -42,4 +42,4 @@ export const SmallCarousel = ({ displayAssets }: SmallCarouselProps) => {
       </div>
     </div>
   );
-};
+});

@@ -1,4 +1,4 @@
-import CircularProgress from "@mui/material/CircularProgress";
+import { CircularProgress } from "@mui/material";
 import axios from "axios";
 import { startTransition, useEffect, useRef, useState } from "react";
 
@@ -468,4 +468,4 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
   );
 };
 
-export const MemoItemDetail = React.memo(ItemDetail)
+export const MemoItemDetail = React.memo(ItemDetail);

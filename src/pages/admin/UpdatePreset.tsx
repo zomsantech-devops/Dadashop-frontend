@@ -7,9 +7,9 @@ import { toast } from "react-toastify";
 
 const UpdatePreset = () => {
   const [data, setData] = useState<CardProps[]>([]);
-  const [selectedPresetId, setSelectedPresetId] = useState<number>(1);
+  const [selectedPresetId, setSelectedPresetId] = useState("1");
   const [selectedPresetLocation, setSelectedPresetLocation] =
-    useState<string>();
+    useState<string>("price-fortnite");
   const [selectedPreset, setSelectedPreset] = useState<CardProps>({
     image: "",
     title: "",
@@ -36,6 +36,7 @@ const UpdatePreset = () => {
         to: "",
       },
     },
+    location: "",
     preset_id: "",
   });
   const [image, setImage] = useState<File>();
@@ -46,27 +47,44 @@ const UpdatePreset = () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_API}/preset`);
         setData(response.data.data);
+
+        if (response.data.data.length > 0) {
+          const firstPresetId = response.data.data[0].preset_id;
+          setSelectedPresetId(firstPresetId);
+          // This will trigger the second useEffect to fetch the preset by ID
+        }
       } catch (error: any) {}
     };
-    
+
     getPreset();
   }, []);
-  
+
   useEffect(() => {
     const getPresetById = async () => {
+      if (!selectedPresetId) return;
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_API}/preset/${selectedPresetId}`
         );
-        setSelectedPreset(response.data.data);
-      } catch (error: any) {}
+        if (response.data.data) {
+          setSelectedPreset(response.data.data);
+          // Update selectedPresetLocation based on fetched data
+          setSelectedPresetLocation(
+            response.data.data.location || "price-fortnite"
+          ); // Default to 'price-fortnite' if location is undefined
+        } else {
+          console.warn("No preset data found for the given ID");
+        }
+      } catch (error) {
+        console.error("Failed to fetch preset by ID:", error);
+      }
     };
 
     getPresetById();
   }, [selectedPresetId]);
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedPresetId(parseInt(e.target.value));
+    setSelectedPresetId(e.target.value);
   };
 
   const handleUpload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -157,7 +175,8 @@ const UpdatePreset = () => {
           to: selectedPreset.button.color.to.toLowerCase(),
         },
       },
-      preset_id: selectedPresetLocation,
+      location: selectedPresetLocation,
+      preset_id: selectedPresetId,
     };
 
     const rawToken: string | null = localStorage.getItem("token");
@@ -432,10 +451,11 @@ const UpdatePreset = () => {
                   <select
                     className="border border-blue-gray-50 mb-[15px] rounded-[5px] px-[10px] py-[5px] focus:border-[#1EAEF0] outline-[#02A7F3]"
                     name="location"
+                    value={selectedPresetLocation}
                     onChange={handleSelectLocation}
                   >
-                    <option value="/price-fortnite">/price-fortnite</option>
-                    <option value="/price-other">/price-other</option>
+                    <option value="price-fortnite">price-fortnite</option>
+                    <option value="price-other">price-other</option>
                   </select>
                 </div>
               </div>

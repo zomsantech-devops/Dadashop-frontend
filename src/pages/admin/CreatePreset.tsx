@@ -34,10 +34,13 @@ const CreatePreset = () => {
         to: "#ffffff",
       },
     },
-    preset_id: "/price-fortnite"
+    location: "price-fortnite",
+    preset_id: "",
   });
   const [image, setImage] = useState<File>();
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedPresetLocation, setSelectedPresetLocation] =
+    useState<string>("price-fortnite");
 
   useEffect(() => {
     const getPreset = async () => {
@@ -114,6 +117,10 @@ const CreatePreset = () => {
       });
     };
 
+  const handleSelectLocation = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSelectedPresetLocation(e.target.value);
+  };
+
   const urlToFile = async (
     url: string,
     filename: string,
@@ -148,7 +155,7 @@ const CreatePreset = () => {
         return; // Exit if the default image conversion fails
       }
     }
-  
+
     const formData = new FormData();
     formData.append("image", fileToUpload);
 
@@ -168,6 +175,7 @@ const CreatePreset = () => {
           to: selectedPreset.button.color.to.toLowerCase(),
         },
       },
+      location: selectedPresetLocation,
       preset_id: data.length + 1,
     };
 
@@ -374,6 +382,21 @@ const CreatePreset = () => {
                       title="Choose your color"
                     />
                   </div>
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="mb-[3px] font-bold">
+                    Location (หน้า เติม fortnite หรือ หน้าบริการอื่นๆ):
+                  </label>
+                  <select
+                    className="border border-blue-gray-50 mb-[15px] rounded-[5px] px-[10px] py-[5px] focus:border-[#1EAEF0] outline-[#02A7F3]"
+                    name="location"
+                    value={selectedPresetLocation}
+                    onChange={handleSelectLocation}
+                  >
+                    <option value="price-fortnite">price-fortnite</option>
+                    <option value="price-other">price-other</option>
+                  </select>
                 </div>
               </div>
 
