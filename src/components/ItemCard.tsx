@@ -26,8 +26,8 @@ interface DisplayAssets {
   image_url: string;
 }
 
-export const ItemCard = memo(
-  ({ item, handleItemClick, rate }: ItemComponentProps) => (
+const ItemCard = memo(({ item, handleItemClick, rate }: ItemComponentProps) => {
+  return (
     <li
       className="relative w-[187px] cursor-pointer screen_500:w-full"
       onClick={() => handleItemClick(item.id || "")}
@@ -61,5 +61,7 @@ export const ItemCard = memo(
         </div>
       </div>
     </li>
-  )
-);
+  );
+});
+
+export { ItemCard };

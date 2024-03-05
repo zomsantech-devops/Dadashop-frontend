@@ -1,4 +1,3 @@
-import { CircularProgress } from "@mui/material";
 import axios from "axios";
 import { startTransition, useEffect, useRef, useState } from "react";
 
@@ -26,6 +25,7 @@ import { useGenerationStore } from "../state/idea-generation";
 import { ItemHistory } from "../components/ItemHistory";
 import { convertVbuckToTHB } from "../lib/utils";
 import React from "react";
+import ItemDetailSkeleton from "../components/skeleton/ItemDetailSkeleton";
 
 export const ItemDetail = ({ itemId, onClose }: IdProps) => {
   const [item, setItem] = useState<Item | null>();
@@ -174,18 +174,17 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
   return (
     <>
       {loading ? (
-        <div className="px-6 flex items-center justify-center">
-          <CircularProgress className="self-center" />
-        </div>
+        <ItemDetailSkeleton />
       ) : item ? (
         <div className="flex screen_1250:flex-col items-center justify-center max-h-[80vh] screen_1250:max-h-none gap-6 px-6 screen_1250:pt-4">
           {item.type.id !== "emote" ? (
             item.type.id !== "bundle" ? (
               displayAssets.length !== 0 ? (
-                <div className="max-w-[520px] screen_610:w-[375px] screen_445:w-[275px] rounded-lg">
+                <div className="max-w-[520px] w-[520px] screen_610:w-[375px] screen_445:w-[275px] rounded-lg">
                   <Carousel>
                     {displayAssets.map((asset) => (
                       <img
+                        loading="lazy"
                         key={asset.materialInstance}
                         src={asset.background || noImg}
                         alt={asset.displayAsset}
@@ -224,13 +223,19 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
               ) : item.images.background ? (
                 <div className="max-w-[520px] screen_610:w-[375px] screen_445:w-[275px] rounded-lg">
                   <img
+                    loading="lazy"
                     src={item.images.background}
                     alt={"item in set"}
                     className={`aspect-square rounded-lg`}
                   />
                 </div>
               ) : (
-                <img src={noImg} alt="empty" className={`rounded-lg`} />
+                <img
+                  loading="lazy"
+                  src={noImg}
+                  alt="empty"
+                  className={`rounded-lg`}
+                />
               )
             ) : (
               <div className="flex flex-col">
@@ -241,6 +246,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                         {!grant.images.icon_background ? (
                           <>
                             <img
+                              loading="lazy"
                               src={noImg}
                               alt="empty"
                               className="rounded-xl w-[120px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105 screen_445:w-[80px]"
@@ -249,6 +255,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                           </>
                         ) : (
                           <img
+                            loading="lazy"
                             src={grant.images.icon_background}
                             alt="item grant"
                             className="bg-[#1780d8] rounded-xl w-[120px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105 screen_445:w-[80px]"
@@ -260,7 +267,12 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                       </div>
                     ))
                   ) : (
-                    <img src={noImg} alt="empty" className="rounded-lg" />
+                    <img
+                      loading="lazy"
+                      src={noImg}
+                      alt="empty"
+                      className="rounded-lg"
+                    />
                   )}
                 </div>
               </div>
@@ -311,6 +323,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
             </div>
           ) : (
             <img
+              loading="lazy"
               src={item.images.background}
               alt="empty"
               className={`max-w-[520px] h-[80vh] object-cover rounded-lg screen_1250:h-[325px] screen_445:h-[256px]`}
@@ -343,7 +356,12 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
               </p>
               <div className="flex flex-col items-start justify-center my-2">
                 <div className="flex items-center">
-                  <img src={vBucks} alt="V-Bucks" className="w-6 h-6 mr-2" />
+                  <img
+                    loading="lazy"
+                    src={vBucks}
+                    alt="V-Bucks"
+                    className="w-6 h-6 mr-2"
+                  />
                   {!item.price ? (
                     <div className="flex gap-2">
                       <p className="font-bold text-2xl">{bundle?.price}</p>
@@ -400,6 +418,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                               className="cursor-pointer bg-[#1780d8] rounded-xl"
                             >
                               <img
+                                loading="lazy"
                                 src={style.image}
                                 alt="style item"
                                 className="rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
@@ -426,6 +445,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                         className="cursor-pointer bg-[#1780d8] rounded-xl"
                       >
                         <img
+                          loading="lazy"
                           src={item.images.background}
                           alt="item grant"
                           className="rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
@@ -443,6 +463,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                         }
                       >
                         <img
+                          loading="lazy"
                           src={grant.images.icon_background}
                           alt="item grant"
                           className="rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"

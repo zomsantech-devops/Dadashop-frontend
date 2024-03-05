@@ -9,10 +9,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import "../components/misterPepper.css";
 import { ItemProps } from "../types";
 import { isToday } from "../lib/utils";
-import { CircularProgress } from "@mui/material";
 import { getRate } from "../utils/api";
 import { Categories } from "../components/Categories";
 import { ItemCard } from "../components/ItemCard";
+import ItemShopSkeleton from "../components/skeleton/ItemShopSkeleton";
 
 export interface ResponseData {
   success: boolean;
@@ -134,7 +134,7 @@ function ItemShop() {
         </div>
         {/* Fetching data */}
         {isLoading ? (
-          <CircularProgress className="self-center" />
+          <ItemShopSkeleton />
         ) : (
           <>
             {/* Categories tabs */}
