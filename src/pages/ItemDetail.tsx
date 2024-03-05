@@ -439,19 +439,16 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                   <div className="flex items-center justify-center flex-wrap gap-3 mb-2">
                     {/* Skin */}
 
-                   {item.type.id === "outfit" && (
-                    <div
-                    className="cursor-pointer bg-[#1780d8] rounded-xl"
-                  >
-                    <img
-                      loading="lazy"
-                      src={item.styles[0].image}
-                      alt="item grant"
-                      className="rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
-                    />
-                  </div>
-
-                   )}
+                    {item.type.id === "outfit" && (
+                      <div className="cursor-pointer bg-[#1780d8] rounded-xl">
+                        <img
+                          loading="lazy"
+                          src={item.images.icon_background || noImg}
+                          alt={"bg icon"}
+                          className={`rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105`}
+                        />
+                      </div>
+                    )}
 
                     {/* Grant */}
                     {item.grants.map((grant) => (

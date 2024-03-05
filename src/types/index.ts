@@ -123,6 +123,7 @@ export interface Item {
   ];
   images: {
     background: string;
+    icon_background: string;
   };
   grants: Grants[];
   displayAssets: DisplayAssetsItem[];
