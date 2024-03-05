@@ -13,7 +13,10 @@ function ItemPriceTable() {
     const getPreset = async () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_API}/preset`);
-        setData(response.data.data);
+        const filteredData = response.data.data.filter(
+          (preset: { location: string; }) => preset.location === "price-fortnite"
+        );
+        setData(filteredData);
       } catch (error: any) {}
     };
 
@@ -28,7 +31,7 @@ function ItemPriceTable() {
     return () => {
       toggleBodyOverflow();
     };
-    }, []);
+  }, []);
 
   return (
     <div>
