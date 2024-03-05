@@ -26,6 +26,8 @@ import { ItemHistory } from "../components/ItemHistory";
 import { convertVbuckToTHB } from "../lib/utils";
 import React from "react";
 import ItemDetailSkeleton from "../components/skeleton/ItemDetailSkeleton";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 export const ItemDetail = ({ itemId, onClose }: IdProps) => {
   const [item, setItem] = useState<Item | null>();
@@ -415,13 +417,15 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                           .map((style, i) => (
                             <div
                               key={i + "_" + style}
-                              className="cursor-pointer bg-[#1780d8] rounded-xl"
+                              className="cursor-pointer rounded-xl"
                             >
-                              <img
-                                loading="lazy"
+                              <LazyLoadImage
+                                width={80}
+                                height={80}
+                                effect="blur"
                                 src={style.image}
                                 alt="style item"
-                                className="rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
+                                className="rounded-xl bg-[#1780d8] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
                               />
                             </div>
                           ))}
@@ -440,12 +444,14 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                     {/* Skin */}
 
                     {item.type.id === "outfit" && (
-                      <div className="cursor-pointer bg-[#1780d8] rounded-xl">
-                        <img
-                          loading="lazy"
+                      <div className="cursor-pointer  rounded-xl">
+                        <LazyLoadImage
+                          width={80}
+                          height={80}
+                          effect="blur"
                           src={item.images.icon_background || noImg}
                           alt={"bg icon"}
-                          className={`rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105`}
+                          className={`rounded-xl transition ease-in-out duration-300 hover:scale-110 hover:brightness-105`}
                         />
                       </div>
                     )}
@@ -454,16 +460,18 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                     {item.grants.map((grant) => (
                       <div
                         key={grant.id}
-                        className="cursor-pointer bg-[#1780d8] rounded-xl"
+                        className="cursor-pointer rounded-xl"
                         onClick={() =>
                           handleItemClick(grant.id, itemId as string)
                         }
                       >
-                        <img
-                          loading="lazy"
+                        <LazyLoadImage
+                          width={80}
+                          height={80}
+                          effect="blur"
                           src={grant.images.icon_background}
                           alt="item grant"
-                          className="rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
+                          className="rounded-xl transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
                         />
                       </div>
                     ))}
