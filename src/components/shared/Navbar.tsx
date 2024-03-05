@@ -4,24 +4,19 @@ import { FaChevronDown } from "react-icons/fa";
 
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import SidebarMain from "./SidebarMain";
 
 function Navbar() {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isMobileDropdownOpen, setMobileDropdownOpen] = useState(false);
-  const [isGiftDropdownOpen, setGiftDropdownOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 975);
-  const [animateCollapseIn, setAnimateCollapseIn] = useState(false);
 
   const location = useLocation();
 
-  useEffect(() => {
-    setAnimateCollapseIn(true);
-    handleToggleDropdownClose();
-    setTimeout(() => {
-      setMobileDropdownOpen(false);
-      setAnimateCollapseIn(false);
-    }, 450);
-  }, [location.pathname]);
+  // useEffect(() => {
+  //   handleToggleDropdownClose();
+  //   setMobileDropdownOpen(false);
+  // }, [location.pathname]);
 
   const handleToggleDropdownOpen = () => {
     setDropdownOpen(true);
@@ -32,18 +27,7 @@ function Navbar() {
   };
 
   const handleToggleMobileDropdown = () => {
-    if (isMobileDropdownOpen) {
-      setAnimateCollapseIn(true);
-      setTimeout(() => {
-        setMobileDropdownOpen(false);
-        setAnimateCollapseIn(false);
-      }, 450);
-    }
-    setMobileDropdownOpen(true);
-  };
-
-  const handleToggleGiftDropdown = () => {
-    setGiftDropdownOpen(!isGiftDropdownOpen);
+    setMobileDropdownOpen(!isMobileDropdownOpen);
   };
 
   useEffect(() => {
@@ -249,109 +233,10 @@ function Navbar() {
         )}
       </div>
       {isMobileDropdownOpen && (
-        <div
-          className={`w-full flex flex-col gap-1 pl-2.5 ${
-            animateCollapseIn ? "animate-collapseOut" : "animate-expandIn"
-          } overflow-hidden`}
-        >
-          <Link
-            to="/item-shop"
-            className={`${
-              location.pathname === "/item-shop" &&
-              "px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
-            }  py-2 relative w-fit block text-gray-700`}
-          >
-            Item Shop
-          </Link>
-          <Link
-            to="/price-fortnite"
-            className={`${
-              location.pathname === "/price-fortnite" &&
-              "px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
-            }  py-2 relative w-fit block text-gray-700`}
-          >
-            เติม Fortnite
-          </Link>
-          <button
-            className={`${
-              location.pathname === "/check-queue/d1-d10" ||
-              location.pathname === "/check-queue/g1-g8" ||
-              location.pathname === "/check-queue/zz1-zz6"
-                ? "px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
-                : "text-gray-700"
-            }  py-2 relative w-fit block`}
-            onClick={handleToggleGiftDropdown}
-          >
-            คิวส่ง Gift
-            <span
-              className={`inline-block w-[12px] ml-[5px] transition-transform transform ${
-                isGiftDropdownOpen && "rotate-180"
-              }`}
-            >
-              <FaChevronDown className="inline-block w-3" />
-            </span>
-          </button>
-          {isGiftDropdownOpen && (
-            <div className="pl-4 flex flex-col gap-1">
-              <Link
-                to="/check-queue/zz1-zz6"
-                className={`${
-                  location.pathname === "/check-queue/zz1-zz6"
-                    ? "bg-[#3d82d1] text-white"
-                    : "text-gray-700"
-                } w-fit block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white`}
-              >
-                Dada ZZ1-ZZ6
-              </Link>
-              <Link
-                to="/check-queue/d1-d10"
-                className={`${
-                  location.pathname === "/check-queue/d1-d10"
-                    ? "bg-[#3d82d1] text-white"
-                    : "text-gray-700"
-                } w-fit block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white`}
-              >
-                Dada D1-D10
-              </Link>
-              <Link
-                to="/check-queue/g1-g8"
-                className={`${
-                  location.pathname === "/check-queue/g1-g8"
-                    ? "bg-[#3d82d1] text-white"
-                    : "text-gray-700"
-                } w-fit block px-4 py-2 rounded-full transition ease-in-out duration-300 text-gray-700 hover:bg-[#3d82d1] hover:text-white`}
-              >
-                Dada G1-G8{" "}
-                <span
-                  className={`${
-                    location.pathname === "/check-queue/g1-g8"
-                      ? "text-[#23d9d9]"
-                      : "text-red-400"
-                  } text-red-400 group-hover/name:text-[#23d9d9]`}
-                >
-                  (ปิดรับเพื่อนแล้ว)
-                </span>
-              </Link>
-            </div>
-          )}
-          <Link
-            to="/price-other"
-            className={`${
-              location.pathname === "/price-other" &&
-              " px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
-            } py-2 relative w-fit block`}
-          >
-            บริการอื่นๆ
-          </Link>
-          <Link
-            to="/check-points"
-            className={`${
-              location.pathname === "/check-points" &&
-              " px-4 rounded-full transition ease-in-out duration-300 bg-[#3d82d1] text-white"
-            } mb-4  py-2 relative w-fit block`}
-          >
-            Dada Points
-          </Link>
+        <div className="">
+          <SidebarMain
+            handleToggleMobileDropdown={handleToggleMobileDropdown}
+          />
         </div>
       )}
     </div>

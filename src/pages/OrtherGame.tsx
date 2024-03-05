@@ -14,7 +14,7 @@ function ItemPriceTable() {
       try {
         const response = await axios.get(`${process.env.REACT_APP_API}/preset`);
         const filteredData = response.data.data.filter(
-          (preset: { location: string; }) => preset.location === "price-other"
+          (preset: { location: string }) => preset.location === "price-other"
         );
         setData(filteredData);
       } catch (error: any) {}
@@ -44,11 +44,13 @@ function ItemPriceTable() {
         <div className="grid grid-cols-12 screen_960:flex screen_960:flex-col self-center gap-[20px] screen_960:gap-[40px] screen_500:w-full">
           {data.map((cardElement, index) =>
             data.length % 2 !== 0 && index === data.length - 1 ? (
-              <div key={index} className="col-start-4 col-span-6">
+              <div key={index} className="col-start-4 screen_1250:col-start-auto col-span-6 screen_1250:col-span-12">
                 <HorizontalCard cardData={cardElement} />
               </div>
             ) : (
-              <VerticalCard key={index} cardData={cardElement} />
+              <div key={index} className="col-span-6">
+                <VerticalCard key={index} cardData={cardElement} />
+              </div>
             )
           )}
         </div>
