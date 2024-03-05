@@ -68,6 +68,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/item-shop" element={<ItemShop />} />
+          <Route path="/item-shop/:id" element={<ItemShop />} />
           <Route path="/price-fortnite" element={<ItemPriceTable />} />
           <Route path="/price-fortnite/how-to-gift" element={<HowToGift />} />
           <Route path="/price-fortnite/how-to-else" element={<HowToElse />} />

@@ -23,7 +23,7 @@ export const VerticalCard = ({ cardData }: VerticalCardProps) => {
           {list.map((item, index) => (
             <p
               key={index}
-              className="overflow-hidden text-ellipsis whitespace-break-spaces screen_1250:text-sm screen_960:text-base"
+              className="overflow-hidden whitespace-break-spaces break-all screen_1250:text-sm screen_960:text-base"
             >
               <span
                 className={`inline-block w-[5px] h-[5px] rounded-full mr-[0.5em] mb-0.5`}

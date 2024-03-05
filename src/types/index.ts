@@ -13,7 +13,8 @@ export interface CardProps {
       to: string;
     };
   };
-  preset_id?: number
+  location: string
+  preset_id: string
 }
 interface BulletList {
   content: string;

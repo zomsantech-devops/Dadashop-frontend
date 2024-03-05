@@ -1,6 +1,5 @@
 import FBIcon from "../../assets/icons/facebook.webp";
 import DiscordIcon from "../../assets/icons/discord.webp";
-import dadaLogo from "../../assets/images/dada-logo-horizontal.webp";
 import { FaChevronDown } from "react-icons/fa";
 
 import { Link, useLocation } from "react-router-dom";
@@ -87,7 +86,7 @@ function Navbar() {
               <Link
                 to="/item-shop"
                 className={`${
-                  location.pathname === "/item-shop"
+                  location.pathname.includes("/item-shop")
                     ? "bg-[#3d82d1] text-white"
                     : "text-gray-700"
                 }  px-4 py-2 rounded-full transition ease-in-out duration-300 hover:bg-[#3d82d1] hover:text-white`}

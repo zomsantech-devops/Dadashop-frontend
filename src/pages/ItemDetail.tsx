@@ -1,4 +1,3 @@
-import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import { startTransition, useEffect, useRef, useState } from "react";
 
@@ -24,8 +23,11 @@ import {
 import noImg from "../assets/images/empty.webp";
 import { useGenerationStore } from "../state/idea-generation";
 import { ItemHistory } from "../components/ItemHistory";
+import { convertVbuckToTHB } from "../lib/utils";
+import React from "react";
+import ItemDetailSkeleton from "../components/skeleton/ItemDetailSkeleton";
 
-const ItemDetail = ({ itemId, onClose }: IdProps) => {
+export const ItemDetail = ({ itemId, onClose }: IdProps) => {
   const [item, setItem] = useState<Item | null>();
   const [loading, setLoading] = useState<boolean>(false);
   const [styles, setStyles] = useState<Styles[]>([]);
@@ -53,21 +55,6 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
       name: "",
       price: "",
     });
-  }, [onClose]);
-
-  useEffect(() => {
-    setItem(null);
-    setDisplayAssets([]);
-    setStyles([]);
-    setPreviewVideo(null);
-    setBundle({
-      id: "",
-      name: "",
-      price: "",
-    });
-
-    const searchParams = new URLSearchParams(location.search);
-    const itemId = searchParams.get("id");
 
     const fetchItem = async () => {
       if (itemId) {
@@ -86,29 +73,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
             setLoading(false);
           });
         } catch (error) {
-          console.error("Error fetching data:", error);
-        }
-      }
-    };
-
-    const itemBundleId = searchParams.get("p_id");
-
-    if (itemBundleId) {
-      setBundleId(itemBundleId);
-    }
-
-    const fetchBundle = async () => {
-      if (itemBundleId) {
-        setLoading(true);
-        try {
-          const response = await axios.get(
-            `${process.env.REACT_APP_API}/item/${itemBundleId}`
-          );
-          startTransition(() => {
-            setBundle(response.data.data.item);
-            setLoading(false);
-          });
-        } catch (error) {
+          setLoading(false);
           console.error("Error fetching data:", error);
         }
       }
@@ -124,8 +89,33 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
     };
 
     fetchItem();
-    fetchBundle();
     getRate();
+  }, [itemId]);
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const itemBundleId = searchParams.get("p_id");
+
+    if (itemBundleId) {
+      setBundleId(itemBundleId);
+    }
+
+    const fetchBundle = async () => {
+      if (itemBundleId) {
+        try {
+          const response = await axios.get(
+            `${process.env.REACT_APP_API}/item/${itemBundleId}`
+          );
+          startTransition(() => {
+            setBundle(response.data.data.item);
+          });
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+    };
+
+    fetchBundle();
   }, [location.search]);
 
   useEffect(() => {
@@ -136,18 +126,10 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
     setChannelName(uniqueSection);
   }, [styles]);
 
-  const convertVbuckToTHB = (price: number | null, rate: number) => {
-    if (price === null) {
-      return 0;
-    }
-    const baht = (price / 100) * rate;
-    return baht;
-  };
-
   const handleItemClick = (itemId: string, p_id?: string) => {
-    let navigatePath = `/item-shop?id=${itemId}`;
+    let navigatePath = `/item-shop/${itemId}`;
     if (p_id) {
-      navigatePath += `&p_id=${p_id}`;
+      navigatePath += `?p_id=${p_id}`;
     }
     navigate(navigatePath);
   };
@@ -192,18 +174,17 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
   return (
     <>
       {loading ? (
-        <div className="px-6 flex items-center justify-center">
-          <CircularProgress className="self-center" />
-        </div>
+        <ItemDetailSkeleton />
       ) : item ? (
         <div className="flex screen_1250:flex-col items-center justify-center max-h-[80vh] screen_1250:max-h-none gap-6 px-6 screen_1250:pt-4">
           {item.type.id !== "emote" ? (
             item.type.id !== "bundle" ? (
               displayAssets.length !== 0 ? (
-                <div className="max-w-[520px] screen_610:w-[375px] screen_445:w-[275px] rounded-lg">
+                <div className="max-w-[520px] w-[520px] screen_610:w-[375px] screen_445:w-[275px] rounded-lg">
                   <Carousel>
                     {displayAssets.map((asset) => (
                       <img
+                        loading="lazy"
                         key={asset.materialInstance}
                         src={asset.background || noImg}
                         alt={asset.displayAsset}
@@ -228,21 +209,33 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                     onPause={handlePause}
                   ></video>
                   {!isPlaying && (
-                    <div className="absolute left-3 bottom-3" onClick={toggleVideoPlay}>
-                      <IoMdPlay className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300" size={25} />
+                    <div
+                      className="absolute left-3 bottom-3"
+                      onClick={toggleVideoPlay}
+                    >
+                      <IoMdPlay
+                        className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300"
+                        size={25}
+                      />
                     </div>
                   )}
                 </div>
               ) : item.images.background ? (
                 <div className="max-w-[520px] screen_610:w-[375px] screen_445:w-[275px] rounded-lg">
                   <img
+                    loading="lazy"
                     src={item.images.background}
                     alt={"item in set"}
                     className={`aspect-square rounded-lg`}
                   />
                 </div>
               ) : (
-                <img src={noImg} alt="empty" className={`rounded-lg`} />
+                <img
+                  loading="lazy"
+                  src={noImg}
+                  alt="empty"
+                  className={`rounded-lg`}
+                />
               )
             ) : (
               <div className="flex flex-col">
@@ -253,6 +246,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                         {!grant.images.icon_background ? (
                           <>
                             <img
+                              loading="lazy"
                               src={noImg}
                               alt="empty"
                               className="rounded-xl w-[120px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105 screen_445:w-[80px]"
@@ -261,6 +255,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                           </>
                         ) : (
                           <img
+                            loading="lazy"
                             src={grant.images.icon_background}
                             alt="item grant"
                             className="bg-[#1780d8] rounded-xl w-[120px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105 screen_445:w-[80px]"
@@ -272,7 +267,12 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                       </div>
                     ))
                   ) : (
-                    <img src={noImg} alt="empty" className="rounded-lg" />
+                    <img
+                      loading="lazy"
+                      src={noImg}
+                      alt="empty"
+                      className="rounded-lg"
+                    />
                   )}
                 </div>
               </div>
@@ -294,8 +294,14 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                 muted={isMuted}
               ></video>
               {!isPlaying && (
-                <div className="absolute left-3 bottom-3" onClick={toggleVideoPlay}>
-                  <IoMdPlay className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300" size={25} />
+                <div
+                  className="absolute left-3 bottom-3"
+                  onClick={toggleVideoPlay}
+                >
+                  <IoMdPlay
+                    className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300"
+                    size={25}
+                  />
                 </div>
               )}
               <div
@@ -303,14 +309,21 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                 onClick={toggleVideoMute}
               >
                 {isMuted ? (
-                  <IoMdVolumeOff className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300" size={25} />
+                  <IoMdVolumeOff
+                    className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300"
+                    size={25}
+                  />
                 ) : (
-                  <IoMdVolumeHigh className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300" size={25} />
+                  <IoMdVolumeHigh
+                    className="text-white cursor-pointer hover:scale-125 transition ease-in-out duration-300"
+                    size={25}
+                  />
                 )}
               </div>
             </div>
           ) : (
             <img
+              loading="lazy"
               src={item.images.background}
               alt="empty"
               className={`max-w-[520px] h-[80vh] object-cover rounded-lg screen_1250:h-[325px] screen_445:h-[256px]`}
@@ -326,26 +339,32 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
               <p>
                 {item.rarity.name} {item.type.name}
               </p>
+
+              <p className="mt-2 font-bold text-2xl">
+                {bundle?.name && (
+                  <>
+                    <span>&#40;</span>
+                    <span
+                      className="text-[#3D82D1] cursor-pointer hover:brightness-110"
+                      onClick={() => handleItemClick(bundleId || "")}
+                    >
+                      {bundle?.name}
+                    </span>
+                    <span>&#41;</span>
+                  </>
+                )}
+              </p>
               <div className="flex flex-col items-start justify-center my-2">
                 <div className="flex items-center">
-                  <img src={vBucks} alt="V-Bucks" className="w-6 h-6 mr-2" />
+                  <img
+                    loading="lazy"
+                    src={vBucks}
+                    alt="V-Bucks"
+                    className="w-6 h-6 mr-2"
+                  />
                   {!item.price ? (
                     <div className="flex gap-2">
                       <p className="font-bold text-2xl">{bundle?.price}</p>
-                      <p className="font-bold text-2xl">
-                        {bundle?.name && (
-                          <>
-                            <span>&#40;</span>
-                            <span
-                              className="text-[#3D82D1] cursor-pointer hover:brightness-110"
-                              onClick={() => handleItemClick(bundleId || "")}
-                            >
-                              {bundle?.name}
-                            </span>
-                            <span>&#41;</span>
-                          </>
-                        )}
-                      </p>
                     </div>
                   ) : (
                     <p className="font-bold text-2xl">{item.price}</p>
@@ -399,6 +418,7 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                               className="cursor-pointer bg-[#1780d8] rounded-xl"
                             >
                               <img
+                                loading="lazy"
                                 src={style.image}
                                 alt="style item"
                                 className="rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
@@ -413,29 +433,28 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
               {item.grants.length !== 0 && (
                 <>
                   <h1 className="pt-3.5 pb-2 text-lg font-bold text-black/80 mb-2">
-                     INCLUDING
+                    INCLUDING
                   </h1>
-                  
+
                   <div className="flex items-center justify-center flex-wrap gap-3 mb-2">
-                    
-                  {/* Skin */}
-               
+                    {/* Skin */}
+
+                    {item.images.background && (
                       <div
                         key={itemId}
                         className="cursor-pointer bg-[#1780d8] rounded-xl"
-                        onClick={() => handleItemClick(itemId || "")}
                       >
                         <img
+                          loading="lazy"
                           src={item.images.background}
                           alt="item grant"
                           className="rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
                         />
-                      </div>                     
+                      </div>
+                    )}
 
-                    {/* Bag */}
-                    
+                    {/* Grant */}
                     {item.grants.map((grant) => (
-                      
                       <div
                         key={grant.id}
                         className="cursor-pointer bg-[#1780d8] rounded-xl"
@@ -444,14 +463,13 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
                         }
                       >
                         <img
+                          loading="lazy"
                           src={grant.images.icon_background}
                           alt="item grant"
                           className="rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
                         />
-                      </div>                     
-          
+                      </div>
                     ))}
-
                   </div>
                 </>
               )}
@@ -465,10 +483,10 @@ const ItemDetail = ({ itemId, onClose }: IdProps) => {
           </div>
         </div>
       ) : (
-        <p className="px-6">...</p>
+        <p className="px-6">Item not found! Please try again.</p>
       )}
     </>
   );
 };
 
-export default ItemDetail;
+export const MemoItemDetail = React.memo(ItemDetail);

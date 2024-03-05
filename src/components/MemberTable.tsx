@@ -106,7 +106,7 @@ export default function MemberTable({
             <tr>
               {TABLE_HEAD.map((head) => (
                 <th key={head} className=" bg-[#E7F9FD] px-[20px] py-[15px]">
-                  <Typography variant="small" className="leading-none">
+                  <Typography variant="small" className="leading-none" placeholder="">
                     {head}
                   </Typography>
                 </th>
@@ -137,6 +137,7 @@ export default function MemberTable({
                     <tr key={id}>
                       <td className={classes} style={{ width: "95px" }}>
                         <Button
+                          placeholder=""
                           className="shadow-none bg-[#1EAEF0] text-white rounded-[10px] px-[10px] py-[5px] text-[12px] opacity-80 hover:opacity-100"
                           onClick={() =>
                             handleEdit(index, {
@@ -159,6 +160,7 @@ export default function MemberTable({
                           variant="small"
                           color="blue-gray"
                           className="font-normal leading-none"
+                          placeholder=""
                         >
                           {name}
                         </Typography>
@@ -168,6 +170,7 @@ export default function MemberTable({
                           variant="small"
                           color="blue-gray"
                           className="font-normal leading-none"
+                          placeholder=""
                         >
                           {tier}
                         </Typography>
@@ -177,6 +180,7 @@ export default function MemberTable({
                           variant="small"
                           color="blue-gray"
                           className="font-normal leading-none"
+                          placeholder=""
                         >
                           {discord_username}
                         </Typography>
@@ -186,6 +190,7 @@ export default function MemberTable({
                           variant="small"
                           color="blue-gray"
                           className="font-normal leading-none"
+                          placeholder=""
                         >
                           {id}
                         </Typography>
@@ -195,6 +200,7 @@ export default function MemberTable({
                           variant="small"
                           color="blue-gray"
                           className="font-normal leading-none"
+                          placeholder=""
                         >
                           {current_points}
                         </Typography>
@@ -203,7 +209,8 @@ export default function MemberTable({
                         <Typography
                           variant="small"
                           color="blue-gray"
-                          className="font-normal leading-none "
+                          className="font-normal leading-none"
+                          placeholder=""
                         >
                           {total_points}
                         </Typography>

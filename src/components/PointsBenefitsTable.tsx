@@ -33,7 +33,7 @@ export function PointsBenefitsTable() {
             <tr>
               {TABLE_HEAD.map((head) => (
                 <th key={head} className=" bg-[#E7F9FD]  px-[20px] py-[15px]">
-                  <Typography variant="small" className="leading-none">
+                  <Typography variant="small" className="leading-none" placeholder="">
                     {head}
                   </Typography>
                 </th>
@@ -80,7 +80,8 @@ export function PointsBenefitsTable() {
                     <Typography
                       variant="small"
                       color="blue-gray"
-                      className="font-normal leading-none "
+                      className="font-normal leading-none"
+                      placeholder=""
                     >
                       {แต้มสะสม}
                     </Typography>
@@ -89,7 +90,8 @@ export function PointsBenefitsTable() {
                     <Typography
                       variant="small"
                       color="blue-gray"
-                      className="font-normal leading-[23px] "
+                      className="font-normal leading-[23px]"
+                      placeholder=""
                     >
                       {สิทธิประโยชน์}
                       {/* ERROR: Warning: validateDOMNesting(...): <p> cannot appear as a descendant of <p>. */}
