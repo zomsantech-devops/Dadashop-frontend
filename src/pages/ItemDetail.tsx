@@ -253,18 +253,19 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                               alt="empty"
                               className="rounded-xl w-[120px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105 screen_445:w-[80px]"
                             />
-                            <p className="text-center">(No image)</p>
                           </>
                         ) : (
-                          <img
-                            loading="lazy"
-                            src={grant.images.icon_background}
-                            alt="item grant"
-                            className="bg-[#1780d8] rounded-xl w-[120px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105 screen_445:w-[80px]"
-                            onClick={() =>
-                              handleItemClick(grant.id, itemId as string)
-                            }
-                          />
+                          <div className="transition ease-in-out duration-300 hover:scale-110 hover:brightness-105">
+                            <LazyLoadImage
+                              effect="blur"
+                              src={grant.images.icon_background}
+                              alt="item grant"
+                              className="bg-[#1780d8] rounded-xl w-[120px] screen_445:w-[80px]"
+                              onClick={() =>
+                                handleItemClick(grant.id, itemId as string)
+                              }
+                            />
+                          </div>
                         )}
                       </div>
                     ))
@@ -440,41 +441,45 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                     INCLUDING
                   </h1>
 
-                  <div className="flex items-center justify-center flex-wrap gap-3 mb-2">
+                  <div className="flex w-full items-center justify-center flex-wrap gap-3 mb-2">
                     {/* Skin */}
 
-                    {item.type.id === "outfit" && (
-                      <div className="cursor-pointer  rounded-xl">
-                        <LazyLoadImage
-                          width={80}
-                          height={80}
-                          effect="blur"
-                          src={item.images.icon_background || noImg}
-                          alt={"bg icon"}
-                          className={`rounded-xl transition ease-in-out duration-300 hover:scale-110 hover:brightness-105`}
-                        />
-                      </div>
-                    )}
+                    {item.type.id === "outfit" &&
+                      item.images.icon_background && (
+                        <div className="cursor-pointer rounded-xl">
+                          <LazyLoadImage
+                            width={80}
+                            height={80}
+                            effect="blur"
+                            src={item.images.icon_background}
+                            alt={"bg icon"}
+                            className={`rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105`}
+                          />
+                        </div>
+                      )}
 
                     {/* Grant */}
-                    {item.grants.map((grant) => (
-                      <div
-                        key={grant.id}
-                        className="cursor-pointer rounded-xl"
-                        onClick={() =>
-                          handleItemClick(grant.id, itemId as string)
-                        }
-                      >
-                        <LazyLoadImage
-                          width={80}
-                          height={80}
-                          effect="blur"
-                          src={grant.images.icon_background}
-                          alt="item grant"
-                          className="rounded-xl transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
-                        />
-                      </div>
-                    ))}
+                    {item.grants.map(
+                      (grant) =>
+                        grant.images.icon_background && (
+                          <div
+                            key={grant.id}
+                            className="cursor-pointer rounded-xl"
+                            onClick={() =>
+                              handleItemClick(grant.id, itemId as string)
+                            }
+                          >
+                            <LazyLoadImage
+                              width={80}
+                              height={80}
+                              effect="blur"
+                              src={grant.images.icon_background}
+                              alt="item grant"
+                              className="rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105"
+                            />
+                          </div>
+                        )
+                    )}
                   </div>
                 </>
               )}
