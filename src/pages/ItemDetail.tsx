@@ -11,7 +11,6 @@ import {
   IoMdVolumeHigh,
   IoMdVolumeOff,
 } from "react-icons/io";
-import { Carousel } from "../components/Carousel";
 import {
   DisplayAssetsItem,
   IdProps,
@@ -28,6 +27,7 @@ import React from "react";
 import ItemDetailSkeleton from "../components/skeleton/ItemDetailSkeleton";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { CarouselSlider } from "../components/Carousel";
 
 export const ItemDetail = ({ itemId, onClose }: IdProps) => {
   const [item, setItem] = useState<Item | null>();
@@ -183,17 +183,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
             item.type.id !== "bundle" ? (
               displayAssets.length !== 0 ? (
                 <div className="max-w-[520px] w-[520px] screen_610:w-[375px] screen_445:w-[275px] rounded-lg">
-                  <Carousel>
-                    {displayAssets.map((asset) => (
-                      <img
-                        loading="lazy"
-                        key={asset.materialInstance}
-                        src={asset.background || noImg}
-                        alt={asset.displayAsset}
-                        className={`aspect-square rounded-lg`}
-                      />
-                    ))}
-                  </Carousel>
+                  <CarouselSlider displayAssets={displayAssets} />
                 </div>
               ) : previewVideo ? (
                 <div className="relative">
