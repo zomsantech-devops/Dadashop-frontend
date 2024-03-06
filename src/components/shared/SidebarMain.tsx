@@ -42,7 +42,7 @@ const SidebarMain = ({ handleToggleMobileDropdown }: SidebarProps) => {
         onClick={handleToggleMobileDropdown}
       ></div>
       <div
-        className={`fixed top-0 right-0 h-full z-40 flex flex-col justify-between bg-[#171717] text-[#ececec] w-64 px-3 py-3.5 transition-width duration-300 ease-in-out`}
+        className={`fixed top-0 right-0 w-full z-40 flex flex-col justify-between bg-[#171717] text-[#ececec] px-3 py-3.5 transition-width duration-300 ease-in-out`}
       >
         <div className="">
           <div className="flex items-center justify-between text-sm">

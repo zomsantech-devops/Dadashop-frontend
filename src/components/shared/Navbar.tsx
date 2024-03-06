@@ -13,10 +13,10 @@ function Navbar() {
 
   const location = useLocation();
 
-  // useEffect(() => {
-  //   handleToggleDropdownClose();
-  //   setMobileDropdownOpen(false);
-  // }, [location.pathname]);
+  useEffect(() => {
+    handleToggleDropdownClose();
+    setMobileDropdownOpen(false);
+  }, [location.pathname]);
 
   const handleToggleDropdownOpen = () => {
     setDropdownOpen(true);
