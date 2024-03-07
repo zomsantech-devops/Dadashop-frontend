@@ -37,8 +37,8 @@ function ItemPriceTable() {
     <div>
       <div className="flex flex-col justify-center px-[30px]">
         <div className="flex justify-center gap-4 screen_420:gap-0">
-          <p className="text-center text-4xl font-bold leading-normal my-[40px] screen_930:text-[33px] screen_445:text-3xl">
-            เติม Fortnite
+          <p className="text-center text-4xl font-bold leading-normal my-[40px] screen_930:text-3xl screen_445:text-2xl">
+            บริการอื่นๆ
           </p>
         </div>
         <div className="grid grid-cols-12 screen_960:flex screen_960:flex-col self-center gap-[20px] screen_960:gap-[40px] screen_500:w-full">
