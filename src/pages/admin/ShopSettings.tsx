@@ -10,6 +10,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaBahtSign } from "react-icons/fa6";
+import EditableCard from "../../components/EditableCard";
 
 const ShopSettings = () => {
   const [status, setStatus] = useState<string>("");
@@ -23,8 +24,6 @@ const ShopSettings = () => {
   const [selectedStatus, setSelectedStatus] = useState<string>(status);
 
   const navigate = useNavigate();
-
-console.log(newOpenTime);
 
   const handleOpenTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewOpenTime(event.target.value);
@@ -104,7 +103,7 @@ console.log(newOpenTime);
         const response = await axios.get(
           `${process.env.REACT_APP_API}/setting/content/${selectedStatus}`
         );
-        setContent(response.data.data.content);  
+        setContent(response.data.data.content);
       } catch (error) {}
     };
     getContent();
@@ -161,7 +160,7 @@ console.log(newOpenTime);
         `${process.env.REACT_APP_API}/setting/content/${selectedStatus}`,
         { content }
       );
-      toast.success("Content updated!")
+      toast.success("Content updated!");
     } catch (error) {}
   };
 
@@ -182,7 +181,9 @@ console.log(newOpenTime);
             <button
               className={`flex items-center justify-center gap-2 rounded-lg p-4 bg-[#4BAE4F] text-white ${
                 status === "OPEN" && "bg-[#4BAE4F]/40 cursor-not-allowed"
-              } ${status === "MAINTENANCE" && "bg-[#4BAE4F]/40 cursor-not-allowed"} `}
+              } ${
+                status === "MAINTENANCE" && "bg-[#4BAE4F]/40 cursor-not-allowed"
+              } `}
               onClick={() => onStatusHandle("OPEN")}
               disabled={status === "OPEN" || status === "MAINTENANCE"}
             >
@@ -194,7 +195,6 @@ console.log(newOpenTime);
                 status === "MAINTENANCE" && "bg-[#FEC006] "
               }`}
               onClick={() => onStatusHandle("MAINTENANCE")}
-              
             >
               <img src={busy} alt="check" className="w-5 h-5 self-center" />
               {status === "MAINTENANCE" ? "Out Maintenance" : "Set Maintenance"}
@@ -202,7 +202,9 @@ console.log(newOpenTime);
             <button
               className={`flex items-center justify-center gap-2 rounded-lg p-4 bg-[#EA3359] text-white ${
                 status === "CLOSED" && "bg-[#EA3359]/40 cursor-not-allowed"
-              } ${status === "MAINTENANCE" && "bg-[#EA3359]/40 cursor-not-allowed"}`}
+              } ${
+                status === "MAINTENANCE" && "bg-[#EA3359]/40 cursor-not-allowed"
+              }`}
               onClick={() => onStatusHandle("CLOSED")}
               disabled={status === "CLOSED" || status === "MAINTENANCE"}
             >
@@ -225,27 +227,27 @@ console.log(newOpenTime);
               onChange={handleSelect}
               value={selectedStatus}
             >
-            {selectedStatus === "MAINTENANCE" && (
-              <>
-                <option value="MAINTENANCE">Maintenance</option>
-                <option value="OPEN">Open</option>
-                <option value="CLOSED">Close</option>
-              </>
-            )}
-            {selectedStatus === "OPEN" && (
-              <>
-                <option value="OPEN">Open</option>
-                <option value="MAINTENANCE">Maintenance</option>
-                <option value="CLOSED">Close</option>
-              </>
-            )}
-            {selectedStatus === "CLOSED" && (
-              <>
-                <option value="CLOSED">Close</option>
-                <option value="OPEN">Open</option>
-                <option value="MAINTENANCE">Maintenance</option>
-              </>
-            )}
+              {selectedStatus === "MAINTENANCE" && (
+                <>
+                  <option value="MAINTENANCE">Maintenance</option>
+                  <option value="OPEN">Open</option>
+                  <option value="CLOSED">Close</option>
+                </>
+              )}
+              {selectedStatus === "OPEN" && (
+                <>
+                  <option value="OPEN">Open</option>
+                  <option value="MAINTENANCE">Maintenance</option>
+                  <option value="CLOSED">Close</option>
+                </>
+              )}
+              {selectedStatus === "CLOSED" && (
+                <>
+                  <option value="CLOSED">Close</option>
+                  <option value="OPEN">Open</option>
+                  <option value="MAINTENANCE">Maintenance</option>
+                </>
+              )}
             </select>
 
             <form onSubmit={handleContentSubmit}>
@@ -313,7 +315,7 @@ console.log(newOpenTime);
             <button
               type="submit"
               className={`bg-[#1EAEF0] rounded-[10px] px-12 py-2 opacity-100 hover:opacity-80 font-bold text-white w-full disabled:bg-[#1EAEF0]/20 disabled:cursor-not-allowed`}
-              disabled={(newCloseTime === closeTime && newOpenTime === openTime)}
+              disabled={newCloseTime === closeTime && newOpenTime === openTime}
             >
               อัพเดตเวลา
             </button>
@@ -371,6 +373,14 @@ console.log(newOpenTime);
               Go to item shop
             </Link>
           </div>
+        </div>
+
+        {/* Update thumbnail */}
+        <div className="text-center text-5xl font-bold mt-10 mb-3 leading-[58px]">
+          UPDATE THUMBNAIL
+        </div>
+        <div className="w-full rounded-xl border shadow-md">
+          <EditableCard />
         </div>
       </div>
     </main>
