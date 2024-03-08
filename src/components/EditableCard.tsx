@@ -3,50 +3,123 @@ import noImg from "../assets/images/empty.webp";
 
 import { FaEdit } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
+import { CiCircleCheck, CiCircleRemove } from "react-icons/ci";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 interface EditableCardProps {
   initialText?: string;
-  initialImgSrc?: string;
 }
 
-const EditableCard = ({ initialText, initialImgSrc }: EditableCardProps) => {
-  const [text, setText] = useState<string>("DADA");
-  const [imgSrc, setImgSrc] = useState<string>("");
+const EditableCard = ({ initialText }: EditableCardProps) => {
+  const [text, setText] = useState<string | undefined>(initialText);
+  const [Image, setImage] = useState<File>();
+  const [previewImage, setPreviewImage] = useState<string>(
+    "https://dadashop-backend.vercel.app/api/v1/image/thumbnail"
+  );
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setImgSrc(e.target?.result as string);
-      };
-      reader.readAsDataURL(event.target.files[0]);
+  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
+      setImage(selectedFile);
+      setPreviewImage(URL.createObjectURL(selectedFile));
     }
   };
 
-  const deleteImg = () => {
-    setImgSrc("");
+  const onCancel = () => {
+    setIsEditing(false);
+    if (!previewImage) {
+      setPreviewImage(
+        "https://dadashop-backend.vercel.app/api/v1/image/thumbnail"
+      );
+    }
+
+    if (!text) {
+      setText(initialText);
+    }
+  };
+
+  const onUpdateThumbnail = async () => {
+    const formData = new FormData();
+    if (Image) {
+      formData.append("image", Image); // Assuming 'image' is the correct field name expected by your backend
+    }
+
+    const rawToken: string | null = localStorage.getItem("token");
+    if (!rawToken) {
+      toast.warn("Token not found in localStorage");
+      console.error("Token not found in localStorage");
+      return;
+    }
+    const token = rawToken.replace(/"/g, "");
+
+    // Upload image
+    if (Image) {
+      try {
+        await axios.post(
+          `${process.env.REACT_APP_API}/image/thumbnail`,
+          formData, // Send formData instead of JSON
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "multipart/form-data", // This is crucial for file upload
+            },
+          }
+        );
+        toast.success("Upload Image Successfully");
+      } catch (error) {
+        toast.error("Upload Image Failed");
+        console.error("Upload Error:", error);
+      }
+    }
+
+    try {
+      await axios.post(
+        `${process.env.REACT_APP_API}/setting/content/title`,
+        { content: text },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success("Text update Successfully");
+    } catch (error) {
+      toast.error("Text update Failed");
+      console.error("Text update error:", error);
+    }
   };
 
   return (
-    <div className="p-6 pt-6 flex items-center justify-between gap-4 screen_400:p-4 screen_400:pt-5">
-      <div className="flex items-center justify-center gap-4">
+    <div
+      className={`p-6 pt-6 flex items-center justify-between gap-4 screen_400:p-4 screen_400:pt-5 ${
+        isEditing && "flex-col"
+      } screen_605:flex-col`}
+    >
+      <div className="flex items-center justify-start gap-4 w-full screen_500:flex-col">
         {isEditing ? (
-          imgSrc ? (
+          previewImage ? (
             <>
               <div className="relative">
-                <img src={imgSrc} alt="Uploaded" className="w-24 h-auto object-cover" />
+                <img
+                  src={previewImage}
+                  alt="Uploaded"
+                  className="h-auto w-[150px] bg-black/20"
+                />
                 <button
                   className="absolute -top-4 -right-5 cursor-pointer"
-                  onClick={deleteImg}
+                  onClick={() => setPreviewImage("")}
                 >
-                  <IoMdClose className={`w-5 h-5`} />
+                  <IoMdClose
+                    className={`w-5 h-5 rounded-full bg-red-500/80 text-white`}
+                  />
                 </button>
               </div>
             </>
           ) : (
-            <div className="flex items-center justify-center w-full">
-              <label className="flex flex-col items-center justify-center w-24 h-auto border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+            <div className="flex items-center justify-center">
+              <label className="flex flex-col items-center justify-center h-auto w-[150px] border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
                 <div className="flex flex-col items-center justify-center py-5">
                   <svg
                     className="w-8 h-8 text-gray-500"
@@ -66,7 +139,8 @@ const EditableCard = ({ initialText, initialImgSrc }: EditableCardProps) => {
                 <input
                   id="dropzone-file"
                   type="file"
-                  onChange={handleImageChange}
+                  accept="image/*"
+                  onChange={handleUpload}
                   className="hidden"
                 />
               </label>
@@ -74,10 +148,18 @@ const EditableCard = ({ initialText, initialImgSrc }: EditableCardProps) => {
           )
         ) : (
           <div className="flex items-center">
-            {imgSrc ? (
-              <img src={noImg} alt="Uploaded" className="w-24 h-auto" />
+            {previewImage ? (
+              <img
+                src={previewImage}
+                alt="Uploaded"
+                className="h-auto w-[150px] bg-black/20"
+              />
             ) : (
-              <div>Img</div>
+              <img
+                src={noImg}
+                alt="Uploaded"
+                className="h-auto w-[150px] bg-black/20"
+              />
             )}
           </div>
         )}
@@ -90,15 +172,44 @@ const EditableCard = ({ initialText, initialImgSrc }: EditableCardProps) => {
               onChange={(e) => setText(e.target.value)}
             />
           ) : (
-            <p>{text || "DADA"}</p>
+            <p>{text}</p>
           )}
         </div>
       </div>
-      <div className="flex items-center justify-center">
-        <button onClick={() => setIsEditing(!isEditing)}>
-          <FaEdit className="w-5 h-5 self-center text-black/60" />
-        </button>
-        {/* {isEditing && <input type="file" onChange={handleImageChange} />} */}
+      {/* Button */}
+      <div className="flex items-center justify-center screen_605:w-full">
+        {isEditing ? (
+          <div className="flex gap-2">
+            <button
+              className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-red-500 text-slate-50 shadow hover:bg-red-500/90 h-9 px-4 py-2 screen_605:w-full"
+              onClick={onCancel}
+            >
+              <div className="flex items-center justify-center">
+                <CiCircleRemove className="w-5 h-5 mr-1" />
+                <p>Cancel</p>
+              </div>
+            </button>
+            <button
+              className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-green-500 text-slate-50 shadow hover:bg-green-500/90 h-9 px-4 py-2 screen_605:w-full"
+              onClick={onUpdateThumbnail}
+            >
+              <div className="flex items-center justify-center">
+                <CiCircleCheck className="w-5 h-5 mr-1" />
+                <p>Confirm</p>
+              </div>
+            </button>
+          </div>
+        ) : (
+          <button
+            className="inline-flex items-center justify-center whitespace-nowrap rounded-[10px] text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-[#1EAEF0] text-slate-50 shadow hover:bg-[#1EAEF0]/90 h-9 px-4 py-2 screen_605:w-full"
+            onClick={() => setIsEditing(true)}
+          >
+            <div className="flex items-center justify-center">
+              <FaEdit className="w-4 h-4 mr-1" />
+              <p>Edit</p>
+            </div>
+          </button>
+        )}
       </div>
     </div>
   );
