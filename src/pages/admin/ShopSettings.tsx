@@ -137,7 +137,7 @@ const ShopSettings = () => {
     getTime();
     getRate();
     getThumbnailContent();
-  }, [status]);
+  }, []);
 
   useEffect(() => {
     const getContent = async () => {

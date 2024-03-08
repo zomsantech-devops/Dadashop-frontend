@@ -12,7 +12,7 @@ interface EditableCardProps {
 }
 
 const EditableCard = ({ initialText }: EditableCardProps) => {
-  const [text, setText] = useState<string | undefined>(initialText);
+  const [content, setText] = useState<string | undefined>(initialText);
   const [Image, setImage] = useState<File>();
   const [previewImage, setPreviewImage] = useState<string>(
     "https://dadashop-backend.vercel.app/api/v1/image/thumbnail"
@@ -35,7 +35,7 @@ const EditableCard = ({ initialText }: EditableCardProps) => {
       );
     }
 
-    if (!text) {
+    if (!content) {
       setText(initialText);
     }
   };
@@ -77,7 +77,7 @@ const EditableCard = ({ initialText }: EditableCardProps) => {
     try {
       await axios.post(
         `${process.env.REACT_APP_API}/setting/content/title`,
-        { "content": text },
+        { content },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -169,12 +169,12 @@ const EditableCard = ({ initialText }: EditableCardProps) => {
           {isEditing ? (
             <input
               type="text"
-              value={text}
+              value={content}
               className="w-full border border-blue-gray-50 rounded-[5px] px-[10px] py-[5px] focus:border-[#1EAEF0] outline-[#02A7F3]"
               onChange={(e) => setText(e.target.value)}
             />
           ) : (
-            <p>{text}</p>
+            <p>{content}</p>
           )}
         </div>
       </div>
