@@ -58,7 +58,7 @@ export const CarouselSlider = ({ displayAssets }: CarouselDisplayAssetProps) => 
           key={asset.materialInstance}
           src={asset.background}
           alt={asset.displayAsset}
-          className={`aspect-square w-[520px] rounded-lg`}
+          className={`aspect-square w-[520px] screen_610:w-[375px] screen_445:w-[275px] rounded-lg`}
         />
       ))}
     </Carousel>

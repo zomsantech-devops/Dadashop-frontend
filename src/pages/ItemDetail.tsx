@@ -182,7 +182,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
           {item.type.id !== "emote" ? (
             item.type.id !== "bundle" ? (
               displayAssets.length !== 0 ? (
-                <div className="max-w-[520px] w-[520px] screen_610:w-[375px] screen_445:w-[275px] rounded-lg">
+                <div className="max-w-[520px] w-[520px] h-fit screen_610:w-[375px] screen_445:w-[275px] rounded-lg">
                   <CarouselSlider displayAssets={displayAssets} />
                 </div>
               ) : previewVideo ? (

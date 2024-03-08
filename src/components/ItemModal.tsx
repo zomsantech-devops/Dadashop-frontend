@@ -25,7 +25,7 @@ export default function Modal({ open, onClose, children }: ModalProps) {
       <div
         onClick={(e) => e.stopPropagation()}
         className={`
-          bg-white rounded-xl py-6 transition-all
+          bg-white rounded-xl py-6 transition-all screen_610:w-full
           ${open ? "scale-100 opacity-100" : "scale-90 opacity-0"}
         `}
       >
