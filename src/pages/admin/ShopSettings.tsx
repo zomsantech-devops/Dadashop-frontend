@@ -126,7 +126,7 @@ const ShopSettings = () => {
         const response = await axios.get(
           `${process.env.REACT_APP_API}/setting/content/title`
         );
-        setInitialText(response.data);
+        setInitialText(response.data.data.content);
       } catch (error: any) {
         console.error(error.response);
       } finally {

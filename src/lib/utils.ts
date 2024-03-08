@@ -30,7 +30,7 @@ export const getTitle = async () => {
     const response = await axios.get(
       `${process.env.REACT_APP_API}/setting/content/title`
     );
-    return response.data;
+    return response.data.data.content;
   } catch (error: any) {
     console.error(error.response);
   }
