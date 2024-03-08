@@ -86,7 +86,7 @@ function HomePage() {
             </div>
             <div className="flex gap-1.5 screen_610:flex-col ">
               <Link
-                to="#"
+                to="/price-fortnite"
                 className="border-2 text-center border-white/30 bg-white/30 py-2 px-8 text-white rounded-[20px] hover:scale-105 transition ease-in-out duration-300 "
               >
                 ราคา
@@ -116,7 +116,7 @@ function HomePage() {
               </div>
               <div className="flex gap-1.5 text-center screen_610:flex-col screen_610:w-[152.75px]">
                 <Link
-                  to="#"
+                  to="/price-other"
                   className="border-2 border-white/30 bg-white/30 p-2 px-8 text-white rounded-[20px] hover:scale-105 transition ease-in-out duration-300"
                 >
                   ราคา
