@@ -37,33 +37,56 @@ const ShopSettings = () => {
 
   const onSubmitHandle = async (event: React.FormEvent) => {
     event.preventDefault();
+    const rawToken = localStorage.getItem("token");
     try {
-      await axios.post(`${process.env.REACT_APP_API}/setting/time`, {
-        open_time: newOpenTime,
-        close_time: newCloseTime,
-      });
-      toast.success("Time updated Successfully", { autoClose: 1500 });
-      setTimeout(() => {
-        window.location.reload();
-      }, 1500);
+      if (rawToken) {
+        const token = rawToken.replace(/"/g, "");
+        await axios.post(
+          `${process.env.REACT_APP_API}/setting/time`,
+          {
+            open_time: newOpenTime,
+            close_time: newCloseTime,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        toast.success("Time updated Successfully", { autoClose: 1500 });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
+      }
     } catch (error) {
-      toast.success("Failed to update times", { autoClose: 1500 });
+      toast.error("Failed to update times", { autoClose: 1500 });
       console.error("Failed to update times", error);
     }
   };
 
   const onUpdateRate = async (event: React.FormEvent) => {
     event.preventDefault();
+    const rawToken: string | null = localStorage.getItem("token");
     try {
-      await axios.patch(
-        `${process.env.REACT_APP_API}/setting/currency/${updateRate}`
-      );
-      toast.success("Update Rate Successfully", { autoClose: 1500 });
-      setTimeout(() => {
-        window.location.reload();
-      }, 1500);
+      if (rawToken) {
+        const token = rawToken.replace(/"/g, "");
+        console.log(token);
+        await axios.patch(
+          `${process.env.REACT_APP_API}/setting/currency/${updateRate}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        toast.success("Update Rate Successfully", { autoClose: 1500 });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
+      }
     } catch (error) {
-      toast.success("Failed to update Rate", { autoClose: 1500 });
+      toast.error("Failed to update Rate", { autoClose: 1500 });
       console.error("Failed to update Rate", error);
     }
   };
@@ -110,16 +133,25 @@ const ShopSettings = () => {
   }, [selectedStatus]);
 
   const onStatusHandle = async (status: string) => {
+    const rawToken = localStorage.getItem("token");
     try {
-      await axios.get(
-        `${process.env.REACT_APP_API}/setting/time/toggle/${status}`
-      );
-      toast.success("Status updated", { autoClose: 1500 });
-      setTimeout(() => {
-        window.location.reload();
-      }, 1500);
+      if (rawToken) {
+        const token = rawToken.replace(/"/g, "");
+        await axios.get(
+          `${process.env.REACT_APP_API}/setting/time/toggle/${status}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        toast.success("Status updated", { autoClose: 1500 });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
+      }
     } catch (error: any) {
-      toast.success("Failed to update status ", { autoClose: 1500 });
+      toast.error("Failed to update status ", { autoClose: 1500 });
       console.error("Update status failed", error.response);
     }
   };
@@ -155,13 +187,24 @@ const ShopSettings = () => {
 
   const handleContentSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    const rawToken = localStorage.getItem("token");
     try {
-      await axios.post(
-        `${process.env.REACT_APP_API}/setting/content/${selectedStatus}`,
-        { content }
-      );
-      toast.success("Content updated!");
-    } catch (error) {}
+      if (rawToken) {
+        const token = rawToken.replace(/"/g, "");
+        await axios.post(
+          `${process.env.REACT_APP_API}/setting/content/${selectedStatus}`,
+          { content },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        toast.success("Content updated!");
+      }
+    } catch (error: any) {
+      console.error("Update content failed", error.response);
+    }
   };
 
   return (
