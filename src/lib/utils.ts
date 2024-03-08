@@ -1,9 +1,10 @@
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 import moment from "moment-timezone";
+import axios from "axios";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 export const convertVbuckToTHB = (price: number | null, rate: number) => {
@@ -22,4 +23,15 @@ export const isToday = (inputDate: Date) => {
     date.month() === today.month() &&
     date.year() === today.year()
   );
+};
+
+export const getTitle = async () => {
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API}/setting/content/title`
+    );
+    return response.data;
+  } catch (error: any) {
+    console.error(error.response);
+  }
 };

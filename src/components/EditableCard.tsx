@@ -77,7 +77,7 @@ const EditableCard = ({ initialText }: EditableCardProps) => {
     try {
       await axios.post(
         `${process.env.REACT_APP_API}/setting/content/title`,
-        { content: text },
+        { "content": text },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -88,6 +88,8 @@ const EditableCard = ({ initialText }: EditableCardProps) => {
     } catch (error) {
       toast.error("Text update Failed");
       console.error("Text update error:", error);
+    } finally {
+      setIsEditing(false)
     }
   };
 
