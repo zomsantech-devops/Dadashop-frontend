@@ -32,7 +32,7 @@ import { CarouselSlider } from "../components/Carousel";
 export const ItemDetail = ({ itemId, onClose }: IdProps) => {
   const [item, setItem] = useState<Item | null>();
   const [loading, setLoading] = useState<boolean>(false);
-  const [styles, setStyles] = useState<Styles[]>([]);
+  // const [styles, setStyles] = useState<Styles[]>([]);
   const [previewVideo, setPreviewVideo] = useState<string | null>();
   const [displayAssets, setDisplayAssets] = useState<DisplayAssetsItem[]>([]);
   const [channelName, setChannelName] = useState<string[]>([]);
@@ -50,7 +50,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
   useEffect(() => {
     setItem(null);
     setDisplayAssets([]);
-    setStyles([]);
+    // setStyles([]);
     setPreviewVideo(null);
     setBundle({
       id: "",
@@ -67,7 +67,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
           );
           startTransition(() => {
             setItem(response.data.data.item);
-            setStyles(response.data.data.item.styles);
+            // setStyles(response.data.data.item.styles);
             setPreviewVideo(
               response.data.data.item.previewVideos[0]?.url || ""
             );
@@ -122,11 +122,11 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
 
   useEffect(() => {
     const uniqueSection = Array.from(
-      new Set(styles.map((cn) => cn.channelName || ""))
+      new Set(item?.styles.map((cn) => cn.channelName || ""))
     );
 
     setChannelName(uniqueSection);
-  }, [styles]);
+  }, [item?.styles]);
 
   const handleItemClick = (itemId: string, p_id?: string) => {
     let navigatePath = `/item-shop/${itemId}`;
@@ -395,7 +395,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                   <p className="text-xs">ตรวจสอบใน Discord</p>
                 </Link>
               </div>
-              {styles.length !== 0 && (
+              {item.styles.length !== 0 && (
                 <>
                   {channelName.map((cn) => (
                     <section key={cn}>
@@ -403,7 +403,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                         {cn}
                       </h1>
                       <div className="flex items-center justify-center flex-wrap gap-3 mb-2">
-                        {styles
+                        {item.styles
                           .filter((style) => style.channelName === cn)
                           .map((style, i) => (
                             <div
