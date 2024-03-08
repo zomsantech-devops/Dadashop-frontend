@@ -257,6 +257,10 @@ const UpdatePreset = () => {
           }
         );
 
+        toast.success(
+          "Preset has been deleted successfully. Reload in 2 seconds..."
+        );
+
         await axios.delete(
           `${process.env.REACT_APP_API}/image/preset-${selectedPresetId}`,
           {
@@ -266,13 +270,7 @@ const UpdatePreset = () => {
           }
         );
 
-        toast.success(
-          "Preset has been deleted successfully. Reload in 2 seconds..."
-        );
-
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
+        toast.success("Preset Image has been deleted successfully.");
       } catch (error) {
         toast.error("Failed to delete the preset");
         console.error(error);

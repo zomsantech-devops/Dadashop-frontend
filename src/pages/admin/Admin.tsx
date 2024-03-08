@@ -5,6 +5,7 @@ import Modal from "../../components/Modal";
 import determineTier from "../../components/DetermineTier";
 import LeftSidebar from "../../components/shared/LeftSidebar";
 import { UserBalance } from "../../types";
+import { toast } from "react-toastify";
 
 function Admin() {
   const [searchValue, setSearchValue] = useState("");
@@ -68,18 +69,27 @@ function Admin() {
       };
       setUserBalance(updatedUserBalance);
 
-      await axios.post(
-        `${process.env.REACT_APP_API}/user-balance/${id}`,
-        {
-          ...editedData,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
+      const rawToken: string | null = localStorage.getItem("token");
+      if (rawToken) {
+        const token = rawToken.replace(/"/g, "");
+        await axios.post(
+          `${process.env.REACT_APP_API}/user-balance/${id}`,
+          {
+            ...editedData,
           },
-        }
-      );
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+      } else {
+        toast.warn("Unauthorization");
+      }
+      toast.success("Update user complete");
     } catch (error) {
+      toast.error("Failed to update user");
       console.error(error);
     }
   };
@@ -126,36 +136,46 @@ function Admin() {
         return updatedUserBalance;
       });
 
-      await axios.post(
-        `${process.env.REACT_APP_API}/user-balance`,
-        {
-          id: (userBalance?.length ?? 0) + 1,
-          discord_id: newUserData.discord_id,
-          discord_username: newUserData.discord_username,
-          name: newUserData.name,
-          name_display: newUserData.name_display,
-          current_points: newUserData.current_points,
-          total_points: newUserData.total_points,
-          tier: newUserData.tier,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
+      const rawToken: string | null = localStorage.getItem("token");
+
+      if (rawToken) {
+        const token = rawToken.replace(/"/g, "");
+        await axios.post(
+          `${process.env.REACT_APP_API}/user-balance`,
+          {
+            id: (userBalance?.length ?? 0) + 1,
+            discord_id: newUserData.discord_id,
+            discord_username: newUserData.discord_username,
+            name: newUserData.name,
+            name_display: newUserData.name_display,
+            current_points: newUserData.current_points,
+            total_points: newUserData.total_points,
+            tier: newUserData.tier,
           },
-        }
-      );
-      setAddUserOpen(false);
-      setNewUserData({
-        id: "",
-        discord_id: "",
-        discord_username: "",
-        name: "",
-        name_display: "Anonymous#",
-        current_points: 0,
-        total_points: 0,
-        tier: "Gold",
-      });
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        setAddUserOpen(false);
+        setNewUserData({
+          id: "",
+          discord_id: "",
+          discord_username: "",
+          name: "",
+          name_display: "Anonymous#",
+          current_points: 0,
+          total_points: 0,
+          tier: "Gold",
+        });
+      } else {
+        toast.error("Unauthorization")
+      }
+      toast.success("Add user complete")
     } catch (error) {
+      toast.error("Failed to add user")
       console.error(error);
     }
   };
