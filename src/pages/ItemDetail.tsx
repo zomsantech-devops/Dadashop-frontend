@@ -62,9 +62,10 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
       if (itemId) {
         setLoading(true);
         try {
-          const response = await axios.get<ResponseData>(
+          const response = await axios.get(
             `${process.env.REACT_APP_API}/item/${itemId}`
           );
+          console.log(response.data.data);
           startTransition(() => {
             setItem(response.data.data.item);
             // setStyles(response.data.data.item.styles);
@@ -77,6 +78,8 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
         } catch (error) {
           setLoading(false);
           console.error("Error fetching data:", error);
+        } finally {
+          
         }
       }
     };
@@ -235,7 +238,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                   {item.grants.length !== 0 ? (
                     item.grants.map((grant) => (
                       <div key={grant.id} className="cursor-pointer rounded-xl">
-                        {!grant.images.icon_background ? (
+                        {/* {!grant.images.icon_background ? (
                           <>
                             <img
                               loading="lazy"
@@ -256,7 +259,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                               }
                             />
                           </div>
-                        )}
+                        )} */}
                       </div>
                     ))
                   ) : (
@@ -434,7 +437,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                   <div className="flex w-full items-center justify-center flex-wrap gap-3 mb-2">
                     {/* Skin */}
 
-                    {item.type.id === "outfit" &&
+                    {/* {item.type.id === "outfit" &&
                       item.images.icon_background && (
                         <div className="cursor-pointer rounded-xl">
                           <LazyLoadImage
@@ -446,10 +449,10 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                             className={`rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105`}
                           />
                         </div>
-                      )}
+                      )} */}
 
                     {/* Grant */}
-                    {item.grants.map(
+                    {/* {item.grants.map(
                       (grant) =>
                         grant.images.icon_background && (
                           <div
@@ -469,7 +472,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                             />
                           </div>
                         )
-                    )}
+                    )} */}
                   </div>
                 </>
               )}
