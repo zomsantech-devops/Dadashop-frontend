@@ -42,15 +42,15 @@ const SidebarMain = ({ handleToggleMobileDropdown }: SidebarProps) => {
         onClick={handleToggleMobileDropdown}
       ></div>
       <div
-        className={`fixed top-0 right-0 w-full z-40 flex flex-col justify-between bg-[#171717] text-[#ececec] px-3 py-3.5 transition-width duration-300 ease-in-out`}
+        className={`fixed top-0 right-0 h-full w-64 z-40 flex flex-col justify-between bg-[#ececec] text-[#171717] px-3 py-3.5 transition-width duration-300 ease-in-out`}
       >
         <div className="">
           <div className="flex items-center justify-between text-sm">
             <Link
               to={"/"}
               className={`flex h-10 items-center gap-2 rounded-lg w-full px-4 mr-2 ${
-                location.pathname === "/" ? "bg-blue-500" : ""
-              } hover:bg-[#212121]`}
+                location.pathname === "/" ? "bg-blue-500 text-white" : ""
+              } hover:bg-blue-500 hover:text-white`}
             >
               <FaHome className="w-5 h-5" />
               <p className="grow overflow-hidden text-ellipsis whitespace-nowrap">
@@ -59,25 +59,25 @@ const SidebarMain = ({ handleToggleMobileDropdown }: SidebarProps) => {
             </Link>
             <button
               onClick={handleToggleMobileDropdown}
-              className={`cursor-pointer p-1 rounded-md hover:bg-[#212121] border-2 text-[#ececec] transform transition-transform duration-300 ease-in-out`}
+              className={`cursor-pointer p-1 rounded-md hover:bg-blue-500 text-black hover:text-white border-2 transform transition-transform duration-300 ease-in-out`}
             >
               <IoMdClose className={`w-5 h-5`} />
             </button>
           </div>
 
           <>
-            <div className="my-2 ml-2 h-px w-7 bg-gray-700" />
+            <div className="my-2 ml-2 h-px w-7 bg-gray-400" />
 
             <nav
-              className={`flex flex-col space-y-2 mt-4 w-full text-[#ececec] text-sm transition-width duration-300 ease-in-out`}
+              className={`flex flex-col space-y-2 mt-4 w-full  text-sm transition-width duration-300 ease-in-out`}
             >
               <div className="pb-0.5 last:pb-0">
                 <Link
                   to={"/item-shop"}
                   className={`flex h-10 items-center gap-2 rounded-lg px-4 ${
                     location.pathname === "/item-shop"
-                      ? "bg-[#424242]"
-                      : "hover:bg-[#212121]"
+                      ? "bg-blue-500 text-white"
+                      : "hover:bg-blue-500 hover:text-white"
                   }`}
                 >
                   <p className="grow overflow-hidden text-ellipsis whitespace-nowrap">
@@ -90,8 +90,8 @@ const SidebarMain = ({ handleToggleMobileDropdown }: SidebarProps) => {
                   to={"/price-fortnite"}
                   className={`flex h-10 items-center gap-2 rounded-lg w-full px-4 ${
                     location.pathname === "/price-fortnite"
-                      ? "bg-[#424242]"
-                      : "hover:bg-[#212121]"
+                      ? "bg-blue-500 text-white"
+                      : "hover:bg-blue-500 hover:text-white"
                   }`}
                 >
                   <p className="grow overflow-hidden text-ellipsis whitespace-nowrap">
@@ -105,8 +105,8 @@ const SidebarMain = ({ handleToggleMobileDropdown }: SidebarProps) => {
                     location.pathname === "/check-queue/d1-d10" ||
                     location.pathname === "/check-queue/g1-g8" ||
                     location.pathname === "/check-queue/zz1-zz6"
-                      ? "bg-[#424242]"
-                      : "hover:bg-[#212121]"
+                      ? "bg-blue-500 text-white"
+                      : "hover:bg-blue-500 hover:text-white"
                   } flex h-10 items-center gap-2 rounded-lg w-full px-4`}
                   onClick={handleToggleGiftDropdown}
                 >
@@ -125,8 +125,8 @@ const SidebarMain = ({ handleToggleMobileDropdown }: SidebarProps) => {
                       to="/check-queue/zz1-zz6"
                       className={`${
                         location.pathname === "/check-queue/zz1-zz6"
-                          ? "bg-[#424242]"
-                          : "hover:bg-[#212121]"
+                          ? "bg-blue-500 text-white"
+                          : "hover:bg-blue-500 hover:text-white"
                       } flex h-10 items-center gap-2 rounded-lg w-full px-4`}
                     >
                       Dada ZZ1-ZZ6
@@ -135,8 +135,8 @@ const SidebarMain = ({ handleToggleMobileDropdown }: SidebarProps) => {
                       to="/check-queue/d1-d10"
                       className={`${
                         location.pathname === "/check-queue/d1-d10"
-                          ? "bg-[#424242]"
-                          : "hover:bg-[#212121]"
+                          ? "bg-blue-500 text-white"
+                          : "hover:bg-blue-500 hover:text-white"
                       } flex h-10 items-center gap-2 rounded-lg w-full px-4`}
                     >
                       Dada D1-D10
@@ -145,8 +145,8 @@ const SidebarMain = ({ handleToggleMobileDropdown }: SidebarProps) => {
                       to="/check-queue/g1-g8"
                       className={`${
                         location.pathname === "/check-queue/g1-g8"
-                          ? "bg-[#424242]"
-                          : "hover:bg-[#212121]"
+                          ? "bg-blue-500 text-white"
+                          : "hover:bg-blue-500 hover:text-white"
                       } flex flex-col h-16 justify-center gap-2 rounded-lg w-full px-4`}
                     >
                       <div className="">Dada G1-G8 </div>
@@ -168,8 +168,8 @@ const SidebarMain = ({ handleToggleMobileDropdown }: SidebarProps) => {
                   to={"/price-other"}
                   className={`flex h-10 items-center gap-2 rounded-lg w-full px-4 ${
                     location.pathname === "/price-other"
-                      ? "bg-[#424242]"
-                      : "hover:bg-[#212121]"
+                      ? "bg-blue-500 text-white"
+                      : "hover:bg-blue-500 hover:text-white"
                   }`}
                 >
                   <p className="grow overflow-hidden text-ellipsis whitespace-nowrap">
@@ -182,8 +182,8 @@ const SidebarMain = ({ handleToggleMobileDropdown }: SidebarProps) => {
                   to={"/check-points"}
                   className={`flex h-10 items-center gap-2 rounded-lg w-full px-4 ${
                     location.pathname === "/check-points"
-                      ? "bg-[#424242]"
-                      : "hover:bg-[#212121]"
+                      ? "bg-blue-500 text-white"
+                      : "hover:bg-blue-500 hover:text-white"
                   }`}
                 >
                   <p className="grow overflow-hidden text-ellipsis whitespace-nowrap">
