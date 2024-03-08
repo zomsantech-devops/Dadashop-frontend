@@ -12,11 +12,11 @@ import {
   IoMdVolumeOff,
 } from "react-icons/io";
 import {
-  DisplayAssetsItem,
+  // DisplayAssetsItem,
   IdProps,
   Item,
   ResponseData,
-  Styles,
+  // Styles,
   Bundle,
 } from "../types";
 import noImg from "../assets/images/empty.webp";
@@ -33,8 +33,8 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
   const [item, setItem] = useState<Item | null>();
   const [loading, setLoading] = useState<boolean>(false);
   // const [styles, setStyles] = useState<Styles[]>([]);
-  const [previewVideo, setPreviewVideo] = useState<string | null>();
-  const [displayAssets, setDisplayAssets] = useState<DisplayAssetsItem[]>([]);
+  // const [previewVideo, setPreviewVideo] = useState<string | null>();
+  // const [displayAssets, setDisplayAssets] = useState<DisplayAssetsItem[]>([]);
   const [channelName, setChannelName] = useState<string[]>([]);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [rate, setRate] = useState<number>(5);
@@ -49,9 +49,9 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
 
   useEffect(() => {
     setItem(null);
-    setDisplayAssets([]);
+    // setDisplayAssets([]);
     // setStyles([]);
-    setPreviewVideo(null);
+    // setPreviewVideo(null);
     setBundle({
       id: "",
       name: "",
@@ -68,10 +68,10 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
           startTransition(() => {
             setItem(response.data.data.item);
             // setStyles(response.data.data.item.styles);
-            setPreviewVideo(
-              response.data.data.item.previewVideos[0]?.url || ""
-            );
-            setDisplayAssets(response.data.data.item.displayAssets);
+            // setPreviewVideo(
+            //   response.data.data.item.previewVideos[0]?.url || ""
+            // );
+            // setDisplayAssets(response.data.data.item.displayAssets);
             setLoading(false);
           });
         } catch (error) {
@@ -181,11 +181,11 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
         <div className="flex screen_1250:flex-col items-center justify-center max-h-[80vh] screen_1250:max-h-none gap-6 px-6 screen_1250:pt-4">
           {item.type.id !== "emote" ? (
             item.type.id !== "bundle" ? (
-              displayAssets.length !== 0 ? (
+              item.displayAssets.length !== 0 ? (
                 <div className="max-w-[520px] w-[520px] h-fit screen_610:w-[375px] screen_445:w-[275px] rounded-lg">
-                  <CarouselSlider displayAssets={displayAssets} />
+                  <CarouselSlider displayAssets={item.displayAssets} />
                 </div>
-              ) : previewVideo ? (
+              ) : item.previewVideos ? (
                 <div className="relative">
                   <video
                     preload="true"
@@ -194,7 +194,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                     loop
                     autoPlay
                     playsInline
-                    src={previewVideo}
+                    src={item.previewVideos[0].url}
                     onClick={toggleVideoPlay}
                     ref={videoRef}
                     onPlay={handlePlay}
@@ -271,7 +271,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
               </div>
             )
           ) : // Emote preview video
-          previewVideo ? (
+          item.previewVideos ? (
             <div className="relative">
               <video
                 preload="true"
@@ -280,7 +280,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                 autoPlay
                 playsInline
                 onClick={toggleVideoPlay}
-                src={previewVideo}
+                src={item.previewVideos[0].url}
                 ref={videoRef}
                 onPlay={handlePlay}
                 onPause={handlePause}
