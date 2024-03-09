@@ -15,6 +15,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getTitle } from "./lib/utils";
+import NotFound from "./pages/NotFound";
 
 const ShopSettings = React.lazy(() => import("./pages/admin/ShopSettings"));
 const UpdatePreset = React.lazy(() => import("./pages/admin/UpdatePreset"));
@@ -122,6 +123,7 @@ function App() {
               path="/create-preset"
               element={<ProtectedRoute component={CreatePreset} />}
             />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </Router>
@@ -139,6 +141,7 @@ function NavbarWrapper(): JSX.Element {
     "/shop-setting",
     "/update-preset",
     "/create-preset",
+    "*",
   ];
   const isNavbarVisible = !hideNavbarRoutes.includes(location.pathname);
 
