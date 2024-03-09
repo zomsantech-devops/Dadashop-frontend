@@ -50,6 +50,20 @@ const LeftSidebar = () => {
     }
   };
 
+  const resetItemDatabase = async () => {
+    setIsLoading(true);
+    try {
+      await axios.delete(`${process.env.REACT_APP_API}/item`);
+      toast.success("Reset API Successfully");
+      setIsLoading(false);
+    } catch (error) {
+      toast.error("Reset Item Database fail");
+      setIsLoading(false);
+      console.error("Reset API Item Failed");
+    }
+  };
+
+
   return (
     <>
       {/* Backdrop */}
@@ -178,7 +192,21 @@ const LeftSidebar = () => {
         {isOpen && (
           <div className="">
             <button
-              className={`flex h-12 items-center justify-center rounded-lg w-full p-4 bg-[#e1510f] ${
+              className={`flex h-12 items-center justify-center rounded-lg w-full p-4 bg-[#f1e043] ${
+                isLoading && "bg-[#f1e043]/50 cursor-not-allowed"
+              }`}
+              onClick={resetItemDatabase}
+              disabled={isLoading}
+            >
+              <div className="flex items-center justify-center gap-4">
+                <FaRedo className={`w-5 h-5 text-black ${isLoading && "animate-spin"}`} />
+                <p className="grow overflow-hidden text-ellipsis whitespace-nowrap text-black">
+                  Reset Item Database
+                </p>
+              </div>
+            </button>
+            <button
+              className={`flex h-12 items-center justify-center rounded-lg w-full p-4 mt-3 bg-[#e1510f] ${
                 isLoading && "bg-[#e1510f]/50 cursor-not-allowed"
               }`}
               onClick={resetItem}
