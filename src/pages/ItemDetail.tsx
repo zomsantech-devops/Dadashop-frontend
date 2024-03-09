@@ -63,7 +63,6 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
           const response = await axios.get(
             `${process.env.REACT_APP_API}/item/${itemId}`
           );
-          console.log(response.data.data);
           startTransition(() => {
             setItem(response.data.data.item);
             // setStyles(response.data.data.item.styles);
@@ -77,7 +76,6 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
           setLoading(false);
           console.error("Error fetching data:", error);
         } finally {
-          
         }
       }
     };
@@ -186,7 +184,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                 <div className="max-w-[520px] w-[520px] h-fit screen_610:w-[375px] screen_445:w-[275px] rounded-lg">
                   <CarouselSlider displayAssets={item.displayAssets} />
                 </div>
-              ) : item.previewVideos ? (
+              ) : item.previewVideos[0]?.url ? (
                 <div className="relative">
                   <video
                     preload="true"
@@ -213,9 +211,10 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                     </div>
                   )}
                 </div>
-              ) : item.images.background ? (
+              ) : item.images?.background ? (
                 <div className="max-w-[520px] screen_610:w-[375px] screen_445:w-[275px] rounded-lg">
-                  <img
+                  <LazyLoadImage
+                    effect="blur"
                     loading="lazy"
                     src={item.images.background}
                     alt={"item in set"}
@@ -236,7 +235,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                   {item.grants.length !== 0 ? (
                     item.grants.map((grant) => (
                       <div key={grant.id} className="cursor-pointer rounded-xl">
-                        {!grant.images.icon_background ? (
+                        {!grant.images?.icon_background ? (
                           <>
                             <img
                               loading="lazy"
@@ -316,7 +315,8 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
               </div>
             </div>
           ) : (
-            <img
+            <LazyLoadImage
+              effect="blur"
               loading="lazy"
               src={item.images.background}
               alt="empty"
@@ -436,7 +436,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                     {/* Skin */}
 
                     {item.type.id === "outfit" &&
-                      item.images.icon_background && (
+                      item.images?.icon_background && (
                         <div className="cursor-pointer rounded-xl">
                           <LazyLoadImage
                             width={80}
@@ -452,7 +452,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                     {/* Grant */}
                     {item.grants.map(
                       (grant) =>
-                        grant.images.icon_background && (
+                        grant.images?.icon_background && (
                           <div
                             key={grant.id}
                             className="cursor-pointer rounded-xl"
@@ -475,7 +475,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                 </>
               )}
             </div>
-          </div>      
+          </div>
         </div>
       ) : (
         <p className="px-6">Item not found! Please try again.</p>
