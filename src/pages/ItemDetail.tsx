@@ -325,7 +325,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
           )}
 
           <div className="w-[2px] min-h-[80vh] bg-black/60 screen_1250:min-h-[2px] screen_1250:min-w-[15%]"></div>
-          <div className="min-w-[min(50vw,500px)] max-h-[80vh] max-w-[560px] screen_1250:max-h-full text-center screen_810:min-w-none overflow-auto py-6">
+          <div className="min-w-[min(50vw,500px)] max-h-[80vh] max-w-[560px] w-[560px] screen_1250:max-h-full text-center screen_810:min-w-none overflow-auto py-6">
             <div className="flex flex-col items-center justify-center px-2.5 mr-4 screen_1250:ml-4">
               <div className="text-[30px] font-bold text-black/80 uppercase text-center">
                 {item?.name}
@@ -401,7 +401,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                   {channelName.map((cn) => (
                     <section key={cn}>
                       <h1 className="pt-3.5 pb-2 text-lg font-bold text-black/80 mb-2">
-                        {cn}
+                        {(cn).toUpperCase()}
                       </h1>
                       <div className="flex items-center justify-center flex-wrap gap-3 mb-2">
                         {item.styles
