@@ -477,13 +477,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                 </>
               )}
             </div>
-          </div>
-          <div
-            className="absolute top-2 right-2 cursor-pointer screen_1170:top-3 screen_1170:right-3 screen_443:top-2 screen_443:right-2"
-            onClick={onClose}
-          >
-            <IoMdClose className="hover:bg-black/20 rounded-xl w-5 h-5 p-0.5 screen_443:w-6 screen_443:h-6" />
-          </div>
+          </div>      
         </div>
       ) : (
         <p className="px-6">Item not found! Please try again.</p>
