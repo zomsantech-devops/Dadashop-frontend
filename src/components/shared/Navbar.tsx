@@ -4,12 +4,12 @@ import { FaChevronDown } from "react-icons/fa";
 
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import SidebarMain from "./SidebarMain";
 
 function Navbar() {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isMobileDropdownOpen, setMobileDropdownOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 975);
+  const [isGiftDropdownOpen, setGiftDropdownOpen] = useState(false);
 
   const location = useLocation();
 
@@ -47,6 +47,10 @@ function Navbar() {
   useEffect(() => {
     window.innerWidth < 975 && setIsMobile(true);
   }, []);
+
+  const handleToggleGiftDropdown = () => {
+    setGiftDropdownOpen(!isGiftDropdownOpen);
+  };
 
   return (
     <div
@@ -232,13 +236,180 @@ function Navbar() {
           </div>
         )}
       </div>
-      {isMobileDropdownOpen && (
+      {/* <> */}
+      {/* Backdrop */}
+      {/* <div
+            className={`fixed inset-0 bg-black bg-opacity-50 z-30 ${
+              isMobileDropdownOpen ? "block" : "hidden"
+            }`}
+            onClick={handleToggleMobileDropdown}
+          ></div> */}
+      <div
+        className={`fixed top-0 right-0 h-full z-40 flex flex-col bg-white text-[#171717] w-64 px-3 py-3.5 transition-transform duration-500 ease-in-out ${
+          isMobileDropdownOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
         <div className="">
-          <SidebarMain
-            handleToggleMobileDropdown={handleToggleMobileDropdown}
-          />
+          <div className="flex items-center justify-between text-sm">
+            <div className="ml-auto flex align-center pt-5 pr-2 pb-8">
+              <button
+                className="flex-col items-center justify-center hidden lg:flex"
+                onClick={handleToggleMobileDropdown}
+                aria-label="Toggle mobile menu"
+              >
+                <span
+                  className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
+                    isMobileDropdownOpen
+                      ? "rotate-45 translate-y-1"
+                      : "-translate-y-0.5"
+                  }`}
+                ></span>
+                <span
+                  className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5 ${
+                    isMobileDropdownOpen && "opacity-0"
+                  }`}
+                ></span>
+                <span
+                  className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
+                    isMobileDropdownOpen
+                      ? "-rotate-45 -translate-y-1"
+                      : "translate-y-0.5"
+                  }`}
+                ></span>
+              </button>
+            </div>
+          </div>
+
+          <>
+
+            <nav
+              className={`flex flex-col space-y-2 mt-4 w-full  text-sm transition-width duration-300 ease-in-out`}
+            >
+              <div className="pb-0.5 last:pb-0">
+                <Link
+                  to={"/item-shop"}
+                  className={`flex h-10 items-center gap-2 rounded-full w-fit px-4 ${
+                    location.pathname === "/item-shop"
+                      ? "bg-[#3d82d1] text-white"
+                      : "hover:bg-[#3d82d1] hover:text-white"
+                  }`}
+                >
+                  <p className="grow overflow-hidden text-ellipsis whitespace-nowrap">
+                    Item Shop
+                  </p>
+                </Link>
+              </div>
+              <div className="pb-0.5 last:pb-0">
+                <Link
+                  to={"/price-fortnite"}
+                  className={`flex h-10 items-center gap-2 rounded-full w-fit px-4 ${
+                    location.pathname === "/price-fortnite"
+                      ? "bg-[#3d82d1] text-white"
+                      : "hover:bg-[#3d82d1] hover:text-white"
+                  }`}
+                >
+                  <p className="grow overflow-hidden text-ellipsis whitespace-nowrap">
+                    เติม fortnite
+                  </p>
+                </Link>
+              </div>
+              <div className="pb-0.5 last:pb-0">
+                <button
+                  className={`${
+                    location.pathname === "/check-queue/d1-d10" ||
+                    location.pathname === "/check-queue/g1-g8" ||
+                    location.pathname === "/check-queue/zz1-zz6"
+                      ? "bg-[#3d82d1] text-white"
+                      : "hover:bg-[#3d82d1] hover:text-white"
+                  } flex h-10 items-center gap-2 rounded-full w-fit px-4`}
+                  onClick={handleToggleGiftDropdown}
+                >
+                  คิวส่ง Gift
+                  <span
+                    className={`inline-block w-[12px] ml-[5px] transition-transform transform ${
+                      isGiftDropdownOpen && "rotate-180"
+                    }`}
+                  >
+                    <FaChevronDown className="inline-block w-3" />
+                  </span>
+                </button>
+                {isGiftDropdownOpen && (
+                  <div className="pl-4 mt-2 flex flex-col gap-1">
+                    <Link
+                      to="/check-queue/zz1-zz6"
+                      className={`${
+                        location.pathname === "/check-queue/zz1-zz6"
+                          ? "bg-[#3d82d1] text-white"
+                          : "hover:bg-[#3d82d1] hover:text-white"
+                      } flex h-10 items-center gap-2 rounded-full w-fit px-4`}
+                    >
+                      Dada ZZ1-ZZ6
+                    </Link>
+                    <Link
+                      to="/check-queue/d1-d10"
+                      className={`${
+                        location.pathname === "/check-queue/d1-d10"
+                          ? "bg-[#3d82d1] text-white"
+                          : "hover:bg-[#3d82d1] hover:text-white"
+                      } flex h-10 items-center gap-2 rounded-full w-fit px-4`}
+                    >
+                      Dada D1-D10
+                    </Link>
+                    <Link
+                      to="/check-queue/g1-g8"
+                      className={`${
+                        location.pathname === "/check-queue/g1-g8"
+                          ? "bg-[#3d82d1] text-white"
+                          : "hover:bg-[#3d82d1] hover:text-white"
+                      } flex flex-col h-16 justify-center rounded-full w-fit px-4`}
+                    >
+                      <div className="">Dada G1-G8 </div>
+                      <span
+                        className={`${
+                          location.pathname === "/check-queue/g1-g8"
+                            ? "text-[#23d9d9]"
+                            : "text-red-400"
+                        } text-red-400 group-hover/name:text-[#23d9d9]`}
+                      >
+                        (ปิดรับเพื่อนแล้ว)
+                      </span>
+                    </Link>
+                  </div>
+                )}
+              </div>
+              <div className="pb-0.5 last:pb-0">
+                <Link
+                  to={"/price-other"}
+                  className={`flex h-10 items-center gap-2 rounded-full w-fit px-4 ${
+                    location.pathname === "/price-other"
+                      ? "bg-[#3d82d1] text-white"
+                      : "hover:bg-[#3d82d1] hover:text-white"
+                  }`}
+                >
+                  <p className="grow overflow-hidden text-ellipsis whitespace-nowrap">
+                    บริการอื่นๆ
+                  </p>
+                </Link>
+              </div>
+              <div className="pb-0.5 last:pb-0">
+                <Link
+                  to={"/check-points"}
+                  className={`flex h-10 items-center gap-2 rounded-full w-fit px-4 ${
+                    location.pathname === "/check-points"
+                      ? "bg-[#3d82d1] text-white"
+                      : "hover:bg-[#3d82d1] hover:text-white"
+                  }`}
+                >
+                  <p className="grow overflow-hidden text-ellipsis whitespace-nowrap">
+                    Dada points
+                  </p>
+                </Link>
+              </div>
+            </nav>
+          </>
         </div>
-      )}
+      </div>
+      {/* </> */}
     </div>
   );
 }

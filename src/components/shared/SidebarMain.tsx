@@ -6,10 +6,14 @@ import { FaChevronDown } from "react-icons/fa";
 
 interface SidebarProps {
   handleToggleMobileDropdown: () => void;
+  isMobileDropdownOpen: boolean;
 }
 
-const SidebarMain = ({ handleToggleMobileDropdown }: SidebarProps) => {
-//   const [isOpen, setIsOpen] = useState(window.innerWidth > 1370);
+const SidebarMain = ({
+  handleToggleMobileDropdown,
+  isMobileDropdownOpen,
+}: SidebarProps) => {
+  //   const [isOpen, setIsOpen] = useState(window.innerWidth > 1370);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1170);
   const [isGiftDropdownOpen, setGiftDropdownOpen] = useState(false);
 
@@ -18,7 +22,7 @@ const SidebarMain = ({ handleToggleMobileDropdown }: SidebarProps) => {
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 1170);
-    //   setIsOpen(window.innerWidth > 1370);
+      //   setIsOpen(window.innerWidth > 1370);
     };
 
     window.addEventListener("resize", handleResize);
@@ -32,17 +36,21 @@ const SidebarMain = ({ handleToggleMobileDropdown }: SidebarProps) => {
     setGiftDropdownOpen(!isGiftDropdownOpen);
   };
 
+  const sidebarClassName = `fixed top-0 right-0 h-full z-40 flex flex-col bg-[#ececec] text-[#171717] px-3 py-3.5 transition-transform duration-300 ease-in-out ${
+    isMobileDropdownOpen ? "translate-x-0" : "-translate-x-full"
+  }`;
+
   return (
     <>
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 bg-opacity-50 block ${
-          isMobile ? "bg-black z-30" : "bg-transparent"
+        className={`fixed inset-0 bg-black bg-opacity-50 z-30 ${
+          isMobileDropdownOpen ? "block" : "hidden"
         }`}
         onClick={handleToggleMobileDropdown}
       ></div>
       <div
-        className={`fixed top-0 right-0 h-full w-64 z-40 flex flex-col justify-between bg-[#ececec] text-[#171717] px-3 py-3.5 transition-width duration-300 ease-in-out`}
+        className={sidebarClassName}
       >
         <div className="">
           <div className="flex items-center justify-between text-sm">
