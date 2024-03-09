@@ -29,6 +29,7 @@ module.exports = {
       'screen_443': {'max': '443px'},
       'screen_420': {'max': '420px'},
       'screen_400': {'max': '400px'},
+      'screen_375': {'max': '375px'},
       'xs': {'max': '390px'},  
       'homePageCatagories_390px': {'max': '390px'},
       'mini': {'max': '350px'},  
