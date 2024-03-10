@@ -250,8 +250,8 @@ function Navbar() {
         }`}
       >
         <div className="">
-          <div className="flex items-center justify-between text-sm">
-            <div className="ml-auto flex align-center pt-5 pr-2 pb-8">
+          <div className="flex items-center justify-between text-sm h-[66px]">
+            <div className="ml-auto flex align-center pt-[14px] pr-2 pb-[28px] screen_610:pr-[16px]">
               <button
                 className="flex-col items-center justify-center hidden lg:flex"
                 onClick={handleToggleMobileDropdown}
