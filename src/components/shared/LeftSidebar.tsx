@@ -7,7 +7,7 @@ import {
   FaUserPlus,
   FaRedo,
   FaCog,
-  FaPlusSquare
+  FaPlusSquare,
 } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -51,18 +51,25 @@ const LeftSidebar = () => {
   };
 
   const resetItemDatabase = async () => {
+    const rawToken: string | null = localStorage.getItem("token");
     setIsLoading(true);
     try {
-      await axios.delete(`${process.env.REACT_APP_API}/item`);
-      toast.success("Reset API Successfully");
-      setIsLoading(false);
+      if (rawToken) {
+        const token = rawToken.replace(/"/g, "");
+        await axios.delete(`${process.env.REACT_APP_API}/item`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        toast.success("Reset database item Successfully");
+        setIsLoading(false);
+      }
     } catch (error) {
       toast.error("Reset Item Database fail");
       setIsLoading(false);
       console.error("Reset API Item Failed");
     }
   };
-
 
   return (
     <>
@@ -199,7 +206,11 @@ const LeftSidebar = () => {
               disabled={isLoading}
             >
               <div className="flex items-center justify-center gap-4">
-                <FaRedo className={`w-5 h-5 text-black ${isLoading && "animate-spin"}`} />
+                <FaRedo
+                  className={`w-5 h-5 text-black ${
+                    isLoading && "animate-spin"
+                  }`}
+                />
                 <p className="grow overflow-hidden text-ellipsis whitespace-nowrap text-black">
                   Reset Item Database
                 </p>

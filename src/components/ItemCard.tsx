@@ -44,10 +44,10 @@ const ItemCard = memo(({ item, handleItemClick, rate }: ItemComponentProps) => {
           </div>
         )}
         <div className="absolute bottom-0 item-title-shadow text-white p-2 pt-4 text-xl uppercase antialiased leading-6 card-bg w-full rounded-lg screen_445:text-lg screen_445:leading-normal">
-          <div className="font-bold leading-5 pb-1.5 pt-2 screen_445:pb-0">
+          <div className="font-bold leading-5 pb-1.5 pt-2 screen_445:pb-0 mini:text-sm mini:leading-5">
             {item.name}
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between screen_375:text-base mini:text-xs">
             <div className="flex items-center justify-center">
               <img src={vBucks} alt="V-Bucks" className="w-5 h-5 mr-1" />
               <p className="font-bold">{item.finalPrice || "-"}</p>

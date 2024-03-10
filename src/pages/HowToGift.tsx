@@ -34,10 +34,10 @@ function HowToGift() {
             />
             ราคา & ขั้นตอนการซื้อ
           </Link>
-          <p className="text-center text-5xl font-bold my-[40px] leading-[58px]">
+          <p className="text-center text-5xl font-bold my-[40px] leading-[58px] screen_540:text-3xl">
             ขั้นตอนการสั่งซื้อ
             <br />
-            <span className="text-4xl leading-[44px]">Gift</span>
+            <span className="text-4xl leading-[44px] screen_540:text-3xl">Gift</span>
           </p>
         </div>
         <div className="flex flex-col gap-[20px]">

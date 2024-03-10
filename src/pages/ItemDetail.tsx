@@ -5,7 +5,6 @@ import vBucks from "../assets/icons/vbucks-coins.webp";
 import { CustomButton } from "../components/Button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
-  IoMdClose,
   IoMdPricetag,
   IoMdPlay,
   IoMdVolumeHigh,
@@ -15,7 +14,6 @@ import {
   // DisplayAssetsItem,
   IdProps,
   Item,
-  ResponseData,
   // Styles,
   Bundle,
 } from "../types";
@@ -65,7 +63,6 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
           const response = await axios.get(
             `${process.env.REACT_APP_API}/item/${itemId}`
           );
-          console.log(response.data.data);
           startTransition(() => {
             setItem(response.data.data.item);
             // setStyles(response.data.data.item.styles);
@@ -79,7 +76,6 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
           setLoading(false);
           console.error("Error fetching data:", error);
         } finally {
-          
         }
       }
     };
@@ -188,7 +184,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                 <div className="max-w-[520px] w-[520px] h-fit screen_610:w-[375px] screen_445:w-[275px] rounded-lg">
                   <CarouselSlider displayAssets={item.displayAssets} />
                 </div>
-              ) : item.previewVideos ? (
+              ) : item.previewVideos[0]?.url ? (
                 <div className="relative">
                   <video
                     preload="true"
@@ -215,9 +211,10 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                     </div>
                   )}
                 </div>
-              ) : item.images.background ? (
+              ) : item.images?.background ? (
                 <div className="max-w-[520px] screen_610:w-[375px] screen_445:w-[275px] rounded-lg">
-                  <img
+                  <LazyLoadImage
+                    effect="blur"
                     loading="lazy"
                     src={item.images.background}
                     alt={"item in set"}
@@ -233,12 +230,12 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                 />
               )
             ) : (
-              <div className="flex flex-col">
+              <div className="flex flex-col mt-4">
                 <div className="flex items-center justify-center flex-wrap gap-3 w-[648px] screen_910:w-auto">
                   {item.grants.length !== 0 ? (
                     item.grants.map((grant) => (
                       <div key={grant.id} className="cursor-pointer rounded-xl">
-                        {/* {!grant.images.icon_background ? (
+                        {!grant.images?.icon_background ? (
                           <>
                             <img
                               loading="lazy"
@@ -259,7 +256,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                               }
                             />
                           </div>
-                        )} */}
+                        )}
                       </div>
                     ))
                   ) : (
@@ -318,7 +315,8 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
               </div>
             </div>
           ) : (
-            <img
+            <LazyLoadImage
+              effect="blur"
               loading="lazy"
               src={item.images.background}
               alt="empty"
@@ -327,7 +325,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
           )}
 
           <div className="w-[2px] min-h-[80vh] bg-black/60 screen_1250:min-h-[2px] screen_1250:min-w-[15%]"></div>
-          <div className="min-w-[min(50vw,500px)] max-h-[80vh] screen_1250:max-h-full text-center screen_810:min-w-none overflow-auto py-6">
+          <div className="min-w-[min(50vw,500px)] max-h-[80vh] max-w-[560px] w-[560px] screen_1250:max-h-full text-center screen_810:min-w-none overflow-auto py-6">
             <div className="flex flex-col items-center justify-center px-2.5 mr-4 screen_1250:ml-4">
               <div className="text-[30px] font-bold text-black/80 uppercase text-center">
                 {item?.name}
@@ -403,7 +401,7 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                   {channelName.map((cn) => (
                     <section key={cn}>
                       <h1 className="pt-3.5 pb-2 text-lg font-bold text-black/80 mb-2">
-                        {cn}
+                        {(cn).toUpperCase()}
                       </h1>
                       <div className="flex items-center justify-center flex-wrap gap-3 mb-2">
                         {item.styles
@@ -437,8 +435,8 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                   <div className="flex w-full items-center justify-center flex-wrap gap-3 mb-2">
                     {/* Skin */}
 
-                    {/* {item.type.id === "outfit" &&
-                      item.images.icon_background && (
+                    {item.type.id === "outfit" &&
+                      item.images?.icon_background && (
                         <div className="cursor-pointer rounded-xl">
                           <LazyLoadImage
                             width={80}
@@ -449,12 +447,12 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                             className={`rounded-xl w-[80px] transition ease-in-out duration-300 hover:scale-110 hover:brightness-105`}
                           />
                         </div>
-                      )} */}
+                      )}
 
                     {/* Grant */}
-                    {/* {item.grants.map(
+                    {item.grants.map(
                       (grant) =>
-                        grant.images.icon_background && (
+                        grant.images?.icon_background && (
                           <div
                             key={grant.id}
                             className="cursor-pointer rounded-xl"
@@ -472,12 +470,12 @@ export const ItemDetail = ({ itemId, onClose }: IdProps) => {
                             />
                           </div>
                         )
-                    )} */}
+                    )}
                   </div>
                 </>
               )}
             </div>
-          </div>      
+          </div>
         </div>
       ) : (
         <p className="px-6">Item not found! Please try again.</p>
