@@ -33,15 +33,15 @@ function HowToElse() {
             </span>
           </p>
         </div>
-        <div className="flex flex-col gap-[20px]">
+        <div className="flex flex-col gap-[20px] ">
           <div className="screen_930:w-full screen_930:text-[20px] font-bold bg-[#E7F9FD] w-[870px] text-xl leading-[40px] p-[30px] rounded-[30px] self-center">
-            <p className=" mb-[15px]">
+            <p className=" mb-[15px] text-[17px] screen_930:text-[16px]">
               1. เข้าเว็บ Epic Games และทำการ Login ID
               ที่เราเล่นไว้รอก่อนได้เลยครับ 😊 (ให้ทำการ Login ให้ถูก ID
               ที่เราเล่น เช่น หากลูกค้าเล่นบน PlayStation ให้กด Login ด้วย
               PlayStation ID เป็นต้น เพื่อป้องกันการผูกผิดไอดี)
             </p>
-            <div className="flex w-fit gap-[15px] text-[16px] hover:scale-105 transition ease-in-out duration-300">
+            <div className="flex w-fit gap-[15px] text-[16px] hover:scale-105 transition ease-in-out duration-300 ">
               <DarkButton
                 text={"Login Epic Games"}
                 link="https://www.epicgames.com/account/connections#accounts"
@@ -50,7 +50,7 @@ function HowToElse() {
             </div>
           </div>
           <div className="screen_930:w-full screen_930:text-[20px] font-bold bg-[#E7F9FD] w-[870px] text-xl leading-[40px] p-[30px] rounded-[30px] self-center">
-            <p className=" mb-[15px]">
+            <p className=" mb-[15px] text-[17px] screen_930:text-[16px]">
               2. สมัคร ID XBOX ของลูกค้า โดยเข้า Link ข้างล่าง แล้วกด{" "}
               <span className="text-blue-600">Create one!</span> (หากมี ID XBOX
               อยู่แล้ว ให้ข้ามข้อนี้ได้เลยครับ)
@@ -64,7 +64,7 @@ function HowToElse() {
             </div>
           </div>
           <div className="screen_930:w-full screen_930:text-[20px] font-bold bg-[#E7F9FD] w-[870px] text-xl leading-[40px] p-[30px] rounded-[30px] self-center">
-            <p className=" mb-[15px]">
+            <p className=" mb-[15px] text-[17px] screen_930:text-[16px]">
               3. ทำการผูก ID Epic เข้ากับ ID XBOX โดยการกด Link นี้เลย
             </p>
             <div className="flex gap-[15px] w-fit text-[16px] hover:scale-105 transition ease-in-out duration-300">
@@ -76,9 +76,9 @@ function HowToElse() {
             </div>
           </div>
           <div className="screen_930:w-full screen_930:text-[20px] font-bold bg-[#E7F9FD] w-[870px] text-xl leading-[40px] p-[30px] rounded-[30px] self-center">
-            <div className="">4. สั่งซื้อ โดยการแจ้งสิ่งที่ต้องการ</div>
+            <div className="text-[17px] screen_930:text-[16px]">4. สั่งซื้อ โดยการแจ้งสิ่งที่ต้องการ</div>
             <ul className="ml-10 md:ml-8 sm:ml-5">
-              <li className="flex flex-col whitespace-normal">
+              <li className="flex flex-col whitespace-normal text-[17px] screen_930:text-[16px]">
                 <p>
                   <span className="list-bullet"></span>V-Bucks
                 </p>
@@ -97,14 +97,14 @@ function HowToElse() {
                   </p>
                 </div>
               </li>
-              <li className="flex items-center">
+              <li className="flex items-center text-[17px] screen_930:text-[16px]">
                 <span className="list-bullet"></span>Packs
               </li>
-              <li className="flex items-center">
+              <li className="flex items-center text-[17px] screen_930:text-[16px]">
                 <span className="list-bullet"></span>Fortnite Crew
               </li>
             </ul>
-            <p className=" mb-[15px]">(ทักแล้วรอ Admin คอนเฟิร์มครับผม)</p>
+            <p className=" mb-[15px] text-[17px] screen_930:text-[16px]">(ทักแล้วรอ Admin คอนเฟิร์มครับผม)</p>
             <div className="flex gap-[15px] text-[16px]">
               <FBButton />
               <DiscordButton />
