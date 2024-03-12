@@ -13,7 +13,7 @@ function CheckPoints() {
   const [notFound, setNotFound] = useState(false);
   const [loading, setLoading] = useState(false);
   const [placeholder, setPlaceholder] = useState(
-    "โปรดระบุหมายเลข Member หรือชื่อ Member ของคุณ"
+    "โปรดระบุหมายเลข Memeber หรือชื่อ Memeber ของคุณ"
   );
 
   useEffect(() => {
