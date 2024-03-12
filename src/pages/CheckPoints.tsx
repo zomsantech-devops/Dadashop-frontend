@@ -22,7 +22,7 @@ function CheckPoints() {
         setPlaceholder("โปรดระบุหมายเลข Member...");
       } else {
         setPlaceholder(
-          "โปรดระบุหมายเลข Member หรือชื่อ Member ของคุณ"
+          "โปรดระบุหมายเลข Memeber หรือชื่อ Memeber ของคุณ"
         );
       }
     }
